@@ -516,7 +516,7 @@ Data Transfer
 ##  
 
 Core functionality of Hadoop Distributed File System and Azure Data Lake
-Storage Gen2 comparison map is as follows -
+Storage Gen2 comparison map is as follows:
 
 +----------------------+----------------------+----------------------+
 | **Feature**          | **ADLS**             | **HDFS**             |
