@@ -1,9 +1,14 @@
 > Hadoop Migration Guide v1.0
 
+Ram
+
 **\
 **
+<<<<<<< HEAD
 **Ram**
 
+=======
+>>>>>>> fc64dcfb359be61d68c399bc86ad3c89282c8b1e
 Table of Contents
 
 [Structure of this guide 6](#structure-of-this-guide)
