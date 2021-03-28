@@ -1,197 +1,176 @@
-> Hadoop Migration Guide v1.0
+# Hadoop Migration Guide v1.0
 
-5555
+## Table of Contents
 
+[Structure of this guide](#Structure-of-this-guide)
 
-Table of Contents
+[Further reading](#further-reading)
 
-[Structure of this guide 6](#structure-of-this-guide)
+[Hadoop Architecture & Components](#hadoop-architecture-components)
 
-[Further reading 6](#further-reading)
+[Brief introduction to Apache Hadoop](#brief-introduction-to-apache-hadoop)
 
-[Hadoop Architecture & Components 7](#hadoop-architecture-components)
+[Hadoop Distributed File Systems (HDFS)](#hadoop-distributed-file-systems-hdfs)
 
-[Brief introduction to Apache Hadoop
-7](#brief-introduction-to-apache-hadoop)
+[Common Challenges of an on premise HDFS](#common-challenges-of-an-on-premise-hdfs)
 
-[Hadoop Distributed File Systems (HDFS)
-8](#hadoop-distributed-file-systems-hdfs)
+[HDFS Architecture and Components](#hdfs-architecture-and-components)
 
-[Common Challenges of an on premise HDFS
-9](#common-challenges-of-an-on-premise-hdfs)
+[Considerations](#considerations)
 
-[HDFS Architecture and Components 11](#hdfs-architecture-and-components)
+[Migration Approach](#migration-approach)
 
-[Considerations 13](#considerations)
+[HDFS Assessment](#hdfs-assessment)
 
-[Migration Approach 14](#migration-approach)
+[Data Transfer](#data-transfer)
 
-[HDFS Assessment 14](#hdfs-assessment)
+[Feature Map & Workaround](#feature-map-workaround)
 
-[Data Transfer 17](#data-transfer)
+[Reference Implementation - ARM Templates](#reference-implementation---arm-templates)
 
-[Feature Map & Workaround 22](#feature-map-workaround)
+[Pseudocode](#pseudocode)
 
-[Reference Implementation - ARM Templates
-25](#reference-implementation---arm-templates)
+[Architectural Guidance](#architectural-guidance)
 
-[Pseudocode 25](#pseudocode)
+[Patterns & Anti -- Patterns](#patterns-anti-patterns)
 
-[Architectural Guidance 25](#architectural-guidance)
+[Performance Tuning](#performance-tuning)
 
-[Patterns & Anti -- Patterns 25](#patterns-anti-patterns)
+[HA & DR](#_Toc67357480)
 
-[Performance Tuning 25](#performance-tuning)
+[HBase](#hbase)
 
-[HA & DR 25](#_Toc67357480)
+[Challenges of HBase on premise](#challenges-of-hbase-on-premise)
 
-[HBase 26](#hbase)
+[HBase Architecture and Components](#hbase-architecture-and-components)
 
-[Challenges of HBase on premise 26](#challenges-of-hbase-on-premise)
+[Brief introduction to Apache Hbase](#brief-introduction-to-apache-hbase)
 
-[HBase Architecture and Components
-26](#hbase-architecture-and-components)
+[Core Concepts](#core-concepts)
 
-[Brief introduction to Apache Hbase
-26](#brief-introduction-to-apache-hbase)
+[Considerations](#considerations-1)
 
-[Core Concepts 27](#core-concepts)
+[Migration Approach](#migration-approach-1)
 
-[Considerations 29](#considerations-1)
+[Lift and shift -- Azure IaaS](#lift-and-shift-azure-iaas)
 
-[Migration Approach 30](#migration-approach-1)
+[Modernization -- Cosmos DB (SQL API)](#modernization-cosmos-db-sql-api)
 
-[Lift and shift -- Azure IaaS 31](#lift-and-shift-azure-iaas)
+[Hive](#hive)
 
-[Modernization -- Cosmos DB (SQL API)
-45](#modernization-cosmos-db-sql-api)
+[Challenges of Hive on premise](#challenges-of-hive-on-premise)
 
-[Hive 70](#hive)
+[Hive Architecture and Components](#hive-architecture-and-components)
 
-[Challenges of Hive on premise 70](#challenges-of-hive-on-premise)
+[Considerations](#considerations-2)
 
-[Hive Architecture and Components 70](#hive-architecture-and-components)
+[Migration Approach](#migration-approach-2)
 
-[Considerations 70](#considerations-2)
+[Modernization -- Databricks](#modernization-databricks)
 
-[Migration Approach 70](#migration-approach-2)
+[Modernization -- Synapse](#modernization-synapse)
 
-[Modernization -- Databricks 70](#modernization-databricks)
+[Lift and Shift -- HDInsight](#lift-and-shift-hdinsight)
 
-[Modernization -- Synapse 75](#modernization-synapse)
+[Lift and Shift -- IAAS](#lift-and-shift-iaas)
 
-[Lift and Shift -- HDInsight 75](#lift-and-shift-hdinsight)
+[Decision Map/Flowchart](#decision-mapflowchart)
 
-[Lift and Shift -- IAAS 75](#lift-and-shift-iaas)
+[Feature Map & Workaround](#feature-map-workaround-1)
 
-[Decision Map/Flowchart 75](#decision-mapflowchart)
+[Reference Implementation - ARM Templates](#reference-implementation---arm-templates-1)
 
-[Feature Map & Workaround 75](#feature-map-workaround-1)
+[Pseudocode](#pseudocode-1)
 
-[Reference Implementation - ARM Templates
-75](#reference-implementation---arm-templates-1)
+[Architectural Guidance](#architectural-guidance-1)
 
-[Pseudocode 76](#pseudocode-1)
+[Patterns & Anti -- Patterns](#patterns-anti-patterns-1)
 
-[Architectural Guidance 76](#architectural-guidance-1)
+[Performance Tuning](#performance-tuning-1)
 
-[Patterns & Anti -- Patterns 76](#patterns-anti-patterns-1)
+[HA & DR](#ha-dr)
 
-[Performance Tuning 76](#performance-tuning-1)
+[Apache Ranger](#apache-ranger)
 
-[HA & DR 76](#ha-dr)
+[Apache Ranger: Overview -- Features](#apache-ranger-overview-features)
 
-[Apache Ranger 76](#apache-ranger)
+[Challenges of Ranger on premise](#challenges-of-ranger-on-premise)
 
-[Apache Ranger: Overview -- Features
-76](#apache-ranger-overview-features)
+[Apache Ranger Architecture and Components](#apache-ranger-architecture-and-components)
 
-[Challenges of Ranger on premise 76](#challenges-of-ranger-on-premise)
+[Apache Ranger](#apache-ranger-1)
 
-[Apache Ranger Architecture and Components
-77](#apache-ranger-architecture-and-components)
+[Apache Ranger: Overview -- Features](#apache-ranger-overview-features-1)
 
-[Apache Ranger 77](#apache-ranger-1)
+[Challenges of Ranger on premise](#challenges-of-ranger-on-premise-1)
 
-[Apache Ranger: Overview -- Features
-78](#apache-ranger-overview-features-1)
+[Apache Ranger Architecture and Components](#apache-ranger-architecture-and-components-1)
 
-[Challenges of Ranger on premise 78](#challenges-of-ranger-on-premise-1)
+[Migration Approach](#migration-approach-3)
 
-[Apache Ranger Architecture and Components
-79](#apache-ranger-architecture-and-components-1)
+[Modernization -- AAD + Databricks](#modernization-aad-databricks)
 
-[Migration Approach 80](#migration-approach-3)
+[Modernization -- AAD + Azure PAAS Services](#modernization-aad-azure-paas-services)
 
-[Modernization -- AAD + Databricks 80](#modernization-aad-databricks)
+[Lift and Shift -- HDInsight](#lift-and-shift-hdinsight-1)
 
-[Modernization -- AAD + Azure PAAS Services
-81](#modernization-aad-azure-paas-services)
+[Lift and Shift -- IAAS (INFRASTRUCTURE AS A SERVICE)](#lift-and-shift-iaas-infrastructure-as-a-service)
 
-[Lift and Shift -- HDInsight 85](#lift-and-shift-hdinsight-1)
+[Decision Map/Flowchart](#decision-mapflowchart-1)
 
-[Lift and Shift -- IAAS (INFRASTRUCTURE AS A SERVICE)
-88](#lift-and-shift-iaas-infrastructure-as-a-service)
+[Ranger - Hbase](#ranger---hbase)
 
-[Decision Map/Flowchart 89](#decision-mapflowchart-1)
+[Ranger -- HDFS](#ranger-hdfs)
 
-[Ranger - Hbase 90](#ranger---hbase)
+[Ranger -- Hive](#ranger-hive)
 
-[Ranger -- HDFS 90](#ranger-hdfs)
+[Feature Map & Workaround](#feature-map-workaround-2)
 
-[Ranger -- Hive 92](#ranger-hive)
+[Pseudocode](#pseudocode-2)
 
-[Feature Map & Workaround 92](#feature-map-workaround-2)
+[Architectural Guidance](#architectural-guidance-2)
 
-[Pseudocode 93](#pseudocode-2)
+[Patterns & Anti -- Patterns](#patterns-anti-patterns-2)
 
-[Architectural Guidance 93](#architectural-guidance-2)
+[Performance Tuning](#performance-tuning-2)
 
-[Patterns & Anti -- Patterns 93](#patterns-anti-patterns-2)
+[HA & DR](#ha-dr-1)
 
-[Performance Tuning 93](#performance-tuning-2)
+[Apache Spark](#apache-spark)
 
-[HA & DR 93](#ha-dr-1)
+[Challenges of Spark on premise](#challenges-of-spark-on-premise)
 
-[Apache Spark 93](#apache-spark)
+[Apache Spark Architecture and Components](#apache-spark-architecture-and-components)
 
-[Challenges of Spark on premise 93](#challenges-of-spark-on-premise)
+[Considerations](#considerations-3)
 
-[Apache Spark Architecture and Components
-94](#apache-spark-architecture-and-components)
+[Migration Approach](#migration-approach-4)
 
-[Considerations 94](#considerations-3)
+[Modernization -- Databricks](#modernization-databricks-1)
 
-[Migration Approach 94](#migration-approach-4)
+[Modernization -- Synapse](#modernization-synapse-1)
 
-[Modernization -- Databricks 94](#modernization-databricks-1)
+[Lift and Shift -- HDInsight](#lift-and-shift-hdinsight-2)
 
-[Modernization -- Synapse 94](#modernization-synapse-1)
+[Lift and Shift -- IAAS](#lift-and-shift-iaas-1)
 
-[Lift and Shift -- HDInsight 94](#lift-and-shift-hdinsight-2)
+[Decision Map/Flowchart](#decision-mapflowchart-2)
 
-[Lift and Shift -- IAAS 94](#lift-and-shift-iaas-1)
+[Feature Map & Workaround](#feature-map-workaround-3)
 
-[Decision Map/Flowchart 94](#decision-mapflowchart-2)
+[Reference Implementation - ARM Templates](#reference-implementation---arm-templates-2)
 
-[Feature Map & Workaround 95](#feature-map-workaround-3)
+[Pseudocode](#pseudocode-3)
 
-[Reference Implementation - ARM Templates
-95](#reference-implementation---arm-templates-2)
+[Architectural Guidance](#architectural-guidance-3)
 
-[Pseudocode 95](#pseudocode-3)
+[Patterns & Anti -- Patterns](#patterns-anti-patterns-3)
 
-[Architectural Guidance 95](#architectural-guidance-3)
+[Performance Tuning](#performance-tuning-3)
 
-[Patterns & Anti -- Patterns 95](#patterns-anti-patterns-3)
+[HA & DR](#ha-dr-2)
 
-[Performance Tuning 95](#performance-tuning-3)
-
-[HA & DR 95](#ha-dr-2)
-
-￼
-
-# Structure of this guide
+### Structure of this guide
 
 This guide recognizes that Hadoop provides an extensive ecosystem of
 services and frameworks. This guide is not intended to be a definitive
@@ -205,7 +184,7 @@ It is assumed that you already have HDFS deployed in an on-premises
 datacentre or Cloud storage- AWS S3 and exploring one of migration
 targets on Azure -- Azure ADLS Gen2 ;
 
-## Further reading
+### Further reading
 
 For customers new to Azure, we recommend [Enterprise Scale Landing Zone
 guidance](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/)
@@ -233,9 +212,9 @@ and application workloads with confidence. All customers can access
 resources and tools such as free migration tools, step-by-step technical
 guidance, training and help in finding a migration partner.
 
-# Hadoop Architecture & Components
+### Hadoop Architecture & Components
 
-## Brief introduction to Apache Hadoop
+### Brief introduction to Apache Hadoop
 
 Hadoop provides a distributed file system and a framework for the
 analysis and transformation of very large data sets using the MapReduce
@@ -258,7 +237,8 @@ system include-
 
 Reference : <https://gearup.microsoft.com/resources/azure-migration>
 
-**Hive**\
+#### Hive
+
 Hive is data warehousing software that addresses how data is structured
 and queried in distributed Hadoop clusters. Hive is also a well-known
 development environment that is used to build queries for data in the
@@ -266,7 +246,7 @@ Hadoop environment. It provides tools for ETL workloads and brings
 SQL-like capabilities to the Hadoop. Hive is a declarative language that
 is used to develop applications for the Hadoop environment.
 
-**Pig**
+#### Pig
 
 Pig is a platform for performing analysis on large data sets that
 consists of a high-level language for expressing data analysis programs,
@@ -276,25 +256,26 @@ scripts into MapReduce, which can then run on YARN and process data in
 the HDFS cluster. Pig is popular because it automates some of the
 complexity in MapReduce development.
 
-**HBase**\
+#### HBase
+
 HBase is a structured noSQL database that rides atop Hadoop. It stores
 the structured data on top of HDFS. HBase provides a fault-tolerant way
 of storing sparse data sets. It is well suited for real-time data
 processing or random read/write access to large volumes of data. Unlike
-traditional [RDBMS](https://www.ibm.com/analytics/relational-database),
-HBase does not support a structured query language like SQL. It
+traditional RDBMS, HBase does not support a structured query language like SQL. It
 comprises a set of standard tables with rows and columns, much like a
 traditional database. Each table must have an element defined as a
 primary key, and all access attempts to HBase tables must use this
 primary key.
 
-**Zookeeper**\
+#### Zookeeper
+
 Apache Zookeeper is a centralized service and a Hadoop Ecosystem
 component for maintaining configuration information, naming, providing
 distributed synchronization, and providing group services. Zookeeper
 manages and coordinates a large cluster of machines.
 
-# Hadoop Distributed File Systems (HDFS)
+#### Hadoop Distributed File Systems (HDFS)
 
 The file system component of Hadoop is Hadoop Distributed File System (
 HDFS). The interface to Hadoop is based on UNIX. The data related to an
@@ -303,26 +284,26 @@ application and file
 HDFS stores file system metadata and application data separately. Like
 the distributed file systems, HDFS also has 2 type of servers --
 
--   # NameNode : File system metadata is stored on a NameNode . It holds the the directory tree of all files in the system and tracks where data files is kept. {#namenode-file-system-metadata-is-stored-on-a-namenode-.-it-holds-the-the-directory-tree-of-all-files-in-the-system-and-tracks-where-data-files-is-kept. .TOC-Heading}
+- **NameNode:** File system metadata is stored on a NameNode . It holds the the directory tree of all files in the system and tracks where data files is kept. {#namenode-file-system-metadata-is-stored-on-a-namenode-.-it-holds-the-the-directory-tree-of-all-files-in-the-system-and-tracks-where-data-files-is-kept. .TOC-Heading}
 
--   # DataNode : Application Data is stored on the DataNodes.  {#datanode-application-data-is-stored-on-the-datanodes. .TOC-Heading}
+- **DataNode:** Application Data is stored on the DataNodes.  {#datanode-application-data-is-stored-on-the-datanodes. .TOC-Heading}
 
 All servers communicate with each other over TCP and for reliability the
 file content is replicated on DataNodes.
 
-## Common Challenges of an on premise HDFS
+#### Common Challenges of an on premise HDFS
 
--   # Frequent HDFS version upgrades {#frequent-hdfs-version-upgrades .TOC-Heading}
+- Frequent HDFS version upgrades {#frequent-hdfs-version-upgrades .TOC-Heading}
 
--   # Growing volume of data on HDFS {#growing-volume-of-data-on-hdfs .TOC-Heading}
+- Growing volume of data on HDFS {#growing-volume-of-data-on-hdfs .TOC-Heading}
 
--   # Small file problem -- when too many small files are stored , the NameNode loads metadata of all the files in memory -- increasing the pressure on the NameNode . The small files also increase the read traffic on the name node when clients are reading the files and also increases the calls when the files are being written. {#small-file-problem-when-too-many-small-files-are-stored-the-namenode-loads-metadata-of-all-the-files-in-memory-increasing-the-pressure-on-the-namenode-.-the-small-files-also-increase-the-read-traffic-on-the-name-node-when-clients-are-reading-the-files-and-also-increases-the-calls-when-the-files-are-being-written. .TOC-Heading}
+- **Small file problem** -- when too many small files are stored , the NameNode loads metadata of all the files in memory -- increasing the pressure on the NameNode . The small files also increase the read traffic on the name node when clients are reading the files and also increases the calls when the files are being written.
 
--   # Multiple teams in the organization may require different datasets - splitting the HDFS clusters by use case or organization is not possible thus increasing costs , data duplication leading to a decrease in the efficiency. {#multiple-teams-in-the-organization-may-require-different-datasets---splitting-the-hdfs-clusters-by-use-case-or-organization-is-not-possible-thus-increasing-costs-data-duplication-leading-to-a-decrease-in-the-efficiency. .TOC-Heading}
+- Multiple teams in the organization may require different datasets - splitting the HDFS clusters by use case or organization is not possible thus increasing costs , data duplication leading to a decrease in the efficiency.
 
--   # It is difficult to scale HDFS cluster without impacting throughput of the NameNode  {#it-is-difficult-to-scale-hdfs-cluster-without-impacting-throughput-of-the-namenode .TOC-Heading}
+- It is difficult to scale HDFS cluster without impacting throughput of the NameNode  
 
--   Prior to Hadoop 2.0 , since all the metadata is stored in a single
+- Prior to Hadoop 2.0 , since all the metadata is stored in a single
     NameNode, it becomes a bottleneck as all client requests to an HDFS
     cluster must first pass through the NameNode making it a single
     point of failure (**SPOF**). Each cluster had a single NameNode, and
@@ -330,95 +311,62 @@ file content is replicated on DataNodes.
     cluster will be unavailable until the NameNode restarts or brought
     on a separate machine.
 
-## HDFS Architecture and Components
+#### HDFS Architecture and Components
 
-# Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the master -slave architecture -- with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers. {#hadoop-distributed-filesystem-hdfs---a-java-based-file-system-that-follows-the-master--slave-architecture-with-namenode-being-the-master-and-datanode-being-the-slave-providing-scalable-and-reliable-data-storage-designed-to-span-large-clusters-of-commodity-servers. .TOC-Heading}
+- **Hadoop Distributed Filesystem (HDFS)** - a Java-based file system that follows the master -slave architecture -- with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
 
-#  {#section .TOC-Heading}
+- **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of files and directories.  {#namenode-is-the-master-node-that-manages-access-to-files-and-namespace.-it-is-a-hierarchy-of-files-and-directories. .TOC-Heading}
+  - Files and directories are inodes on the NameNode - has attributes like permissions, modification and access times, namespace and disk space quotas.
 
-#   {#section-1 .TOC-Heading}
+    - The file content is split into blocks (usually 128 megabytes , but can be customized per file) {#the-file-content-is-split-into-blocks-usually-128-megabytes-but-can-be-customized-per-file .TOC-Heading}
 
-#  {#section-2 .TOC-Heading}
+    - Each block of the file is independently replicated at multiple DataNodes. The replication factor is default 3 but can be customized on file to file basis.  {#each-block-of-the-file-is-independently-replicated-at-multiple-datanodes.-the-replication-factor-is-default-3-but-can-be-customized-on-file-to-file-basis. .TOC-Heading}
 
-#  {#section-3 .TOC-Heading}
+    - The NameNode maintains the namespace tree and the mapping of file blocks to DataNodes (the physical location of file data).  {#the-namenode-maintains-the-namespace-tree-and-the-mapping-of-file-blocks-to-datanodes-the-physical-location-of-file-data. .TOC-Heading}
 
--   # **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of files and directories.  {#namenode-is-the-master-node-that-manages-access-to-files-and-namespace.-it-is-a-hierarchy-of-files-and-directories. .TOC-Heading}
+    - An HDFS client that needs to read a file -  {#an-hdfs-client-that-needs-to-read-a-file-- .TOC-Heading}
 
-    -   # Files and directories are inodes on the NameNode - has attributes like permissions, modification and access times, namespace and disk space quotas.  {#files-and-directories-are-inodes-on-the-namenode---has-attributes-like-permissions-modification-and-access-times-namespace-and-disk-space-quotas. .TOC-Heading}
+         1. Contacts the NameNode for the locations of data blocks comprising the file  {#contacts-the-namenode-for-the-locations-of-data-blocks-comprising-the-file .TOC-Heading}
 
-    -   # The file content is split into blocks (usually 128 megabytes , but can be customized per file) {#the-file-content-is-split-into-blocks-usually-128-megabytes-but-can-be-customized-per-file .TOC-Heading}
+         2. Reads block contents from the DataNode closest to the client.  {#reads-block-contents-from-the-datanode-closest-to-the-client. .TOC-Heading}
 
-    -   # Each block of the file is independently replicated at multiple DataNodes. The replication factor is default 3 but can be customized on file to file basis.  {#each-block-of-the-file-is-independently-replicated-at-multiple-datanodes.-the-replication-factor-is-default-3-but-can-be-customized-on-file-to-file-basis. .TOC-Heading}
+    - An HDFS cluster can have thousands of DataNodes and tens of thousands of HDFS clients per cluster, as each DataNode can execute multiple application tasks concurrently.  
 
-    -   # The NameNode maintains the namespace tree and the mapping of file blocks to DataNodes (the physical location of file data).  {#the-namenode-maintains-the-namespace-tree-and-the-mapping-of-file-blocks-to-datanodes-the-physical-location-of-file-data. .TOC-Heading}
+    - HDFS keeps the entire namespace in memory ie RAM.  {#hdfs-keeps-the-entire-namespace-in-memory-ie-ram. .TOC-Heading}
 
-    -   # An HDFS client that needs to read a file -  {#an-hdfs-client-that-needs-to-read-a-file-- .TOC-Heading}
+- **DataNode**: is the slave node that performs read/write operations on the file system as well as block operations like creation, replication, and deletion.
 
-1.  # Contacts the NameNode for the locations of data blocks comprising the file  {#contacts-the-namenode-for-the-locations-of-data-blocks-comprising-the-file .TOC-Heading}
+- Contains a metadata file that holds the checksum  
 
-2.  # Reads block contents from the DataNode closest to the client.  {#reads-block-contents-from-the-datanode-closest-to-the-client. .TOC-Heading}
+- Contains the data file that holds the block's data
 
-    -   # An HDFS cluster can have thousands of DataNodes and tens of thousands of HDFS clients per cluster, as each DataNode can execute multiple application tasks concurrently.  {#an-hdfs-cluster-can-have-thousands-of-datanodes-and-tens-of-thousands-of-hdfs-clients-per-cluster-as-each-datanode-can-execute-multiple-application-tasks-concurrently. .TOC-Heading}
+- On a file read, DataNode fetches the block locations and replica locations from the NameNode -- tries reading from the location closest to the client {#on-a-file-read-datanode-fetches-the-block-locations-and-replica-locations-from-the-namenode-tries-reading-from-the-location-closest-to-the-client .TOC-Heading}
 
-    -   # HDFS keeps the entire namespace in memory ie RAM.  {#hdfs-keeps-the-entire-namespace-in-memory-ie-ram. .TOC-Heading}
+- **HDFS Client** is the client used by applications to access the file systems
+- It is a code library that exports the HDFS file system interface.  {#it-is-a-code-library-that-exports-the-hdfs-file-system-interface. .TOC-Heading}
+- Supports operations to read, write and delete files, and operations to create and delete directories.  
 
-#  {#section-4 .TOC-Heading}
+     **The steps followed when an application reads a file**{#the-steps-followed-when-an-application-reads-a-file .TOC-Heading}
 
--   # **DataNode**: is the slave node that performs read/write operations on the file system as well as block operations like creation, replication, and deletion. {#datanode-is-the-slave-node-that-performs-readwrite-operations-on-the-file-system-as-well-as-block-operations-like-creation-replication-and-deletion. .TOC-Heading}
+- Get the list of DataNodes and locations that host the blocks -- this includes the replicas {#get-the-list-of-datanodes-and-locations-that-host-the-blocks-this-includes-the-replicas .TOC-Heading}
 
-    -   # Contains a metadata file that holds the checksum  {#contains-a-metadata-file-that-holds-the-checksum .TOC-Heading}
+- Gets the blocks from the DataNode directly based on the list received from NameNode
 
-    -   # Contains the data file that holds the block's data {#contains-the-data-file-that-holds-the-blocks-data .TOC-Heading}
+- HDFS provides an API that exposes the locations of file blocks. This allows applications like the MapReduce framework to schedule a task to where the data are located, thus improving the read performance.  
 
-    -   # On a file read, DataNode fetches the block locations and replica locations from the NameNode -- tries reading from the location closest to the client {#on-a-file-read-datanode-fetches-the-block-locations-and-replica-locations-from-the-namenode-tries-reading-from-the-location-closest-to-the-client .TOC-Heading}
+- **Block**: is the unit of storage in HDFS. A file is comprised of blocks, and different blocks are stored on different data nodes.
 
-#  {#section-5 .TOC-Heading}
+#### Considerations
 
--   # **HDFS Client** is the client used by applications to access the file systems {#hdfs-client-is-the-client-used-by-applications-to-access-the-file-systems .TOC-Heading}
+- Don't store small, frequently-queried tables in HDFS, especially not if they consist of thousands of files ie tables in HDFS
 
-# It is a code library that exports the HDFS file system interface.  {#it-is-a-code-library-that-exports-the-hdfs-file-system-interface. .TOC-Heading}
+- HDFS symlinks - Jobs requiring file system features like strictly atomic directory renames, fine-grained HDFS permissions, or HDFS symlinks can only work on HDFS
+- Azure Storage can be geo-replicated. Although geo-replication gives geographic recovery and data redundancy, a failover to the geo-replicated location severely impacts the performance, and it may incur additional costs. The recommendation is to choose the geo-replication wisely and only if the value of the data is worth the additional cost.
+- If the file names have common prefixes , the storage treats them as a single partition and hence if ADF is used , all DMUs write to a single partition.
 
-# Supports operations to read, write and delete files, and operations to create and delete directories.  {#supports-operations-to-read-write-and-delete-files-and-operations-to-create-and-delete-directories. .TOC-Heading}
+- If Azure Data factory is chosen as an approach for data transfer -- scan through each directory excluding snapshots , check the size of each directory using the hdfs du command. If there are multiple subfolders and large volume of data - initiate multiple copy activities in ADF -- one per subfolder instead of transferring the entire data in a directory in a single copy activity  
 
-# The steps followed when an application reads a file {#the-steps-followed-when-an-application-reads-a-file .TOC-Heading}
-
-# Get the list of DataNodes and locations that host the blocks -- this includes the replicas {#get-the-list-of-datanodes-and-locations-that-host-the-blocks-this-includes-the-replicas .TOC-Heading}
-
-# Gets the blocks from the DataNode directly based on the list received from NameNode {#gets-the-blocks-from-the-datanode-directly-based-on-the-list-received-from-namenode .TOC-Heading}
-
-# HDFS provides an API that exposes the locations of file blocks. This allows applications like the MapReduce framework to schedule a task to where the data are located, thus improving the read performance.  {#hdfs-provides-an-api-that-exposes-the-locations-of-file-blocks.-this-allows-applications-like-the-mapreduce-framework-to-schedule-a-task-to-where-the-data-are-located-thus-improving-the-read-performance. .TOC-Heading}
-
--   # **Block**: is the unit of storage in HDFS. A file is comprised of blocks, and different blocks are stored on different data nodes. {#block-is-the-unit-of-storage-in-hdfs.-a-file-is-comprised-of-blocks-and-different-blocks-are-stored-on-different-data-nodes. .TOC-Heading}
-
-#  {#section-6 .TOC-Heading}
-
-## Considerations
-
--   # Don't store small, frequently-queried tables in HDFS, especially not if they consist of thousands of files ie tables in HDFS {#dont-store-small-frequently-queried-tables-in-hdfs-especially-not-if-they-consist-of-thousands-of-files-ie-tables-in-hdfs .TOC-Heading}
-
-#  {#section-7 .TOC-Heading}
-
--   # HDFS symlinks - Jobs requiring file system features like strictly atomic directory renames, fine-grained HDFS permissions, or HDFS symlinks can only work on HDFS {#hdfs-symlinks---jobs-requiring-file-system-features-like-strictly-atomic-directory-renames-fine-grained-hdfs-permissions-or-hdfs-symlinks-can-only-work-on-hdfs .TOC-Heading}
-
-#  {#section-8 .TOC-Heading}
-
--   # Azure Storage can be geo-replicated. Although geo-replication gives geographic recovery and data redundancy, a failover to the geo-replicated location severely impacts the performance, and it may incur additional costs. The recommendation is to choose the geo-replication wisely and only if the value of the data is worth the additional cost. {#azure-storage-can-be-geo-replicated.-although-geo-replication-gives-geographic-recovery-and-data-redundancy-a-failover-to-the-geo-replicated-location-severely-impacts-the-performance-and-it-may-incur-additional-costs.-the-recommendation-is-to-choose-the-geo-replication-wisely-and-only-if-the-value-of-the-data-is-worth-the-additional-cost. .TOC-Heading}
-
-#  {#section-9 .TOC-Heading}
-
--   # If the file names have common prefixes , the storage treats them as a single partition and hence if ADF is used , all DMUs write to a single partition. {#if-the-file-names-have-common-prefixes-the-storage-treats-them-as-a-single-partition-and-hence-if-adf-is-used-all-dmus-write-to-a-single-partition. .TOC-Heading}
-
-#  {#section-10 .TOC-Heading}
-
--   # If Azure Data factory is chosen as an approach for data transfer -- scan through each directory excluding snapshots , check the size of each directory using the hdfs du command. If there are multiple subfolders and large volume of data - initiate multiple copy activities in ADF -- one per subfolder instead of transferring the entire data in a directory in a single copy activity  {#if-azure-data-factory-is-chosen-as-an-approach-for-data-transfer-scan-through-each-directory-excluding-snapshots-check-the-size-of-each-directory-using-the-hdfs-du-command.-if-there-are-multiple-subfolders-and-large-volume-of-data---initiate-multiple-copy-activities-in-adf-one-per-subfolder-instead-of-transferring-the-entire-data-in-a-directory-in-a-single-copy-activity .TOC-Heading}
-
-## 
-
-## 
-
-## 
-
-## Migration Approach
+### Migration Approach
 
 ### HDFS Assessment
 
@@ -440,32 +388,26 @@ the incremental load.
 HDFS commands and reports that can help with getting the key assessment
 metrics from HDFS include --
 
--   **To list all directories in a location**
+> **To list all directories in a location**\
+> hdfs dfs -ls books
 
-    -   hdfs dfs -ls books
+> **Recursively list all files in a location**\
+>hdfs dfs -ls -R books
 
--   **Recursively list all files in a location**
-
-    -   hdfs dfs -ls -R books
-
--   **Size of the HDFS File/Directory**
-
-    -   Hadoop fs -du -s -h command
-
-    -   The Hadoop fs -du -s -h command is used to check the size of the
+> **Size of the HDFS File/Directory**\
+>Hadoop fs -du -s -h command \
+> The Hadoop fs -du -s -h command is used to check the size of the
         HDFS file/directory in human readable format. Since the Hadoop
         file system replicates every file, the actual physical size of
         the file will be number of replication with multiply of size of
         the file.
 
--   **Hdfs-site.xml**
+>**Hdfs-site.xml**
 
-    -   dfs.namenode.acls.enabled : Check if acls.enabled -- helpful to
+- dfs.namenode.acls.enabled : Check if acls.enabled -- helpful to
         plan the access control on Azure storage account
 
-    -   dfs.replication
-
-    -   
+- dfs.replication
 
 > For more information refer -
 > <https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml>
@@ -474,12 +416,12 @@ metrics from HDFS include --
 the migration of data . Some the metrics related to data migration
 include --
 
--   **List of small files -** generates reports that can help assess the
+- **List of small files -** generates reports that can help assess the
     on premise Hadoop system . The sample below generates a report on
     the small files being generated -- that helps with planning the next
     action on moving to Azure.
 
--   **List of files based on size** -- generates reports based on the
+- **List of files based on size** -- generates reports based on the
     data volume and groups into- large, medium , tiny , empty
 
 ### Data Transfer
@@ -487,9 +429,9 @@ include --
 Based on the identified strategy for data migration identify the data
 sets to be moved to Azure.
 
-*Pre-checks prior to Transfer*
+#### Pre-checks prior to Transfer
 
-1.  **Identify all the ingestion points** for the chosen use case to
+1. **Identify all the ingestion points** for the chosen use case to
     migrate to Azure .. Due to security requirements if data cannot be
     landed to the cloud directly then on premise can continue to exist
     in parallel as the intermediary landing zone and pipelines can be
@@ -499,22 +441,23 @@ sets to be moved to Azure.
 
 > Common ingestion sources include --
 
-1.  SFTP Server
+   1.SFTP Server
 
-2.  File Ingestion
+   2.File Ingestion
 
-3.  Database Ingestion
+3.Database Ingestion
 
-4.  Database dump
+4.Database dump
 
-5.  CDC
+5.DC
 
-6.  Streaming Ingestion
+6.Streaming Ingestion
 
 ```{=html}
 <!-- -->
 ```
-2.  **Plan the number of storage accounts needed**
+
+2.**Plan the number of storage accounts needed**
 
 To plan the number of storage accounts needed , understand the total
 load on the current hdfs by using the metric TotalLoad that gives the
@@ -532,39 +475,22 @@ enabled cannot revert back to a flat namespace . Workloads like backups
 , images etc do not gain any benefit from enabling a hierarchical
 namespace.
 
-# Availability Requirements {#availability-requirements .TOC-Heading}
+3.**Availability Requirements**
 
-> Hadoop platforms have the replication factor specified in the
-> hdfs-site.xml or per file . The replication on ADLS Gen2 can be
-> planned based on the nature of the data ie. If an application requires
-> the data to be reconstructed in case of a loss then ZRS can be an
-> option . In ADLS Gen 2 ZRS -- data is copied synchronously across 3
-> AZs in the primary region. For applications that require high
-> availability and is not constrained by the region of storage -- the
-> data can additionally be copied in a secondary region -- ie. geo
-> redundancy .
+Hadoop platforms have the replication factor specified in the hdfs-site.xml or per file . The replication on ADLS Gen2 can be
+planned based on the nature of the data ie. If an application requires
+the data to be reconstructed in case of a loss then ZRS can be an
+option . In ADLS Gen 2 ZRS -- data is copied synchronously across 3
+AZs in the primary region. For applications that require high
+availability and is not constrained by the region of storage -- the
+data can additionally be copied in a secondary region -- ie. geo
+redundancy .
 
-#  {#section-14 .TOC-Heading}
+4.**Check for corrupted/missing blocks**
 
-#  {#section-15 .TOC-Heading}
+ Check for corrupted/missing blocks by checking the block scanner report -- if any corrupted blocks are found then wait for the data to be restored prior to transferring the file associated with the corrupted blocks.  
 
-#  {#section-16 .TOC-Heading}
-
-#  {#section-17 .TOC-Heading}
-
-#  {#section-18 .TOC-Heading}
-
-#  {#section-19 .TOC-Heading}
-
-#  {#section-20 .TOC-Heading}
-
-# Check for corrupted/missing blocks {#check-for-corruptedmissing-blocks .TOC-Heading}
-
-# Check for corrupted/missing blocks by checking the block scanner report -- if any corrupted blocks are found then wait for the data to be restored prior to transferring the file associated with the corrupted blocks.  {#check-for-corruptedmissing-blocks-by-checking-the-block-scanner-report-if-any-corrupted-blocks-are-found-then-wait-for-the-data-to-be-restored-prior-to-transferring-the-file-associated-with-the-corrupted-blocks. .TOC-Heading}
-
-#  {#section-21 .TOC-Heading}
-
-# Check if NFS is enabled {#check-if-nfs-is-enabled .TOC-Heading}
+5.**Check if NFS is enabled**
 
 Check if NFS is enabled on the on premise Hadoop platform checking the
 core-site.xml file , that holds the property -- nfsserver.groups and
@@ -575,10 +501,7 @@ Refer the link -
 <https://docs.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support>
 for the NFS 3.0 features that aren\'t yet supported with Azure Data Lake
 Storage Gen2 .
-
-#  {#section-22 .TOC-Heading}
-
-# Check Hadoop File Formats {#check-hadoop-file-formats .TOC-Heading}
+6.**Check Hadoop File Formats**
 
 <https://docs.microsoft.com/en-us/azure/storage/common/storage-choose-data-transfer-solution>
 
@@ -588,41 +511,53 @@ Guide](https://gearup.microsoft.com/resources/azure-hdinsight?selectedassetconta
 for the details on the different approaches as below to transfer data to
 the Azure Storage Account.
 
-1.  # Azcopy Jobs  {#azcopy-jobs .TOC-Heading}
+7.**Choose an Azure solution for data transfer**
 
-2.  # Azure Storage Explorer {#azure-storage-explorer .TOC-Heading}
+Data transfer can be online over the network or offline using physical shippable devices based on the data volume, network bandwidth and the frequency of the data transfer( historical data would be a one time transfer and incremental load would be at periodic interval ).  
 
-3.  # Azure Powershell {#azure-powershell .TOC-Heading}
+For more details on the option to choose refer the link -  https://docs.microsoft.com/en-us/azure/storage/common/storage-choose-data-transfer-solution
 
-4.  # Azure CLI {#azure-cli .TOC-Heading}
+- **Azcopy**
 
-5.  # Mount blob container as part of Linux FS with NFS3.0/Blobfuse drivers {#mount-blob-container-as-part-of-linux-fs-with-nfs3.0blobfuse-drivers .TOC-Heading}
+    Azcopy is a command line utility that can be used to copy files from HDFS to a storage account. This is an option when there is high network bandwidth to move the data ( ie over 1 gbps)  
 
-6.  # Azure Express Route ( for large data transfers) {#azure-express-route-for-large-data-transfers .TOC-Heading}
+     Sample command to move an hdfs directory  -  
 
-7.  # Azure Data Box ( for large data transfers) {#azure-data-box-for-large-data-transfers .TOC-Heading}
+   azcopy copy "C:\local\path" "https://account.blob.core.windows.net/mycontainer1/?sv=2018-03-28&ss=bjqt&srt=sco&sp=rwddgcup&se=2019-05-01T05:01:17Z&st=2019-04-30T21:01:17Z&spr=https&sig=MGCXiyEzbtttkr3ewJIh2AR8KrghSy1DGM9ovN734bQF4%3D" --recursive=true
 
-# Data extraction and transfer Scripts using the Data Box approach can be referred to at the location - [GitHub - Azure/databox-adls-loader: Tools and scripts to load data from Hadoop clusters to Azure Data Lake Storage using Data Box](https://github.com/Azure/databox-adls-loader) {#data-extraction-and-transfer-scripts-using-the-data-box-approach-can-be-referred-to-at-the-location---github---azuredatabox-adls-loader-tools-and-scripts-to-load-data-from-hadoop-clusters-to-azure-data-lake-storage-using-data-box .TOC-Heading}
+- **Distcp**
 
-8.  # MapReduce Jobs using Hadoop Distcp  {#mapreduce-jobs-using-hadoop-distcp .TOC-Heading}
+    DistCp is a command-line utility in Hadoop to perform distributed copy operations in a Hadoop cluster. Distcp creates several map jobs in the Hadoop cluster to copy the data from source to the sink .  This push approach is good when there is good network bandwidth and doesn’t require extra compute resources to be provisioned for data migration. However , if the source HDFS cluster is already running out of capacity and additional compute cannot be added then consider using Azure Data Factory ( with distcp copy activity) as a pull approach instead of the push approach.  
+    hadoop  distcp -D fs.azure.account.key.<account name>.blob.core.windows.net=<Key> wasb://<container>@<account>.blob.core.windows.net<path to wasb file> hdfs://<hdfs path>
 
-9.  # Azure Data Factory {#azure-data-factory .TOC-Heading}
+- **Azure Data Box ( for large data transfers)**
 
-10. # 3rd Party solutions like -- WANDISCO Live Data Migration {#rd-party-solutions-like-wandisco-live-data-migration .TOC-Heading}
+    Azure Data Box is a service that provides large-scale data transfers – particularly to move the historical data  and is a physical device ordered from  Microsoft.  For an offline data  transfer option , when network bandwidth is limited or no bandwidth  and data volume is high ( say a few TBS to PB scale) then Azure data box is an option.  
 
-## Feature Map & Workaround
+    There are multiple options for a data box provided based on the data volume – Data Box Disk , Data Box or Data Box Heavy  .  The device when received is connected to the Local Area Network and data is transferred to it and shipped back to the MS data center. The data from the Data box is then transferred by the engineers to the configured storage account.  
 
-##  
+    Data extraction and transfer Scripts using the Data Box approach can be referred to at the location - GitHub - Azure/databox-adls-loader: Tools and scripts to load data from Hadoop clusters to Azure Data Lake Storage using Data Box
+
+- **Azure Data Factory**
+
+    Azure Data Factory is a data-integration service that helps create data-driven workflows orchestrating and automating data movement and data transformation.  This option can be used when there is high network bandwidth available and there is a need to orchestrate and monitor the data migration process. Also can be an approach for regular incremental load of data when the incremental data arrives on the on premise system as a first hop and cannot be directly transferred to the Azure storage account due to security requirements.
+
+    For details on comparison of the approaches refer the link - Azure data transfer options for large datasets, moderate to high network bandwidth | Microsoft Docs
+
+    For details on copying data from HDFS using ADF refer the link Copy data from HDFS by using Azure Data Factory - Azure Data Factory | Microsoft Docs
+
+- **3rd Party solutions like – WANDISCO Live Data Migration**
+
+    WANdisco LiveData Platform for Azure is one of Microsoft’s preferred solutions for Hadoop to Azure migrations and provides the capability through the Azure Portal and CLI.
+
+    For more details related to Live Data migrator refer Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure
 
 Core functionality of Hadoop Distributed File System and Azure Data Lake
 Storage Gen2 comparison map is as follows -
 
-+----------------------+----------------------+----------------------+
 | **Feature**          | **ADLS**             | **HDFS**             |
-+======================+======================+======================+
-| **Access that is     | Can manage and       | MapR cluster can     |
-| compatible with      | access data just as  | access an external   |
-| Hadoop**             | you would with a     | HDFS cluster with    |
+|---------------------|----------------------|----------------------|
+| **Access that is compatible with Hadoop**      | Can manage and        MapR cluster can  access data just as  | access an external   you would with a     | HDFS cluster with    |
 |                      | Hadoop Distributed   | the hdfs:// or       |
 |                      | File System (HDFS).  | webhdfs:// protocols |
 |                      | The Azure Blob File  |                      |
@@ -636,7 +571,7 @@ Storage Gen2 comparison map is as follows -
 |                      | to access data       |                      |
 |                      | stored in Data Lake  |                      |
 |                      | Storage Gen2         |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **POSIX              | The security model   | Jobs requiring file  |
 | permissions**        | for Data Lake Gen2   | system features like |
 |                      | supports ACL and     | strictly atomic      |
@@ -651,7 +586,7 @@ Storage Gen2 comparison map is as follows -
 |                      | frameworks like      |                      |
 |                      | Apache Hive and      |                      |
 |                      | Apache Spark.        |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Cost               | Data Lake Storage    |                      |
 | effectiveness**      | Gen2 offers low-cost |                      |
 |                      | storage capacity and |                      |
@@ -662,7 +597,7 @@ Storage Gen2 comparison map is as follows -
 |                      | billing rates as     |                      |
 |                      | data moves through   |                      |
 |                      | its life cycle.      |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Optimized driver** | The ABFS driver is   |                      |
 |                      | optimized            |                      |
 |                      | specifically for big |                      |
@@ -674,12 +609,12 @@ Storage Gen2 comparison map is as follows -
 |                      | system (DFS)         |                      |
 |                      | endpoint,            |                      |
 |                      | dfs.core.windows.net |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Metadata**         | Metadata in Azure    | The NameNode is the  |
 |                      | can be stored in     | arbitrator and       |
 |                      | Azure Purview        | repository for all   |
 |                      |                      | HDFS metadata.       |
-+----------------------+----------------------+----------------------+
+|----------------------+----------------------+----------------------|
 | **Block Size**       | 'Blocks', this is    | HDFS stores the data |
 |                      | equivalent to a      | in the form of the   |
 |                      | single 'Append' API  | block where the size |
@@ -701,11 +636,11 @@ Storage Gen2 comparison map is as follows -
 |                      | maximum files size   |                      |
 |                      | of 4.75TB is         |                      |
 |                      | achieved.            |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Default ACLS**     | Files do not have    | Files do not have    |
 |                      | default ACLs and Not | default ACLs         |
 |                      | enabled by default   |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Binary Files**     | Binary files can be  | Hadoop provides the  |
 |                      | moved to Azure Blob  | facility to          |
 |                      | Storage . Objects in | read/write binary    |
@@ -732,7 +667,7 @@ Storage Gen2 comparison map is as follows -
 |                      |                      | Seque                |
 |                      |                      | nceFileReader/Writer |
 |                      |                      | methods              |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Permission         | ADLS Gen2 uses the   | Permissions for an   |
 | inheritance**        | the POSIX-style      | item are stored on   |
 |                      | model and follows    | the item itself. In  |
@@ -753,7 +688,7 @@ Storage Gen2 comparison map is as follows -
 |                      | rage-access-control) | parent items before  |
 |                      |                      | the child items have |
 |                      |                      | been created.        |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Data Replication** | Data in an Azure     | By default a file's  |
 |                      | Storage account is   | replication factor   |
 |                      | replicated three     | is three. For        |
@@ -768,7 +703,7 @@ Storage Gen2 comparison map is as follows -
 |                      | availability zones   | their read bandwidth |
 |                      | in the primary       |                      |
 |                      | region.              |                      |
-+----------------------+----------------------+----------------------+
+|----------------------|----------------------|----------------------|
 | **Sticky bit**       | In the context of    | The Sticky bit can   |
 |                      | Data Lake Storage    | be set on            |
 |                      | Gen2, it is unlikely | directories,         |
@@ -786,15 +721,13 @@ Storage Gen2 comparison map is as follows -
 |                      | The sticky bit       | no effect.           |
 |                      | isn\'t shown in the  |                      |
 |                      | Azure portal.        |                      |
-+----------------------+----------------------+----------------------+
+----------------------+----------------------+----------------------+
 
-### 
-
-## Reference Implementation - ARM Templates 
+#### Reference Implementation - ARM Templates
 
 TBD v2
 
-## Pseudocode
+#### Pseudocode
 
 TBD v2
 
@@ -804,31 +737,22 @@ TBD v2
 
 ### Patterns & Anti -- Patterns
 
-### Performance Tuning
+#### Performance Tuning
 
-# HBase 
+### HBase Migration
 
-## Challenges of HBase on premise
+#### Challenges of HBase on premise
 
-Common challenges associated with Hbase deployments:
-
--   # Scalability  {#scalability .TOC-Heading}
-
--   # Ageing infrastructure {#ageing-infrastructure .TOC-Heading}
-
--   # Capacity {#capacity .TOC-Heading}
-
--   # Hard to achieve HA-DR due to either capacity issues and/or lack of data-centre sites. {#hard-to-achieve-ha-dr-due-to-either-capacity-issues-andor-lack-of-data-centre-sites. .TOC-Heading}
-
--   # Lack of native tools that enable: {#lack-of-native-tools-that-enable .TOC-Heading}
-
-    -   # Cost transparency {#cost-transparency .TOC-Heading}
-
-    -   # Monitoring {#monitoring .TOC-Heading}
-
-    -   # DevOps {#devops .TOC-Heading}
-
-    -   # Automations {#automations .TOC-Heading}
+- **Common challenges associated with Hbase deployments:**
+  - Scalability  
+  - Ageing infrastructure
+  - Capacity
+  - Hard to achieve HA-DR due to either capacity issues and/or lack of data-centre sites.
+  - Lack of native tools that enable:
+    - Cost transparency
+    - Monitoring
+    - DevOps
+    - Automations
 
 ## HBase Architecture and Components
 
@@ -862,7 +786,7 @@ Hbase cluster. This includes but not limited to creation/deletion of
 objects; monitoring RegionServers etc. There are usually two Master
 servers deployed for high availability (HA).
 
-#### ZooKeeper nodes 
+#### ZooKeeper nodes
 
 ZooKeeper (ZK) nodes are required for coordination in a distributed
 application environment such as Hbase.
@@ -903,7 +827,7 @@ family. The rows are sorted and stored based on the row key.
 Columns in Hbase are grouped into column families. All columns in a
 column have the same prefix.
 
-##### Cells 
+##### Cells
 
 A {row, column, version} tuple represent a cell.
 
@@ -911,14 +835,14 @@ A {row, column, version} tuple represent a cell.
 
 There are 4 types of data model operations:
 
--   Get -- returns attributes for a specified row.
+- Get -- returns attributes for a specified row.
 
--   Put -- either adds new rows to the table or updates existing rows.
+- Put -- either adds new rows to the table or updates existing rows.
 
--   Scans -- allows iteration over multiple rows for specified
+- Scans -- allows iteration over multiple rows for specified
     attributes.
 
--   Delete -- removes a row from the table. A marker (called tombstone)
+- Delete -- removes a row from the table. A marker (called tombstone)
     is placed on record mark for deletion. These are then removed during
     major compactions.
 
@@ -944,17 +868,17 @@ file (Hfile). Hfile is stored on HDFS. Depending on MemStore size and
 data flush interval, data from MemStore is written to Hbase file (or
 Hfile).
 
-*//insert diagram for Hbase write path*
+***//insert diagram for Hbase write path***
 
 To summarise, the components on the write-path are:
 
--   Write Ahead Log (WAL) is a data structure that is stored on
+- Write Ahead Log (WAL) is a data structure that is stored on
     persistent storage.
 
--   MemStore -- in-memory data structure. It's an on-heap data
+- MemStore -- in-memory data structure. It's an on-heap data
     structure.
 
--   Hfile -- Hbase file used for data persistence and stored on HDFS.
+- Hfile -- Hbase file used for data persistence and stored on HDFS.
 
 ##### Read Path
 
@@ -973,10 +897,10 @@ but it's hosted off-heap.
 
 To summarise:
 
--   Hbase tries to serve a read request using data stored in cache --
+- Hbase tries to serve a read request using data stored in cache --
     BlockCache and MemStore.
 
--   If data is not there, a read request is served using HFile.
+- If data is not there, a read request is served using HFile.
 
 ##### Offheap Read and Write paths
 
@@ -986,55 +910,53 @@ reading data does its best to avoid on-heap memory allocations reducing
 the amount of work that Garbage Collection (GC) must do to complete
 reads and writes.
 
-## Considerations
+#### HBase Considerations
 
--   Azure Enterprise Scale Landing Zone (ESLZ) principles with special
+- Azure Enterprise Scale Landing Zone (ESLZ) principles with special
     attention to using Subscription as a unit of scale.
 
--   Well-Architected Framework.
+- Well-Architected Framework.
 
--   Azure compute and storage throughput limits and the role they play
+- Azure compute and storage throughput limits and the role they play
     in sizing and scalability.
 
--   Apache Hbase and leveraging different Azure Storage options to
+- Apache Hbase and leveraging different Azure Storage options to
     balance performance and costs.
 
-## Migration Approach
+#### HBase Migration Approach
 
 Azure has several landing targets for Apache Hbase. Depending on
 requirements and product features, customers can choose between Azure
 IaaS, HDI Hbase or Cosmos DB (SQL API).
 
-### Lift and shift -- Azure IaaS
+#### Lift and shift -- Azure IaaS
 
 ##### Planning and Sizing
 
 The list below contains a set of questions that drive critical decision
 points related to migration such as:
 
--   Sizing
+- Sizing
 
--   Capacity planning and growth
+- Capacity planning and growth
 
--   Security
+- Security
 
--   Administration
+- Administration
 
--   Monitoring
+- Monitoring
 
--   Dependencies on specific version of application(s)
+- Dependencies on specific version of application(s)
 
--   Target SLA, RTO and RPO
+- Target SLA, RTO and RPO
 
 The list is applicable to following migration scenarios:
 
--   On-premises Hbase migration to Azure IaaS or PaaS
+- On-premises Hbase migration to Azure IaaS or PaaS
 
--   Hbase migrations from 3P cloud to Azure IaaS or PaaS
+- Hbase migrations from 3P cloud to Azure IaaS or PaaS
 
--   Migrations from Azure IaaS to Azure PaaS (HDI Hbase or Cosmos DB).
-
-#  {#section-25 .TOC-Heading}
+- Migrations from Azure IaaS to Azure PaaS (HDI Hbase or Cosmos DB).
 
 +----------------------+----------------------+----------------------+
 | Layer                | Questions            | Comments             |
@@ -1460,25 +1382,26 @@ storage.
 Azure Virtual Machines (VM) families are optimized to suit different
 use-cases and provide a balance of compute (vCores) and memory.
 
-  **Type**                                                                                     **Sizes**      **Description**
-  -------------------------------------------------------------------------------------------- -------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  [Entry-level](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general)         A, Av2         Have CPU performance and memory configurations best suited for entry level workloads like development and test. They are economical and provide a low-cost option to get started with Azure.
-  [General purpose](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general)     D, DSv2, Dv2   Balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.
-  [Compute optimized](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-compute)   F              High CPU-to-memory ratio. Good for medium traffic web servers, network appliances, batch processes, and application servers.
-  [Memory optimized](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-memory)     Esv3, Ev3      High memory-to-CPU ratio. Great for relational database servers, medium to large caches, and in-memory analytics.
+ 
+|Type  |Sizes  |Description  |
+|---------|---------|---------|
+|Entry-level      | A, Av2         | Have CPU performance and memory configurations best suited for entry level workloads like development and test. They are economical and provide a low-cost option to get started with Azure.         |
+|General purpose      | D, DSv2, Dv2         | Balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.         |
+|Compute optimized      | F         |High CPU-to-memory ratio. Good for medium traffic web servers, network appliances, batch processes, and application servers.          |
+|Memory optimized      | Esv3, Ev3         |   High memory-to-CPU ratio. Great for relational database servers, medium to large caches, and in-memory analytics.       |
 
 In terms of nature of resource footprint, Apache Hbase is designed to
 leverage memory and premium storage (such as SSDs).
 
--   Hbase ships with features like BucketCache which can significantly
+- Hbase ships with features like BucketCache which can significantly
     improve read performance. BucketCache is stored off-heap. Hence, we
     recommend VMs that have higher memory to CPU ratio.
 
--   Hbase write path includes writing changes to a write-ahead log (WAL)
+- Hbase write path includes writing changes to a write-ahead log (WAL)
     which is a data structure persisted on a storage medium. Storing WAL
     on fast storage medium such as SSDs will improve write performance.
 
--   Hbase is designed to scale out.
+- Hbase is designed to scale out.
 
 Scalability targets of Azure compute
 [Ds-series](https://docs.microsoft.com/en-us/azure/virtual-machines/dv2-dsv2-series-memory)
@@ -1492,25 +1415,25 @@ sizing and planning.
 From compute and memory perspective, we recommend using the following
 Azure compute family types for various Hbase node types:
 
--   **Hbase Master** -- For enterprise deployments, we recommend at
+- **Hbase Master** -- For enterprise deployments, we recommend at
     least 2 x Master (from HA perspective). For a large Hbase cluster, a
     DS5_v2 Azure VM with 16 vCPUs and 56 GiB memory should suffice most
     deployments. For medium-sized clusters, recommendation is to have at
     least 8 vCPU and 20-30GB memory.
 
--   **HDFS NameNode** -- We recommend hosting NameNode on separate set
+- **HDFS NameNode** -- We recommend hosting NameNode on separate set
     of virtual machines and not to co-locate with Hbase Master. From HA
     perspective, 2 x NameNodes should be deployed. Like Hbase Master,
     Azure VM DS5_v2 is recommended for large production-grade clusters.
 
--   **Hbase Region Server** -- We recommend using Azure VMs with high
+- **Hbase Region Server** -- We recommend using Azure VMs with high
     memory to vCPU ratio. Hbase has several features that can leverage
     memory for improving reads and writes. Azure VMs like DS14_v2 or
     DS15_v2 will be a good starting point. Hbase is designed for
     scale-out and more Region Servers can be added to improve
     performance.
 
--   **ZooKeeper (ZK) nodes** -- Hbase relies on ZK for operations. An
+- **ZooKeeper (ZK) nodes** -- Hbase relies on ZK for operations. An
     Azure VM with 4-8 vCPU; 4-8 GB memory is a good starting point.
     Ensure that there is local storage available. ZK nodes should be
     deployed on a separate set of VMs.
@@ -1525,7 +1448,7 @@ performance, availability, and cost targets.
 There are **two key factors** that influence of sizing of Hbase storage
 -- volume and throughput.
 
--   Volume of data.
+- Volume of data.
 
 > This is the data that must be persisted on Hbase. The data gets
 > persisted to underlying storage and when we refer to volume of data,
@@ -1533,7 +1456,7 @@ There are **two key factors** that influence of sizing of Hbase storage
 > replication. Total storage size is the metric that we use to drive
 > volume.
 
--   Throughput of reads and writes.
+- Throughput of reads and writes.
 
 > This is how fast one wants Hbase to service writes and reads. IOPS and
 > throughput are the two metrics that drive this.
@@ -1594,26 +1517,26 @@ for brand new and existing deployments
 
 ######## Further reading
 
--   Architecting Hbase applications by Jean-Marc Spaggiari; Kevin
+- Architecting Hbase applications by Jean-Marc Spaggiari; Kevin
     O\'Dell. Published by O\'Reilly Media, Inc., 2016
 
--   [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem)
+- [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 
--   [Apache Hbase
+- [Apache Hbase
     master](https://hbase.apache.org/book.html#architecture.master)
 
--   [Apache ZooKeeper](https://zookeeper.apache.org/)
+- [Apache ZooKeeper](https://zookeeper.apache.org/)
 
--   [Apache Hbase
+- [Apache Hbase
     RegionServer](https://hbase.apache.org/book.html#regionserver.arch)
 
--   Apache Hbase RegionServer [Offheap Read/Write
+- Apache Hbase RegionServer [Offheap Read/Write
     path](https://hbase.apache.org/book.html#offheap_read_write).
 
--   General guidance and best practices on designing [table
+- General guidance and best practices on designing [table
     schemas](https://hbase.apache.org/book.html#table_schema_rules_of_thumb).
 
--   
+-
 
 #### Data migration
 
@@ -1653,8 +1576,8 @@ directly copy HFiles between two Hbase clusters.
 |                |                |                | between source |
 |                |                |                | and target.    |
 +----------------+----------------+----------------+----------------+
-| Source is an   | **Hbase        | **CopyTable**  | Same as above  |
-| Hbase          | CopyTable**    | can read from  | plus a few     |
+| Source is an   | Hbase        | CopyTable | Same as above  |
+| Hbase          | CopyTable      | can read from  | plus a few     |
 | datastore BUT  |                | Hbase source   | related to     |
 | different      | *OR*           | and write to   | specific tool  |
 | version.       |                | Hbase target.  | used for       |
@@ -1664,8 +1587,8 @@ directly copy HFiles between two Hbase clusters.
 |                |                | *OR*           | CopyTable**    |
 |                | *OR*           |                |                |
 |                |                | **Azure HDI    | Hbase version  |
-|                | **Hbase Export | Spark or Azure | on source and  |
-|                | utility**      | Databricks**   | target sides.  |
+|                | Hbase Export | Spark or Azure | on source and  |
+|                | utility     | Databricks**   | target sides.  |
 |                |                |                |                |
 |                |                | *OR*           | Clusters       |
 |                |                |                | should be      |
@@ -1793,7 +1716,7 @@ learn more about Azure Cosmos DB, see the
 [overview](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction)
 article. This section provides guide to migrate from HBase to Cosmos DB.
 
-### Modernization -- Cosmos DB (SQL API)
+#### Modernization -- Cosmos DB (SQL API)
 
 Before migrating, you need to understand the difference between Cosmos
 DB and HBase.
@@ -1810,49 +1733,49 @@ section for the HBase resource model.
 The key differences between the Cosmos DB and HBase / Phoenix resource
 and data models are shown in the table below.
 
-  **HBase**             **Phoenix**            **Cosmos DB**
-  --------------------- ---------------------- -----------------
-  Cluster               Account                
-  Namespace             Schema (if enabled)    Database
-  Table                 Container/Collection   
-  Column family         N/A                    
-  Row                   Item/Document          
-  Version (Timestamp)   N/A                    
-  N/A                   Primary Key            Partition Key
-  N/A                   Index                  Index
-  N/A                   Secondary Index        Secondary Index
-  N/A                   View                   N/A
-  N/A                   Sequence               N/A
+  |**HBase**          |   **Phoenix**            |**Cosmos DB**|
+  |-------------------|--------------------------|-------------|
+  |Cluster            |Account                 |               |
+  |Namespace           | Schema (if enabled)    |Database      |
+  |Table                |Container/Collection   |              |
+  |Column family         |N/A                   |              |
+  |Row                   |Item/Document         |              |
+  |Version (Timestamp)   |N/A                   |              |
+  |N/A                   |Primary Key            |Partition Key|
+  |N/A                   |Index                  |Index        |
+  |N/A                   |Secondary Index        |Secondary Index|
+  |N/A                   |View                   |N/A            |
+  |N/A                   |Sequence               |N/A            |
 
 #### Data structural differences
 
 The key differences regarding the data structure of Cosmos DB and HBase
 data are as follows:
 
-**RowKey**
+- **RowKey**
 
 HBase is sorted and stored by RowKey and horizontally divided into
 Regions by the range of RowKey. Cosmos DB will be distributed to
 partitions according to the Hash value of the specified Partition key.
 
-**Column Family**
+- **Column Family**
 
 > HBase columns are grouped within a Column Family, but the Cosmos DB
 > SQL API doesn\'t have a Column Family concept.
 
-**Timestamp**
+- **Timestamp**
 
 > HBase can use Timestamp to give a Cell multiple versions. You can use
 > Timestamp to get the values of past versions. Cosmos DB does not have
 > a history of values.
 
-**HBase data format**
+- **HBase data format**
 
 The following is an example of HBase table row.
 
-It consists of RowKey, Column Family:Column Name, Timestamp, Value.
+ It consists of RowKey, Column Family  Column Name, Timestamp, Value.
 
-**Cosmos DB data format**
+- **Cosmos DB data format**
 
 The following is an example of Cosmos DB document.
 
@@ -1867,15 +1790,14 @@ HBase offers strictly consistent reads and writes, Cosmos DB offers five
 well-defined consistency levels. From strongest to weakest, the levels
 are:
 
--   # Strong {#strong .TOC-Heading}
+- **Strong**
 
--   # Bounded staleness {#bounded-staleness .TOC-Heading}
+- **Bounded staleness**
 
--   # Session {#session .TOC-Heading}
+- **Session**
 
--   # Consistent prefix {#consistent-prefix .TOC-Heading}
-
--   # Eventual {#eventual .TOC-Heading}
+- **Consistent prefix**
+- **Eventual**
 
 Each level provides availability and performance tradeoffs. The
 following image shows the different consistency levels as a spectrum.
@@ -1916,13 +1838,15 @@ for more details.
 > The number of RUs per second will be affected by the following
 > factors:
 
--   # **Document size -** Larger documents will consume more RUs to read or write. {#document-size---larger-documents-will-consume-more-rus-to-read-or-write. .TOC-Heading}
+- **Document size -** Larger documents will consume more RUs to read or write.
 
--   # **Indexing -** Indexing is automatic for all items, but if you specify not to index an item, it will consume fewer RUs. {#indexing---indexing-is-automatic-for-all-items-but-if-you-specify-not-to-index-an-item-it-will-consume-fewer-rus. .TOC-Heading}
+- **Indexing -** Indexing is automatic for all items, but if you specify not to index an item, it will consume fewer RUs.
 
--   # **Consistency levels -** The most consistent Strong and Bounded Staleness consistency levels consume approximately double the number of RUs when compared to other consistency levels. {#consistency-levels---the-most-consistent-strong-and-bounded-staleness-consistency-levels-consume-approximately-double-the-number-of-rus-when-compared-to-other-consistency-levels. .TOC-Heading}
+- **Consistency levels -**
+The most consistent Strong and Bounded Staleness consistency levels consume approximately double the number of RUs when compared to other consistency levels.
 
--   # **Queries, stored procedures, and triggers -** The same query on the same data will always consume the same RUs, but queries with bigger result sets, many and/or complex predicates, and including user-defined functions will consume more RUs. {#queries-stored-procedures-and-triggers---the-same-query-on-the-same-data-will-always-consume-the-same-rus-but-queries-with-bigger-result-sets-many-andor-complex-predicates-and-including-user-defined-functions-will-consume-more-rus. .TOC-Heading}
+- **Queries, stored procedures, and triggers -**
+The same query on the same data will always consume the same RUs, but queries with bigger result sets, many and/or complex predicates, and including user-defined functions will consume more RUs.
 
 > You can use a calculation tool to estimate RUs.
 >
@@ -1964,7 +1888,7 @@ for more details.
 
 #### Availability
 
-**HBase**
+- **HBase**
 
 > HBase consists of Master and Region Server (and ZooKeeper). High
 > availability in a single cluster can be achieved by making each
@@ -1972,7 +1896,7 @@ for more details.
 > HBase clusters in remote locations and use replication mechanisms to
 > maintain the same data across clusters.
 
-**Cosmos DB**
+- **Cosmos DB**
 
 > Cosmos DB does not require any configuration such as cluster component
 > redundancy. It provides a comprehensive SLA for high availability,
@@ -1983,12 +1907,12 @@ for more details.
 
 #### Data reliability
 
-**HBase**
+- **HBase**
 
 > HBase is built on HDFS and the stored data will have 3 replicas by
 > default.
 
-**Cosmos DB**
+- **Cosmos DB**
 
 > Azure Cosmos DB primarily provides high availability in two ways.
 > First, Azure Cosmos DB replicates data between regions configured
@@ -2005,7 +1929,7 @@ another system, or is it accessed using a directory service? Are other
 important processes working in your HBase cluster? These system
 dependencies need to be clarified to determine the impact of migration.
 
-##### Data migration
+##### HBase Data migration
 
 For successful data migration, it is important to understand the
 characteristics of the business that uses the database and decide how to
@@ -2037,13 +1961,13 @@ Data Discovery
 Gather information in advance from your existing HBase cluster to
 identify the data you want to migrate.
 
--   # HBase version {#hbase-version .TOC-Heading}
+- **HBase version**
 
--   # Migration target tables {#migration-target-tables .TOC-Heading}
+- **Migration target tables**
 
--   # Column family information {#column-family-information .TOC-Heading}
+- **Column family information**
 
--   # Table status {#table-status .TOC-Heading}
+- **Table status**
 
 Here the data is collected using an "hbase shell" script and stored in
 the local file system of the operating machine.
@@ -2081,13 +2005,13 @@ status of the table.
 If you are using Apache Phoenix on HBase cluster, you need to collect
 data from Phoenix as well.
 
--   # Migration target table  {#migration-target-table .TOC-Heading}
+- **Migration target table**
 
--   # Table schemas {#table-schemas .TOC-Heading}
+- **Table schemas**
 
--   # Indexes {#indexes .TOC-Heading}
+- **Indexes**
 
--   # Primary key {#primary-key .TOC-Heading}
+- **Primary key**
 
 Connect to Apache Phoenix on your cluster.
 
@@ -2120,11 +2044,11 @@ endpoint) that joins a private network using a Private IP address.
 See the following documents for more information on the three network
 options:
 
--   # Public IP with Firewall <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-firewall> {#public-ip-with-firewall-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-configure-firewall .TOC-Heading}
+- **Public IP with Firewall** <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-firewall> {#public-ip-with-firewall-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-configure-firewall .TOC-Heading}
 
--   # Public IP with Service Endpoint <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-vnet-service-endpoint> {#public-ip-with-service-endpoint-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-configure-vnet-service-endpoint .TOC-Heading}
+- **Public IP with Service Endpoint** <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-vnet-service-endpoint> {#public-ip-with-service-endpoint-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-configure-vnet-service-endpoint .TOC-Heading}
 
--   # Private Endpoint <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-private-endpoints> {#private-endpoint-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-configure-private-endpoints .TOC-Heading}
+- **Private Endpoint** <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-private-endpoints> {#private-endpoint-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-configure-private-endpoints .TOC-Heading}
 
 #### Data migration
 
@@ -2136,7 +2060,7 @@ Tool.
 
 ##### HBase 1.x
 
-**Data Factory**
+- **Data Factory**
 
 > Suitable for large datasets. The Azure Cosmos DB Bulk Executor library
 > is used. Please note that there are no checkpoints, so if you
@@ -2156,7 +2080,7 @@ Tool.
 >
 > <https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-cosmos-db>
 
-**Data Migration Tool**
+- **Data Migration Tool**
 
 A dedicated OSS tool for migrating data to Cosmos DB, suitable for small
 datasets. It can be installed, set up and used on a Windows machine.
@@ -2173,7 +2097,7 @@ The Data Factory and Data Migration Tool do not support HBase 2.x or
 later REST APIs, but Spark can read HBase data and write it to Cosmos
 DB.
 
-**Apache Spark - Apache HBase Connector & Cosmos DB Spark connector**
+- **Apache Spark - Apache HBase Connector & Cosmos DB Spark connector**
 
 Here is an example assuming that HBase 2.1.0 and Spark 2.4.0 are running
 in the same cluster.
@@ -2345,11 +2269,11 @@ Hive, Spark, and more. If you have other workloads with your current
 HBase, they also need to be migrated. For details, refer to each
 migration guides.
 
--   # MapReduce {#mapreduce .TOC-Heading}
+- **MapReduce**
 
--   # HBase {#hbase-1 .TOC-Heading}
+- **HBase**
 
--   # Spark {#spark .TOC-Heading}
+- **Spark**
 
 #### Server-side programming
 
@@ -2358,45 +2282,39 @@ these features, you will also need to migrate their processing.
 
 HBase
 
--   # Custom filters {#custom-filters .TOC-Heading}
+- **Custom filters**
 
-    -   # Various filters are available as default in HBase, but you can also implement your own custom filters. Custom filters may be implemented if the filters available as default on HBase do not meet your requirements. {#various-filters-are-available-as-default-in-hbase-but-you-can-also-implement-your-own-custom-filters.-custom-filters-may-be-implemented-if-the-filters-available-as-default-on-hbase-do-not-meet-your-requirements. .TOC-Heading}
+Various filters are available as default in HBase, but you can also implement your own custom filters. Custom filters may be implemented if the filters available as default on HBase do not meet your requirements.
 
--   # Coprocessor :  {#coprocessor .TOC-Heading}
+- **Coprocessor:**
 
-    -   # The Coprocessor is a framework that allows you to run your own code on the Region Server. By using the Coprocessor, it is possible to perform the processing that was being executed on the client side on the server side, and depending on the processing, it can be made more efficient. There are two types of Coprocessors, Observer and Endpoint. {#the-coprocessor-is-a-framework-that-allows-you-to-run-your-own-code-on-the-region-server.-by-using-the-coprocessor-it-is-possible-to-perform-the-processing-that-was-being-executed-on-the-client-side-on-the-server-side-and-depending-on-the-processing-it-can-be-made-more-efficient.-there-are-two-types-of-coprocessors-observer-and-endpoint. .TOC-Heading}
+  The Coprocessor is a framework that allows you to run your own code on the Region Server. By using the Coprocessor, it is possible to perform the processing that was being executed on the client side on the server side, and depending on the processing, it can be made more efficient. There are two types of Coprocessors, Observer and Endpoint.
 
-        -   # Observer {#observer .TOC-Heading}
+- **Observer**
 
-            -   # Observer hooks specific operations and events. This is a function for adding arbitrary processing. This is a feature similar to RDBMS triggers. Endpoint {#observer-hooks-specific-operations-and-events.-this-is-a-function-for-adding-arbitrary-processing.-this-is-a-feature-similar-to-rdbms-triggers.-endpoint .TOC-Heading}
+Observer hooks specific operations and events. This is a function for adding arbitrary processing. This is a feature similar to RDBMS triggers.
 
-        -   # Endpoint {#endpoint .TOC-Heading}
+- **Endpoint**
 
-            -   # Endpoint is a feature for extending HBase RPC. It is a function similar to an RDBMS stored procedure. {#endpoint-is-a-feature-for-extending-hbase-rpc.-it-is-a-function-similar-to-an-rdbms-stored-procedure. .TOC-Heading}
+Endpoint is a feature for extending HBase RPC. It is a function similar to an RDBMS stored procedure.
 
-#  {#section-26 .TOC-Heading}
+##### Azure Cosmos DB
 
-Azure Cosmos DB
+- **Stored Procedure**
+Cosmos DB stored procedures are written in JavaScript and can perform operations such as creating, updating, reading, querying, and deleting items in Cosmos DB containers. <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#stored-procedures>
 
--   # Stored Procedure {#stored-procedure .TOC-Heading}
+- **Trigger**
+Triggers can be specified for operations on the database. There are two methods provided: a pre-trigger that runs before the database item changes and a post-trigger that runs after the database item changes.
 
-    -   # Cosmos DB stored procedures are written in JavaScript and can perform operations such as creating, updating, reading, querying, and deleting items in Cosmos DB containers. <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#stored-procedures> {#cosmos-db-stored-procedures-are-written-in-javascript-and-can-perform-operations-such-as-creating-updating-reading-querying-and-deleting-items-in-cosmos-db-containers.-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-write-stored-procedures-triggers-udfsstored-procedures .TOC-Heading}
-
--   # Trigger {#trigger .TOC-Heading}
-
-    -   # Triggers can be specified for operations on the database. There are two methods provided: a pre-trigger that runs before the database item changes and a post-trigger that runs after the database item changes. <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#triggers> {#triggers-can-be-specified-for-operations-on-the-database.-there-are-two-methods-provided-a-pre-trigger-that-runs-before-the-database-item-changes-and-a-post-trigger-that-runs-after-the-database-item-changes.-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-write-stored-procedures-triggers-udfstriggers .TOC-Heading}
-
--   # UDF {#udf .TOC-Heading}
-
-    -   # Cosmos DB allows you to define User Defined Functions (UDFs). UDFs can also be written in JavaScript. <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#udfs> {#cosmos-db-allows-you-to-define-user-defined-functions-udfs.-udfs-can-also-be-written-in-javascript.-httpsdocs.microsoft.comen-usazurecosmos-dbhow-to-write-stored-procedures-triggers-udfsudfs .TOC-Heading}
-
+- **UDF**
+- Cosmos DB allows you to define User Defined Functions (UDFs). UDFs can also be written in JavaScript. <https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#udfs>
 Server-side programming mappings
 
-  HBase                    Cosmos DB
-  ------------------------ ------------------
-  Custom filters           WHERE Clause
-  Coprocessor (Observer)   Trigger
-  Coprocessor (Endpoint)   Stored Procedure
+  |HBase                    |Cosmos DB
+  |------------------------  |------------------|
+  |Custom filters           |WHERE Clause       |
+  |Coprocessor (Observer)   |Trigger            |
+  |Coprocessor (Endpoint)   |Stored Procedure   |
 
 \*Please note that different mappings and implementations may be
 required in Cosmos DB depending on the processing implemented on HBase.
@@ -2409,61 +2327,58 @@ components to be installed for security. We recommend that you consider
 migrating your database system security implementation using the
 following checklist:
 
--   # Network security and firewall settings {#network-security-and-firewall-settings .TOC-Heading}
+- Network security and firewall settings
+- User authentication and fine grained user controls
+- Ability to replicate data globally for regional failures
+- Ability to fail over from one data center to another
+- Local data replication within a data center
 
--   # User authentication and fine grained user controls {#user-authentication-and-fine-grained-user-controls .TOC-Heading}
+##### **Automatic data backups**
 
--   # Ability to replicate data globally for regional failures {#ability-to-replicate-data-globally-for-regional-failures .TOC-Heading}
+##### **Restoration of deleted data from backups**
 
--   # Ability to fail over from one data center to another {#ability-to-fail-over-from-one-data-center-to-another .TOC-Heading}
+##### *Protect and isolate sensitive data**
 
--   # Local data replication within a data center {#local-data-replication-within-a-data-center .TOC-Heading}
+##### **Monitoring for attacks**
 
--   # Automatic data backups {#automatic-data-backups .TOC-Heading}
+##### **Responding to attacks**
 
--   # Restoration of deleted data from backups {#restoration-of-deleted-data-from-backups .TOC-Heading}
+##### **Ability to geo-fence data to adhere to data governance restrictions**
 
--   # Protect and isolate sensitive data {#protect-and-isolate-sensitive-data .TOC-Heading}
+##### **Physical protection of servers in protected data centers**
 
--   # Monitoring for attacks {#monitoring-for-attacks .TOC-Heading}
-
--   # Responding to attacks {#responding-to-attacks .TOC-Heading}
-
--   # Ability to geo-fence data to adhere to data governance restrictions {#ability-to-geo-fence-data-to-adhere-to-data-governance-restrictions .TOC-Heading}
-
--   # Physical protection of servers in protected data centers {#physical-protection-of-servers-in-protected-data-centers .TOC-Heading}
-
--   # Certifications {#certifications .TOC-Heading}
+##### **Certifications**
 
 For more information on security, please refer to the following
 document.
 <https://docs.microsoft.com/en-us/azure/cosmos-db/database-security>
 
-#### Monitoring
+##### Monitoring
 
 HBase typically monitors the cluster using the cluster metric web UI or
 in conjunction with Ambari, Cloudera Manager, or other monitoring tools.
 Cosmos DB allows you to use the monitoring mechanism built into the
 Azure platform.
 
--   # Monitoring in the Cosmos DB portal  {#monitoring-in-the-cosmos-db-portal .TOC-Heading}
+###### **Monitoring in the Cosmos DB portal**  
 
-    -   # Metrics such as throughput, storage, availability, latency, consistency, etc. are automatically retrieved and retained for 7 days. {#metrics-such-as-throughput-storage-availability-latency-consistency-etc.-are-automatically-retrieved-and-retained-for-7-days. .TOC-Heading}
+Metrics such as throughput, storage, availability, latency, consistency, etc. are automatically retrieved and retained for 7 days.
 
 ```{=html}
 <!-- -->
 ```
--   # Monitoring using Azure Monitor metrics  {#monitoring-using-azure-monitor-metrics .TOC-Heading}
 
-    -   # You can monitor metrics for your Cosmos DB account and create dashboards from Azure Monitor. Metrics are collected on a minute-by-minute basis and are retained for 30 days by default. {#you-can-monitor-metrics-for-your-cosmos-db-account-and-create-dashboards-from-azure-monitor.-metrics-are-collected-on-a-minute-by-minute-basis-and-are-retained-for-30-days-by-default. .TOC-Heading}
+###### **Monitoring using Azure Monitor metrics**
 
--   # Monitoring using Azure Monitor diagnostic logs  {#monitoring-using-azure-monitor-diagnostic-logs .TOC-Heading}
+You can monitor metrics for your Cosmos DB account and create dashboards from Azure Monitor. Metrics are collected on a minute-by-minute basis and are retained for 30 days by default.
 
-    -   # Telemetry such as events and traces that occur every second is stored as a log. You can analyze these logs by querying the collected data. {#telemetry-such-as-events-and-traces-that-occur-every-second-is-stored-as-a-log.-you-can-analyze-these-logs-by-querying-the-collected-data. .TOC-Heading}
+###### **Monitoring using Azure Monitor diagnostic logs**
 
--   # Monitor programmatically with SDKs {#monitor-programmatically-with-sdks .TOC-Heading}
+Telemetry such as events and traces that occur every second is stored as a log. You can analyze these logs by querying the collected data.
 
-    -   # You can monitor your Azure Cosmos account by writing your own program using .NET, Java, Python, Node.js SDK, and REST API. {#you-can-monitor-your-azure-cosmos-account-by-writing-your-own-program-using-.net-java-python-node.js-sdk-and-rest-api. .TOC-Heading}
+###### **Monitor programmatically with SDKs**
+
+You can monitor your Azure Cosmos account by writing your own program using .NET, Java, Python, Node.js SDK, and REST API.
 
 For more information on Cosmos DB monitoring, please refer to the
 following document.
@@ -2483,9 +2398,9 @@ Also, see below for Cosmos DB metrics and log types that can be
 collected by Azure Monitor.
 <https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db-reference>
 
-#### BC-DR
+##### **BC-DR**
 
-##### Backup
+###### **Backup**
 
 There are several ways to get a backup of HBase. For example, Snapshot,
 Export, CopyTable, Offlibe backup of HDFS data, and other custom
@@ -2496,17 +2411,14 @@ not affect the performance or availability of database operations.
 Backups are stored in Azure storage and can be used to recover data if
 needed. There are two types of Cosmos DB backups:
 
--   # Periodic backup {#periodic-backup .TOC-Heading}
+##### **Periodic backup**
 
-    -   # This is the default backup method. Backups are performed on a regular basis and, by default, keep the latest two backups. You can change the backup interval and retention period according to your requirements. The data is restored by making a request to Azure support team. {#this-is-the-default-backup-method.-backups-are-performed-on-a-regular-basis-and-by-default-keep-the-latest-two-backups.-you-can-change-the-backup-interval-and-retention-period-according-to-your-requirements.-the-data-is-restored-by-making-a-request-to-azure-support-team. .TOC-Heading}
+This is the default backup method. Backups are performed on a regular basis and, by default, keep the latest two backups. You can change the backup interval and retention period according to your requirements. The data is restored by making a request to Azure support team.
+<https://docs.microsoft.com/en-us/azure/cosmos-db/configure-periodic-backup-restore>
 
-# <https://docs.microsoft.com/en-us/azure/cosmos-db/configure-periodic-backup-restore> {#httpsdocs.microsoft.comen-usazurecosmos-dbconfigure-periodic-backup-restore .TOC-Heading}
+##### **Continuous backup (Public Preview at the time of publication of this document 2021/3)**
 
--   # Continuous backup (Public Preview at the time of publication of this document 2021/3) {#continuous-backup-public-preview-at-the-time-of-publication-of-this-document-20213 .TOC-Heading}
-
-    -   # You can restore to any point in the last 30 days. You need to select this backup mode when you create your Cosmos DB account to enable it. You can do a self-service restore using the Azure portal, PowerShell or CLI. {#you-can-restore-to-any-point-in-the-last-30-days.-you-need-to-select-this-backup-mode-when-you-create-your-cosmos-db-account-to-enable-it.-you-can-do-a-self-service-restore-using-the-azure-portal-powershell-or-cli. .TOC-Heading}
-
-# <https://docs.microsoft.com/en-us/azure/cosmos-db/continuous-backup-restore-introduction> {#httpsdocs.microsoft.comen-usazurecosmos-dbcontinuous-backup-restore-introduction .TOC-Heading}
+ You can restore to any point in the last 30 days. You need to select this backup mode when you create your Cosmos DB account to enable it. You can do a self-service restore using the Azure portal, PowerShell or CLI.<https://docs.microsoft.com/en-us/azure/cosmos-db/continuous-backup-restore-introduction>
 
 ##### Disaster Recovery
 
@@ -2534,22 +2446,23 @@ These are momentary and do not require any changes from the application.
 
 <https://docs.microsoft.com/en-us/azure/cosmos-db/high-availability>
 
-###  
+## Hive
 
-# Hive
+### Challenges of Hive on premise
 
-## Challenges of Hive on premise
+### Hive Architecture and Components
 
-## Hive Architecture and Components
+#### Hive Considerations
 
-## Considerations
+### **Hive Migration Approach**
 
-## Migration Approach
-
-### Modernization -- Databricks
+### **Modernization -- Databricks**
 
 When an Azure Databricks workspace provisioned, a default Hive
-[Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/)
+
+### **Metastore**
+
+ (https://docs.microsoft.com/en-us/azure/databricks/data/metastores/)
 comes automatically with the workspace. Alternative, an [external Hive
 Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/external-hive-metastore)
 can be provision on Azure and connected to Azure Databricks. The
@@ -2571,74 +2484,33 @@ Export Hive table DDL
 
 There are two methods you can use to generate the DDL for hive tables:
 
-# Use SHOW CREATE TABLE command {#use-show-create-table-command .TOC-Heading}
+- Use SHOW CREATE TABLE command
 
-# The "show create table" hive command can be used to generate the DDL for the single hive table (syntax: SHOW CREATE TABLE HIVE_TABLE_NAME; ) {#the-show-create-table-hive-command-can-be-used-to-generate-the-ddl-for-the-single-hive-table-syntax-show-create-table-hive_table_name .TOC-Heading}
+The "show create table" hive command can be used to generate the DDL for the single hive table (syntax: SHOW CREATE TABLE HIVE_TABLE_NAME; )
 
-#  {#section-28 .TOC-Heading}
+Use shell script + beeline to dump all tables DDL in the given Hive databaseYou can leverage on the same command "SHOW CREATE TABLE" to export all hive table DDL.
 
-#  {#section-29 .TOC-Heading}
+The following handy script demonstrate the scripting approach to export DDL for multiple tables:
 
-# Use shell script + beeline to dump all tables DDL in the given Hive database  {#use-shell-script-beeline-to-dump-all-tables-ddl-in-the-given-hive-database .TOC-Heading}
-
-# You can leverage on the same command "SHOW CREATE TABLE" to export all hive table DDL. The following handy script demonstrate the scripting approach to export DDL for multiple tables: {#you-can-leverage-on-the-same-command-show-create-table-to-export-all-hive-table-ddl.-the-following-handy-script-demonstrate-the-scripting-approach-to-export-ddl-for-multiple-tables .TOC-Heading}
-
-+----------------------------------------------------------------------+
-| # table_name_file=\'/home/sshdanny/tablen                            |
-| ames.txt\' {#table_name_filehomesshdannytablenames.txt .TOC-Heading} |
-|                                                                      |
-| # ddl_file=\'/home/sshdanny/hiv                                      |
-| etableddl.txt\' {#ddl_filehomesshdannyhivetableddl.txt .TOC-Heading} |
-|                                                                      |
-| # rm -f \$table_name_file {#rm--f-table_name_file .TOC-Heading}      |
-|                                                                      |
-| # rm -f \$ddl_file {#rm--f-ddl_file .TOC-Heading}                    |
-|                                                                      |
-| # beeline -u \"jdbc:hive2://zk0-danny.3er3nak3hkxuzfakhju4xihqha.    |
-| ix.internal.cloudapp.net:2181,zk2-danny.3er3nak3hkxuzfakhju4xihqha.i |
-| x.internal.cloudapp.net:2181,zk3-danny.3er3nak3hkxuzfakhju4xihqha.ix |
-| .internal.cloudapp.net:2181/;serviceDiscoveryMode=zooKeeper;zooKeepe |
-| rNamespace=hiveserver2\" -n \"danny\" -p \"\[password\]\" \--showHea |
-| der=false \--silent=true \--outputformat=csv2 -e \"show tables\" \>\ |
-| $table_name_file {#beeline--u-jdbchive2zk0-danny.3er3nak3hkxuzfakhju |
-| 4xihqha.ix.internal.cloudapp.net2181zk2-danny.3er3nak3hkxuzfakhju4xi |
-| hqha.ix.internal.cloudapp.net2181zk3-danny.3er3nak3hkxuzfakhju4xihqh |
-| a.ix.internal.cloudapp.net2181servicediscoverymodezookeeperzookeeper |
-| namespacehiveserver2--n-danny--p-password---showheaderfalse---silent |
-| true---outputformatcsv2--e-show-tables-table_name_file .TOC-Heading} |
-|                                                                      |
-| #  {#section-30 .TOC-Heading}                                        |
-|                                                                      |
-| wait                                                                 |
-|                                                                      |
-| cat \$table_name_file \| while read LINE                             |
-|                                                                      |
-| do                                                                   |
-|                                                                      |
-| beeline -u \"jdbc:hive2://zk0-                                       |
-| danny.3er3nak3hkxuzfakhju4xihqha.ix.internal.cloudapp.net            |
-| :2181,zk2-danny.3er3nak3hkxuzfakhju4xihqha.ix.internal.cloudapp.net: |
-| 2181,zk3-danny.3er3nak3hkxuzfakhju4xihqha.ix.internal.cloudapp.net:2 |
-| 181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2\" |
-| -n \"danny\" -p \"\[password\]\" \--showHeader=false \--silent=true  |
-| \--outputformat=csv2 -e \"show create table \$LINE\" \>\> \$ddl_file |
-|                                                                      |
-| #                                                                    |
-|   echo -e \"\\n\" \>\> \$ddl_file {#echo--e-n-ddl_file .TOC-Heading} |
-|                                                                      |
-| #  echo \$LINE {#echo-line .TOC-Heading}                             |
-|                                                                      |
-| #  done {#done .TOC-Heading}                                         |
-|                                                                      |
-| # rm -f \$table_name_file {#rm--f-table_name_file-1 .TOC-Heading}    |
-|                                                                      |
-| # echo \"Tabl                                                        |
-| e DDL were generated\" {#echo-table-ddl-were-generated .TOC-Heading} |
-+----------------------------------------------------------------------+
-
-#  {#section-31 .TOC-Heading}
-
-#  {#section-32 .TOC-Heading}
+ table_name_file=\'/home/sshdanny/tablen
+ ames.txt\'
+ ddl_file=\'/home/sshdanny/hiv
+etableddl.txt\'
+  rm -f \$table_name_file
+ rm -f \$ddl_file
+beeline -u \"jdbc:hive2://zk0-danny.3er3nak3hkxuzfakhju4xihqha.    ix.internal.cloudapp.net:2181,zk2-danny.3er3nak3hkxuzfakhju4xihqha.i
+x.internal.cloudapp.net:2181,zk3-danny.3er3nak3hkxuzfakhju4xihqha.ix
+.internal.cloudapp.net:2181/;serviceDiscoveryMode=zooKeeper;zooKeepe
+rNamespace=hiveserver2\" -n \"danny\" -p \"\[password\]\" \--showHea
+ der=false \--silent=true \--outputformat=csv2 -e \"show tables\" \>\
+$table_name_file
+ cat \$table_name_file \
+while read LINE
+do
+beeline -u \"jdbc:hive2://zk0-danny.3er3nak3hkxuzfakhju4xihqha.ix.internal.cloudapp.net:2181,zk2-danny.3er3nak3hkxuzfakhju4xihqha.ix.internal.cloudapp.net:2181,zk3-danny.3er3nak3hkxuzfakhju4xihqha.ix.internal.cloudapp.net:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2\" -n \"danny\" -p \"\[password\]\" \--showHeader=false \--silent=true \--outputformat=csv2 -e \"show create table \$LINE\" \>\> \$ddl_file
+echo -e \"\\n\" \>\> \$ddl_file echo \$LINE                                                                     done
+rm -f \$table_name_file {#rm--f-table_name_file-1 .TOC-Heading}
+echo \"Table DDL were generated\" {#echo-table-ddl-were-generated .TOC-Heading} |
 
 **Note**: Before executing the generated DDL file in Azure databricks
 DBFS to re-create the tables, the location of the each hive table need
@@ -2654,31 +2526,23 @@ residing in Hive can be migrated.
 
 There are several tools available for the data migration:
 
--   # [Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hive) -- connect directly to Hive and copy data, in a parallelized manner, to ADLS or [Databricks Delta Lake](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-databricks-delta-lake) (big data solution) {#azure-data-factory-connect-directly-to-hive-and-copy-data-in-a-parallelized-manner-to-adls-or-databricks-delta-lake-big-data-solution .TOC-Heading}
+- **Azure Data Factory** (https://docs.microsoft.com/en-us/azure/data-factory/connector-hive) -- connect directly to Hive and copy data, in a parallelized manner, to ADLS or [Databricks Delta Lake](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-databricks-delta-lake) (big data solution)
 
--   # Connect to Hive via [ODBC/JDBC driver](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi) and copy to Hive storing in Azure (small data option) {#connect-to-hive-via-odbcjdbc-driver-and-copy-to-hive-storing-in-azure-small-data-option .TOC-Heading}
+- **Connect to Hive via ODBC/JDBC driver** (https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi) and copy to Hive storing in Azure (small data option)
 
--   # Connect to Azure Databricks via Databricks CLI and copy the data to DBFS  {#connect-to-azure-databricks-via-databricks-cli-and-copy-the-data-to-dbfs .TOC-Heading}
+- **Connect to Azure Databricks via Databricks CLI and copy the data to DBFS**  
 
-    -   # Set up the databricks CLI on the hive node  {#set-up-the-databricks-cli-on-the-hive-node .TOC-Heading}
+- **Set up the databricks CLI on the hive node**
 
-    -   # Set up authentication to connect to azure databricks  {#set-up-authentication-to-connect-to-azure-databricks .TOC-Heading}
+- **Set up authentication to connect to azure databricks**
 
-    -   # Copy the data to DBFS via "databricks fs" commands {#copy-the-data-to-dbfs-via-databricks-fs-commands .TOC-Heading}
+- Copy the data to DBFS via "databricks fs" commands {#copy-the-data-to-dbfs-via-databricks-fs-commands .TOC-Heading}
 
-# [Example:]{.ul} {#example .TOC-Heading}
+[Example:]{.ul}
 
-# Connecting to Azure databricks via token and list down the folders in DBFS  {#connecting-to-azure-databricks-via-token-and-list-down-the-folders-in-dbfs .TOC-Heading}
+Connecting to Azure databricks via token and list down the folders in DBFS  
 
-#  {#section-33 .TOC-Heading}
-
-#  {#section-34 .TOC-Heading}
-
-# Copy the file from local to DBFS {#copy-the-file-from-local-to-dbfs .TOC-Heading}
-
-#  {#section-35 .TOC-Heading}
-
-#  {#section-36 .TOC-Heading}
+ Copy the file from local to DBFS
 
 > Finally, the Hive jobs can be migrated over to Azure Databricks. Given
 > that Apache Spark SQL in Azure Databricks is designed to be
@@ -2693,13 +2557,11 @@ There are several tools available for the data migration:
 
 ### Lift and Shift -- HDInsight
 
-### Lift and Shift -- IAAS 
+#### Lift and Shift -- IAAS
 
-## Decision Map/Flowchart
+#### Decision Map/Flowchart
 
-##  {#section-37}
-
-## Feature Map & Workaround
+#### Feature Map & Workaround
 
 Core functionality of HIVE and Azure Synapse comparison map is as
 follows -
@@ -2735,22 +2597,22 @@ follows -
 +-------------+----------+-------------------------------+
 |             |          |                               |
 +-------------+----------+-------------------------------+
-|             |          | #  {#section-38 .TOC-Heading} |
+|             |          |  |
 +-------------+----------+-------------------------------+
 |             |          |                               |
 +-------------+----------+-------------------------------+
 |             |          |                               |
 +-------------+----------+-------------------------------+
 
-## Reference Implementation - ARM Templates 
+### Reference Implementation - ARM Templates
 
 TBD v2
 
-## Pseudocode
+### Pseudocode
 
 TBD v2
 
-## Architectural Guidance
+### Architectural Guidance
 
 TBD v2
 
@@ -2760,100 +2622,24 @@ TBD v2
 
 ### HA & DR
 
-# Apache Ranger
+## Apache Ranger
 
-## Apache Ranger: Overview -- Features
+### Apache Ranger: Overview -- Features
 
--   # Centralized policy administration {#centralized-policy-administration .TOC-Heading}
+- Centralized policy administration
 
--   # Centralized auditing {#centralized-auditing .TOC-Heading}
+- Centralized auditing
 
--   # Dynamic row filtering {#dynamic-row-filtering .TOC-Heading}
+- Dynamic row filtering
 
--   # Dynamic data masking {#dynamic-data-masking .TOC-Heading}
+- Dynamic data masking
 
--   # Tag based authorisation {#tag-based-authorisation .TOC-Heading}
+- Tag based authorisation
 
--   # Rich and extendable policy enforcement engine {#rich-and-extendable-policy-enforcement-engine .TOC-Heading}
+- Rich and extendable policy enforcement engine
 
--   # Key Management System {#key-management-system .TOC-Heading}
-
--   # Security Zone (New feature) {#security-zone-new-feature .TOC-Heading}
-
-## Challenges of Ranger on premise
-
-**Security risks**. Apart from the usual risk of cyberattack, when you
-have physical servers, you take on 'real-world' risks including damage,
-destruction, natural disasters, fire, water damage or simply hardware
-'wear and tear'.
-
-However, for many businesses, security is the key reason why they want
-to stick with on-premise. With locally hosted data, some people believe
-that they have better [data security]{.ul} compared to cloud-based
-storage.
-
-But this is nothing but a myth. Services like [Azure Active
-Directory]{.ul} are another advantage Azure has over on-premise storage
-solutions.
-
-Active Directory is a multi-tenant, cloud-based directory and identity
-management service. It allows IT admins to give employees single sign-on
-(SSO) access to multiple cloud SaaS applications like [SharePoint]{.ul},
-[Office 365]{.ul} and more.
-
-In addition, it offers an extensive suite of identity management
-services which include:
-
--   # Device registration. {#device-registration. .TOC-Heading}
-
--   # Multi-factor authentication. {#multi-factor-authentication. .TOC-Heading}
-
--   # Role-based access control. {#role-based-access-control. .TOC-Heading}
-
--   # Self-service group management. {#self-service-group-management. .TOC-Heading}
-
--   # Application usage monitoring. {#application-usage-monitoring. .TOC-Heading}
-
-These services keep your business secure, ensuring only relevant users
-have access to your most sensitive information.
-
-Not only that, but by rejecting physical servers for the cloud you also
-eliminate the risk of physical security as you don't have on-premise
-servers to take care of in your building. Between that and your virtual
-security, Azure helps secure your business on two fronts.
-
-## Apache Ranger Architecture and Components
-
-Apache Ranger is a framework to enable, monitor and manage comprehensive
-data security across the Hadoop platform.
-
-The vision with Ranger is to provide comprehensive security across the
-Apache Hadoop ecosystem. With the advent of Apache YARN, the Hadoop
-platform can now support a true data lake architecture. Enterprises can
-potentially run multiple workloads, in a multi-tenant environment. Data
-security within Hadoop needs to evolve to support multiple use cases for
-data access, while also providing a framework for central administration
-of security policies and monitoring of user access.
-
-#  Apache Ranger
-
-## Apache Ranger: Overview -- Features
-
--   # Centralized policy administration {#centralized-policy-administration-1 .TOC-Heading}
-
--   # Centralized auditing {#centralized-auditing-1 .TOC-Heading}
-
--   # Dynamic row filtering {#dynamic-row-filtering-1 .TOC-Heading}
-
--   # Dynamic data masking {#dynamic-data-masking-1 .TOC-Heading}
-
--   # Tag based authorisation {#tag-based-authorisation-1 .TOC-Heading}
-
--   # Rich and extendable policy enforcement engine {#rich-and-extendable-policy-enforcement-engine-1 .TOC-Heading}
-
--   # Key Management System {#key-management-system-1 .TOC-Heading}
-
--   # Security Zone (New feature) {#security-zone-new-feature-1 .TOC-Heading}
+- Key Management System
+- Security Zone (New feature)
 
 ## Challenges of Ranger on premise
 
@@ -2879,15 +2665,14 @@ management service. It allows IT admins to give employees single sign-on
 In addition, it offers an extensive suite of identity management
 services which include:
 
--   # Device registration. {#device-registration.-1 .TOC-Heading}
+- Device registration.
 
--   # Multi-factor authentication. {#multi-factor-authentication.-1 .TOC-Heading}
+- Multi-factor authentication.
 
--   # Role-based access control. {#role-based-access-control.-1 .TOC-Heading}
+- Role-based access control.
+- Self-service group management.
 
--   # Self-service group management. {#self-service-group-management.-1 .TOC-Heading}
-
--   # Application usage monitoring. {#application-usage-monitoring.-1 .TOC-Heading}
+- Application usage monitoring.
 
 These services keep your business secure, ensuring only relevant users
 have access to your most sensitive information.
@@ -2897,7 +2682,7 @@ eliminate the risk of physical security as you don't have on-premise
 servers to take care of in your building. Between that and your virtual
 security, Azure helps secure your business on two fronts.
 
-## Apache Ranger Architecture and Components
+### Apache Ranger Architecture and Components
 
 Apache Ranger is a framework to enable, monitor and manage comprehensive
 data security across the Hadoop platform.
@@ -2916,17 +2701,15 @@ of security policies and monitoring of user access.
 The Apache Ranger has a decentralized architecture with the following
 internal components:
 
-  **Component**         **Description**
-  --------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Ranger admin portal   The Ranger Admin portal is the central interface for security administration. Users can create and update policies, which are then stored in a policy database. Plugins within each component poll these policies at regular intervals. The portal also consists of an audit server that sends audit data collected from the plugins for storage in HDFS or in a relational database.
-  Ranger plugins        Plugins are lightweight Java programs which embed within processes of each cluster component. For example, the Apache Ranger plugin for Apache Hive is embedded within Hiveserver2. These plugins pull in policies from a central server and store them locally in a file. When a user request comes through the component, these plugins intercept the request and evaluate it against the security policy. Plugins also collect data from the user request and follow a separate thread to send this data back to the audit server.
-  User group sync       Apache Ranger provides a user synchronization utility to pull users and groups from Unix or from LDAP or Active Directory. The user or group information is stored within Ranger portal and used for policy definition.
+  |**Component**         |**Description**|
+  |----------------------|---------------|
+  |Ranger admin portal       |The Ranger Admin portal is the central interface for security administration. Users can create and update policies, which are then stored in a policy database.Plugins |within each component poll these policies at regular intervals. The portal also consists of an audit server that sends audit data collected from the plugins for storage in HDFS or in a relational database.|
+  |Ranger plugins        |Plugins are lightweight Java programs which embed within processes of each cluster component. For example, the Apache Ranger plugin for Apache Hive is embedded within Hiveserver2. These plugins pull in policies from a central server and store them locally in a file. When a user request comes through the component, these plugins intercept the request and evaluate it against the security policy. Plugins also collect data from the user request and follow a separate thread to send this data back to the audit server.|
+  |User group sync       |Apache Ranger provides a user synchronization utility to pull users and groups from Unix or from LDAP or Active Directory. The user or group information is stored within Ranger portal and used for policy definition.|
 
 *Information source: [Apache Ranger \| Cloudera]{.ul}*
 
-## Migration Approach
-
-###  {#section-39}
+### Ranger Migration Approach
 
 ### Modernization -- AAD + Databricks
 
@@ -2967,165 +2750,42 @@ features available and other Azure security services. For more
 information head to
 *https://docs.microsoft.com/en-us/azure/cosmos-db/database-security*
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Security requirement                        Azure Cosmos DB\'s security approach
-  ------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Network security                            Using an IP firewall is the first layer of protection to secure your database.
+#### Security requirement
 
-  Authorization                               Azure Cosmos DB uses hash-based message authentication code (HMAC) for authorization.
+-
+|Security requirement   |Azure Cosmos DB's security approach   |
+|---------|---------|
+|Network security      |  Using an IP firewall is the first layer of protection to secure your database.         |
+|Authorization     | Azure Cosmos DB uses hash-based message authentication code (HMAC) for authorization.         |
+|Users and permissions      | Users and permissionsUsing the primary key for the account, you can create user resources and permission resources per database. A resource token is associated with a permission in a database and determines whether the user has access (read-write, read-only, or no access) to an application resource in the database.         |
+|Active directory integration (Azure RBAC)      |  You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.        |
+|Protect and isolate sensitive data      | All data in the regions listed in What's new? is now encrypted at rest. Personal data and other confidential data can be isolated to specific container and read-write, or read-only access can be limited to specific users.         |
+|Encryption at rest      | All data stored into Azure Cosmos DB is encrypted at rest. Learn more in Azure Cosmos DB encryption at rest         |
 
-  Users and permissions                       Users and permissionsUsing the primary key for the account, you can create user resources and permission resources per database. A resource token is associated with a permission in a database and determines whether the user has access (read-write, read-only, or no access) to an application resource in the database.
-
-  Active directory integration (Azure RBAC)   You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
-
-  Protect and isolate sensitive data          All data in the regions listed in What\'s new? is now encrypted at rest.\
-                                              \
-                                              Personal data and other confidential data can be isolated to specific container and read-write, or read-only access can be limited to specific users.
-
-  Encryption at rest                          All data stored into Azure Cosmos DB is encrypted at rest. Learn more in [Azure Cosmos DB encryption at rest]{.ul}
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The following screenshot shows how you can use audit logging and
 activity logs to monitor your account:
 
-*Image source: Microsoft Docs*
+**Image source: Microsoft Docs**
 
 Security in Azure Synapse Analytics can be achieved by using below
 methods:
 
-+---------------------------------+-----------------------------------+
-| Security requirement            | Azure Synapse Analytics Security  |
-|                                 | approach                          |
-+=================================+===================================+
-| Assess control                  | Regulatory Compliance in Azure    |
-|                                 | Policy provides Microsoft created |
-|                                 | and managed initiative            |
-|                                 | definitions, known as built-ins,  |
-|                                 | for the compliance domains and    |
-|                                 | security controls related to      |
-|                                 | different compliance standards.   |
-|                                 | This page lists the compliance    |
-|                                 | domains and security controls for |
-|                                 | Azure App Configuration. You can  |
-|                                 | assign the built-ins for a        |
-|                                 | security control individually to  |
-|                                 | help make your Azure resources    |
-|                                 | compliant with the specific       |
-|                                 | standard.                         |
-+---------------------------------+-----------------------------------+
-| Encryption at rest              | Azure Synapse Analytics offers a  |
-|                                 | second layer of encryption for    |
-|                                 | the data in your workspace with a |
-|                                 | customer-managed key. This key is |
-|                                 | safeguarded in your Azure Key     |
-|                                 | Vault, which allows you to take   |
-|                                 | ownership of key management and   |
-|                                 | rotation.                         |
-|                                 |                                   |
-|                                 | The first layer of encryption for |
-|                                 | Azure services is enabled with    |
-|                                 | platform-managed keys. By         |
-|                                 | default, Azure Disks, and data in |
-|                                 | Azure Storage accounts are        |
-|                                 | automatically encrypted at rest.  |
-+---------------------------------+-----------------------------------+
-| KMS                             | The Azure Synapse encryption      |
-|                                 | model with customer-managed keys  |
-|                                 | involves the workspace accessing  |
-|                                 | the keys in Azure Key Vault to    |
-|                                 | encrypt and decrypt as needed.    |
-|                                 | The keys are made accessible to   |
-|                                 | the workspace either through an   |
-|                                 | access policy or Azure Key Vault  |
-|                                 | RBAC access.                      |
-+---------------------------------+-----------------------------------+
-| Network Security                | -   #                             |
-|                                 | Azure Synapse Analytics IP firewa |
-|                                 | ll rules {#azure-synapse-analytic |
-|                                 | s-ip-firewall-rules .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # Azure Synaps                |
-|                                 | e Analytics Managed Virtual Netwo |
-|                                 | rk {#azure-synapse-analytics-mana |
-|                                 | ged-virtual-network .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # Synapse Managed p           |
-|                                 | rivate endpoints {#synapse-manage |
-|                                 | d-private-endpoints .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # Data exfiltration p         |
-|                                 | rotection for Azure Synapse Analy |
-|                                 | tics workspaces {#data-exfiltrati |
-|                                 | on-protection-for-azure-synapse-a |
-|                                 | nalytics-workspaces .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # Connect                     |
-|                                 |  to Azure Synapse Studio using Az |
-|                                 | ure Private Link Hubs {#connect-t |
-|                                 | o-azure-synapse-studio-using-azur |
-|                                 | e-private-link-hubs .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # Connect to a secure Azu     |
-|                                 | re storage account from your Syna |
-|                                 | pse workspace {#connect-to-a-secu |
-|                                 | re-azure-storage-account-from-you |
-|                                 | r-synapse-workspace .TOC-Heading} |
-+---------------------------------+-----------------------------------+
-| Authentication and pass-through | With Azure AD authentication, you |
-|                                 | can centrally manage user         |
-|                                 | identities that have access to    |
-|                                 | Azure Synapse to simplify         |
-|                                 | permission management.            |
-|                                 |                                   |
-|                                 | Use Multi-factor AAD              |
-|                                 | authentication with Synapse SQL   |
-|                                 | (SSMS support for MFA)            |
-|                                 |                                   |
-|                                 | Optionally one may also choose to |
-|                                 | use SQL Authentication to gain    |
-|                                 | user access to the data.          |
-+---------------------------------+-----------------------------------+
-| Access Control                  | Synapse provides a comprehensive  |
-|                                 | and fine-grained access control   |
-|                                 | system, that integrates:          |
-|                                 |                                   |
-|                                 | -   # **Azure roles** for         |
-|                                 | resource management and access to |
-|                                 |  data in storage, {#azure-roles-f |
-|                                 | or-resource-management-and-access |
-|                                 | -to-data-in-storage .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # **Synapse                   |
-|                                 | roles** for managing live access  |
-|                                 | to code and execution, {#synapse- |
-|                                 | roles-for-managing-live-access-to |
-|                                 | -code-and-execution .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # **                          |
-|                                 | SQL roles** for data plane access |
-|                                 |  to data in SQL pools, and {#sql- |
-|                                 | roles-for-data-plane-access-to-da |
-|                                 | ta-in-sql-pools-and .TOC-Heading} |
-|                                 |                                   |
-|                                 | -   # **Git permission            |
-|                                 | s** for source code control, incl |
-|                                 | uding continuous integration and  |
-|                                 | deployment support. {#git-permiss |
-|                                 | ions-for-source-code-control-incl |
-|                                 | uding-continuous-integration-and- |
-|                                 | deployment-support. .TOC-Heading} |
-+---------------------------------+-----------------------------------+
+
+|Security requirement   |Azure Synapse Analytics Security approach   |
+|---------|---------|
+|Assess control      | Regulatory Compliance in Azure Policy provides Microsoft created and managed initiative definitions, known as built-ins, for the compliance domains and security controls related to different compliance standards. This page lists the compliance domains and security controls for Azure App Configuration. You can assign the built-ins for a security control individually to help make your Azure resources compliant with the specific standard.         |
+|Encryption at rest      |  Azure Synapse Analytics offers a second layer of encryption for the data in your workspace with a customer-managed key. This key is safeguarded in your Azure Key Vault, which allows you to take ownership of key management and rotation.The first layer of encryption for Azure services is enabled with platform-managed keys. By default, Azure Disks, and data in Azure Storage accounts are automatically encrypted at rest.        |
+|KMS     |  The Azure Synapse encryption model with customer-managed keys involves the workspace accessing the keys in Azure Key Vault to encrypt and decrypt as needed. The keys are made accessible to the workspace either through an access policy or Azure Key Vault RBAC access.        |
+|Network Security      | Azure Synapse Analytics IP firewall rules.Azure Synapse Analytics Managed Virtual Network.Synapse Managed private endpoints.Data exfiltration protection for Azure Synapse Analytics workspaces.Connect to Azure Synapse Studio using Azure Private Link Hubs.Connect to a secure Azure storage account from your Synapse workspace|
+|
+Network Security Authentication and pass-through |With Azure AD authentication, you can centrally manage user identities that have access to Azure Synapse to simplify permission management.Use Multi-factor AAD authentication with Synapse SQL (SSMS support for MFA)Optionally one may also choose to use SQL Authentication to gain user access to the data.       |
+|Access Control      | Synapse provides a comprehensive and fine-grained access control system, that integrates:Azure roles for resource management and access to data in storage,Synapse roles for managing live access to code and execution,SQL roles for data plane access to data in SQL pools, and Git permissions for source code control, including continuous integration and deployment support.        |
 
 To read more about Security in Synapse Analytics please follow
 *https://docs.microsoft.com/en-in/azure/synapse-analytics/security-controls-policy*
 
-###   {#section-40}
-
-###   {#section-41}
-
-###   {#section-42}
-
-### Lift and Shift -- HDInsight
+### Ranger Lift and Shift -- HDInsight
 
 HDInsight is a Hortonworks-derived distribution provided as a first
 party service on Azure. It supports the most common Big Data engines,
@@ -3135,13 +2795,12 @@ experience with optimized developer tooling and monitoring capabilities.
 
 Its Enterprise features include:
 
--   # Ranger support (Kerberos based Security) {#ranger-support-kerberos-based-security .TOC-Heading}
+- Ranger support (Kerberos based Security)
 
--   # Log Analytics via OMS {#log-analytics-via-oms .TOC-Heading}
+- Log Analytics via OMS
+- Orchestration via Azure Data Factory
 
--   # Orchestration via Azure Data Factory {#orchestration-via-azure-data-factory .TOC-Heading}
-
-*Secure and govern cluster with Enterprise Security Package*
+**Secure and govern cluster with Enterprise Security Package**
 
 The Enterprise Security Package (ESP) supports Active Directory-based
 authentication, multiuser support, and role-based access control. With
@@ -3154,7 +2813,7 @@ done to access control policies.
 ESP is available on the following cluster types: Apache Hadoop, Apache
 Spark, Apache HBase, Apache Kafka, and Interactive Query (Hive LLAP).
 
-*Importing and exporting resource-based policies*
+**Importing and exporting resource-based policies**
 
 You can export and import policies from the Ranger Admin UI for
 migration and cluster resiliency (backups), during recovery operations,
@@ -3163,7 +2822,7 @@ can export/import a specific subset of policies (such as those that
 pertain to specific resources or user/groups) or clone the entire
 repository (or multiple repositories) via Ranger Admin UI.
 
-*Interfaces*
+**Interfaces**
 
 You can import and export policies from the Service Manager page:
 
@@ -3207,18 +2866,18 @@ The default credentials for this user are *keyadmin*/*keyadmin*.
 
 To successfully import policies, use the following database versions:
 
--   # MariaDB: 10.1.16+  {#mariadb-10.1.16 .TOC-Heading}
+- MariaDB: 10.1.16+  {#mariadb-10.1.16 .TOC-Heading}
 
--   # MySQL: 5.6.x+  {#mysql-5.6.x .TOC-Heading}
+- MySQL: 5.6.x+  {#mysql-5.6.x .TOC-Heading}
 
 ```{=html}
 <!-- -->
 ```
--   # Oracle: 11gR2+  {#oracle-11gr2 .TOC-Heading}
+- Oracle: 11gR2+  {#oracle-11gr2 .TOC-Heading}
 
--   # PostgreSQL: 8.4+  {#postgresql-8.4 .TOC-Heading}
+- PostgreSQL: 8.4+  {#postgresql-8.4 .TOC-Heading}
 
--   # MS SQL: 2008 R2+  {#ms-sql-2008-r2 .TOC-Heading}
+- MS SQL: 2008 R2+  {#ms-sql-2008-r2 .TOC-Heading}
 
 Partial import is not supported.
 
@@ -3230,7 +2889,7 @@ Machines. It can be deployed through the [Azure marketplace]{.ul}.
 Cloudera Data Hub is designed to build a unified enterprise data
 platform. Its Enterprise features include:
 
--   # Full hybrid support & parity with on-premises Cloudera deployments {#full-hybrid-support-parity-with-on-premises-cloudera-deployments .TOC-Heading}
+- Full hybrid support & parity with on-premises Cloudera deployments {#full-hybrid-support-parity-with-on-premises-cloudera-deployments .TOC-Heading}
 
 -   # Ranger support (Kerberos-based Security) and fine-grained authorization (Sentry) {#ranger-support-kerberos-based-security-and-fine-grained-authorization-sentry .TOC-Heading}
 
@@ -3310,15 +2969,14 @@ auto-termination to improve total cost of ownership (TCO).
 
 On top of Apache Spark, Azure Databricks offers additional capabilities:
 
--   # [Photon Engine](https://techcommunity.microsoft.com/t5/analytics-on-azure/turbocharge-azure-databricks-with-photon-powered-delta-engine/ba-p/1694929) - a vectorized query engine that leverages modern CPU architecture to enhance Apache Spark 3.0's performance by up to 20x. {#photon-engine---a-vectorized-query-engine-that-leverages-modern-cpu-architecture-to-enhance-apache-spark-3.0s-performance-by-up-to-20x. .TOC-Heading}
+- **Photon Engine** (https://techcommunity.microsoft.com/t5/analytics-on-azure/turbocharge-azure-databricks-with-photon-powered-delta-engine/ba-p/1694929) - a vectorized query engine that leverages modern CPU architecture to enhance Apache Spark 3.0's performance by up to 20x.
+- **DBIO Cache** (https://docs.microsoft.com/en-us/azure/databricks/delta/optimizations/delta-cache) - Transparent caching of Parquet data on worker local disk
 
--   # [DBIO Cache](https://docs.microsoft.com/en-us/azure/databricks/delta/optimizations/delta-cache) - Transparent caching of Parquet data on worker local disk {#dbio-cache---transparent-caching-of-parquet-data-on-worker-local-disk .TOC-Heading}
+- **Skew Join Optimization** (https://docs.microsoft.com/en-us/azure/databricks/delta/join-performance/skew-join)
 
--   # [Skew Join Optimization](https://docs.microsoft.com/en-us/azure/databricks/delta/join-performance/skew-join) {#skew-join-optimization .TOC-Heading}
+- **Managed Delta Lake** (https://docs.microsoft.com/en-us/azure/databricks/delta/)
 
--   # [Managed Delta Lake](https://docs.microsoft.com/en-us/azure/databricks/delta/) {#managed-delta-lake .TOC-Heading}
-
--   # [Managed MLflow](https://docs.microsoft.com/en-us/azure/databricks/applications/mlflow/) {#managed-mlflow .TOC-Heading}
+- **Managed MLflow** (https://docs.microsoft.com/en-us/azure/databricks/applications/mlflow/) 
 
 The migration of Spark jobs onto Azure Databricks is trivial, and
 requires minimal, if any, modifications to scripts. Job scripts can be
@@ -3336,7 +2994,7 @@ CLI](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/cli/workspace-c
 [Albero Azure Decision Tree for Data: Spark on
 Azure](https://albero.cloud/html/spark.html)
 
-##  {#section-44}
+
 
 ## Feature Map & Workaround
 
