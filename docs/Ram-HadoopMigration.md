@@ -6,7 +6,7 @@
 
 [Further reading](#further-reading)
 
-[Hadoop Architecture & Components](#hadoop-architecture-components)
+[Hadoop Architecture & Components](#hadoop-architecture-&-components)
 
 [Brief introduction to Apache Hadoop](#brief-introduction-to-apache-hadoop)
 
