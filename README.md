@@ -25,6 +25,10 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 - [Choosing storage for Apache HBase on Azure](docs/flowchart-hbase-azure-storage-options.png)
 
 
+### Business Continuity and Disaster Recovery (BC-DR)  
+
+
+
 ### Glossary of Terms and Acronyms
 
 - [Glossary of Terms and Acronyms](docs/appendix/glossary.md)
