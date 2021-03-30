@@ -2,7 +2,7 @@
 
 Azure has several landing targets for Apache Hbase. Depending on requirements and product features, customers can choose between Azure IaaS, HDI Hbase or Cosmos DB (SQL API).  
 
-![Landing Targets for Apac](./flowchart-hbase-azure-landing-targets.png)
+![Landing Targets for Apache Hbase on Azure](..images/../flowchart-hbase-azure-landing-targets.png)
 
 ## Lift and shift migration to Azure IaaS  
 
@@ -84,7 +84,7 @@ From compute and memory perspective, we recommend using the following Azure comp
 **Azure Storage**  
 For an Azure IaaS-based Hbase deployment, Azure offers several storage options. The following flowchart uses features of various options to land on a storage target. Each storage option on Azure has a different performance, availability, and cost targets.  
 
-![Azure Storage Options for Hbase](flowchart-hbase-azure-storage-options.png)
+![Azure Storage Options for Hbase](../images/flowchart-hbase-azure-storage-options.png)
 
 There are two key factors that influence of sizing of Hbase storage – **volume** and **throughput**. These two parameters also have an implication on choice of Azure VM size/numbers and Azure Storage (Managed Disks or ADLS).
 
@@ -235,7 +235,7 @@ curl -XGET http://<hbase_master>:16010/jmx?qry=Hadoop:service=HBase,name=Master,
 
 Once configured, each individual source will appear under Custom Logs blade. In the snippet above, we used the name oms.api.metrics_regionservers for the input, Log Analytics uses the following format for displaying custom table name with a suffix_CL.
 
-![Hbase Monitoring Custom Logs](hbase-monitoring-logging-CL-screenshot.png)
+![Hbase Monitoring Custom Logs](../images/hbase-monitoring-logging-CL-screenshot.png)
 
 ##### **Infrastructure (VM, storage disks and networking) logging and metrics**  
 
