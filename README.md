@@ -1,19 +1,38 @@
 **General disclaimer: DO NOT COPY - UNDER DEVELOPMENT - MS INTERNAL ONLY** \
 &nbsp;
 
-# Hadoop Platform migrations to Azure
+# Hadoop Platform migration to Azure
 
 **Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Danny Liu, Nagaraj Seeplapudur Venkatesan.**
 
 *IMPORTANT - This documentation is currently private preview and the main branch will be updated once a week. Update schedule TBD.*
 
+## Brief introduction to Apache Hadoop 
+
+Hadoop  provides a distributed file system and a framework for the analysis and transformation of very large data sets using the MapReduce paradigm. An important characteristic of Hadoop is the partitioning of data and computation across many (thousands) of hosts, and executing application computations in parallel close to their data. A Hadoop cluster scales computation capacity, storage capacity and IO bandwidth by simply adding commodity hardware.  The key components of an Hadoop system include-   
+
+
+ 
+|Component | Description|
+|----------|-----------|
+|HDFS |Distributed File System |
+|MapReduce |Distributed computation framework |
+|HBase     |Column-oriented table service |
+|Pig       |Dataflow language and parallel execution framework |
+|Hive      |Datawarehouse infrastructure |
+|Zookeeper |Distributed coordination service |
+|Chukwa    |System for collecting management data |
+|Avro      |Data serialization system |
+
+
+
 This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing data storage -- HDFS , Other Cloud Storage like AWS S3 data to Azure.
  
-## Table of Contents
+
 
 ### Applications
 
-- [Apache Hadoop and HDFS](docs/hdfs/architecture-and-components.md)
+- [Hadoop Distributed File System](docs/hdfs/architecture-and-components.md)
 - [Apache HBase](docs/hbase/architecture-and-components.md)
 - [Apache Hive](docs/hive/architecture-and-components.md)
 - [Apache Spark](docs/spark/architecture-and-components.md)
