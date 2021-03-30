@@ -40,9 +40,8 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 
 ### Flowcharts
 
-- [Choosing landing target for Apache HBase](docs/images/flowchart-hbase-azure-landing-targets.png)
-- [Choosing storage for Apache HBase on Azure](docs/flowchart-hbase-azure-storage-options.png)
-
+- [Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png)
+- [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
 
 ### Business Continuity and Disaster Recovery (BC-DR)  
 
