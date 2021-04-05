@@ -11,4 +11,3 @@
 • Apache HBase allows customers to use different types of storage options for caching and persistent storage. This must be considered while designing Apache HBase solutions on Azure.  
 
 • There is a level of performance optimization and right-sizing of infrastructure involved post-migration to Azure IaaS. Reason is that performance of HBase is dictated by size of infrastructure deployed; choice of storage; and distribution of Regions. Even though we are focusing on lift & shift scenario, Azure infrastructure is fundamentally different to on-premises and there are Azure features and limits that one must consider to meet performance requirements.  
-
