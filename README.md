@@ -38,10 +38,10 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 
 ### End State Reference Architecture
 
-#### Target State Architecture
+#### Target States 
 
 
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_End_state_arch.png)
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_state.png)
 
 
 - **Lift and Shift(IAAS)**
