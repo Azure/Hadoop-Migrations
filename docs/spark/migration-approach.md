@@ -2,7 +2,7 @@
 
 Primary target for Synapse Spark is to provide Spark processing power to Synapse table in the same eco system.
 
-![img](..\images\clip_image142.png)
+![img](../images/clip_image142.png)
 
 ## Synapse Spark Primary Use-Cases
 
@@ -26,7 +26,7 @@ Primary target for Synapse Spark is to provide Spark processing power to Synapse
 
 Synapse Spark is good entry point when on-boarding customer with Synapse and they are mature and for complex use case Azure Databricks based Spark is recommended.
 
-![img](..\images\clip_image144.png)
+![img](../images/clip_image144.png)
 
 ## Migration Scenarios:
 
@@ -167,7 +167,7 @@ Decision Map/Flowchart
 
 [Albero Azure Decision Tree for Data: Spark on Azure](https://albero.cloud/html/spark.html) 
 
-![img](..\images\clip_image146.png)
+![img](../images/clip_image146.png)
 
 ### Modernization – Databricks
 

@@ -68,13 +68,13 @@ You can export and import policies from the Ranger Admin UI for migration and cl
 
 You can import and export policies from the Service Manager page:
 
- ![img](..\images\clip_image130.png)
+ ![img](../images/clip_image130.png)
 
 You can also export policies from the Reports page:
 
- ![img](..\images\clip_image132.png)
+ ![img](../images/clip_image132.png)
 
- ![img](..\images\clip_image134.png)
+ ![img](../images/clip_image134.png)
 
 **Filtering** 
 

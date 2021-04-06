@@ -2,7 +2,7 @@
 
 The migration approach of HDFS to ADLS typically involves the below 6 steps.
 
-![img](..\images\clip_image012.png)
+![img](../images/clip_image012.png)
 
 ​        [[DK19\]](#_msocom_19)
 
@@ -10,7 +10,7 @@ The migration approach of HDFS to ADLS typically involves the below 6 steps.
 
 ​        On premises assessment scripts can be run to plan what workloads can be migrated to the Azure Storage account/s , priority of migration ie all data or move in parts . The below decision flow helps decide the criteria and commands can be run to get the data/ metrics. 3rd party tools like Unravel can support in getting the metrics and support auto assessment of the on premise HDFS . Data Migration planning can be split based on – Data Volume , Business Impact , Ownership of Data , Processing/ETL Jobs complexity , Sensitive Data / PII data , based on the date/time data generated. Based on this either entire workload or parts can be planned to be moved to Azure to avoid downtimes/business impact.[[DK20\]](#_msocom_20) The sensitive data can be chosen to remain on premise and moving only non PII data to cloud as an approach. All historical data can be planned to be moved and tested prior to moving the incremental load.
 
-![img](..\images\clip_image014.png)
+![img](../images/clip_image014.png)
 
 HDFS commands and reports that can help with getting the key assessment metrics from HDFS include –
 
@@ -35,11 +35,11 @@ For more information refer - https://hadoop.apache.org/docs/current/hadoop-proje
 
 - **List of small files -**      generates reports that     can help assess the on premise Hadoop system . The sample below generates     a report on the small files being generated – that helps with planning the     next action on moving to Azure.
 
-![img](..\images\clip_image016.jpg)
+![img](../images/clip_image016.jpg)
 
 - **list of file files based on size** – generates reports based on the data volume and groups     into- large, medium , tiny , empty
 
-![Graphical user interface, application  Description automatically generated](..\images\clip_image018.jpg)
+![Graphical user interface, application  Description automatically generated](../images/clip_image018.jpg)
 
 ### Data Transfer
 
@@ -67,19 +67,19 @@ Common ingestion sources include –
 
 To plan the number of storage accounts needed , understand the total load on the current hdfs by using the metric TotalLoad that gives the concurrent file access across all the data nodes. Based on the total load on premise and the expected growth on Azure , limit needs to be checked on the storage account in the region. If it is possible to increase the limit , a single storage account may suffice. However for a data lake , it is advised to keep a separate storage account per zone considering the future data volume growth. Other reasons to keep a separate storage account include – access control , resiliency requirements, data replication requirements , exposing the data for public usage.  It is important to understand if an hierarchical namespace is needed to be enabled on the storage account- as once it has been enabled cannot revert back to a flat namespace . Workloads like backups , images etc do not gain any benefit from enabling a hierarchical namespace.
 
-![img](..\images\clip_image020.png)
+![img](../images/clip_image020.png)
 
  . Availability     Requirements
 
 Hadoop platforms have the replication factor specified in the hdfs-site.xml or per file . The replication on ADLS Gen2 can be planned based on the nature of the data ie. If an application requires the data to be reconstructed in case of a loss then ZRS can be an option . In ADLS Gen 2 ZRS – data is copied synchronously across 3 AZs in the primary region. For applications that require high availability and is not constrained by the region of storage – the data can additionally be copied in a secondary region – ie. geo redundancy .
 
-![img](..\images\clip_image022.png)
+![img](../images/clip_image022.png)
 
 1. Check for     corrupted/missing blocks
 
 Check for corrupted/missing blocks by checking the block scanner report – if any corrupted blocks are found then wait for the data to be restored prior to transferring the file associated with the corrupted blocks.
 
-![img](..\images\clip_image024.png)
+![img](../images/clip_image024.png)
 
 1. Check if NFS is     enabled
 
@@ -87,13 +87,13 @@ Check if NFS is enabled on the on premise Hadoop platform checking the core-site
 
  Refer the link - https://docs.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support for the NFS 3.0 features that aren't yet supported with Azure Data Lake Storage Gen2 .
 
-![img](..\images\clip_image026.png)
+![img](../images/clip_image026.png)
 
 1. Check Hadoop     File Formats
 
 [[DK25\]](#_msocom_25)
 
-![img](..\images\clip_image028.png)
+![img](../images/clip_image028.png)
 
  1. Choose an Azure     solution for data transfer
 
@@ -191,4 +191,4 @@ Another approach is to move workloads associated to the various teams within the
 
 Data migration can be accomplished by copying on-prem data onto an Azure storage solution, like Azure Data Lake Gen2. This copying can be accomplished via Azure Data Factory, involving potential data conversions to optimized formats like [Parquet](https://docs.microsoft.com/en-us/azure/data-factory/format-parquet) and [Delta](https://docs.microsoft.com/en-us/azure/data-factory/format-delta).
 
-![img](..\images\clip_image030.png)
+![img](../images/clip_image030.png)
