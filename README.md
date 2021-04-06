@@ -36,11 +36,17 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 - [Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png)
 - [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
 
-### End State Architecture
+### End State Reference Architecture
+
+#### Target State Architecture
+
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_End_state_arch.png)
+
 
 - **Lift and Shift(IAAS)**
 
--  **Modernize**
+-  **Modernize(Azure Synapse Analytics & Azure Databricks)**
 
 - **Lift and Shift(HDInsight)**
 
