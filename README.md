@@ -3,7 +3,7 @@
 
 # Hadoop Platform migration to Azure
 
-**Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Danny Liu, Nagaraj Seeplapudur Venkatesan.**
+**Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Sunil Sattiraju, Danny Liu, Nagaraj Seeplapudur Venkatesan.**
 
 *IMPORTANT - This documentation is currently private preview and the main branch will be updated once a week. Update schedule TBD.*
 
@@ -13,13 +13,15 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 
 
  
-|Component | Description|
-|----------|-----------|
-|HDFS |Distributed File System |
+|Component | Description| Reference|
+|----------|-----------|-----------|
+|HDFS |Distributed File System |[Hadoop Distributed File System](docs/hdfs/architecture-and-components.md) |
+|HBase     |Column-oriented table service |[Apache HBase](docs/hbase/architecture-and-components.md) |
+|Hive      |Datawarehouse infrastructure |[Apache Hive](docs/hive/architecture-and-components.md) |
+|Spark     |Data processing Framework |[Apache Spark](docs/spark/architecture-and-components.md) |
+|Ranger    |Frame work to monitor and manage Data secuirty |[Apache Ranger](docs/ranger/architecture-and-components.md)|
 |MapReduce |Distributed computation framework |
-|HBase     |Column-oriented table service |
 |Pig       |Dataflow language and parallel execution framework |
-|Hive      |Datawarehouse infrastructure |
 |Zookeeper |Distributed coordination service |
 |Chukwa    |System for collecting management data |
 |Avro      |Data serialization system |
@@ -43,7 +45,19 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 - [Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png)
 - [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
 
-### Business Continuity and Disaster Recovery (BC-DR)  
+### End State Architecture
+
+- **Lift and Shift(IAAS)**
+
+-  **Modernize**
+
+- **Lift and Shift(HDInsight)**
+
+![image.png](attachment:Hdinight end state.png)
+
+
+For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
+
 
 
 
@@ -51,9 +65,7 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 
 - [Glossary of Terms and Acronyms](docs/appendix/glossary.md)
 
-### Deployment Templates
 
-### Performance Tuning  
 
 ## Trademarks
 
