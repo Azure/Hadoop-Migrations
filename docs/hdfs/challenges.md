@@ -1,7 +1,7 @@
 
 ## Common Challenges of an on premise HDFS
 
-![img](..\images\clip_image004.png)
+![img](../images/clip_image004.png)
 
 - Frequent HDFS version upgrades
 - Growing volume of data on HDFS

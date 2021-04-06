@@ -13,7 +13,7 @@ Hadoop provides a distributed file system and a framework for the analysis and t
 | Chukwa    | System  for collecting management data              |
 | Avro      | Data  serialization system                          |
 
- [[NM3\]](#_msocom_3) ![img](..\images\clip_image002.jpg)
+ [[NM3\]](#_msocom_3) ![img](../images/clip_image002.jpg)
 
 Reference : https://gearup.microsoft.com/resources/azure-migration[[HT4\]](#_msocom_4) [[DK5\]](#_msocom_5)
 
@@ -38,7 +38,7 @@ Pig is a platform for performing analysis on large data sets that consists of a 
 
 Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the master -slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
 
- ![img](..\images\clip_image006.png)[[DK9\]](#_msocom_9)
+ ![img](../images/clip_image006.png)[[DK9\]](#_msocom_9)
 
 ·    **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of files and directories. 
 
