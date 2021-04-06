@@ -13,11 +13,9 @@ Hadoop provides a distributed file system and a framework for the analysis and t
 | Chukwa    | System  for collecting management data              |
 | Avro      | Data  serialization system                          |
 
- [[NM3\]](#_msocom_3) ![img](../images/clip_image002.jpg)
+ ![img](../images/clip_image002.jpg)
 
-Reference : https://gearup.microsoft.com/resources/azure-migration[[HT4\]](#_msocom_4) [[DK5\]](#_msocom_5)
-
-[[DK6\]](#_msocom_6) [[NM7\]](#_msocom_7)
+Reference : https://gearup.microsoft.com/resources/azure-migration
 
 **Hive**
  Hive is data warehousing software that addresses how data is structured and queried in distributed Hadoop clusters. Hive is also a well-known development environment that is used to build queries for data in the Hadoop environment. It provides tools for ETL workloads and brings SQL-like capabilities to the Hadoop. Hive is a declarative language that is used to develop applications for the Hadoop environment.
@@ -32,54 +30,52 @@ Pig is a platform for performing analysis on large data sets that consists of a 
 **Z****ookeeper**
  Apache Zookeeper is a centralized service and a Hadoop Ecosystem component for maintaining configuration information, naming, providing distributed synchronization, and providing group services. Zookeeper manages and coordinates a large cluster of machines.
 
-[[DK8\]](#_msocom_8) The below sections provide details of each Hadoop Component, Architecture , common challenges, Feature Map , Migration approach of the component to Azure , Decision Flows/Maps. 
+The below sections provide details of each Hadoop Component, Architecture , common challenges, Feature Map , Migration approach of the component to Azure , Decision Flows/Maps. 
 
 ## HDFS Architecture and Components
 
 Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the master -slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
 
- ![img](../images/clip_image006.png)[[DK9\]](#_msocom_9)
+ ![img](../images/clip_image006.png)
 
-·    **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of files and directories. 
+*    **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of files and directories. 
 
-- - Files and directories are inodes on      the NameNode - has attributes like permissions, modification and access      times, namespace and disk space quotas. 
-  - The file content is split into      blocks (usually 128 megabytes , but can be customized per file
-  - Each block of the file is      independently replicated at multiple DataNodes. The replication factor is      default 3 but can be customized on file to file basis.
-  - The NameNode maintains the      namespace tree and the mapping of file blocks to DataNodes (the physical      location of file data).
-  - An HDFS client that needs to read a      file - 
+      - Files and directories are nodes on      the NameNode - has attributes like permissions, modification and access      times, namespace and disk space quotas. 
+       - The file content is split into      blocks (usually 128 megabytes , but can be customized per file
+       - Each block of the file is      independently replicated at multiple DataNodes. The replication factor is      default 3 but can be customized on file to file basis.
+       - The NameNode maintains the      namespace tree and the mapping of file blocks to DataNodes (the physical      location of file data).
+       - An HDFS client that needs to read a      file - 
 
-\1.   Contacts the NameNode for the locations of data blocks comprising the file
+          1.   Contacts the NameNode for the locations of data blocks comprising the file
 
-\2.   Reads block contents from the DataNode closest to the client.
+          2.   Reads block contents from the DataNode closest to the client.
 
-- - An HDFS cluster can have thousands      of DataNodes and tens of thousands of HDFS clients per cluster, as each      DataNode can execute multiple application tasks concurrently. 
+ - A HDFS cluster can have thousands      of DataNodes and tens of thousands of HDFS clients per cluster, as each      DataNode can execute multiple application tasks concurrently. 
   - HDFS keeps the entire namespace in      memory ie RAM.
 
-- **DataNode**: is the slave node that performs     read/write operations on the file system as well as block operations like     creation, replication, and deletion.
+* **DataNode**: is the slave node that performs     read/write operations on the file system as well as block operations like     creation, replication, and deletion.
 
-- - Contains a metadata file that holds      the checksum
+   - Contains a metadata file that holds      the checksum
   - Contains the data file that holds      the block’s data
   - On a file read, DataNode fetches      the block locations and replica locations from the NameNode – tries      reading from the location closest to the client
 
-- **HDFS     Client** is     the client used by applications to access the file systems
+* **HDFS     Client** is     the client used by applications to access the file systems
 
-It is a code library that exports the HDFS file system interface.
+  - It is a code library that exports the HDFS file system interface.
 
-Supports operations to read, write and delete files, and operations to create and delete directories.
+  - Supports operations to read, write and delete files, and operations to create and delete directories.
 
-The steps followed when an application reads a file
+  - The steps followed when an application reads a file
 
-Get the list of DataNodes and locations that host the blocks – this includes the replicas
+  - Get the list of DataNodes and locations that host the blocks – this includes the replicas
 
-Gets the blocks from the DataNode directly based on the list received from NameNode
+  - Gets the blocks from the DataNode directly based on the list received from NameNode
 
-HDFS provides an API that exposes the locations of file blocks. This allows applications like the MapReduce framework to schedule a task to where the data are located, thus improving the read performance.
+  - HDFS provides an API that exposes the locations of file blocks. This allows applications like the MapReduce framework to schedule a task to where the data are located, thus improving the read performance.
 
 - **Block**: is the unit of storage in HDFS. A     file is comprised of blocks, and different blocks are stored on different     data nodes.
 
-## Feature Map[[HT10\]](#_msocom_10)
-
-##   
+## Feature Map
 
    Core functionality of Hadoop Distributed File System and Azure Data Lake Storage Gen2 comparison map is as follows[[HT11\]](#_msocom_11) -
 
