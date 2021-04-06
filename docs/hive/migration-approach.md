@@ -339,14 +339,6 @@ Reference: [sql - How to get/generate the create statement for an existing hive 
 
 *    Import the hive internal table to azure synapse dedicated SQL Pool or spark database via T-SQL scripts.
 
-### Post migration checks:
-
-<Details to be added>
-
-### Synapse Optimization Guidance
-
-<Details to be added. Will cover data loading recommendations, table distribution guidance,indexing and maintenance guidance etc..>
-
 ### Lift and Shift – HDInsight
 
 Refer the documentation provided by the HDI product team
@@ -463,21 +455,25 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 [How to use Apache Hive replication in Azure HDInsight clusters | Microsoft Docs](https://docs.microsoft.com/en-us/azure/hdinsight/interactive-query/apache-hive-replication)
 
+### Post migration checks:
+
+***Details to be added***
+
+### Synapse Optimization Guidance
+
+***Details to be added***
+
 ## Decision Map/Flowchart
 
 ![img](../images/clip_image124.png)
 
-|      |      |      |
-| ---- | ---- | ---- |
-|      |      |      |
-|      |      |      |
-|      |      |      |
+## Feature Map & Workaround
 
 ## Reference Implementation - ARM Templates  
 
 TBD v2
 
-## Pseudocode 
+## Pseudocode
 
 TBD v2
 
@@ -485,8 +481,8 @@ TBD v2
 
 TBD v2
 
-## Patterns & Anti – Patterns
+### Patterns & Anti – Patterns
 
-## Performance Tuning
+### Performance Tuning
 
-HA & DR
+### HA & DR
