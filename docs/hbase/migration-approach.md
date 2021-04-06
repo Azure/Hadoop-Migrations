@@ -2,7 +2,7 @@
 
 Azure has several landing targets for Apache Hbase. Depending on requirements and product features, customers can choose between Azure IaaS, HDI Hbase or Cosmos DB (SQL API).  
 
-![Landing Targets for Apache Hbase on Azure](images/../../images/flowchart-hbase-azure-landing-targets.png)
+![Landing Targets for Apache Hbase on Azure](../images/flowchart-hbase-azure-landing-targets.png)
 ## Lift and shift migration to Azure IaaS  
 
 ### **Planning and Sizing for Azure Compute & Storage**  

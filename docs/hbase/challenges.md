@@ -12,4 +12,3 @@ Common challenges associated with Hbase deployments:
 - Monitoring
 - DevOps
 - Automation  
-
