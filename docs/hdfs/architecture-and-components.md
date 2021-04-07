@@ -1,33 +1,3 @@
-
- | HDFS      | Distributed  File System                            |
-| --------- | --------------------------------------------------- |
-| MapReduce | Distributed  computation framework                  |
-| HBase     | Column-oriented  table service                      |
-| Pig       | Dataflow  language and parallel execution framework |
-| Hive      | Datawarehouse  infrastructure                       |
-| Zookeeper | Distributed  coordination service                   |
-| Chukwa    | System  for collecting management data              |
-| Avro      | Data  serialization system                          |
-
- ![img](../images/clip_image002.jpg)
-
-Reference : https://gearup.microsoft.com/resources/azure-migration
-
-**Hive**
- Hive is data warehousing software that addresses how data is structured and queried in distributed Hadoop clusters. Hive is also a well-known development environment that is used to build queries for data in the Hadoop environment. It provides tools for ETL workloads and brings SQL-like capabilities to the Hadoop. Hive is a declarative language that is used to develop applications for the Hadoop environment.
-
-**Pig**
-
-Pig is a platform for performing analysis on large data sets that consists of a high-level language for expressing data analysis programs, coupled with infrastructure for evaluating these programs. Pig includes Pig Latin, which is a scripting language. Pig translates Pig Latin scripts into MapReduce, which can then run on YARN and process data in the HDFS cluster. Pig is popular because it automates some of the complexity in MapReduce development.
-
-**HBase**
- HBase is a structured noSQL database that rides atop Hadoop. It stores the structured data on top of HDFS. HBase provides a fault-tolerant way of storing sparse data sets. It is well suited for real-time data processing or random read/write access to large volumes of data. Unlike traditional [RDBMS](https://www.ibm.com/analytics/relational-database), HBase does not support a structured query language like SQL. It comprises a set of standard tables with rows and columns, much like a traditional database. Each table must have an element defined as a primary key, and all access attempts to HBase tables must use this primary key.
-
-**Z****ookeeper**
- Apache Zookeeper is a centralized service and a Hadoop Ecosystem component for maintaining configuration information, naming, providing distributed synchronization, and providing group services. Zookeeper manages and coordinates a large cluster of machines.
-
-The below sections provide details of each Hadoop Component, Architecture , common challenges, Feature Map , Migration approach of the component to Azure , Decision Flows/Maps. 
-
 ## HDFS Architecture and Components
 
 Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the master -slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
