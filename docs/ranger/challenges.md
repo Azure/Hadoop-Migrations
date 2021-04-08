@@ -1,24 +1,24 @@
 ## Challenges of Ranger on premise
 
-**Security risks**. Apart from the usual risk of cyber attack, when you have physical servers, you take on ‘real-world’ risks including damage, destruction, natural disasters, fire, water damage or simply hardware ‘wear and tear’.
+**Security risks**. Apart from the usual risk of cyber attacks, when you have physical servers, you take on ‘real-world’ risks including damage, destruction, natural disasters, fire, water damage or simply hardware ‘wear and tear’.
 
 However, for many businesses, on the contrary security is the key reason why they want to stick with on-premise. With locally hosted data, some people believe that they have better data security compared to cloud-based storage.
 
-But this is nothing but a myth. Services like Azure Active Directory are another advantage Azure has over on-premise storage solutions.
+But this is nothing more than a myth. Services such as AAD (Azure Active Directory) provide Azure with another advantage over on-premise storage solutions.
 
-Active Directory is a multi-tenant, cloud-based directory and identity management service. It allows IT admins to give employees single sign-on (SSO) access to multiple cloud SaaS applications like SharePoint, Office 365 and more.
+Azure Active Directory is a multi-tenant, cloud-based directory and identity management service. It allows IT admins to give employees single sign-on (SSO) access to multiple cloud SaaS applications like SharePoint, Office 365 and more.
 
 In addition, it offers an extensive suite of identity management services which include:
 
-·    Device registration.
+*    Device registration.
 
-·    Multi-factor authentication.
+*    Multi-factor authentication.
 
-·    Role-based access control.
+*    Role-based access control.
 
-·    Self-service group management.
+*    Self-service group management.
 
-·    Application usage monitoring.
+*    Application usage monitoring.
 
 These services keep your business secure, ensuring only relevant users have access to your most sensitive information.
 

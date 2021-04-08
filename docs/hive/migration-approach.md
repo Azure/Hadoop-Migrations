@@ -1,6 +1,15 @@
 ## Migration Approach
 
-Metadata
+- [Metadata](#metadata)
+- [Sizing](#sizing)
+- [Export Hive Metadata](#export-hive-metadata)
+- [Decision flow for selecting target DB for hive metadata:](#decision-flow-for-selecting-target-db-for-hive-metadata)
+- [Modernization – Databricks](#modernization-databricks)
+- [Modernization – Synapse](#modernization-synapse)
+- [Modernization – Synapse](#modernization-synapse)
+- [Modernization – Synapse](#modernization-synapse)
+
+### Metadata
 
 **Finding CPU information:**
 
@@ -67,54 +76,49 @@ Perform the following steps to export hive metadata:
         b.   Extract value of key : <fs.DefaultFS> from target cluster core-site.xml file
 
 ```console
-[root@ram-hadoopsrv-xu1 linuxadmin]# cat /etc/hadoop/conf/core-site.xml | grep -A1 "fs.defaultFS"
+    [root@ram-hadoopsrv-xu1 linuxadmin]# cat /etc/hadoop/conf/core-site.xml | grep -A1 "fs.defaultFS"
 
-   <name>fs.defaultFS</name>
+    <name>fs.defaultFS</name>
 
-   <value>hdfs://ram-hadoopsrv-xu0.southeastasia.cloudapp.azure.com:8020</value>
+    <value>hdfs://ram-hadoopsrv-xu0.southeastasia.cloudapp.azure.com:8020</value>
 
-[root@ram-hadoopsrv-xu1 linuxadmin]#
+    [root@ram-hadoopsrv-xu1 linuxadmin]#
 
-![Text  Description automatically generated](../images/clip_image063.png)
+    ![Text  Description automatically generated](../images/clip_image063.png)
 ```
 
-c.    Note the TARGET_HDFS_PATH.
+. 
+          c.   Note the TARGET_HDFS_PATH.
 
-2.Update the TARGET_HDFS_PATH and TARGET_OBJECTSTORE_PATH in hive_migrate.properties script to the location where HIVE tables data will be typically available post migration. Please note that you need not escape the forward slashes in the path.
+2.  Update the TARGET_HDFS_PATH and TARGET_OBJECTSTORE_PATH in hive_migrate.properties script to the location where HIVE tables data will be typically available post migration. Please note that you need not escape the forward slashes in the path.
 
 ![Graphical user interface, text, application, email  Description automatically generated](../images/clip_image065.png)
 
-3.Connect to the target cluster via ssh as root user. See Connect to a Cluster Node Through Secure Shell (SSH) in Using Source Cluster
+3.  Connect to the target cluster via ssh as root user. See Connect to a Cluster Node Through Secure Shell (SSH) in Using Source Cluster
 
-1. Create a script named generate_target_ddl_from_source.sh in the root home directory with the attached code. This script generates the DDL statements that you can run on the target cluster to create the hive metadata.
+4. Create a script named generate_target_ddl_from_source.sh in the root home directory with the attached code. This script generates the DDL statements that you can run on the target cluster to create the hive metadata.
 
-2. As root user, run the generate_target_ddl_from_source.sh script.
+5. As root user, run the generate_target_ddl_from_source.sh script.
 
-3. CREATE_TARGET_DB.hql
+   1 . CREATE_TARGET_DB.hql
 
-4. CREATE_TARGET_TABLE.hql
+   2 . CREATE_TARGET_TABLE.hql
 
-5. ADD_TARGET_PARTITION.hql
+   3 . ADD_TARGET_PARTITION.hql
+> [!TIP]
+Other options to migrate Hive metastore are based upon underlying Databases and its utilities like export import, replication, log shipping etc.
 
-/****
-
-Other options to migrate Hive metastore are bases on underlined Database and its utilities like export import, replication, log shipping etc.
-
-[[DK43\]](#_msocom_43)
-
-*****/
-
-**Decision flow for selecting target DB for hive metadata:**
+### Decision flow for selecting target DB for hive metadata:
 
 ![img](../images/clip_image067.png)
 
-### Modernization – Databricks
+### Modernization Databricks
 
-When an Azure Databricks workspace provisioned, a default Hive [Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) comes automatically with the workspace. Alternative, an [external Hive Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/external-hive-metastore) can be provision on Azure and connected to Azure Databricks. The migration of on-premises Hive to Azure Databricks essentially include two major parts: Metastore migration and underlying hive table data migration.
+When an Azure Databricks workspace is provisioned, a default Hive [Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) becomes automatically available within the workspace. Alternatively, an [external Hive Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/external-hive-metastore) can be provisioned in Azure and connected to Azure Databricks. The migration of on-premises Hive to Azure Databricks essentially includes two major parts: Metastore migration and the underlying hive table data migration.
 
 #### Metastore Migration
 
-The first step is to migrate the Hive Metastore from Hadoop to Azure Databricks (or Azure SQL-DB). Hive Metastore contains all the location and structure of all the data assets in the Hadoop environment. Migrating the Hive Metastore is required for users to query tables in Databricks notebooks using SQL statements. During migration process, the locations of the underlying datasets will need to be updated to reference the Azure Databricks file system mounts.
+The first step is to migrate the Hive Metastore from Hadoop to Azure Databricks (or Azure SQL-DB). Hive Metastore contains all the location and structure of all the data assets in the Hadoop environment. Migrating the Hive Metastore is required for users to query tables in Databricks notebooks using SQL statements. During the migration process, the locations of the underlying datasets will need to be updated to reference the Azure Databricks file system mounts.
 
 ##### Export Hive table DDL
 
@@ -138,7 +142,7 @@ You can leverage on the same command “SHOW CREATE TABLE” to export all hive 
 
 ![img](../images/clip_image073.png)
 
-**Note**: Before executing the generated DDL file in Azure databricks DBFS to re-create the tables, the location of each hive table needs to be updated according (the corresponding dbfs:// paths) You can [export all table metadata](https://docs.microsoft.com/en-us/azure/databricks/kb/metastore/create-table-ddl-for-metastore) from Hive to the Databricks default or external metastore:
+> [!NOTE] Before executing the generated DDL file in Azure databricks DBFS to re-create the tables, the location of each hive table needs to be updated according (the corresponding dbfs:// paths) You can [export all table metadata](https://docs.microsoft.com/en-us/azure/databricks/kb/metastore/create-table-ddl-for-metastore) from Hive to the Databricks default or external metastore:
 
 #### Hive Data & Job Assets Migration
 
@@ -168,7 +172,7 @@ Connecting to Azure databricks via token and list down the folders in DBFS
 
 Finally, the Hive jobs can be migrated over to Azure Databricks. Given that Apache Spark SQL in Azure Databricks is designed to be [compatible](https://docs.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/compatibility/hive) with the Apache Hive, including metastore connectivity, SerDes, and UDFs, even the “copy/paste” approach to Hive job migration is feasible. The [Workspace CLI](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/cli/workspace-cli) can be used to perform bulk imports of scripts onto Azure Databricks.
 
-### Modernization – Synapse
+### Modernization Synapse
 
 Azure Synapse Analytics is a limitless analytics service that brings together data integration, enterprise data warehousing, and big data analytics. Azure synapse analytics provides one the freedom to query data either using serverless or dedicated resources—at scale. Azure Synapse brings these worlds together with a unified experience to ingest, explore, prepare, manage, and serve data for immediate BI and machine learning needs.
 
@@ -423,7 +427,7 @@ Retrieve the table data from the Migrated using HDFS commands.
 
 **Step 3)**
 
-use AZcopy command to copy the data identified to the target cluster.
+Use the AZcopy command to copy the data identified to the target cluster.
 
 **Step 4)**
 

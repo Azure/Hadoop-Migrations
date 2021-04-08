@@ -1,7 +1,7 @@
 ## Considerations
 
-*    Version of the hive on on-premises
+*    The on-premises version of Hive
 
-*    Consider the right instance for metastore and not to share with other components.
+*    Consider the right instance for the metastore and not to share with other components.
 
-*    Selecting right partition in order to maintain performance
+*    Selecting the right partition in order to maintain performance

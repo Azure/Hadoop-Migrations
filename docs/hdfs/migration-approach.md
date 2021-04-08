@@ -4,24 +4,23 @@ The migration approach of HDFS to ADLS typically involves the below 6 steps.
 
 ![img](../images/clip_image012.png)
 
-​        [[DK19\]](#_msocom_19)
-
 ### HDFS Assessment
 
-​        On premises assessment scripts can be run to plan what workloads can be migrated to the Azure Storage account/s , priority of migration ie all data or move in parts . The below decision flow helps decide the criteria and commands can be run to get the data/ metrics. 3rd party tools like Unravel can support in getting the metrics and support auto assessment of the on premise HDFS . Data Migration planning can be split based on – Data Volume , Business Impact , Ownership of Data , Processing/ETL Jobs complexity , Sensitive Data / PII data , based on the date/time data generated. Based on this either entire workload or parts can be planned to be moved to Azure to avoid downtimes/business impact.[[DK20\]](#_msocom_20) The sensitive data can be chosen to remain on premise and moving only non PII data to cloud as an approach. All historical data can be planned to be moved and tested prior to moving the incremental load.
+​        On premises assessment scripts can be run to plan what workloads can be migrated to the Azure Storage account/s , priority of migration ie all data or move in parts . The below decision flow helps decide the criteria and commands can be run to get the data/ metrics. 3rd party tools like Unravel can support in getting the metrics and support auto assessment of the on premise HDFS . Data Migration planning can be split based on – Data Volume , Business Impact , Ownership of Data , Processing/ETL Jobs complexity , Sensitive Data / PII data , based on the date/time data generated. Based on this either entire workload or parts can be planned to be moved to Azure to avoid downtimes/business impact. The sensitive data can be chosen to remain on premise and moving only non PII data to cloud as an approach. All historical data can be planned to be moved and tested prior to moving the incremental load.
 
 ![img](../images/clip_image014.png)
 
 HDFS commands and reports that can help with getting the key assessment metrics from HDFS include –
 
 - **To list all directories in a location**
-  - hdfs dfs -ls books[[DK21\]](#_msocom_21)
+
+  - hdfs dfs -ls books
 
 - **Recursively list all files in a location**
    - hdfs       dfs -ls -R books
 
 - **Size of the HDFS File/Directory**
-  - Hadoop fs -du -s -h command[[DK22\]](#_msocom_22)
+  - Hadoop fs -du -s -h command
   - The Hadoop fs -du -s -h command is used to check the       size of the HDFS file/directory in human readable format. Since the       Hadoop file system replicates every file, the actual physical size of       the file will be number of replication with multiply of size of the       file.
 
 - **Hdfs-site.xml**
@@ -30,8 +29,6 @@ HDFS commands and reports that can help with getting the key assessment metrics 
     For more information refer - https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
 
  3rd party tools like Unravel provides assessment reports that can help plan the migration of data . The tool is required to be installed in the on premise environment or be able to connect to the Hadoop cluster to generate the assessment report. Based on the customer requirements the tool can be installed or scripts can be built using the hdfs commands to assess the HDFS cluster. Some of the metrics related to data migration include –
-
-[[NM24\]](#_msocom_24)
 
 - **List of small files -**      generates reports that     can help assess the on premise Hadoop system . The sample below generates     a report on the small files being generated – that helps with planning the     next action on moving to Azure.
 
@@ -91,8 +88,6 @@ Based on the identified strategy for data migration identify the data sets to be
 
 6. **Check Hadoop     File Formats**
 
-[[DK25\]](#_msocom_25)
-
 ![img](../images/clip_image028.png)
 
  7. **Choose an Azure     solution for data transfer**
@@ -101,20 +96,22 @@ Based on the identified strategy for data migration identify the data sets to be
 
     For more details on the option to choose refer the link - https://docs.microsoft.com/en-us/azure/storage/common/storage-choose-data-transfer-solution
 
-    **1.**  **Azcopy**[[HT26\]](#_msocom_26)
-
+    **1.**  **Azcopy**
+    
     Azcopy is a command line utility that can be used to copy files from HDFS to a storage account. This is an option when there is high network bandwidth to move the data ( ie over 1 gbps)
 
     Sample command to move an hdfs directory -
-
-    *azcopy copy "C:\local\path" "https://account.blob.core.windows.net/mycontainer1/?sv=2018-03-28&ss=bjqt&srt=sco&sp=rwddgcup&se=2019-05-01T05:01:17Z&st=2019-04-30T21:01:17Z&spr=https&sig=MGCXiyEzbtttkr3ewJIh2AR8KrghSy1DGM9ovN734bQF4%3D" --recursive=true*[[DK27\]](#_msocom_27)
+    ```bash
+    *azcopy copy "C:\local\path" "https://account.blob.core.windows.net/mycontainer1/?sv=2018-03-28&ss=bjqt&srt=sco&sp=rwddgcup&se=2019-05-01T05:01:17Z&st=2019-04-30T21:01:17Z&spr=https&sig=MGCXiyEzbtttkr3ewJIh2AR8KrghSy1DGM9ovN734bQF4%3D" --recursive=true*
+    ```
 
     **2.**  **Distcp**
 
     [DistCp](https://hadoop.apache.org/docs/current3/hadoop-distcp/DistCp.html) is a command-line utility in Hadoop to perform distributed copy operations in a Hadoop cluster. Distcp creates several map jobs in the Hadoop cluster to copy the data from source to the sink . This push approach is good when there is good network bandwidth and doesn’t require extra compute resources to be provisioned for data migration. However , if the source HDFS cluster is already running out of capacity and additional compute cannot be added then consider using Azure Data Factory ( with distcp copy activity) as a pull approach instead of the push approach.
 
-    *hadoop distcp -D fs.azure.account.key.<account name>.blob.core.windows.net=<Key> wasb://<container>@<account>.blob.core.windows.net<path to wasb file> hdfs://<hdfs path>*[[DK28\]](#_msocom_28)
-
+    ```bash
+    *hadoop distcp -D fs.azure.account.key.<account name>.blob.core.windows.net=<Key> wasb://<container>@<account>.blob.core.windows.net<path to wasb file> hdfs://<hdfs path>*
+    ```
     **3.**  **Azure Data Box ( for large data transfers)**
 
     Azure Data Box is a service that provides large-scale data transfers – particularly to move the historical data and is a physical device ordered from Microsoft. For an offline data transfer option , when network bandwidth is limited or no bandwidth  and         data volume is high ( say a few TB to PB scale) then Azure data box is an option.
