@@ -13,6 +13,7 @@ The migration approach of HDFS to ADLS typically involves the below 6 steps.
 HDFS commands and reports that can help with getting the key assessment metrics from HDFS include –
 
 - **To list all directories in a location**
+
   - hdfs dfs -ls books
 
 - **Recursively list all files in a location**
@@ -107,6 +108,7 @@ Based on the identified strategy for data migration identify the data sets to be
     **2.**  **Distcp**
 
     [DistCp](https://hadoop.apache.org/docs/current3/hadoop-distcp/DistCp.html) is a command-line utility in Hadoop to perform distributed copy operations in a Hadoop cluster. Distcp creates several map jobs in the Hadoop cluster to copy the data from source to the sink . This push approach is good when there is good network bandwidth and doesn’t require extra compute resources to be provisioned for data migration. However , if the source HDFS cluster is already running out of capacity and additional compute cannot be added then consider using Azure Data Factory ( with distcp copy activity) as a pull approach instead of the push approach.
+
     ```bash
     *hadoop distcp -D fs.azure.account.key.<account name>.blob.core.windows.net=<Key> wasb://<container>@<account>.blob.core.windows.net<path to wasb file> hdfs://<hdfs path>*
     ```
