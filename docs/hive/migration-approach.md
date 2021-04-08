@@ -6,8 +6,9 @@
 - [Decision flow for selecting target DB for hive metadata:](#decision-flow-for-selecting-target-db-for-hive-metadata)
 - [Modernization – Databricks](#modernization-databricks)
 - [Modernization – Synapse](#modernization-synapse)
-- [Modernization – Synapse](#modernization-synapse)
-- [Modernization – Synapse](#modernization-synapse)
+- [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
+- [Lift and Shift - IAAS](#lift-and-shift---iaas)
+- [Decision Map/Flowchart](#decision-mapflowchart)
 
 ### Metadata
 
@@ -343,11 +344,11 @@ Reference: [sql - How to get/generate the create statement for an existing hive 
 
 *    Import the hive internal table to azure synapse dedicated SQL Pool or spark database via T-SQL scripts.
 
-### Lift and Shift – HDInsight
+### Lift and Shift - HDInsight
 
 Refer the documentation provided by the HDI product team
 
-### Lift and Shift – IAAS 
+### Lift and Shift - IAAS
 
 Other options to migrate Hive Tables
 
