@@ -10,7 +10,7 @@ Every operation of Hive depends on the definition of metadata that describes the
 
 **HiveServer2**
 
-is a JDBC interface for applications that want to use it for accessing Hive. This is included with standard analytic tools called Beeline.
+This is a JDBC interface for applications that want to use it for accessing Hive. This is included with standard analytic tools called Beeline.
 
  **Hive pattern rules**
 
@@ -18,4 +18,4 @@ A simple syntax used by Hive for matching database objects.
 
 **Hive Client Applications**
 
-Can be access either directly (using its Thrift interface), or indirectly via another client application such as Beeline or HiveServer2.
+Can be accessed either directly (using its Thrift interface), or indirectly via another client application such as Beeline or HiveServer2.

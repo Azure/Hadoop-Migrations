@@ -1,15 +1,15 @@
 ## Challenges of Hive on premise
 
-Complexity of building data pipelines[[DK42\]](#_msocom_42)
+- Complexity of building data pipelines
 
-Maintenance Costs
+- Maintenance Costs
 
-Scalability
+- Scalability
 
-Acheiving HA and DR
+- Achieving HA and DR
 
-Monitoring
+- Monitoring
 
-DevOps
+- DevOps
 
-Automations
+- Automations

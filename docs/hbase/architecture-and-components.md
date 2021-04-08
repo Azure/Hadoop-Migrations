@@ -64,9 +64,9 @@ For long-term data persistence, Hbase uses a data structure called Hbase file (H
 **////// write path Image goes here //////**
 
 To summarise, the components on the write-path are:  
-• **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.   
-• **MemStore** – in-memory data structure. It’s an on-heap data structure.  
-• **Hfile** – Hbase file used for data persistence and stored on HDFS.
+* **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.   
+* **MemStore** – in-memory data structure. It’s an on-heap data structure.  
+* **Hfile** – Hbase file used for data persistence and stored on HDFS.
 
 #### **Read Path**
 

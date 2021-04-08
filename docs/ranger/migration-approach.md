@@ -2,9 +2,9 @@
 
 ### Modernization – AAD + Databricks
 
-All user authentication to the Azure Databricks Workspace is done via Azure Active Directory’s (AAD) single sign-on functionality. Additionally, AAD conditional access can be leveraged for fine-grain access control to the Databricks workspace.
+All user authentication to the Azure Databricks Workspace is done via Azure Active Directory (AAD) single sign-on functionality. Additionally, AAD conditional access can be leveraged for fine-grain access control to the Databricks workspace.
 
-Authorization is achieved using a combination of AAD and Databricks Access Control Lists (ACLs). Users and groups defined within AAD can be imported to the Databricks workspace via SCIM. Access to data residing in ADLS gen1&2 (at the file or folder levels) can be orchestrated using AAD credential passthrough. Access the Databricks workspace objects are governed by ACLs. Row-level and column-level permissions and [data masking](https://docs.microsoft.com/en-us/azure/databricks/security/access-control/table-acls/object-privileges#data-masking) for table data is managed using Databricks dynamic views.
+Authorization is achieved using a combination of AAD and Databricks Access Control Lists (ACLs). Users and groups defined within AAD can be imported to the Databricks workspace via SCIM. Access to data residing in ADLS gen1&2 (at the file or folder levels) can be orchestrated using AAD credential passthrough. Access to the Databricks workspace objects are governed by ACLs. Row-level and column-level permissions and [data masking](https://docs.microsoft.com/en-us/azure/databricks/security/access-control/table-acls/object-privileges#data-masking) for table data is managed using Databricks dynamic views.
 
 Advanced security features can be implemented using 3rd party partner solutions, Privacera and Immuta.
 
@@ -25,7 +25,7 @@ Security on Cosmos DB can be achieved with combination of various features avail
 
 The following screenshot shows how you can use audit logging and activity logs to monitor your account:
 
-![img](..images\clip_image128.png)
+![img](../images/clip_image128.png)
 
 *Image source: Microsoft Docs*
 
@@ -48,11 +48,11 @@ HDInsight is a Hortonworks-derived distribution provided as a first party servic
 
 Its Enterprise features include:
 
-·    Ranger support (Kerberos based Security)
+*    Ranger support (Kerberos based Security)
 
-·    Log Analytics via OMS
+*    Log Analytics via OMS
 
-·    Orchestration via Azure Data Factory
+*    Orchestration via Azure Data Factory
 
 *Secure and govern cluster with Enterprise Security Package* 
 
@@ -84,13 +84,13 @@ When exporting from the Reports page, you can apply filters before saving the fi
 
 You can export policies in the following formats:
 
-·    Excel
+*    Excel
 
-·    JSON
+*    JSON
 
-·    CSV
+*    CSV
 
-Note: CSV format is not supported for importing policies.
+> [!NOTE] CSV format is not supported for importing policies.
 
 When you export policies from the Service Manager page, the policies are automatically downloaded in JSON format. If you wish to export in Excel or CSV format, export the policies from the Reports page dropdown menu.
 **Required User Roles**
@@ -103,15 +103,15 @@ The Ranger KMS keyadmin user can import and export only KMS policies. The defaul
 
 To successfully import policies, use the following database versions:
 
-·    MariaDB: 10.1.16
+*    MariaDB: 10.1.16
 
-·    MySQL: 5.6.x
+*    MySQL: 5.6.x
 
-·    Oracle: 11gR2+
+*    Oracle: 11gR2+
 
-·    PostgreSQL: 8.4+
+*    PostgreSQL: 8.4+
 
-·    MS SQL: 2008 R2+
+*    MS SQL: 2008 R2+
 
 Partial import is not supported.
 
@@ -121,12 +121,12 @@ Cloudera Data Hub is a distribution of Hadoop running on Azure Virtual Machines.
 
 Cloudera Data Hub is designed to build a unified enterprise data platform. Its Enterprise features include:
 
-·    Full hybrid support & parity with on-premises Cloudera deployments
+*    Full hybrid support & parity with on-premises Cloudera deployments
 
-·    Ranger support (Kerberos-based Security) and fine-grained authorization (Sentry)
+*    Ranger support (Kerberos-based Security) and fine-grained authorization (Sentry)
 
-·    Widest portfolio of Hadoop technologies
+*    Widest portfolio of Hadoop technologies
 
-·    Single platform serving multiple applications seamlessly on-premises and on-cloud.
+*    Single platform serving multiple applications seamlessly on-premises and on-cloud.
 
 For more information please follow : *https://docs.cloudera.com/documentation/other/reference-architecture/topics/ra_azure_deployment.html*
