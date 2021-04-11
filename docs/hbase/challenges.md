@@ -1,6 +1,6 @@
 # Challenges of HBase on premise  
 
-Common challenges associated with Hbase deployments:
+Common challenges associated with HBase deployments:
 
 * Scalability  
 * Ageing infrastructure  
@@ -8,7 +8,7 @@ Common challenges associated with Hbase deployments:
 * Hard to achieve HA-DR due lack of data-centre sites.  
 * Lack of native tools that enable:  
 
-- Cost transparency
-- Monitoring
-- DevOps
-- Automation  
+  * Cost transparency  
+  * Monitoring  
+  * DevOps  
+  * Automation  
