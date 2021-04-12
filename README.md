@@ -94,6 +94,9 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
     
 -  **Modernize(Azure Synapse Analytics & Azure Databricks)**
 
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Modernize_end_State_architecture.png)
+
+
 - **Lift and Shift(HDInsight)**
 
 ![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
