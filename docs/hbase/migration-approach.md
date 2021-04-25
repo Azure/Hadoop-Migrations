@@ -263,19 +263,19 @@ See [“Overview of Apache HBase and Architecture”](#_Overview_of_Apache) sect
 
 The table below shows a conceptual mapping between Apache HBase, Apache Phoenix and Cosmos DB.
 
-| **HBase**           | **Phoenix**          | **Cosmos DB**   |      |
-| ------------------- | -------------------- | --------------- | ---- |
-| Cluster             | Account              |                 |      |
-| Namespace           | Schema (if enabled)  | Database        |      |
-| Table               | Container/Collection |                 |      |
-| Column family       | N/A                  |                 |      |
-| Row                 | Item/Document        |                 |      |
-| Version (Timestamp) | N/A                  |                 |      |
-| N/A                 | Primary Key          | Partition Key   |      |
-| N/A                 | Index                | Index           |      |
-| N/A                 | Secondary Index      | Secondary Index |      |
-| N/A                 | View                 | N/A             |      |
-| N/A                 | Sequence             | N/A             |      |
+| **HBase**           | **Phoenix**          | **Cosmos DB**   |
+| ------------------- | -------------------- | --------------- |
+| Cluster | | Account |
+| Namespace | Schema (if enabled) | Database |
+| Table | | Container/Collection |
+| Column family | | N/A |
+| Row || Item/Document |
+| Version (Timestamp) | | N/A |
+| N/A | Primary Key | Partition Key   |
+| N/A | Index | Index|
+| N/A | Secondary Index | Secondary Index |
+| N/A | View | N/A |
+| N/A | Sequence | N/A |
 
 
 #### Data Structure Comparison and Differences
