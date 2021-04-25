@@ -272,7 +272,7 @@ The table below shows a conceptual mapping between Apache HBase, Apache Phoenix 
 | Row || Item/Document |
 | Version (Timestamp) | | N/A |
 | N/A | Primary Key | Partition Key   |
-| N/A | Index | Index|
+| N/A | Index | Index |
 | N/A | Secondary Index | Secondary Index |
 | N/A | View | N/A |
 | N/A | Sequence | N/A |
