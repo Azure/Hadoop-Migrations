@@ -265,12 +265,12 @@ The table below shows a conceptual mapping between Apache HBase, Apache Phoenix 
 
 | **HBase**           | **Phoenix**          | **Cosmos DB**   |
 | ------------------- | -------------------- | --------------- |
-| Cluster | | Account |
+| Cluster | Cluster | Account |
 | Namespace | Schema (if enabled) | Database |
-| Table | | Container/Collection |
-| Column family | | N/A |
-| Row || Item/Document |
-| Version (Timestamp) | | N/A |
+| Table | Table | Container/Collection |
+| Column family | Column family | N/A |
+| Row | Row | Item/Document |
+| Version (Timestamp) | Version (Timestamp) | N/A |
 | N/A | Primary Key | Partition Key |
 | N/A | Index | Index |
 | N/A | Secondary Index | Secondary Index |
