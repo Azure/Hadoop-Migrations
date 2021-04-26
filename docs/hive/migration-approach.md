@@ -121,7 +121,7 @@ Although architectures can vary depending on custom configurations (such as when
 ![image](https://user-images.githubusercontent.com/70247096/116026874-25816e80-a686-11eb-83c0-80cc14a0d111.png)
 
 
-#### Metastore Migration
+#### Migration Approach
 
 When an Azure Databricks workspace provisioned, a default Hive Metastore comes automatically with the workspace. Alternative, an external Hive Metastore can be provision on Azure and connected to Azure Databricks. The migration of on-premises Hive to Azure Databricks essentially include two major parts: Metastore migration and Hive Data & Job Assets migration.
 
