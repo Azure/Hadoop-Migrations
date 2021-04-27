@@ -811,7 +811,7 @@ The mappings for code migration are shown here, but the HBase RowKeys and Cosmos
 
 HBase
 
-```console
+```java
 Configuration config = HBaseConfiguration.create(); 
 config.set("hbase.zookeeper.quorum","zookeepernode0,zookeepernode1,zookeepernode2"); 
 config.set("hbase.zookeeper.property.clientPort", "2181"); 
@@ -821,14 +821,14 @@ Connection connection = ConnectionFactory.createConnection(config)
 
 Phoenix
 
-```console
+```java
 //Use JDBC to get a connection to an HBase cluster 
 Connection conn = DriverManager.getConnection("jdbc:phoenix:server1,server2:3333",props);
 ```
 
 Azure Cosmos DB
 
- ```console
+ ```java
 // Create sync client 
 client = new CosmosClientBuilder()              
     .endpoint(AccountSettings.HOST)              
@@ -842,7 +842,7 @@ client = new CosmosClientBuilder()
 
 HBase
 
-```console
+```java
 // create an admin object using the config     
 HBaseAdmin admin = new HBaseAdmin(config);      
 // create the table...     
@@ -854,13 +854,13 @@ admin.createTable(tableDescriptor);
 
 Phoenix
 
-```console
+```sql
 CREATE IF NOT EXISTS FamilyTable (“id” BIGINT not null primary key, “ColFam”.“lastName” VARCHAR(50));
 ```
 
 Azure Cosmos DB
 
- ```console
+ ```java
 //  Create database if not exists 
 CosmosDatabaseResponse databaseResponse = client.createDatabaseIfNotExists(databaseName); 
 database = client.getDatabase(databaseResponse.getProperties().getId());  
@@ -880,7 +880,7 @@ container = database.getContainer(databaseResponse.getProperties().getId());
 
 HBase
 
-```console
+```java
 HTable table = new HTable(config, “FamilyTable”);
 Put put = new Put(Bytes.toBytes(RowKey));
 
@@ -904,7 +904,7 @@ Azure Cosmos DB provides you type safety via data model. We use data model named
 echo "describe '({Namespace}:){Table name}'" | hbase shell -n > {Table name} -schema.txt
 ```
 
-```c#
+```java
 public class Family {
     public Family() {
     }
@@ -927,7 +927,7 @@ The above is part of the code. See [full code example](https://github.com/Azure-
 
 Use the Family class to define document and insert item.
 
-```c#
+```java
 Family family = new Family();
 family.setLastName(“Witherspoon”);
 family.setId(“1”);
@@ -942,7 +942,7 @@ container.createItem(family,new PartitionKey(family.getLastName()),new CosmosIte
 
 HBase
 
-```c#
+```java
 HTable table = new HTable(config, “FamilyTable”);
 
 Get get = new Get(Bytes.toBytes(RowKey));
@@ -963,7 +963,7 @@ SELECT lastName FROM FamilyTable;
 
 Azure Cosmos DB
 
-```sql
+```java
 //  Read document by ID
 Family family = container.readItem(documentId,new PartitionKey(documentLastName),Family.class).getItem();
 
@@ -977,7 +977,7 @@ CosmosPagedIterable<Family> filteredFamilies = container.queryItems(sql, new Cos
 
 For HBase, use the append method and checkAndPut method to update the value. append is the process of appending a value atomically to the end of the current value, and checkAndPut atomically compares the current value with the expected value and updates only if they match.
 
-```c#
+```java
 // append
 HTable table = new HTable(config, “FamilyTable”);
 Append append = new Append(Bytes.toBytes(RowKey));
@@ -1007,7 +1007,7 @@ Azure Cosmos DB
 
 In Azure Cosmos DB, updates are treated as Upsert operations. That is, if the document does not exist, it will be inserted.
 
-```console
+```java
 // Replace existing document with new modified document (contingent on modification).
 
 Family family = new Family();
@@ -1023,7 +1023,7 @@ HBase
 
 In Hbase, there is no direct delete way of selecting the row by value. You may have implemented the delete process in combination with ValueFilter etc. In this example, the row to be deleted is simply specified by RowKey.
 
-```console
+```java
 HTable table = new HTable(config, “FamilyTable”);
 
 Delete delete = new Delete(Bytes.toBytes(RowKey));
@@ -1044,7 +1044,7 @@ Azure Cosmos DB
 
 The deletion method by Document ID is shown below.
 
- ```console
+ ```java
 container.deleteItem(documentId, new PartitionKey(documentLastName), new CosmosItemRequestOptions());
 ```
 
@@ -1052,7 +1052,7 @@ container.deleteItem(documentId, new PartitionKey(documentLastName), new CosmosI
 
 HBase allows you to retrieve multiple Rows using scan. You can use Filter to specify detailed scan conditions.
 
-```c#
+```java
 HTable table = new HTable(config, “FamilyTable”);
 
 Scan scan = new Scan();
@@ -1076,7 +1076,7 @@ Azure Cosmos DB
 
 Filter operation
 
- ```console
+ ```java
 String sql = "SELECT * FROM c WHERE c.lastName = 'Witherspoon'";
 CosmosPagedIterable<Family> filteredFamilies = container.queryItems(sql, new CosmosQueryRequestOptions(), Family.class);
 
@@ -1086,7 +1086,7 @@ CosmosPagedIterable<Family> filteredFamilies = container.queryItems(sql, new Cos
 
 HBase
 
-```console
+```java
 HBaseAdmin admin = new HBaseAdmin(config);
 admin.deleteTable(“FamilyTable”)
 
@@ -1101,7 +1101,7 @@ DROP TABLE IF EXISTS FamilyTable;
 
 Azure Cosmos DB
 
-```console
+```java
 CosmosContainerResponse containerResp = database.getContainer(“FamilyContainer”).delete(new CosmosContainerRequestOptions());
 ```
 
