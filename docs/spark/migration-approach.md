@@ -107,12 +107,13 @@ Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Micros
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen. 
 
-| Use case            | Sink                 | Comment        |
-| ------------------- | -------------------- | -------------- |
-| Data Warehouse      | Synapse table        | [Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
-| API and fast access | Cosmos DB            |[Configuration references · Azure/azure-cosmosdb-spark Wiki](https://docs.microsoft.com/en-us/azure/cosmos-db/synapse-link)               |
-| Historical Analysis | ADLS Gen2 (Datalake) |[Introduction to Microsoft Spark utilities - Azure Synapse Analytics](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-csharp)                |
-| Integration         | EventHub             |[Azure/azure-event-hubs-spark](https://github.com/Azure/azure-event-hubs-spark)|
+| Use case            | Sink                 | Comment        |Reference Links|
+| ------------------- | -------------------- | --------------  |--------------|
+| Data Warehouse      | Synapse table        |                 |[Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
+| API and fast access | Cosmos DB            |                 |[Configuration references · Azure/azure-cosmosdb-spark Wiki](https://docs.microsoft.com/en-us/azure/cosmos-db/synapse-link)               |
+| Historical Analysis | ADLS Gen2 (Datalake) |                 |[Introduction to Microsoft Spark utilities - Azure Synapse Analytics](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-csharp)                |
+| Integration         | EventHub             | Kafka protocol        |[Azure/azure-event-hubs-spark](https://github.com/Azure/azure-event-hubs-spark)|
+
 ## Data Migration:
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
