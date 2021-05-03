@@ -1,14 +1,14 @@
 ## HDFS Architecture and Components
 
-Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the master-slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
+Hadoop Distributed Filesystem (HDFS) - a Java-based distributed file system that follows the master-slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
 
  ![img](../images/image.png)
 
-*    **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of files and directories. 
+*    **Namenode**: Is the master node that manages access to files and namespace. It is a hierarchy of directories. 
 
       - Files and directories are nodes on      the NameNode - has attributes like permissions, modification and access      times, namespace and disk space quotas. 
-       - The file content is split into      blocks (usually 128 megabytes , but can be customized per file
-       - Each block of the file is      independently replicated at multiple DataNodes. The replication factor is      default 3 but can be customized on file-to-file basis.
+       - The file is split into      blocks (Default is 128 megabytes , but can be customized for a cluster by making changes to hdfs-site.xml file
+       - Each block of the file is      independently replicated at multiple DataNodes. The replication factor is      default 3 but can be customized for every cluster (replication factor can be changed at anytime, which will result in a cluster re-balancing).
        - The NameNode maintains the      namespace tree and the mapping of file blocks to DataNodes (the physical      location of file data).
        - An HDFS client that needs to read a      file - 
 
@@ -18,10 +18,11 @@ Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the
 
  - A HDFS cluster can have thousands      of DataNodes and tens of thousands of HDFS clients per cluster, as each      DataNode can execute multiple application tasks concurrently. 
   - HDFS keeps the entire namespace in      memory i.e. RAM.
+  - An end-to-end checksum calculation is performed as part of the HDFS write pipeline while the block is being written to DataNodes
 
 * **DataNode**: is the slave node that performs     read/write operations on the file system as well as block operations like     creation, replication, and deletion.
 
-   - Contains a metadata file that holds      the checksum
+   - Contains a metadata file that holds      the checksum of the stored files. For each block replica hosted by a DataNode, there is a corresponding metadata file that contains metadata about the replica, including its checksum information. The metadata file will have the same base name as the block file, and it will have an extension of ".meta".
   - Contains the data file that holds      the block’s data
   - On a file read, DataNode fetches      the block locations and replica locations from the NameNode – tries      reading from the location closest to the client
 
@@ -39,7 +40,7 @@ Hadoop Distributed Filesystem (HDFS) - a Java-based file system that follows the
 
   - HDFS provides an API that exposes the locations of file blocks. This allows applications like the MapReduce framework to schedule a task to where the data are located, thus improving the read performance.
 
-- **Block**: is the unit of storage in HDFS. A     file is comprised of blocks, and different blocks are stored on different     data nodes.
+- **Block**: is the unit of storage in HDFS. A     file is comprised of blocks, and different blocks are stored on different     data nodes (ideally, unless the cluster is under-replicated).
 
 ## Feature Map
 
