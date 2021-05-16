@@ -326,6 +326,10 @@ The JSON object represents the data format in the Azure Cosmos DB SQL API. The p
 
 ```
 
+> [!TIP]
+HBase stores data in byte array, so if you want to migrate data that contains double-byte characters to Cosmos DB, the data must be UTF-8 encoded.
+
+
 #### Consistency model
 
 HBase offers strictly consistent reads and writes. Cosmos DB offers [five well-defined consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels). 
