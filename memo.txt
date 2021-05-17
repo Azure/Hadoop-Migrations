@@ -1,0 +1,5 @@
+
+
+az deployment group create -n main -g 210429HDMIGPRJ_KRC -f main.bicep
+
+az deployment group create -g 210429HDMIGPRJ_KRC -f main.bicep
