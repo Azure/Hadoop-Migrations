@@ -8,6 +8,7 @@ Landing Targets for Apache HBase on Azure
 - [Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
 - [Azure Cosmos DB (SQL API)](#migrating-apache-hbase-to-azure-cosmos-db-sql-api)
 
+
 ## Lift and shift migration to Azure IaaS  
 
 ### **Planning and Sizing for Azure Compute & Storage**  
