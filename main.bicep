@@ -177,6 +177,7 @@ module stgUAI './modules/assign-userassignedidentity/azuredeploy.bicep' = {
 }
 */
 
+/*
 // HDI Cluster Creation,.. has to be separated into 2 steps, 1 sa + user assigned identity/role ssignment (manually) 2 cluster creation
 module stgKV './modules/create-hdinsight-datalake-store-azure-storage/azuredeploy.bicep' = {
   name: 'create-hdinsight'
@@ -192,4 +193,55 @@ module stgKV './modules/create-hdinsight-datalake-store-azure-storage/azuredeplo
     userAssignedIdentityName: 'uain-007'
  }
 }
+*/
 
+/*
+// Synapse with Spark pool
+module stgSNPS './modules/create-synapse-workspace/azuredeploy.bicep' = {
+  name: 'create-synapse-with-sparkpool'
+  params: {
+    location: glocation
+    projectName: gprojectName
+    workspaceName: concat('snps-krc-002-', gprojectName)
+    sparkPoolName: 'spp01'
+    sqlPoolName: 'sqp01'
+    dataLakeStorageAccountName: 'sakrc002hdmp001'
+    dataLakeStorageFieshareName: 'file01'
+    sqlAdministratorLogin: 'hdmpuser'
+    sqlAdministratorLoginPassword: 'H$ngh9731@'
+ }
+}
+*/
+
+/*
+// ADB with Load Balancer
+module stgADB './modules/create-databricks/azuredeploy.bicep' = {
+  name: 'create-databricks-with-loadbalancer'
+  params: {
+    location: glocation
+    workspaceName: concat('adb-krc-001-', gprojectName)
+    pricingTier: 'premium'
+    nsgName: nsgName
+    disablePublicIp: false 
+    vnetADBName: 'vnet-krc-012-adb'
+    vnetADBCider: '192.168.16.0/23'
+    publicSubnetName: 'sub1-adb-pub'
+    publicSubnetCidr: '192.168.16.0/26'
+    privateSubnetName: 'sub2-adb-prv'
+    privateSubnetCidr: '192.168.16.64/26'
+    loadBalancerPublicIpName: 'ip-krc-001-adblb'
+    loadBalancerName: 'lb-krc-001-adblb'
+    loadBalancerFrontendConfigName: 'lbfe-cfg-krc-001-adblb'
+    loadBalancerBackendPoolName: 'lbbep-name-krc-001-adblb'
+ }
+}
+*/
+
+// Data Factory instance creation
+module stgADB './modules/create-datafactory/azuredeploy.bicep' = {
+  name: 'create-datafactory'
+  params: {
+    location: glocation
+    dataFactoryName: 'adf-krc-001'
+ }
+}
