@@ -1,13 +1,16 @@
 @description('Location to create all resources')
 param glocation string = 'koreacentral'
 
+@description('Project name')
+param gprojectName string = 'hdmp001'
+
 var vnetMgmtName = 'vnet-krc-010'
 var vnetBlueName = 'vnet-krc-011'
 var nsgName = 'nsg-krc-011'
 var saName = 'sakrc011'
 var privateDnsZoneName = 'euphoria.com'
 
-param publicKey string = '<your public key>'
+param publicKey string = '....'
 
 /*
 // VNet Creation
@@ -43,13 +46,14 @@ module stgNSG './modules/create-nsg/azuredeploy.bicep' = {
 */
 
 /*
-// Storage Account Creation
-module stgSA './modules/create-storage-account/azuredeploy.bicep' = {
+// Storage Account Creation, ADLS Gen2 with a Blob container
+module stgSA './modules/create-adls-gen2-with-blob/azuredeploy.bicep' = {
   name: 'create-storage-account'
   params: {
     location: glocation
     storageAccountType: 'Standard_LRS'
     storageAccountName: saName
+    containerName: 'blob1'
   }
 }
 */
@@ -93,7 +97,7 @@ module stgLB './modules/create-loadbalancer-http/azuredeploy.bicep' = {
   name: 'create-slb-http'
   params: {
     location: glocation
-    projectName: 'hdmp001'
+    projectName: gprojectName
  }
 }
 */
@@ -132,20 +136,60 @@ resource privateDnsZoneName_privateDnsZoneName_link 'Microsoft.Network/privateDn
 } 
 */
 
-// Key Valut Creation 
+/*
+// Key Valut Creation .... can't access from portal
 module stgKV './modules/create-key-vault/azuredeploy.bicep' = {
   name: 'create-key-vault'
   params: {
     location: glocation
-    keyVaultName: 'kv-krc-501'
+    keyVaultName: 'kv-krc-502'
     enabledForDeployment: true
     enabledForDiskEncryption: true
     enabledForTemplateDeployment: true
     objectId: 'ec847c95-e7b1-4f60-89dc-0abe8c01949f'
-//    keysPermissions: ['all']
-//    secretsPermissions: ['all']
+    tenantId: '72f988bf-86f1-41af-91ab-2d7cd011db47'
+    keysPermissions: array('all')
+    secretsPermissions: array('all')
     skuName: 'premium'
-    //secretName: 
-    //secretValue:    
+    secretName: 'sec-01'
+    secretValue: 'sec-value-string'
  }
 }
+*/
+
+/*
+// Managed Identity Creation assigning Blob Storage Ownder role to the Storage Account
+// Step 1
+var userAssignedIdentityName = 'uain-007'
+
+//resource userAssignedIdentityName_resource 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
+//  name: userAssignedIdentityName
+//  location: glocation
+//}
+
+// Step 2
+module stgUAI './modules/assign-userassignedidentity/azuredeploy.bicep' = {
+  name: 'assign-userassignedidentity-to-storage'
+  params: {
+     userAssignedIdentityName: userAssignedIdentityName
+     clusterStorageAccountName: concat('sakrc002', gprojectName)
+ }
+}
+*/
+
+// HDI Cluster Creation,.. has to be separated into 2 steps, 1 sa + user assigned identity/role ssignment (manually) 2 cluster creation
+module stgKV './modules/create-hdinsight-datalake-store-azure-storage/azuredeploy.bicep' = {
+  name: 'create-hdinsight'
+  params: {
+    location: glocation
+    clusterType: 'hadoop'
+    clusterName: concat('hdi-krc-001-', gprojectName)
+    clusterLoginUserName: 'hdmpuser'
+    clusterLoginPassword: 'H$ngh9731@'
+    sshUserName: 'azureuser'
+    sshPassword: 'H$ngh9731@'
+    clusterStorageAccountName: concat('sakrc002', gprojectName)
+    userAssignedIdentityName: 'uain-007'
+ }
+}
+

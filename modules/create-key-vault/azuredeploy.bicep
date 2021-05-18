@@ -48,12 +48,12 @@ param secretsPermissions array = [
 @description('Specifies whether the key vault is a standard vault or a premium vault.')
 param skuName string = 'standard' 
 
-//@description('Specifies the name of the secret that you want to create.')
-//param secretName string
+@description('Specifies the name of the secret that you want to create.')
+param secretName string
 
-//@description('Specifies the value of the secret that you want to create.')
-//@secure()
-//param secretValue string
+@description('Specifies the value of the secret that you want to create.')
+@secure()
+param secretValue string
 
 resource keyVaultName_resource 'Microsoft.KeyVault/vaults@2019-09-01' = {
   name: keyVaultName
@@ -83,7 +83,7 @@ resource keyVaultName_resource 'Microsoft.KeyVault/vaults@2019-09-01' = {
     }
   }
 }
-/*
+
 resource keyVaultName_secretName 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   name: '${keyVaultName_resource.name}/${secretName}'
   //location: location
@@ -91,4 +91,3 @@ resource keyVaultName_secretName 'Microsoft.KeyVault/vaults/secrets@2019-09-01' 
     value: secretValue
   }
 }
-*/
