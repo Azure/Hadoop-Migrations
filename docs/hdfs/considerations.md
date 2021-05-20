@@ -13,3 +13,8 @@ There are some considerations when planning the migration of HDFS to ADLS. Based
 - If Azure Data factory is     chosen as an approach for data transfer – scan through each directory     excluding snapshots , check the size of each directory using the hdfs du     command. If there are multiple subfolders and large volume of data - initiate multiple copy activities in     ADF – one per subfolder instead of transferring the entire data in a     directory in a single copy activity
 
 ![img](../images/clip_image010.png)
+
+- As part of migration , when interacting with Azure Blob Storage via the Hadoop FileSystem client, there may be instances where the methods may not be supported.  by the AzureNativeFileSystem ie. throws an UnsupportedOperationException. For Eg - append(Path f, int bufferSize, Progressable progress) is an optional operation in AzureNativeFileSystem and is currently is not yet supported
+For other issues related to ABFS refer link - https://issues.apache.org/jira/browse/HADOOP-15763
+
+- For requirements where it is needed to connect to ADLS from existing older clusters ( prior to v3.1) backported driver details can be found at the link - https://github.com/Azure/abfs-backport
