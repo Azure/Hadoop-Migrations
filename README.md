@@ -26,7 +26,7 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |Chukwa    |System for collecting management data |
 |Avro      |Data serialization system |
 
-minor change
+
 
 This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing data storage -- HDFS , Other Cloud Storage like AWS S3 data to Azure.
  
