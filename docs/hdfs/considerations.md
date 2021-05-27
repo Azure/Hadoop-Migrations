@@ -18,3 +18,5 @@ There are some considerations when planning the migration of HDFS to ADLS. Based
 For other issues related to ABFS refer link - https://issues.apache.org/jira/browse/HADOOP-15763
 
 - For requirements where it is needed to connect to ADLS from existing older clusters ( prior to v3.1) backported driver details can be found at the link - https://github.com/Azure/abfs-backport
+
+- In an Azure Virtual Networks environment, the **DistCp** tool doesn't support **Azure ExpressRoute** private peering with an Azure Storage virtual network endpoint.Refer the link for recommendations - https://docs.microsoft.com/en-us/azure/data-factory/data-migration-guidance-hdfs-azure-storage 
