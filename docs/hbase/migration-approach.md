@@ -664,7 +664,10 @@ There are various methods for data migration with Offline, but here we will intr
 | Apache Spark                                      | All versions | Support all versions  of HBase  Suitable for large  datasets  Spark setup required |
 | Custom tool with  Cosmos DB bulk executor library | All versions | Most flexible to  create custom data migration tools using libraries  Requires more effort  to setup |
 
-##### HBase 1.x
+
+The following flowchart uses some conditions to reach the available data migration methods.
+
+![Graphical user interface  Description automatically generated with low confidence](../images/flowchart-hbase-cosmosdb-migration-tools.png)
 
 **Data Factory**
 
@@ -691,8 +694,6 @@ The source code is available here.
 https://github.com/azure/azure-documentdb-datamigrationtool
 
 ![Graphical user interface, application  Description automatically generated](../images/clip_image021.png)
-
-##### HBase 2.x or later
 
 The Data Factory and Data Migration Tool do not support HBase 2.x or later REST APIs, but Spark can read HBase data and write it to Cosmos DB.
 
