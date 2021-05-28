@@ -669,6 +669,7 @@ The following flowchart uses some conditions to reach the available data migrati
 
 ![Graphical user interface  Description automatically generated with low confidence](../images/flowchart-hbase-cosmosdb-migration-tools.png)
 
+
 **Data Factory**
 
 Suitable for large datasets. The Azure Cosmos DB Bulk Executor library is used. Please note that there are no checkpoints, so if you encounter any issues during the migration you will have to restart the migration process from the beginning. You can also use Data Factory's Self-Hosted Integration Runtime to connect to your on-premises HBase, or deploy Data Factory to a Managed VNET and connect to your on-premises network via VPN or ExpressRoute.
