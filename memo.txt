@@ -3,3 +3,17 @@
 az deployment group create -n main -g 210429HDMIGPRJ_KRC -f main.bicep
 
 az deployment group create -g 210429HDMIGPRJ_KRC -f main.bicep
+
+az identity create -g 210429HDMIGPRJ_KRC -n managedid-001
+{
+  "clientId": "ebbc7ae8-6010-4b7f-a51c-bd64bad82c10",
+  "clientSecretUrl": "https://control-koreacentral.identity.azure.net/subscriptions/b6d4cd53-eeab-41d1-93a8-665daf75fce1/resourcegroups/210429HDMIGPRJ_KRC/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedid-001/credentials?tid=72f988bf-86f1-41af-91ab-2d7cd011db47&oid=2ec65537-5f96-4146-9606-d4fd4930b340&aid=ebbc7ae8-6010-4b7f-a51c-bd64bad82c10",
+  "id": "/subscriptions/b6d4cd53-eeab-41d1-93a8-665daf75fce1/resourcegroups/210429HDMIGPRJ_KRC/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedid-001",
+  "location": "koreacentral",
+  "name": "managedid-001",
+  "principalId": "2ec65537-5f96-4146-9606-d4fd4930b340",
+  "resourceGroup": "210429HDMIGPRJ_KRC",
+  "tags": {},
+  "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+  "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+}

@@ -44,6 +44,7 @@ resource vNet1Name_resource 'Microsoft.Network/virtualNetworks@2020-05-01' = {
         name: vNet1Config.subnetName
         properties: {
           addressPrefix: vNet1Config.subnetPrefix
+          privateEndpointNetworkPolicies: 'Disabled'
         }
       }
     ]
@@ -77,6 +78,7 @@ resource vNet2Name_resource 'Microsoft.Network/virtualNetworks@2020-05-01' = {
         name: vNet2Config.subnetName
         properties: {
           addressPrefix: vNet2Config.subnetPrefix
+          privateEndpointNetworkPolicies: 'Disabled'
         }
       }
     ]

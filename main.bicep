@@ -10,7 +10,7 @@ var nsgName = 'nsg-krc-011'
 var saName = 'sakrc011'
 var privateDnsZoneName = 'euphoria.com'
 
-param publicKey string = '....'
+param publicKey string = 'ssh-rsa ****'
 
 /*
 // VNet Creation
@@ -23,12 +23,14 @@ module stgVM './modules/create-vnets-with-peering/azuredeploy.bicep' = {
       addressSpacePrefix: '192.168.12.0/23'
       subnetName: 'subnet1'
       subnetPrefix: '192.168.12.0/26'
+      privateEndpointNetworkPolicies: 'Disabled'
     }
     vNet2Name: vnetBlueName
     vNet2Config: {
       addressSpacePrefix: '192.168.14.0/23'
       subnetName: 'subnet1'
       subnetPrefix: '192.168.14.0/26'
+      privateEndpointNetworkPolicies: 'Disabled'
     }
   }
 }
@@ -177,23 +179,25 @@ module stgUAI './modules/assign-userassignedidentity/azuredeploy.bicep' = {
 }
 */
 
-/*
 // HDI Cluster Creation,.. has to be separated into 2 steps, 1 sa + user assigned identity/role ssignment (manually) 2 cluster creation
 module stgKV './modules/create-hdinsight-datalake-store-azure-storage/azuredeploy.bicep' = {
   name: 'create-hdinsight'
   params: {
     location: glocation
+    // "'hadoop' | 'hbase' | 'spark' | 'interactivehive'" //'storm' is not supported in 4.0
     clusterType: 'hadoop'
-    clusterName: concat('hdi-krc-001-', gprojectName)
+    clusterName: concat('hdi-krc-003-', gprojectName)
     clusterLoginUserName: 'hdmpuser'
     clusterLoginPassword: 'H$ngh9731@'
     sshUserName: 'azureuser'
     sshPassword: 'H$ngh9731@'
-    clusterStorageAccountName: concat('sakrc002', gprojectName)
+    clusterStorageAccountName: concat('sakrc003', gprojectName)
     userAssignedIdentityName: 'uain-007'
+    vmSizeHeadNode: 'Standard_E8_v3'
+    vmSizeWorkerNode: 'Standard_A5'
+    vmSizeZookeeperNode: 'Standard_A5'
  }
 }
-*/
 
 /*
 // Synapse with Spark pool
@@ -237,6 +241,7 @@ module stgADB './modules/create-databricks/azuredeploy.bicep' = {
 }
 */
 
+/*
 // Data Factory instance creation
 module stgADB './modules/create-datafactory/azuredeploy.bicep' = {
   name: 'create-datafactory'
@@ -245,3 +250,33 @@ module stgADB './modules/create-datafactory/azuredeploy.bicep' = {
     dataFactoryName: 'adf-krc-001'
  }
 }
+*/
+
+/*
+//Cosmos instance creation with privte endpoints
+
+var privateEndpointName_var = 'pep002'
+
+resource keyVaultName_resource 'Microsoft.KeyVault/vaults@2019-09-01' existing = {
+  name: 'kv-krc-502'
+}
+
+resource privateDnsZoneName_resource 'Microsoft.Network/privateDnsZones@2020-01-01' existing = {
+  name: 'euphoria.com'
+}
+
+resource vNet2Name_resource 'Microsoft.Network/virtualNetworks@2020-05-01' existing = {
+  name: 'vnet-krc-211'
+}
+
+module stgADB './modules/create-cosmosdb-with-private-endpoints/azuredeploy.bicep' = {
+  name: 'create-cosmosdb-with-private-endpoints'
+  params: {
+    location: glocation
+    cosmosAccountName: 'csms-krc-001'
+    subnetId: vNet2Name_resource.properties.subnets[0].id
+    privateDnsZoneId: privateDnsZoneName_resource.id
+    keyVaultId: keyVaultName_resource.id
+  }
+}
+*/

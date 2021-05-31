@@ -1,11 +1,12 @@
 @description('Specifies the Azure location where the key vault should be created.')
 param location string = resourceGroup().location 
 
+//  storm is not supported in 4.0
 @allowed([
   'hadoop'
   'hbase'
-  'storm'
   'spark'
+  'interactivehive'
 ])
 @description('The type of the HDInsight cluster to create.')
 param clusterType string
@@ -41,6 +42,15 @@ param clusterZookeeperNodeCount int = 3
 
 @description('The number of Zookeeper nodes in the HDInsight cluster.')
 param userAssignedIdentityName string = 'uain-001'
+
+@description('VM Spec for Head Node')
+param vmSizeHeadNode string = 'Standard_D3'
+
+@description('VM Spec for Worker Node')
+param vmSizeWorkerNode string = 'Standard_D3'
+
+@description('VM Spec for ZooKeeper Node')
+param vmSizeZookeeperNode string = 'Standard_D3'
 
 resource clusterStorageAccountName_resource 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: clusterStorageAccountName
@@ -123,7 +133,7 @@ resource clusterName_resource 'Microsoft.HDInsight/clusters@2018-06-01-preview' 
           name: 'headnode'
           targetInstanceCount: clusterHeadNodeCount
           hardwareProfile: {
-            vmSize: 'Standard_D3'
+            vmSize: vmSizeHeadNode
           }
           osProfile: {
             linuxOperatingSystemProfile: {
@@ -136,7 +146,7 @@ resource clusterName_resource 'Microsoft.HDInsight/clusters@2018-06-01-preview' 
           name: 'workernode'
           targetInstanceCount: clusterWorkerNodeCount
           hardwareProfile: {
-            vmSize: 'Standard_D3'
+            vmSize: vmSizeWorkerNode
           }
           osProfile: {
             linuxOperatingSystemProfile: {
@@ -149,7 +159,7 @@ resource clusterName_resource 'Microsoft.HDInsight/clusters@2018-06-01-preview' 
           name: 'zookeepernode'
           targetInstanceCount: clusterZookeeperNodeCount
           hardwareProfile: {
-            vmSize: 'standard_a2_v2'
+            vmSize: vmSizeZookeeperNode
           }
           osProfile: {
             linuxOperatingSystemProfile: {
