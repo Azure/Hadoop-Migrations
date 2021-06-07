@@ -44,6 +44,20 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 ![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_state.png)
 
 
+
+    
+-  **Modernize(Azure Synapse Analytics & Azure Databricks)**
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
+
+
+- **Lift and Shift(HDInsight)**
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
+
+
+For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
+
 - **Lift and Shift(IaaS)**  
 
 The following pattern presents a point of view on how to deploy OSS on Azure IaaS with a tight integration back to a customer's on-premises systems such as Active Directory; Domain Controller; DNS etc. The deployment follows Enterprise Scale Landing Zone guidance from Microsoft where management capabilities such as monitoring; security; governance; networking etc. are hosted within a management subscription. The workloads (all IaaS-based) are hosted in a separate subscription. ESLZ guidance is covered in details [here](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture#landing-zone-in-enterprise-scale).  
@@ -91,20 +105,6 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 11. **Big data workloads** are hosted on a set of independent Azure virtual machines. Please refer to guidance for [Hadoop](/docs/hdfs/migration-approach.md), [HBase](/docs/hbase/migration-approach.md), [Hive](/docs/hive/migration-approach.md), [Ranger](/docs/ranger/migration-approach.md)and [Spark](/docs/spark/migration-approach.md) on Azure IaaS for more information.
 
 12. **[Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/user-guide/alm-devops-features?view=azure-devops)** is a SaaS offering from Microsoft and provides an integrated set of services and tools to manage your software projects, from planning and development through testing and deployment.
-    
--  **Modernize(Azure Synapse Analytics & Azure Databricks)**
-
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
-
-
-- **Lift and Shift(HDInsight)**
-
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
-
-
-For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
-
-
 
 
 ### Glossary of Terms and Acronyms
