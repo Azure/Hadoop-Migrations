@@ -263,7 +263,7 @@ Before migrating, one must understand the differences between Cosmos DB and HBas
 The resource model of Cosmos DB is as follows.
 ![Graphical user interface, application, Teams  Description automatically generated](../images/clip_image002-1619013250925.png)
 
-See [“Overview of Apache HBase and Architecture”](#_Overview_of_Apache) section for the HBase resource model.
+See [“Overview of Apache HBase and Architecture”](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hbase/architecture-and-components.md#brief-introduction-to-apache-hbase) section for the HBase resource model.
 
 #### Resource mapping
 
