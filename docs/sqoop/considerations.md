@@ -1,0 +1,7 @@
+# Considerations  
+
+* SqoopをAzureに移行する場合において、データソースが既存のオンプレミスに残る場合はその接続性について考慮する必要があります。Azureと既存のオンプレミスのネットワーク間でインターネットを介したVPN接続を確立することや、ExpressRouteを使用してプライベート接続を行う方法があります。
+
+* HDInsightに移行する場合は、Sqoopのバージョンをよく考慮する必要があります。HDInsightはSqoop1をサポートしているため、オンプレミスの環境でSqoop2を使用している場合、それをHDInsight上のSqoop1に置き換えるか、Sqoop2を独立させて維持する必要があります。
+
+* Data Factoryに移行する場合、出力フォーマットについて考慮する必要があります。Data Factoryは出力フォーマットとしてSquenceFileをサポートしていないため、Sqoopの出力フォーマットとしてSequenceFileを使用している場合は、後続の処理が異なるフォーマット (Text, Avro, Parquet, JSON, ORC) でも利用できることを確実にする必要があります。
