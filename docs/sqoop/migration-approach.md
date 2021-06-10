@@ -156,7 +156,6 @@ See “Azure Private Link for Azure Data Factory”(https://docs.microsoft.com/e
 
 
 ### Performance of data copy
-SqoopはMapReduceを使用して並列処理を行うことによってデータ転送や変換の性能を向上します。Data Factoryも大規模なデータ移行を実行するシナリオのためにパフォーマンスとスケーラビリティを調節することができます。
 Sqoop improves data transfer performance by using MapReduce for parallel processing. Data Factory can also adjust performance and scalability for scenarios that perform large-scale data migrations.
 
 Data factory can adjust up to 256 units of performance called Data Integration Units (DIU) for copy activities that use the Azure Integration Runtime. DIU is a combination of CPU, memory, and network resource allocation. Please refer to [Data Integration Units](https://docs.microsoft.com/en-us/azure/data-factory/copy-activity-performance#data-integration-units) for details. 
