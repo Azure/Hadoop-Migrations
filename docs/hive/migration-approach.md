@@ -9,6 +9,7 @@
 - [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
 - [Lift and Shift - IAAS](#lift-and-shift---iaas)
 - [Decision Map/Flowchart](#decision-mapflowchart)
+- [Migrate Hive SQL Workloads](#migrate-hive-sql-workloads)
 
 ### Metadata
 
@@ -479,6 +480,18 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 ## Decision Map/Flowchart
 
 ![img](../images/clip_image124.png)
+  
+## Migrate Hive SQL Workloads
+  
+**Migrate Hive SQL Queries to HDIsight Spark SQL**
+  
+[To Migrate Hive SQL Queries to HDIsight Spark SQL please refer MLens product from Knowledgelens.](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/knowledgelens1591334415709.knowledgelens_mlens?tab=Overview)
+
+**Migrate Hive SQL Queries to Databricks**
+  
+[To Migrate Hive SQL Queries to Databricks please refer MLens product from Knowledgelens.](https://www.youtube.com/watch?v=I3uQvZVIalo)
+
+Please contact harman@knowledgelens.com & deepanjali@knowledgelens.com for further assistance.
 
 ## Feature Map & Workaround
 
