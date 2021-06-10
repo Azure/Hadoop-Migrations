@@ -2,39 +2,40 @@
 # Brief introduction to Apache Sqoop
 
 ## Overview
-Apache Sqoop は、Apache Hadoopクラスターとリレーショナルデータベースの間でデータを転送するためのコマンドラインインターフェースのツールです。
+Apache Sqoop is a command line interface tool for transferring data between Apache Hadoop clusters and relational databases.
 
-このツールを使用して、MySQL、PostgreSQL, Oracle, SQL Server などのRDBMSからHDFSにデータをインポートしたり、HDFSのデータをRDBMS へエクスポートできます。SqoopではMapReduceやApache Hive を使用してHadoop上でデータを変換することもできます。また、Sqoopは並列で動作し、高速なデータ転送を実現します。
+You can use this tool to import data from Relational Databases such as MySQL, PostgreSQL, Oracle, SQL Server to HDFS, or export HDFS data to Relational Databases. Sqoop can also use MapReduce and Apache Hive to convert data on Hadoop. In addition, Sqoop operates in parallel to achieve high-speed data transfer.
 
-また、高度な機能として、インクリメンタルなロード、SQLを使用してフォーマットを変換したロード、既存データセットの更新などもサポートされています。
+Advanced features include incremental loading, formatting converted using SQL, updating existing datasets, and more.
 
-### **バージョン**
+### **Version**
 
-Apache SqoopにはSqoop1とSqoop2の2つのシリーズが存在します。それらはコマンドライン含む使用方法が異なります。Sqoop1はシンプルなクライアントツールであるのに対して、Sqoop2はクライアントとサーバが協調して動作するアーキテクチャになっています。
+There are two series of Apache Sqoop, Sqoop1 and Sqoop2. They differ in usage, including the command line. Sqoop1 is a simple client tool, while Sqoop2 has an architecture in which the client and server work together.
 
-#### **Sqoop1のアーキテクチャ**
+#### **Sqoop1 architecture**
 
 ![Sqoop1 Architecture](../images/sqoop1-architecture.png)
 
-##### **Sqoop1のimport/exportの概念**
+##### **Sqoop1 import/export concept**
 
 - **import**  
-  RDBMSからデータを読み込んでHDFSにデータを出力します。RDBMSのテーブルの各レコードは、HDFS内では一行として出力されます。HDFS上に出力されるファイルフォーマットはText、SequenceFiles、Avroがサポートされています。
+  Reads data from Relational Databases and outputs data to HDFS. Each record in the Relational Databases table is output as a single row in HDFS. Text, SequenceFiles, and Avro are supported as the file formats output on HDFS. 
 
 - **export**  
-  HDFS上のデータを読み込んでRDBMSに転送します。ターゲットのRDBMSではInsertまたはUpdateがサポートされます。
+  Read the data on HDFS and transfer it to Relational Databases. The target Relational Databases support Insert or Update. 
 
 
-#### **Sqoop2のアーキテクチャ**
+#### **Sqoop2 architecture**
 
 ![Sqoop2 Architecture](../images/sqoop2-architecture.png)
 
-##### **Sqoop2のServerとClientの概念**
+##### **Sqoop2 Server and Client concept **
 - **Server**  
-  Sqoopクライアントのエントリーポイントになりサービスを提供する
+  Serve as an entry point for Sqoop clients 
 
 - **Client**  
-  必要なノードにインストールし、Sqoopサーバとやりとりする。クライアントはサーバと通信するだけでよいため、MapReduceなどの設定が不要。
+  Install it on the required node and interact with the Sqoop server. Since the client only needs to communicate with the server, there is no need to make settings such as MapReduce.
+  
 
 
 

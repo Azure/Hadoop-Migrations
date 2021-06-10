@@ -1,7 +1,7 @@
 # Considerations  
 
-* SqoopをAzureに移行する場合において、データソースが既存のオンプレミスに残る場合はその接続性について考慮する必要があります。Azureと既存のオンプレミスのネットワーク間でインターネットを介したVPN接続を確立することや、ExpressRouteを使用してプライベート接続を行う方法があります。
+* When migrating Sqoop to Azure, if your data source remains on-premises, you need to consider its connectivity. You can establish a VPN connection over the Internet between Azure and your existing on-premises network, or you can use ExpressRoute to make a private connection.
 
-* HDInsightに移行する場合は、Sqoopのバージョンをよく考慮する必要があります。HDInsightはSqoop1をサポートしているため、オンプレミスの環境でSqoop2を使用している場合、それをHDInsight上のSqoop1に置き換えるか、Sqoop2を独立させて維持する必要があります。
+* When migrating to HDInsight, you need to carefully consider your Sqoop version. HDInsight supports Sqoop1, so if you are using Sqoop2 in your on-premises environment, you will need to replace it with Sqoop1 on HDInsight or keep Sqoop2 independent. 
 
-* Data Factoryに移行する場合、出力フォーマットについて考慮する必要があります。Data Factoryは出力フォーマットとしてSquenceFileをサポートしていないため、Sqoopの出力フォーマットとしてSequenceFileを使用している場合は、後続の処理が異なるフォーマット (Text, Avro, Parquet, JSON, ORC) でも利用できることを確実にする必要があります。
+* When migrating to Data Factory, you need to consider the output format. Data Factory does not support SquenceFile as an output format. Therefore, if you are using SequenceFile as the output format for Sqoop, you need to ensure that subsequent processing is available in different formats (Text, Avro, Parquet, JSON, ORC). Or you can take advantage of Spark to convert file format to SequenceFile.
