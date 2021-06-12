@@ -24,7 +24,7 @@ The daemon configuration for Storm clusters is similar to Hadoop clusters. There
 
 - **Nimbus** - It plays the role of a master node. Assign tasks to other nodes in the cluster and monitor their execution through Apache ZooKeeper. 
 - **ZooKeeper** - It provides coordination to the cluster and assists in communication between the Nimbus and the supervisor processing of the worker node. 
-- **Supervisor** Listens for work assigned to its machine and starts and stops worker processes based on directives from Nimbus. Each worker process executes a subset of a topology. User’s application logic (Spouts and Bolt) run here. It can be restarted quickly and fails over quickly.
+- **Supervisor** - Listens for work assigned to its machine and starts and stops worker processes based on directives from Nimbus. Each worker process executes a subset of a topology. User’s application logic (Spouts and Bolt) run here. It can be restarted quickly and fails over quickly.
 
 
 ![Storm Daemons](../images/storm-diagram-nimbus.png)
