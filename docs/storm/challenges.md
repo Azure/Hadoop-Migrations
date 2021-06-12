@@ -1,6 +1,6 @@
 # Challenges of Sqoop on premise  
 
-Common challenges associated with Sqoop deployments:
+Common challenges associated with Storm deployments:
 
 * Scalability  
 * Ageing infrastructure  
