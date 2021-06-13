@@ -13,16 +13,22 @@ Landing Targets for Apache Storm on Azure
 
 ## Lift and shift migration to Azure IaaS  
 
-xxxxx
+### Planning
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
 
-xxxxx
+### Planning
+
+### Migration
 
 ## Migration to Azure Stream Analytics
 
-xxxxx
+### Planning
+
+### Migration
 
 ## Migration to Azure Functions
 
-xxxxx
+### Planning
+
+### Migration
