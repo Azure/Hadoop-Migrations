@@ -10,7 +10,6 @@ Landing Targets for Apache Sqoop on Azure
 - [Migration to HDInsight](#migration-to-hdinsight)
 - [Migration to Data Factory](#migration-to-data-factory)
 
-
 ## Lift and shift migration to Azure IaaS  
 If you choose Azure IaaS virtual machines as your migration destination for Sqoop running on-premises, you can use the exact same version of Sqoop to create a completely controllable environment. Therefore, a method is available that does not make any changes to the Sqoop software itself. Sqoop works with Hadoop Cluster and is usually migrated with Hadoop Cluster.
 The following is available as a guide for migrating Hadoop Cluster as Lift and Shift. Please refer to it according to the service to be migrated. 
