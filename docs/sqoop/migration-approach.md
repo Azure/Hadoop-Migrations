@@ -6,8 +6,9 @@ Landing Targets for Apache Sqoop on Azure
 
 ![Landing Targets for Apache HBase on Azure](../images/flowchart-sqoop-azure-landing-targets.png)
 
-- [Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
-- [Azure Cosmos DB (SQL API)](#migrating-apache-hbase-to-azure-cosmos-db-sql-api)
+- [Lift and shift migration to Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
+- [Migration to HDInsight](#migration-to-hdinsight)
+- [Migration to Data Factory](#migration-to-data-factory)
 
 
 ## Lift and shift migration to Azure IaaS  
