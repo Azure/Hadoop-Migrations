@@ -12,6 +12,7 @@ A storm topology consists of multiple components placed in a directed acyclic gr
 Spout components bring data into the topology. They emit one or more streams into the topology.
 Bolt components consume streams emitted from spouts or other bolts. Bolts may optionally emit a stream to the topology. Bolts is also responsible for writing data to external services or storage such as HDFS, Kafka, HBase.
 
+- **Topology** - A package of real-time application logic. Topology is a graph with Spout and Bolt connected.
 - **Spout** - Bring data into the topology. Output one or more streams to this topology.
 - **Bolt** - Use the stream output from the spout or other bolt. Bolt can output a stream to the topology as needed. It also writes data to external services or storage such as HDFS, Kafka, HBase.
 
