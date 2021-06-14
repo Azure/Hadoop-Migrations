@@ -7,7 +7,9 @@ Apache Sentry is a granular, role-based authorization module for Hadoop. Sentry 
 There are components involved in the authorization process:
 
 **Sentry Server**: The Sentry RPC server manages the authorization metadata. It supports interface to securely retrieve and manipulate the metadata;
+
 **Data Engine:** This is a data processing application such as Hive or Impala that needs to authorize access to data or metadata resources. The data engine loads the Sentry plugin and all client requests for accessing resources are intercepted and routed to the Sentry plugin for validation;
+
 **Sentry Plugin:** The Sentry plugin runs in the data engine. It offers interfaces to manipulate authorization metadata stored in the Sentry server, and includes the authorization policy engine that evaluates access requests using the authorization metadata retrieved from the server.
 
 **Key Concepts:**
