@@ -24,5 +24,6 @@ Privilege - An instruction or rule that allows access to an object
 Role - A set of privileges; a template to combine multiple access rules
 Authorization models - Defines the objects to be subject to authorization rules and the granularity of actions allowed. For example, in the SQL model, the objects can be databases or tables, and the actions are SELECT, INSERT, CREATE and so on. For the Search model, the objects are indexes, collections and documents; the access modes are query, update and so on.
 
+
  
 information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
