@@ -16,6 +16,7 @@ There are components involved in the authorization process:
 **Sentry Plugin:** The Sentry plugin runs in the data engine. It offers interfaces to manipulate authorization metadata stored in the Sentry server, and includes the authorization policy engine that evaluates access requests using the authorization metadata retrieved from the server.
 
 **Key Concepts:**
+
 Authentication - Verifying credentials to reliably identify a user
 
 Authorization - Limiting the user’s access to a given resource
