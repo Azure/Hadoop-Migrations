@@ -134,18 +134,3 @@ Based on the identified strategy for data migration identify the data sets to be
 
     For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure]
 
-## Reference Implementation - ARM Templates
-
-TBD v2
-
-## Pseudocode
-
-TBD v2
-
-## Architectural Guidance
-
-TBD v2
-
-### Patterns & Anti – Patterns
-
-### Performance Tuning
