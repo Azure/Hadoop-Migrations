@@ -37,7 +37,8 @@ There are 2 keys classes implemented in the MapReduce programming model when bui
 
 
 Hadoop MapReduce architecture comprises of three layers - 
-    1. Namenode and Datanode , Replication Management: HDFS- Hadoop Distributed File System
-    2. Scheduler and Application Manager : Yarn
-    3. Map Task and Reduce Task : MapReduce
+
+1. Namenode and Datanode , Replication Management: HDFS- Hadoop Distributed File System
+2. Scheduler and Application Manager : Yarn    
+3. Map Task and Reduce Task : MapReduce
 
