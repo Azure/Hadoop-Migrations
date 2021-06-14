@@ -6,31 +6,34 @@ MapReduce is an open source framework/programming model that supports scalabilit
 
 MapReduce performs 2 tasks - Map task and a Reduce task. Programming languages like Python, Ruby , Java etc are supported to create the Map and Reduce tasks. 
        
-    #### 1. Map task 
-        Map Task takes the input data and converts it into another set of data, each element is broken into key/value pairs and returns a list of <key, value> pairs. Sorting and Shuffling are 2 key operations applied before sending the output to the Reduce Job
+#### 1. Map task 
+Map Task takes the input data and converts it into another set of data, each element is broken into key/value pairs and returns a list of <key, value> pairs. Sorting and Shuffling are 2 key operations applied before sending the output to the Reduce Job
 
-    #### 2. Reduce task  
-    Output of the Map job is fed as input to a reduce job and it combines the key/value pairs into a smaller set of key/value pairs as per the reducer implementation.
+#### 2. Reduce task  
+Output of the Map job is fed as input to a reduce job and it combines the key/value pairs into a smaller set of key/value pairs as per the reducer implementation.
 
-    Input Data -> Map -> Shuffle and Sort -> Reduce -> Output Data
 
-MapReduce Class
+Input Data -> Map -> Shuffle and Sort -> Reduce -> Output Data
+
+### MapReduce Classes
+
 There are 2 keys classes implemented in the MapReduce programming model when building MapReduce applications- 
     
-    1. MapReduce Mapper Class
+1. MapReduce Mapper Class
     Mapper class maps the input key-value pairs to a set of intermediate key-value pairs. These intermediate pairs are associated with a given output key and passed to Reducer
         
         **Method map :** 
         void map(KEYIN key, VALUEIN value, Context context)	This method can be called only once for each key-value in the input split.  Applications should override this method to provide the map implementation
         
-        For other methods refer link - http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Mapper.html
+    For other methods refer link - http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Mapper.html
 
-    2. MapReduce Reducer Class 
+2. MapReduce Reducer Class 
     Reducer class reduces the set of intermediate key-value pairs to generate the final output
+        
         **Method reduce :**
         void reduce(KEYIN key, Iterable<VALUEIN> values, org.apache.hadoop.mapreduce.Reducer.Context context) 	This method called only once for each key.
         
-        For other methods refer link - http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Reducer.html
+    For other methods refer link - http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Reducer.html
 
 
 Hadoop MapReduce architecture comprises of three layers - 
