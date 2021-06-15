@@ -38,7 +38,12 @@ There are 2 keys classes implemented in the MapReduce programming model when bui
 
 Hadoop MapReduce architecture comprises of three layers - 
 
-1. Namenode and Datanode , Replication Management: HDFS- Hadoop Distributed File System
-2. Scheduler and Application Manager : Yarn    
-3. Map Task and Reduce Task : MapReduce
+1. Data Storage : Namenode and Datanode , Replication Management : HDFS- Hadoop Distributed File System
+2. Management Framework : Scheduler and Application Manager : YARN    
+3. API : Map Task and Reduce Task : MapReduce
 
+Apache Spark in Azure Synapse Analytics Architecture includes following three main components:
+1. Data Storage : Azure Blob Storage / Data Lake Store
+2. Management Framework : YARN
+3. API : Spark Core Engine , Spark SQL,Spark MLib , GraphX
+For additional details refer link - https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-overview
