@@ -2,7 +2,6 @@
 
 Common challenges associated with Sentry migrations:
 
-RBAC to ABAC
-
 From Sentry to Ranger
+  RBAC to ABAC
 
