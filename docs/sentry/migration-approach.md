@@ -5,7 +5,7 @@ Currently there is only a way to migrate Sentry RBAC policies to Ranger ABAC pol
 https://docs.cloudera.com/cdp-private-cloud/latest/upgrade-cdh/topics/cdpdc-sentry-pre-upgrade-migration-to-ranger.html
 
 
-# From Ranger to Databricks
+# Ranger to Databricks
 
 Some companies are migrating Ranger Policies to databricks cluster using an intermediate solution:
 
