@@ -876,10 +876,6 @@ Azure Cosmos DB
 
 Azure Cosmos DB provides you type safety via data model. We use data model named ‘Family’.
 
-```console
-echo "describe '({Namespace}:){Table name}'" | hbase shell -n > {Table name} -schema.txt
-```
-
 ```java
 public class Family {
     public Family() {
