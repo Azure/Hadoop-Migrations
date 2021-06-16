@@ -1,6 +1,6 @@
 # Migration Approach
 
-Azure has several landing targets for Apache Sentry. Depending on requirements and product features.
+Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions.
 
 Landing Targets for Apache Sentry on Azure
 
