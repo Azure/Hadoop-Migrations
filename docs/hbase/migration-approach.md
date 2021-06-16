@@ -6,8 +6,8 @@ Landing Targets for Apache HBase on Azure
 ![Landing Targets for Apache HBase on Azure](../images/flowchart-hbase-azure-landing-targets.png)
 
 - [Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
+- [Azure HDInsight](#migrationg-apache-hbase-to-azure-hdinsight)
 - [Azure Cosmos DB (SQL API)](#migrating-apache-hbase-to-azure-cosmos-db-sql-api)
-
 
 ## Lift and shift migration to Azure IaaS  
 
@@ -251,7 +251,11 @@ Azure Monitor relies on [Log Analytics agent](https://docs.microsoft.com/en-us/a
 
 Instructions for setting up Azure Monitor to collect data from Linux are available [here](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-linux-computer). Once data has been written to Log Analytics, analysis can be done using [Kusto](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial)
 
-### Migrating Apache HBase to Azure Cosmos DB (SQL API)
+## Migrationg Apache HBase to Azure HDInsight
+
+There is a detailed guide for migrating HBase to HDInsight HBase cluster. You can download it from [Guide to Migrating Big Data Workloads to Azure HDInsight](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/).
+
+## Migrating Apache HBase to Azure Cosmos DB (SQL API)
 
 Azure Cosmos DB is a scalable, globally distributed, fully managed database. It provides guaranteed low latency access to your data. To learn more about Azure Cosmos DB, see the [overview](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction) article. This section provides guide to migrate from HBase to Cosmos DB.
 
