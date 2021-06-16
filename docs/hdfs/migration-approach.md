@@ -67,7 +67,11 @@ Based on the identified strategy for data migration identify the data sets to be
 ![img](../images/Plan_storage_accounts.png)
 
 
-Refer the link https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#trusted-microsoft-services to secure all traffic between your VNet and the storage account over a private link.
+Refer the link [Securing Storage Accounts ](https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#trusted-microsoft-services) to secure all traffic between your VNet and the storage account over a private link.
+
+
+Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account?toc=/azure/storage/blobs/toc.json) that describes default limits for Azure storage accounts. The ingress limit refers to all data that is sent to a storage account. The egress limit refers to all data that is received from a storage account
+
 
 
 
