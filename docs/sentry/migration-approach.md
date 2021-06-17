@@ -5,7 +5,7 @@ https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-autho
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/122224778-bae5f580-ceb4-11eb-9d38-aef6ff871fbe.png)
+![Sentry](https://user-images.githubusercontent.com/7907123/122371706-5b452400-cf60-11eb-89be-01fb4899d924.png)
 
 # Sentry to Ranger
 
