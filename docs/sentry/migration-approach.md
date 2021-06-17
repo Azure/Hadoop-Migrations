@@ -20,3 +20,17 @@ Some companies are migrating Ranger Policies to databricks cluster using an inte
 
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
+# Ranger from CDP/HDP to HDInsight 
+
+In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and exporte it one by one as follows:
+
+1.Export policies from CDP/HDP cluster:
+
+  http://<ranger_address>:6080/service/plugins/policies/download/<clustername>_hadoop
+
+2.Import ranger policies one by one to HDInsight 
+  
+  curl -iv -u <user>:<password> -d @<policy payload> -H "Content-Type: application/json" -X POST http://<RANGER-Host>:6080/service/public/api/policy/
+  
+
+
