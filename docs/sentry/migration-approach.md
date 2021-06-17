@@ -1,3 +1,4 @@
+
 # Migration Approach
 
 Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions:
@@ -5,7 +6,7 @@ https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-autho
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/122371706-5b452400-cf60-11eb-89be-01fb4899d924.png)
+![Sentry](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)
 
 # Sentry to Ranger
 
