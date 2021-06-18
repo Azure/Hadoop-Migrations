@@ -77,7 +77,28 @@ Storm Bolt and Stream Analytics Output
 |N/A|Azure Cosmos DB||
 |N/A|Azure Functions||
 
-**Lookup table**
+#### Lookup table
+
+If you are running Storm Topoloby by referencing an external table for joins, filters, etc., you will need to migrate that external table when migrating to Stream Analytics. Azure Blob Storage and SQL Database are used as the data store for reference in Stream Analytics.
+
+The sample that uses the reference data in the Stream Analytics job is as follows. 
+
+```
+With Step1 as (
+    --JOIN input stream with reference data to get 'Desc'
+    SELECT streamInput.*, refData1.Desc as Desc
+    FROM    streamInput
+    JOIN    refData1 ON refData1.key = streamInput.key 
+)
+--Now Join Step1 with second reference data
+SELECT *
+INTO    output 
+FROM    Step1
+JOIN    refData2 ON refData2.Desc = Step1.Desc
+```
+
+See [Using reference data for lookups in Stream Analytics](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-use-reference-data) for more information. 
+
 
 ### Architecture
 
@@ -104,7 +125,7 @@ Stream Analytics guarantees Exactly-once processing. And, depending on the outpu
 
 From the above, you can see that when it comes to event handling and delivery assurance, migrating from Storm to Stream Analytics will provide the same or better level. However, please note that At-least-once tends to have better performance than Exactly-once.
 
-詳細は[Event Delivery Guarantees](https://docs.microsoft.com/en-us/stream-analytics-query/event-delivery-guarantees-azure-stream-analytics)を参照してください。
+See [Event Delivery Guarantees](https://docs.microsoft.com/en-us/stream-analytics-query/event-delivery-guarantees-azure-stream-analytics) for more information. 
 
 ### Real-time vs Micro-batch
 
@@ -177,7 +198,7 @@ For more information on Stream Analytics query language, see [this Reference her
 You can also increase flexibility through custom functions that are called in your query. Custom functions can be written in JavaScript or C #. See [User-defined functions in Azure Stream Analytics](https://docs.microsoft.com/en-us/azure/stream-analytics/functions-overview) for more information on UDF / UDA. 
 
 ### Windowing
-Storm CoreとStream AnalyticsのWindowingに関する違いをいかに示します。Storm CoreがサポートしているSliding windowingおよびTumbling Windowingに該当する機能はStream Analyticsでサポートされていますので、事前テストの上これらを移行することができます。また、Stream Analyticsはその他のWindowingもサポートしているため要求事項に応じてそれらの利用も検討してください。
+
 Here's how the difference between Storm Core and Stream Analytics in Windowing. The features that Storm Core supports for Sliding windowing and Tumbling Windowing are supported by Stream Analytics, so you can migrate them after pre-testing. Stream Analytics also supports other windows, so consider using them as required.
 
 |Storm Core|Stream Analytics|Description|
@@ -216,6 +237,7 @@ Before migrating your existing Storm to Stream Analytics, collect the following 
 |Stream jobs|Identify all streaming jobs running on Storm. You can see the currently running jobs on the Storm UI. Also make sure to identify jobs that are not running from your inventory, code repository, etc. |
 |Source and Sink in Topology|Identify all the data sources and Sinks in the Topology of each Storm streaming job. And ensure that you can remap the data sources and Sink migration destinations and services that you migrate with when you migrate Storm to Stream Analytics. In other words, it maps to the Input and Output supported by Stream Analytics listed in [Connectors](#connectors). If this is not possible, consider other migration targets instead of Stream Analytics.|
 |Applications that sends data to Source|Identify the application that sends the data to Storm's Source. Migrating the Storm Source to the Stream Analytics Input needs to be done as a set, so that migration should also be planned.|
+|Lookup table|If your Storm job references external data as a Lookup table, identify that data source as well. Stream Analytics uses Azure Blob Storage or SQL Database as reference data. Include them in your plan to migrate them to Azure as reference data. |
 |Applications that use Sink data|Identify applications that utilize Storm's Sink data. Migrating Storm's Sink to Stream Analytics Output needs to be done as a set, so that migration should also be planned.|
 |Processing logic|Identify all the processing logic in the Topology of each Storm streaming job. |
 |Current sizing|Get information about the CPU, Memory, Disk, number of nodes, etc. of the host or virtual machine on which the Sqoop client or server is running. This allows you to estimate the base size required for your Azure virtual machine.|
@@ -233,8 +255,8 @@ Migrating Storm to Stream Analytics is highly dependent on the surrounding syste
 #### Preparation and migration
 1. Prepare to send data to [Stream Analytics Input](#connectors) in the applications that are the source of data using the test environment.
 2. Use the test environment to prepare the applications that use the data of Sink of the data to connect to [Output of Stream Analytics](#connectors) and run the service.
-3. Deploy and set up Input and Output resources and Stream Analytics in Azure.
-4. Set Input and Output, and migrate Storm Topologies to Stream Analytics jobs.
+3. Deploy and set up Input and Output resources and Stream Analytics in Azure. If you have lookup tables for Storm jobs, create Azure Blob Storage or SQL Database as well.
+4. Set Input and Output, data store for lookup table and migrate Storm Topologies to Stream Analytics jobs.
 5. Use the test environment to send data from the application to test a series of streaming processes.
 6. Adjust configurations and applications to ensure that the sequence of processes works without problems in terms of business and system requirements. 
 
