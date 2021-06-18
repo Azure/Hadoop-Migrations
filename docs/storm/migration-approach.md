@@ -83,7 +83,7 @@ If you are running Storm Topoloby by referencing an external table for joins, fi
 
 The sample that uses the reference data in the Stream Analytics job is as follows. 
 
-```
+```sql
 With Step1 as (
     --JOIN input stream with reference data to get 'Desc'
     SELECT streamInput.*, refData1.Desc as Desc
