@@ -44,6 +44,17 @@ Spark is written in Scala Programming Language and runs on Java Virtual Machine 
 
 • RDD also exposes two operations -  map() and reduce()  - however these are not a direct analog of Hadoop’s Mapper or Reducer APIs.
 
+	Map() function
+	r = map ( func, seq )
+
+The first argument func is the name of a function and the second a sequence (e.g. a list) seq. map() applies the function func to all the elements of the sequence seq. It returns a new list with the elements changed by func.
+
+	Reduce() function
+
+The function reduce (func, seq) continually applies the function func() to the sequence seq. It returns a single value.
+
+
+
 • Key RDD Operations to reproduce MapReduce behaviour 
 
 	groupByKey([numPartitions])	When called on a dataset of (K, V) pairs, returns a dataset of (K, Iterable<V>) pairs.
@@ -52,13 +63,49 @@ Note: If you are grouping in order to perform an aggregation (such as a sum or a
 Note: By default, the level of parallelism in the output depends on the number of partitions of the parent RDD. You can pass an optional numPartitions argument to set a different number of tasks.
 	
 	reduceByKey(func, [numPartitions])	When called on a dataset of (K, V) pairs, returns a dataset of (K, V) pairs where the values for each key are aggregated using the given reduce function func, which must be of type (V,V) => V. 
+
 Like in groupByKey, the number of reduce tasks is configurable through an optional second argument.
 
 
 
 
 
-	**Example - WordLength** 
+
+Components of a MapReduce Job
+
+		Job job = new Job(conf, getJobName());
+		job.setJarByClass(...);
+		job.setInputFormatClass(...);
+		job.setMapperClass(...); // parsing input records
+		job.setMapOutputKeyClass(...);
+		job.setMapOutputValueClass(...);
+		job.setReduceClass(...); // business logic
+		job.setPartitionerClass(...); // secondary sort, mapper side
+		job.setSortComparatorClass(...); // secondary sort, shuffle side
+		job.setGroupingComparatorClass(...); // secondary sort, reducer side
+		job.setOutputKeyClass(...);
+		job.setOutputValueClass(...);
+		job.setOutputFormatClass(...);
+		result = job.waitForCompletion(true);
+
+
+Components of a Spark Job
+
+Instead of creating custom classes, functional programming style is used to construct a dataflow  which consists of a set of Transformations and ends with an Action. The size of code for Spark solution is an order of magnitude less that a MapReduce Java solution.
+
+		val sc = new SparkContext(conf)
+		val result = sc.parallelize(ADLSG2Location)
+		.flatMap(downloadAndParseJournals)
+		.groupSort(Ordering) // secondary sort, map side
+		.mapStreamByKey(performTemporalAggregation) // secondary sort, reduce side
+		.mapPartitionsWithIndex(storeIndexAndChunksToADLSGen2)
+		.collect
+
+
+
+
+
+** Java Example - WordLength** 
 	
 	Hadoop Mapper Class
 
@@ -100,3 +147,19 @@ The result of the map() operation above is an RDD of (Int,Int) tuple
 	Spark equivalent
 
 	val lengthCounts = lines.map(line => (line.length, 1)).reduceByKey(_ + _)
+
+
+#### Migration Steps/Approach
+
+1. Decompose the MapReduce job to identify each transformation of the data 
+
+2. For every transformation,  capture the input and output data-types
+
+3. Replace the MapReduce transformations with one or more Spark transformation
+that matches the input/output data-types
+
+4. Identifying Shuffle Operations
+Shuffle transformation is the most expensive operation in terms of CPU and I/O load. Consider eliminating the same when migrating
+
+5. Identifying the expected CPU and memory is essential before migration
+
