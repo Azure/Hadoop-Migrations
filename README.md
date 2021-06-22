@@ -13,10 +13,10 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 
 
  
-|Component | Description|
-|----------|-----------|
+|Component | Description| Decision Flow/Flowchats|
+|----------|-----------|-----------|
 |[Apache HDFS](docs/hdfs/architecture-and-components.md) |Distributed File System |
-|[Apache HBase](docs/hbase/architecture-and-components.md)      |Column-oriented table service |
+|[Apache HBase](docs/hbase/architecture-and-components.md)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
 |[Apache Hive](docs/hive/architecture-and-components.md)      |Datawarehouse infrastructure |
 |[Apache Spark](docs/spark/architecture-and-components.md)     |Data processing Framework |
 |[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
@@ -30,11 +30,6 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 
 This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing platform/infrastructure -- On-Premises and Other Cloud like AWS to Azure.
  
-
-### Flowcharts
-
-- [Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png)
-- [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
 
 ### End State Reference Architecture
 
