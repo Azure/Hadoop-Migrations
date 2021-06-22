@@ -19,6 +19,10 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
 
+Spark provides primitives for in-memory cluster computing. A Spark job can load and cache data into memory and query it repeatedly. In-memory computing is much faster than disk-based applications, such as Hadoop, which shares data through Hadoop distributed file system (HDFS). Spark also integrates into the Scala programming language to let you manipulate distributed data sets like local collections. There's no need to structure everything as map and reduce operations.
+
+![image](https://user-images.githubusercontent.com/7907123/122955375-59c09500-d380-11eb-83f0-202f89c027c9.png)
+
 ### Planning
 
 ### Migration
