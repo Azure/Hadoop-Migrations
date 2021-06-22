@@ -31,7 +31,7 @@ Spark provides primitives for in-memory cluster computing. A Spark job can load 
 See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark)
 
 #### From Spark to Databricks
-See reference documentation:[Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
+See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
 
 ## Migration to Azure Stream Analytics
 
