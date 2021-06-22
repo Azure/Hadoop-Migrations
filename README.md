@@ -20,7 +20,7 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache Hive](docs/hive/architecture-and-components.md)      |Datawarehouse infrastructure |
 |[Apache Spark](docs/spark/architecture-and-components.md)     |Data processing Framework |
 |[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
-|[MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
+|[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
 |Pig       |Dataflow language and parallel execution framework |
 |Zookeeper |Distributed coordination service |
 |Chukwa    |System for collecting management data |
