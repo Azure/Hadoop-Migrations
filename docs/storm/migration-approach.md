@@ -334,6 +334,77 @@ GROUP BY TumblingWindow(seconds,10)
 
 ## Migration to Azure Functions
 
-### Planning
+Azure Functions is a serverless solution with less control over the platform. Users don't have to worry about deploying or managing servers because they manage and provide the resources needed to run applications on the Azure side. There are [various scenarios](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) for Azure Functions, but in the context of migrating from Apache Storm to Azure Functions, real-time data processing scenarios fit.
+Azure Functions, like Stream Analytics, is a serverless PaaS that allows you to easily connect to various Azure services. In addition, it is highly flexible because it is processed by custom code as the basis for executing the function.
+Unlike other migration targets, Azure Functions is not a service dedicated to streaming processing, so there are significant functional differences. Familiarize yourself with the differences between Storm and Functions in the next section before planning your migration. 
+
+### Difference between Storm and Functions 
+#### Storm Topology and Functions
+
+|Storm Topology|Functions|
+|---|---|
+|Tuple|Event|
+|Spout|Input|
+|Bolt|Output|
+
+#### Connectors
+The following is a comparison of Storm's typical connector and Stream Analytics Input / Output. 
+Please note that these do not show all Storm and Functions connectivity. See the official documentation for details. 
+
+Storm Spout and Functions Input
+|Storm Spout|Functions Input|Description|
+|--|--|--|
+|Kafka|N/A|Can connect with Kafka client in your code.|
+|HDFS|N/A|FFunctions does not have a built-in HDFS Input. Configure the Blob Storage to contain the required data. Alternatively, use custom code to consume HDFS data.|
+|Azure Event Hub|Azure Event Hub||
+|N/A|Azure IoT Hub||
+|N/A|Azure Blob Storage||
+|N/A|Azure Cosmos DB||
+|N/A|HTTTP and Webhook|Run as a trigger|
+|N/A|Service Bus|Run as a trigger|
+|N/A|Queue Storage|Run as a trigger|
+
+
+Storm Bolt and Functions Output
+|Storm Bolt|Functions Output|Description|
+|--|--|--|
+|Kafka|Kafka||
+|HDFS|N/A|Functions cannot output data directly to HDFS. Design to output to Blob Storage. Or output to HDFS with custom code.|
+|HBase|N/A|Functions doesn't have a built-in connector for HBase, can be output to HBase with custom code.|
+|Hive|N/A|Functions doesn't have a built-in connector for Hive, can be output to Hive table with custom code. |
+|Cassandra|N/A|Functions doesn't have a built-in connector for Cassandra, can be output to Cassandra with custom code.|
+|Solr|N/A|Functions doesn't have a built-in connector for Solr, can be output to Solr with custom code.|
+|MongoDB|N/A|Functions doesn't have a built-in connector for MongoDB, can be output to MongoDB with custom code.|
+|Elasticsearch|N/A|Functions doesn't have a built-in connector for Elasticsearch, can be output to Elasticsearch with custom code.|
+|N/A|Azure Blob Storage||
+|Azure Event Hubs|Azure Event Hubs||
+|N/A|Azure Table storage||
+|N/A|Azure Service Bus||
+|N/A|Azure Cosmos DB||
+|N/A|HTTP and Webhook||
+
+#### Event delivery guarantee
+
+Functions provides an "at-least-once" guarantee when using input in a message queuing system like Event Hubs. See [the Functions documentation on trusted message handling for more information](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reliable-event-processing). 
+
+#### Distribition
+Functions can be processed in parallel using up to 200 instances.
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale
+
+#### Performance consideration
+
+#### Language
+
+
+#### Disaster Recovery
+
+#### Security
+
 
 ### Migration
+
+#### Assessment
+
+#### Planning
+
+#### Migration
