@@ -17,6 +17,7 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 
 ### Planning
 
+### Migration
 [Migration Storm to IaaS](https://docs.microsoft.com/en-us/azure/hdinsight/storm/apache-storm-quickstart)
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
