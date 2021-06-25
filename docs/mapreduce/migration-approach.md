@@ -5,10 +5,15 @@ The primary target for MapReduce Jobs is Synapse Spark on Azure.
 There are 2 approaches to move the MapReduce jobs to Azure - 
 1. MapReduce Jobs converted to Spark Jobs or
 2. If the MapReduce job depends on multiple classes run the MapReduce jobs on Spark with no conversion
+
 		a. Create an RDD of the input data.
+
 		b. Call map with your mapper code. Output key-value pairs.
+
 		c. Call reduceByKey with your reducer code.
-    d. Write the resulting RDD to disk.
+
+    	d. Write the resulting RDD to disk.
+
 
 ### Choosing the execution model
 Hadoop Mapreduce uses on Disk processing model (disk based parallelization) -  batch processing model. Spark leverages in-memory processing and has different execution models . Choose the execution model for Spark which is in memory - batch , interactive or near real - time based on the requirement. 
@@ -32,6 +37,7 @@ Spark is written in Scala Programming Language and runs on Java Virtual Machine 
 • Produces an output of 0 or more key-value pairs for every input
 
 • Hadoop Java programs  consist of below classes - 
+
 1. Mapper class 
 
 2. Reducer class 
@@ -54,7 +60,6 @@ The first argument func is the name of a function and the second a sequence (e.g
 The function reduce (func, seq) continually applies the function func() to the sequence seq. It returns a single value.
 
 
-
 • Key RDD Operations to reproduce MapReduce behaviour 
 
 	groupByKey([numPartitions])	When called on a dataset of (K, V) pairs, returns a dataset of (K, Iterable<V>) pairs.
@@ -68,21 +73,17 @@ Like in groupByKey, the number of reduce tasks is configurable through an option
 
 
 
-
-
-
 Components of a MapReduce Job
 
 		Job job = new Job(conf, getJobName());
-		job.setJarByClass(...);
 		job.setInputFormatClass(...);
-		job.setMapperClass(...); // parsing input records
+		job.setMapperClass(...); // input records parsing
 		job.setMapOutputKeyClass(...);
 		job.setMapOutputValueClass(...);
 		job.setReduceClass(...); // business logic
-		job.setPartitionerClass(...); // secondary sort, mapper side
-		job.setSortComparatorClass(...); // secondary sort, shuffle side
-		job.setGroupingComparatorClass(...); // secondary sort, reducer side
+		job.setPartitionerClass(...); // secondary sort, mapper
+		job.setSortComparatorClass(...); // secondary sort, shuffle 
+		job.setGroupingComparatorClass(...); // secondary sort, reducer 
 		job.setOutputKeyClass(...);
 		job.setOutputValueClass(...);
 		job.setOutputFormatClass(...);
@@ -103,9 +104,7 @@ Instead of creating custom classes, functional programming style is used to cons
 
 
 
-
-
-** Java Example - WordLength** 
+Java Example - Word Length
 	
 	Hadoop Mapper Class
 
@@ -120,7 +119,7 @@ Instead of creating custom classes, functional programming style is used to cons
 -- output of this mapper is a (key,value) pair -- (word length , 1)
 
 
-	Spark equivalent
+Spark equivalent - Word Length
 
 	words.map(word => (word.length, 1))
 		In Spark RDD output is a tuple - (wordlength,1)
@@ -163,3 +162,4 @@ Shuffle transformation is the most expensive operation in terms of CPU and I/O l
 
 5. Identifying the expected CPU and memory is essential before migration
 
+For additional details on Synapse Spark/Databricks refer link - https://github.com/Azure/Hadoop-Migrations/blob/main/docs/spark/migration-approach.md
