@@ -18,6 +18,46 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 ### Planning
 
 ### Migration
+
+#### Prerequisites
+
+- Create and deploy a cluster on Azure IaaS
+
+- An SSH client.
+
+#### Create the topology
+Connect to your Storm cluster. Edit the command below by replacing CLUSTERNAME with the name of your Storm cluster, and then enter the command:
+
+ssh sshuser@CLUSTERNAME-ssh.clusterdomian.net
+
+The WordCount example is included on your HDInsight cluster at /usr/hdp/current/storm-client/contrib/storm-starter/. The topology generates random sentences and counts how many times words occur. Use the following command to start the wordcount topology on the cluster:
+
+storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.WordCountTopology wordcount
+
+#### Monitor the Topology
+
+Storm provides a web interface for working with running topologies, and is included on your HDInsight cluster.
+
+Use the following steps to monitor the topology using the Storm UI:
+
+1. To display the Storm UI, open a web browser to https://CLUSTERNAME.azurehdinsight.net/stormui. Replace CLUSTERNAME with the name of your cluster.
+
+2. Under Topology Summary, select the wordcount entry in the Name column. Information about the topology is displayed.
+
+![image](https://user-images.githubusercontent.com/7907123/123391245-18a4cc80-d59c-11eb-95fe-26229acb3f07.png)
+
+The new page provides the following information:
+
+Property	Description
+Topology stats	Basic information on the topology performance, organized into time windows. Selecting a specific time window changes the time window for information displayed in other sections of the page.
+Spouts	Basic information about spouts, including the last error returned by each spout.
+Bolts	Basic information about bolts.
+Topology configuration	Detailed information about the topology configuration.
+Activate	Resumes processing of a deactivated topology.
+Deactivate	Pauses a running topology.
+Rebalance	Adjusts the parallelism of the topology. You should rebalance running topologies after you have changed the number of nodes in the cluster. Rebalancing adjusts parallelism to compensate for the increased/decreased number of nodes in the cluster. For more information, see Understanding the parallelism of an Apache Storm topology.
+Kill	Terminates a Storm topology after the specified timeout.
+
 [Migration Storm to IaaS](https://docs.microsoft.com/en-us/azure/hdinsight/storm/apache-storm-quickstart)
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
