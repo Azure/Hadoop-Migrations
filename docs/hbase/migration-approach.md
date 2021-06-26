@@ -1213,3 +1213,22 @@ Cosmos DB is a globally distributed database with built-in Disaster Recovery cap
 Cosmos DB account that uses only a single region may lose availability in the event of a region failure. We recommend that you configure at least two regions to ensure high availability at all times. You can also ensure high availability for both writes and reads by configuring your Azure Cosmos account to span at least two regions with multiple write regions to ensure high availability for writes and reads. For multi-region accounts that consist of multiple write regions, failover between regions is detected and handled by the Azure Cosmos DB client. These are momentary and do not require any changes from the application.
 
 For more information on High Availability, please refer to [How does Azure Cosmos DB provide high availability](https://docs.microsoft.com/en-us/azure/cosmos-db/high-availability)
+
+
+## FAQ
+
+#### Why migrate to SQL API instead of other APIs in Cosmos DB?
+
+SQL API provides the best end-to-end experience in terms of interface, service SDK client library. The new features rolled out to Azure Cosmos DB will be first available in your SQL API account. In addition, the SQL API supports analytics and provides performance separation between production and analytics workloads. If you want to use the modernized technologies to build your apps, SQL API is the recommended option.
+
+####  Can I assign the HBase RowKey to the Cosmos DB partition key?
+
+It may not be optimized as it is. In HBase, the data is sorted by the specified RowKey, stored in the Region, and divided into fixed sizes. This behaves differently than partitioning in Cosmos DB. Therefore, the keys need to be redesigned to better distribute the data according to the characteristics of the workload. See the [Distribution](#distribution) section for more details.
+
+#### Data is sorted by RowKey in HBase, but partitioning by key in Cosmos DB. How can Cosmos DB achieve sorting and collocation?
+
+In Cosmos DB, you can add a Composite Index to sort your data in ascending or descending order to improve the performance of equality and range queries. See the [Distribution](#distribution) section and the [Composite Index](https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes) in product documentation.
+
+#### Analytical processing is executed on HBase data with Hive or Spark. How can I modernize them in Cosmos DB?
+
+You can use the Azure Cosmos DB analytical store to automatically synchronize operational data to another column store. The column store format is suitable for large analytic queries that are executed in an optimized way, which improves latency for such queries. Azure Synapse Link allows you to build an ETL-free HTAP solution by linking directly from Azure Synapse Analytics to the Azure Cosmos DB analytical store. This allows you to perform large-scale, near-real-time analysis of operational data. Synapse Analytics supports Apache Spark and serverless SQL pools in the Cosmos DB analytics store. You can take advantage of this feature to migrate your analytical processing. See [Analytical store](https://docs.microsoft.com/en-us/azure/cosmos-db/analytical-store-introduction) for more information.
