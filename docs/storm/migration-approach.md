@@ -431,23 +431,29 @@ Storm Bolt and Functions Output
 Functions provides an "at-least-once" guarantee when using input in a message queuing system like Event Hubs. See [the Functions documentation on trusted message handling for more information](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reliable-event-processing). 
 
 #### Distribition
+Functions are evenly distributed to the nodes for each request in triggers such as HTTP. For Event Hub triggers, one EventProcessorHost instance corresponds to each instance of the function triggered by the event. Event Hubs triggers allow only one EventProcessorHost instance to take a lease for a particular partition. It works to evenly allocate Event Hubs partitions according to the number of EventProcessorHost instances. 
 Functions can be processed in parallel using up to 200 instances.
 https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale
 
-#### Performance consideration
+#### Performance and Reliability consideration
 
-#### Language
-
+Storm performance is basically improved by scaling up or out of hardware, tuning memory, adjusting the number of worker threads, etc. Also Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. See [guidance for improving Functions performance and reliability](https://docs.microsoft.com/en-us/azure/azure-functions/functions-best-practices). Understand how to describe and configure functions for scalability and reliability. 
 
 #### Disaster Recovery
 
-#### Security
+If you have Disaster Recovery configured in Storm, you may want to configure Disaster Recovery as well when migrating to Functions. Functions themselves do not provide automatic geo-failover, but it can be achieved by applying geo disaster recovery strategy. See [Azure Functions geo-disaster recovery](https://docs.microsoft.com/en-us/azure/azure-functions/functions-geo-disaster-recovery) for more information.
 
+#### Security
+Data security is a shared responsibility of the customer and the service provider. For on-premises solutions, customers have to provide everything from endpoint protection to physical hardware security, which is not an easy task. If you choose a PaaS cloud service provider, customer involvement will be significantly reduced. For Microsoft's security shared responsibility model, see [Security Baselines](https://docs.microsoft.com/ja-jp/security/benchmark/azure/baselines/stream-analytics-security-baseline?toc=/azure/stream-analytics/TOC.json) for Cloud Computing. Stream Analytics runs on the Azure platform, so it can be enhanced in a different way than Storm. Stream Analytics does not require any additional components to be installed for security. We recommend that you consider migrating your stream processing system security implementation using the following checklist :
+
+||Storm|Functions|
+|---|---|---|
+|Network Security|Control traffic using security functions such as network devices.|Incoming IP restrictions, virtual network integration, hybrid connectivity, and outbound IP restrictions to Functions endpoints are available. Please refer to this [Document](https://docs.microsoft.com/en-us/azure/azure-functions/functions-networking-options) for details, as the available features differ depending on the Functions plan. |
+|Identity and Access Control|Storm offers pluggable authentication support through thrift and SASL. It also has an authorization mechanism for access control for jobs.|You can authenticate with the Functions key. The App Service platform can also use Azure Active Directory (AAD) and several third-party identity providers to authenticate clients. You can use this method to implement custom authorization rules for your function and manipulate the user information in your function code. You can also use Azure API Management (APIM) to authenticate your request.|
+|Data Protection|Storm itself does not have encryption capabilities.|Functions uses Azure Storage. Azure Storage encrypts all the data in your stored storage account.|
+|Regulatory Compliance controls|You can set policies using security components such as Apache Ranger.|Regulatory compliance in Azure Policy provides an initiative definition created and managed by Microsoft called "embedded" for compliance domains and security controls associated with various compliance standards.|
+|Data Recovery|There is no backup feature. You need to implement data backup yourself.|Data in Azure Blob storage can be protected by the backup feature of Blob storage. For Functions applications, App Service features can only be backed up if you are using App Service Plan hosting. However, it is recommended to manage the application code using a code repository.|
 
 ### Migration
 
-#### Assessment
-
-#### Planning
-
-#### Migration
+The idea of migrating from Storm to Functions is basically the same as Stream Analytics. See the Assessment, Planning, and Migration parts of the Migration section of Stream Analytics. 
