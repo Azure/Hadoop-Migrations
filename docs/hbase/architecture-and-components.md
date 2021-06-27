@@ -61,22 +61,45 @@ Once data is committed to WAL, data gets written to MemStore, which is an in-mem
 
 For long-term data persistence, HBase uses a data structure called HBase file (HFile). HFile is stored on HDFS. Depending on MemStore size and data flush interval, data from MemStore is written to HBase file or [Hfile](https://HBase.apache.org/book.html#_hfile_format_2).  
 
-**////// write path Image goes here //////**
+The picture below has a conceptual view of write path.  
+
+```mermaid
+graph TD;
+
+A(write to HBase) -- PUT/DELETE --> WAL(Write to HBase WAL)
+WAL --> commit(Commit changes to WAL)
+commit --> memstore(Write to memstore)
+memstore -- Flush to HFile --> hfile(Write to HFile when WAL is full)
+```
 
 To summarise, the components on the write-path are:  
-* **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.   
-* **MemStore** – in-memory data structure. It’s an on-heap data structure.  
-* **Hfile** – HBase file used for data persistence and stored on HDFS.
+- **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.
+  
+- **MemStore** – in-memory data structure. It’s an on-heap data structure.  
+
+- **Hfile** – HBase file used for data persistence and stored on HDFS.
 
 #### **Read Path**
 
 To deliver fast random and sequential reads, HBase uses several data structures. When a read request is sent to HBase, it tries to serve the read request through data cached in BlockCache and failing that, from MemStore. Both are stored on-heap. If the data is not available in cache, then the data is fetched from HFile and caches the data in BlockCache.  
 
-For scenarios where you want low latency on reads, there is an option to persist data in BucketCache which is also an in-memory data structure, but it’s hosted off-heap.  
+For scenarios where you want low latency on reads, there is an option to persist data in BucketCache which is also an off-heap in-memory data structure.
 
-**////// Read path Image goes here //////**  
+The figure below shows conceptual view of read path of HBase.
+
+```mermaid
+
+graph TD;
+
+Start(Read META table to locate region <br/>address of the table to be read) --> Blockcache(Check BlockCache for data)
+Blockcache -- Data not found --> Memstore(Check Memstore for data)
+Memstore -- Data not found --> Hfile(Fetch data from HFile)
+
+ ```
 
 To summarise, HBase tries to serve a read request using data stored in cache – BlockCache and MemStore. If data is not there, a read request is served using HFile.  
+
+**Note** - there is also option of using [BucketCache](https://hbase.apache.org/book.html#offheap.blockcache) which is an off-heap data structure. When enabled, BucketCache can help in offloading data from BlockCache thereby reducing data stored on-heap.
 
 #### **Offheap Read and Write paths**
 
