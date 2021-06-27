@@ -95,13 +95,15 @@ When choosing Stream Analytics, also see [Cases where Stream Analytics is suitab
 
 
 #### Connectors
-The following is a comparison of Storm's typical connector and Stream Analytics Input / Output. 
+Following tables describe correspondences between Storm Spout / Bolt, which are its typical connectors, 
+and Stream Analytics’ input sources / output destinations.
 
 Storm Spout and Stream Analytics Input
 |Storm Spout|Stream Analytics Input|Description|
 |--|--|--|
-|Kafka|N/A|Can connect to Apache Kafka for Event Hubs.|
-|HDFS|N/A|Stream Analytics cannot consume HDFS data directly. Configure the Blob Storage or Data Lake Storage Gen2 to contain the required data. |
+|Kafka|N/A|You can use an endpoint of Azure Event Hubs compatible with the Apache Kafka.|
+|HDFS|N/A|You need to configure Blob Storage or Data Lake Storage Gen2 instead because Stream Analytics cannot
+deal with HDFS directly.|
 |Azure Event Hub|Azure Event Hub||
 |N/A|Azure IoT Hub||
 |N/A|Azure Blob Storage||
@@ -112,12 +114,12 @@ Storm Bolt and Stream Analytics Output
 |--|--|--|
 |Kafka|N/A|Can connect to Apache Kafka for Event Hubs.|
 |HDFS|N/A|Stream Analytics cannot output data directly to HDFS. Design to output to Blob Storage or Data Lake Storage Gen2. Or output to HDFS with custom code via Azure Functions etc.|
-|HBase|N/A|Can be output to HBase with custom code via Azure Functions.|
-|Hive|N/A|Can be output to Hive table with custom code via Azure Functions. |
-|Cassandra|N/A|Can be output to Cassandra with custom code via Azure Functions.|
-|Solr|N/A|Can be output to Solr with custom code via Azure Functions.|
-|MongoDB|N/A|Can be output to MongoDB with custom code via Azure Functions.|
-|Elasticsearch|N/A|Can be output to Elasticsearch with custom code via Azure Functions.|
+|HBase|N/A|Stream Analytics can output data to HBase indirectly via Azure Functions writing a custom code.|
+|Hive|N/A|Stream Analytics can output data to Hive table indirectly via Azure Functions writing a custom code.|
+|Cassandra|N/A|Stream Analytics can output data to Cassandra indirectly via Azure Functions writing a custom code.|
+|Solr|N/A|Stream Analytics can output data to Solr indirectly via Azure Functions writing a custom code.|
+|MongoDB|N/A|Stream Analytics can output data to MongoDB indirectly via Azure Functions writing a custom code.|
+|Elasticsearch|N/A|Stream Analytics can output data to Elasticsearch indirectly via Azure Functions writing a custom code.|
 |N/A|Azure Data Lake Storage Gen1||
 |N/A|Azure SQL Database||
 |N/A|Azure Synapse Analytics||
@@ -132,9 +134,9 @@ Storm Bolt and Stream Analytics Output
 
 #### Lookup table
 
-If you are running Storm Topoloby by referencing an external table for joins, filters, etc., you will need to migrate that external table when migrating to Stream Analytics. Azure Blob Storage and SQL Database are used as the data store for reference in Stream Analytics.
+If you migrate existing Storm with Topology which references external table(s) using phrases specifically joins,  filters, etc. to Stream Analytics, you will also need to migrate the external table(s) into SQL Database, which can be referenced from Stream Analytics.
 
-The sample that uses the reference data in the Stream Analytics job is as follows. 
+A sample query in a Stream Analytics job that references an external table is as follows.
 
 ```sql
 With Step1 as (
@@ -157,26 +159,26 @@ See [Using reference data for lookups in Stream Analytics](https://docs.microsof
 
 For more information on Apache Storm architecture and components, see [Storm architecture and components](./architecture-and-conponents). 
 
-Stream Analytics is a PaaS type service, so users do not need to be aware of internal components or infrastructure. As shown in the figure below, it can be configured by arranging it for analysis and conversion processing in the pipeline of streaming data and defining Input / Query / Output. 
+Stream Analytics is a PaaS type service, so users do not need to be aware of internal components or infrastructure. As shown in the figure below, you can configure it by defining Input / Query / Output and arranging the streaming data in its pipelines for data transformation and analytics. 
 
 ![Stream Analytics pipeline](../images/stream-analytics-e2e-pipeline.png)
 
 Image source : https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction
 
-Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. Stream Analytics is a fully managed service that implements ingenuity to improve the fault tolerance of internal components. As a result, users can check their availability based on SLAs. See [SLA for Azure Stream Analytics](https://azure.microsoft.com/en-us/support/legal/sla/stream-analytics/v1_0/) for more information. 
+Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. In contrast, Stream Analytics is a fully managed service that implements ingenuity to improve the fault tolerance of internal components. Therefore, users can check their availability based on SLAs. See [SLA for Azure Stream Analytics](https://azure.microsoft.com/en-us/support/legal/sla/stream-analytics/v1_0/) for more information. 
 
 #### Event delivery guarantee 
 ##### Storm
-The basic abstraction of Apache Storm provides At-least-once processing guarantee. This is the same guarantee as when using a queuing system. The message will only be played in the event of a failure. Exactly-once can be achieved with the higher abstraction Trident API.
+The basic abstraction of Apache Storm provides at-least-once processing guarantee. This is the same guarantee as when using a queuing system. The message will only be replayed in the event of a failure. exactly-once can be achieved with the higher abstraction of Trident API.
 
 ##### Stream Analytics
-Stream Analytics guarantees Exactly-once processing. And, depending on the output destination, it guarantees Exactly-once delivery or At-least-once delivery. Exactly-once delivery is guaranteed when you use the following as the output destination. This is because the Stream Analytics output adapter writes output events transactionally.
+Stream Analytics can guarantees exactly-once or at-least-once processing, depending on the output destination, exactly-once delivery is guaranteed when you use the following as the output destination. This is because the Stream Analytics output adapter writes output events transactionally.
 
 - Cosmos DB
 - SQL
 - Azure Table
 
-From the above, you can see that when it comes to event handling and delivery assurance, migrating from Storm to Stream Analytics will provide the same or better level. However, please note that At-least-once tends to have better performance than Exactly-once.
+From the above, you can see that when it comes to event handling and delivery assurance, migrating from Storm to Stream Analytics can provide the same or better level. However, please note that at-least-once demonstrates better performance than exactly-once in typical cases.
 
 See [Event Delivery Guarantees](https://docs.microsoft.com/en-us/stream-analytics-query/event-delivery-guarantees-azure-stream-analytics) for more information. 
 
@@ -186,7 +188,7 @@ Storm provides a model to handle each event. All records received are processed 
 
 ![Real-time vs Micro-batch](../images/real-time-vs-micro-batch.png)
 
-Storm is based on real-time event processing and at-least-once processing. By using Trident, microbatch processing and exactly once processing can be guaranteed. Because you can use different levels of message processing on Storm, carefully review the business requirements for stream processing to determine what level of assurance you need.
+Storm is based on real-time event processing and at-least-once processing. As mentioned, by using Trident, microbatch processing and exactly-once processing can be guaranteed. Because you can use different levels of message processing on Storm, carefully review the business requirements for stream processing to determine what level of assurance you need.
 
 #### Distribition
 ##### Storm
@@ -203,15 +205,15 @@ It is mainly used to determine how to distribute the processing for the purpose 
 - **Local or shuffle grouping** - If the target volt has more than one task in the same worker process, the tuple will be shuffled only to those in-process tasks.
 
 ##### Stream Analytics
-Stream Analytics partitions the data into subsets and scales out the query. When a query is partitioned, it will be distributed across multiple nodes. As a result, the amount of events processed by each node may be reduced and performance may be improved.
-The more input partitions you have, the more resources your job will consume. Optimize job performance by adjusting the number of streaming units and partitions described below. Partitioning is similar to Storm's Fields grouping. 
+Stream Analytics partitions the data into subsets to scale out query processing like Storm’s Fields grouping. Queries are distributed across multiple nodes so that the amount of events processed on each node may be reduced, therefore the total performance may be improved.
+The more input partitions you have, the more computation resources your job will consume. Optimize job performance by adjusting the number of streaming units and partitions described below. Partitioning is similar to Storm's Fields grouping. 
 
 Below is an image of the input partitioning. If the input, such as Event Hubs, is partitioned by Partition ID, Stream Analytics recommends partitioning with this Partition Key.
 ![Partitioning](../images/partitioning.png)
 
-If the input stream does not seem to be partitioned, Stream Analytics can subpartition or reshuffle the partitions. 
+When no partitions are available in the input stream, Stream Analytics can make the stream partitioned and/or shuffle them again, using repartitioning/reshuffling functionalities.
 
-Example of subpartitioning the input partition 
+Example query of subpartitioning the input partition 
 
 ```sql
 WITH RepartitionedInput AS 
@@ -227,11 +229,11 @@ GROUP BY DeviceId, TumblingWindow(minute, 1)
 ```
 
 #### Performance consideration
-Storm performance is basically improved by scaling up or out of hardware, tuning memory, adjusting the number of worker threads, etc., but Stream Analytics is done by adjusting the streaming unit (SU). SU is an abstraction unit of CPU and memory resources allocated to Stream Analytics. Stream Analytics can handle approximately 1MB/s of input per SU. Stream Analytics jobs do all the work in memory. If you run out of memory, the job will fail. Therefore, you need to ensure that enough resources are allocated for Stream Analytics jobs. 
+There are various ways to improve performance on Storm, specifically scaling up/out, tuning memory usage, adjusting the number of worker threads, etc. Onthe other hand, Stream Analytics provides simply a single way, adjusting the allocation of streaming unit (SU), which is an abstracted unit of a pair of CPU and memory. Stream Analytics can handle approximately 1MB/s of input per SU. Stream Analytics jobs do all the work in memory. If you run out of memory, the job will fail. To avoid the failure, you need to ensure that enough resources are allocated for Stream Analytics jobs. 
 
 **SU sizing**
-Choosing the number of SUs required for a particular job depends on the partitioning configuration of the input and the queries defined in the job. In general, it is best practice to start with 6 SUs for queries that do not use PARTITION BY. After that, the SU usage rate is monitored by passing data equivalent to the actual flow amount, and as a result of trial and error, the appropriate optimum number is examined. Please refer to [Understand and ajust Streaming Units](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-streaming-unit-consumption) for details of SU and how to set it. 
-The maximum number of SUs that a Stream Analytics job can use depends on the number of query steps defined in the job and the number of partitions in each step. For more information on restrictions, see [this article](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-parallelization#calculate-the-maximum-streaming-units-of-a-job). 
+Choosing the number of SUs required for a particular job depends on the partitioning configuration of the input and the queries defined in the job. In general, it is best practice to start with 6 SUs for queries that do not use PARTITION BY. And then, it is the best way for you to examine the optimum number of SUs step-by-step seeing monitored SU usage rate with the actual data flow. Please refer to [Understand and ajust Streaming Units](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-streaming-unit-consumption) for details of SU and how to set it. 
+The maximum number of SUs depend on both the number of query steps defined in the job and the number of partitions in each step. For more information on restrictions, see [this article](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-parallelization#calculate-the-maximum-streaming-units-of-a-job). 
 
 In general, the factors that increase the usage rate of SU are as follows.
 - Jobs with complex query logic --This is because if the query is complex, it is more likely to keep the state in memory.
@@ -242,7 +244,7 @@ In general, the factors that increase the usage rate of SU are as follows.
 
 
 **Stream Analytics Cluster**
-A single-tenant environment for complex and demanding scenarios is provided as a Stream Analytics Cluster. Full scale in this environment can process faster than 200MB/s. If you need more processing power than the regular version of Stream Analytics as a result of sizing, consider using Stream Analytics Cluster. Stream Analytics Cluster can also use Private Endpoint to connect to a Private virtual network.
+A single-tenant environment for complex and demanding scenarios is provided as a Stream Analytics Cluster. Fully scaled cluster environment can process data no less than 200MB/s. If you need more processing power than the regular version of Stream Analytics as a result of sizing, consider using Stream Analytics Cluster. Stream Analytics Cluster can also use Private Endpoint to connect to a Private virtual network.
 For more information on Stream Anlytics Cluster, see [Overview of Azure Stream Analytics Cluster](https://docs.microsoft.com/en-us/azure/stream-analytics/cluster-overview). 
 
 #### Language
