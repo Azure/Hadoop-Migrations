@@ -4,6 +4,9 @@
 There are some considerations when planning the migration of HDFS to ADLS. Based on our experience with customer engagements the below have been identified -
 
 - Consider aggregating the data in small     files into a single file when storing in ADLS Gen 2 
+- List all the directory structure in HDFS and replicate the similar zoning in ADLS Gen 2. Directory structure of HDFS can be obtained using hdfs -ls / command
+- Take a list of all the Roles being defined in HDFS cluster to replicate the same in the target environment
+- Take a note of the data lifecycle policy of the files stored in HDFS 
 - HDFS symlinks - Jobs requiring file     system features like strictly atomic directory renames, fine-grained HDFS     permissions, or HDFS symlinks can only work on HDFS.
 - Azure Storage can be geo-replicated.     Although geo-replication gives geographic recovery and data redundancy, a     failover to the geo-replicated location severely impacts the performance,     and it may incur additional costs. The recommendation is to choose the     geo-replication wisely and only if the value of the data is worth the     additional cost.
 - If the file     names have common prefixes , the storage treats them as a single partition     and hence if Azure Data Factory is used , all     DMUs write to a single partition.
@@ -19,4 +22,4 @@ For other issues related to ABFS refer link - https://issues.apache.org/jira/bro
 
 - For requirements where it is needed to connect to ADLS from existing older clusters ( prior to v3.1) backported driver details can be found at the link - https://github.com/Azure/abfs-backport
 
-- In an Azure Virtual Networks environment, the **DistCp** tool doesn't support **Azure ExpressRoute** private peering with an Azure Storage virtual network endpoint.Refer the link for recommendations - https://docs.microsoft.com/en-us/azure/data-factory/data-migration-guidance-hdfs-azure-storage 
+- In an Azure Virtual Networks environment, the **DistCp** tool doesn't support **Azure ExpressRoute** private peering with an Azure Storage virtual network endpoint.Refer the link for recommendations - https://docs.microsoft.com/en-us/azure/data-factory/data-migration-guidance-hdfs-azure-storage
