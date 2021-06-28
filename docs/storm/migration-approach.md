@@ -48,17 +48,34 @@ Use the following steps to monitor the topology using the Storm UI:
 
 The new page provides the following information:
 
-Property	Description
-Topology stats	Basic information on the topology performance, organized into time windows. Selecting a specific time window changes the time window for information displayed in other sections of the page.
-Spouts	Basic information about spouts, including the last error returned by each spout.
-Bolts	Basic information about bolts.
-Topology configuration	Detailed information about the topology configuration.
-Activate	Resumes processing of a deactivated topology.
-Deactivate	Pauses a running topology.
-Rebalance	Adjusts the parallelism of the topology. You should rebalance running topologies after you have changed the number of nodes in the cluster. Rebalancing adjusts parallelism to compensate for the increased/decreased number of nodes in the cluster. For more information, see Understanding the parallelism of an Apache Storm topology.
-Kill	Terminates a Storm topology after the specified timeout.
+![image](https://user-images.githubusercontent.com/7907123/123632381-25cdef80-d818-11eb-88ba-bde2029f7fb6.png)
 
 [Migration Storm to IaaS](https://docs.microsoft.com/en-us/azure/hdinsight/storm/apache-storm-quickstart)
+
+3. From this page, select an entry from the Spouts or Bolts section. Information about the selected component is displayed.
+
+![image](https://user-images.githubusercontent.com/7907123/123632498-4a29cc00-d818-11eb-8cd9-7c58ef1093a2.png)
+
+The new page displays the following information:
+
+![image](https://user-images.githubusercontent.com/7907123/123632570-63327d00-d818-11eb-8f1d-7bbb44815186.png)
+
+4. When viewing the details of a spout or bolt, select an entry from the Port column in the Executors section to view details for a specific instance of the component.
+
+``` Output
+2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: split default ["with"]
+2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: split default ["nature"]
+2015-01-27 14:18:02 b.s.d.executor [INFO] Processing received message source: split:21, stream: default, id: {}, [snow]
+2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: count default [snow, 747293]
+2015-01-27 14:18:02 b.s.d.executor [INFO] Processing received message source: split:21, stream: default, id: {}, [white]
+2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: count default [white, 747293]
+2015-01-27 14:18:02 b.s.d.executor [INFO] Processing received message source: split:21, stream: default, id: {}, [seven]
+2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: count default [seven, 1493957]
+```
+In this example, the word seven has occurred 1493957 times. This count is how many times the word has been encountered since this topology was started.
+
+#### Stop the Topology
+Return to the Topology summary page for the word-count topology, and then select the Kill button from the Topology actions section. When prompted, enter 10 for the seconds to wait before stopping the topology. After the timeout period, the topology no longer appears when you visit the Storm UI section of the dashboard.
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
 
@@ -121,7 +138,7 @@ There are three ways to run jobs on a pool: API/CLI, Airflow, UI.
 
 2. Run the following command to submit your code one time. The API returns a URL that you can use to track the progress of the job run.
 
-```Bash
+``` Bash
 databricks runs submit --json
 
 {
@@ -146,7 +163,7 @@ databricks runs submit --json
 ```
 3. To schedule a job, use the following example. Jobs created through this mechanism are displayed in the jobs list page. The return value is a job_id that you can use to look at the status of all the runs.
 
-```Bash
+``` Bash
 databricks jobs create --json
 
 {
