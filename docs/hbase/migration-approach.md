@@ -1128,7 +1128,7 @@ Azure Cosmos DB
 
   - Cosmos DB allows you to define User Defined Functions (UDFs). UDFs can also be written in JavaScript.
  
-
+Stored procedures and triggers consume RUs based on the complexity of the operations performed. When developing server-side processing, check the required usage to get a better understanding of the amount of RU consumed by each operation. See [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units) and [Optimize request cost in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/optimize-cost-reads-writes) for details.
 
 Server-side programming mappings
 
