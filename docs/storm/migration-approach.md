@@ -71,6 +71,28 @@ Spark provides primitives for in-memory cluster computing. A Spark job can load 
 ### Migration
 
 #### From Storm to Spark
+To migrate your application from Storm to one of the Spark streaming APIs, do the following:
+
+1. Deploy a new cluster. Deploy a new Spark cluster in the same virtual network and deploy your Spark Streaming or Spark Structured Streaming application on it and test it thoroughly.
+
+![image](https://user-images.githubusercontent.com/7907123/123607172-e72b3b80-d7fd-11eb-8584-3e6e5d9543f3.png)
+
+
+2. Stop consuming on the old Storm cluster. In the existing Storm, stop consuming data from the streaming data source and wait it for the data to finish writing to the target sink.
+
+![image](https://user-images.githubusercontent.com/7907123/123607371-1f327e80-d7fe-11eb-95ed-3abdb09de812.png)
+
+
+3. Start consuming on the new Spark cluster. Start streaming data from a newly deployed HDInsight 4.0 Spark cluster. At this time, the process is taken over by consuming from the latest Kafka offset.
+
+![image](https://user-images.githubusercontent.com/7907123/123608900-7b49d280-d7ff-11eb-95c1-eee2afe28b26.png)
+
+
+4. Remove the old cluster as needed. Once the switch is complete and working properly, Storm cluster as needed.
+
+![image](https://user-images.githubusercontent.com/7907123/123608931-83097700-d7ff-11eb-8ac0-db5412be84a9.png)
+
+
 See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark)
 
 #### From Spark to Databricks
