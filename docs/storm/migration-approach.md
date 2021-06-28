@@ -32,10 +32,6 @@ Connect to your Storm cluster. Edit the command below by replacing CLUSTERNAME w
 ssh sshuser@CLUSTERNAME-ssh.clusterdomian.net
 ```
 
-The WordCount example is included on your HDInsight cluster at /usr/hdp/current/storm-client/contrib/storm-starter/. The topology generates random sentences and counts how many times words occur. Use the following command to start the wordcount topology on the cluster:
-
-storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.WordCountTopology wordcount
-
 #### Monitor the Topology
 
 Storm provides a web interface for working with running topologies, and is included on your HDInsight cluster.
