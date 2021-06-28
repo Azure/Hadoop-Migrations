@@ -113,7 +113,100 @@ You can run a job on a pool using the Jobs API or the UI. You must run each job 
 - One associated SparkContext, which is equivalent to a Spark application on other Spark platforms.
 - A driver node and a specified number of workers. For a single job, you can specify a worker range. Azure Databricks autoscales a single Spark job based on the resources needed for that job. Azure Databricks benchmarks show that this can save you up to 30% on cloud costs, depending on the nature of your job.
 
+There are three ways to run jobs on a pool: API/CLI, Airflow, UI.
+
+### API / CLI
+
+1. Download and configure the Databricks CLI.
+
+2. Run the following command to submit your code one time. The API returns a URL that you can use to track the progress of the job run.
+
+```Bash
+databricks runs submit --json
+
+{
+  "run_name": "my spark job",
+  "new_cluster": {
+    "spark_version": "7.3.x-scala2.12",
+
+    "instance_pool_id": "0313-121005-test123-pool-ABCD1234",
+    "num_workers": 10
+    },
+    "libraries": [
+    {
+    "jar": "dbfs:/my-jar.jar"
+    }
+
+    ],
+    "timeout_seconds": 3600,
+    "spark_jar_task": {
+    "main_class_name": "com.databricks.ComputeModels"
+  }
+}
+```
+3. To schedule a job, use the following example. Jobs created through this mechanism are displayed in the jobs list page. The return value is a job_id that you can use to look at the status of all the runs.
+
+```Bash
+databricks jobs create --json
+
+{
+  "name": "Nightly model training",
+  "new_cluster": {
+     "spark_version": "7.3.x-scala2.12",
+     ...
+     "instance_pool_id": "0313-121005-test123-pool-ABCD1234",
+     "num_workers": 10
+   },
+   "libraries": [
+     {
+     "jar": "dbfs:/my-jar.jar"
+     }
+   ],
+   "email_notifications": {
+     "on_start": ["john@foo.com"],
+     "on_success": ["sally@foo.com"],
+     "on_failure": ["bob@foo.com"]
+   },
+   "timeout_seconds": 3600,
+   "max_retries": 2,
+   "schedule": {
+   "quartz_cron_expression": "0 15 22 ? \* \*",
+   "timezone_id": "America/Los_Angeles"
+   },
+   "spark_jar_task": {
+     "main_class_name": "com.databricks.ComputeModels"
+  }
+}
+```
+If you use spark-submit to submit Spark jobs, the following table shows how spark-submit parameters map to different arguments in the Jobs Create API.
+
+### Airflow
+Azure Databricks offers an Airflow operator if you want to use Airflow to submit jobs in Azure Databricks. The Databricks Airflow operator calls the Jobs Run API to submit jobs to Azure Databricks. See Apache Airflow.
+
+### UI
+Azure Databricks provides a simple and intuitive easy-to-use UI to submit and schedule jobs. To create and submit jobs from the UI, follow the step-by-step guide.
+
+![image](https://user-images.githubusercontent.com/7907123/123611845-4db25880-d802-11eb-8b56-5bec83f441e8.png)
+
+
 3. Troubleshoot jobs
+Azure Databricks provides lots of tools to help you troubleshoot your jobs.
+
+#### Access logs and Spark UI
+Azure Databricks maintains a fully managed Spark history server to allow you to access all the Spark logs and Spark UI for each job run. They can be accessed from the job details page as well as the job run page:
+
+![image](https://user-images.githubusercontent.com/7907123/123612521-ea74f600-d802-11eb-8324-918771d7bc7a.png)
+
+#### Forward logs
+You can also forward cluster logs to your cloud storage location. To send logs to your location of choice, use the cluster_log_conf parameter in the NewCluster spec.
+
+
+#### View metrics
+While the job is running, you can go to the cluster page and look at the live Ganglia metrics in the Metrics tab. Azure Databricks also snapshots these metrics every 15 minutes and stores them, so you can look at these metrics even after your job is completed. To send metrics to your metrics server, you can install custom agents in the cluster. See Monitor performance.
+
+![image](https://user-images.githubusercontent.com/7907123/123612752-1f814880-d803-11eb-8772-f6854ee3d6a0.png)
+
+
 See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
 
 ## Migration to Azure Stream Analytics
