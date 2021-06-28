@@ -66,6 +66,15 @@ Based on the identified strategy for data migration identify the data sets to be
 
 ![img](../images/Plan_storage_accounts.png)
 
+
+Refer the link [Securing Storage Accounts ](https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#trusted-microsoft-services) to secure all traffic between your VNet and the storage account over a private link.
+
+
+Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account?toc=/azure/storage/blobs/toc.json) that describes default limits for Azure storage accounts. The ingress limit refers to all data that is sent to a storage account. The egress limit refers to all data that is received from a storage account
+
+
+
+
 3. **Availability     Requirements**
 
     Hadoop platforms have the replication factor specified in the hdfs-site.xml or per file . The replication on ADLS Gen2 can be planned based on the nature of the data ie. If an application requires the data to be reconstructed in case of a loss then ZRS can be an option . In ADLS Gen 2 ZRS – data is copied synchronously across 3 AZs in the primary region. For applications that require high availability and is not constrained by the region of storage – the data can additionally be copied in a secondary region – ie. geo redundancy .
@@ -132,5 +141,5 @@ Based on the identified strategy for data migration identify the data sets to be
 
     WANdisco LiveData Platform for Azure is one of Microsoft’s preferred solutions for Hadoop to Azure migrations and provides the capability through the Azure Portal and CLI.
 
-    For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure]
+    For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure](https://azure.microsoft.com/en-in/blog/migrate-your-hadoop-data-lakes-with-wandisco-livedata-platform-for-azure/)
 
