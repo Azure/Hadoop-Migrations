@@ -80,7 +80,7 @@ To migrate your application from Storm to one of the Spark streaming APIs, do th
 ![image](https://user-images.githubusercontent.com/7907123/123607371-1f327e80-d7fe-11eb-95ed-3abdb09de812.png)
 
 
-3. Start consuming on the new Spark cluster. Start streaming data from a newly deployed HDInsight 4.0 Spark cluster. At this time, the process is taken over by consuming from the latest Kafka offset.
+3. Start consuming on the new Spark cluster. Start streaming data from a newly deployed Spark cluster. At this time, the process is taken over by consuming from the latest Kafka offset.
 
 ![image](https://user-images.githubusercontent.com/7907123/123608900-7b49d280-d7ff-11eb-95c1-eee2afe28b26.png)
 
