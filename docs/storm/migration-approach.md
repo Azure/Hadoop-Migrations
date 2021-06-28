@@ -29,7 +29,7 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 ``` Bash
 ssh sshuser@CLUSTERNAME-ssh.clusterdomian.net
 ```
-2. Deploy the topology in the new cluster:
+2. Deploy the topology in the new cluster (for example a wordcount topology) :
 
 ``` Bash
 storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.WordCountTopology wordcount
