@@ -181,10 +181,10 @@ databricks jobs create --json
 If you use spark-submit to submit Spark jobs, the following table shows how spark-submit parameters map to different arguments in the Jobs Create API.
 
 ### Airflow
-Azure Databricks offers an Airflow operator if you want to use Airflow to submit jobs in Azure Databricks. The Databricks Airflow operator calls the Jobs Run API to submit jobs to Azure Databricks. See Apache Airflow.
+Azure Databricks offers an Airflow operator if you want to use Airflow to submit jobs in Azure Databricks. The Databricks Airflow operator calls the Jobs Run API to submit jobs to Azure Databricks. [See Apache Airflow](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/data-pipelines#airflow).
 
 ### UI
-Azure Databricks provides a simple and intuitive easy-to-use UI to submit and schedule jobs. To create and submit jobs from the UI, follow the step-by-step guide.
+Azure Databricks provides a simple and intuitive easy-to-use UI to submit and schedule jobs. To create and submit jobs from the UI, follow the [step-by-step guide](https://docs.microsoft.com/en-us/azure/databricks/jobs#job-create).
 
 ![image](https://user-images.githubusercontent.com/7907123/123611845-4db25880-d802-11eb-8b56-5bec83f441e8.png)
 
@@ -202,7 +202,7 @@ You can also forward cluster logs to your cloud storage location. To send logs t
 
 
 #### View metrics
-While the job is running, you can go to the cluster page and look at the live Ganglia metrics in the Metrics tab. Azure Databricks also snapshots these metrics every 15 minutes and stores them, so you can look at these metrics even after your job is completed. To send metrics to your metrics server, you can install custom agents in the cluster. See Monitor performance.
+While the job is running, you can go to the cluster page and look at the live Ganglia metrics in the Metrics tab. Azure Databricks also snapshots these metrics every 15 minutes and stores them, so you can look at these metrics even after your job is completed. To send metrics to your metrics server, you can install custom agents in the cluster. See [Monitor performance](https://docs.microsoft.com/en-us/azure/databricks/clusters/clusters-manage#cluster-performance).
 
 ![image](https://user-images.githubusercontent.com/7907123/123612752-1f814880-d803-11eb-8772-f6854ee3d6a0.png)
 
