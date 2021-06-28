@@ -28,7 +28,7 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 
 
 
-This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing data storage -- HDFS , Other Cloud Storage like AWS S3 data to Azure.
+This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing platform/infrastructure -- On-Premises and Other Cloud like AWS to Azure.
  
 
 ### Flowcharts
@@ -43,6 +43,20 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 
 ![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_state.png)
 
+
+
+    
+-  **Modernize(Azure Synapse Analytics & Azure Databricks)**
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
+
+
+- **Lift and Shift(HDInsight)**
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
+
+
+For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
 
 - **Lift and Shift(IaaS)**  
 
@@ -91,20 +105,6 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 11. **Big data workloads** are hosted on a set of independent Azure virtual machines. Please refer to guidance for [Hadoop](/docs/hdfs/migration-approach.md), [HBase](/docs/hbase/migration-approach.md), [Hive](/docs/hive/migration-approach.md), [Ranger](/docs/ranger/migration-approach.md)and [Spark](/docs/spark/migration-approach.md) on Azure IaaS for more information.
 
 12. **[Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/user-guide/alm-devops-features?view=azure-devops)** is a SaaS offering from Microsoft and provides an integrated set of services and tools to manage your software projects, from planning and development through testing and deployment.
-    
--  **Modernize(Azure Synapse Analytics & Azure Databricks)**
-
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
-
-
-- **Lift and Shift(HDInsight)**
-
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
-
-
-For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
-
-
 
 
 ### Glossary of Terms and Acronyms

@@ -2,7 +2,13 @@
 
 Azure has several landing targets for Apache HBase. Depending on requirements and product features, customers can choose between Azure IaaS, HDI HBase or Cosmos DB (SQL API).  
 
-![Landing Targets for Apache HBase on Azure](../images/flowchart-HBase-azure-landing-targets.png)
+Landing Targets for Apache HBase on Azure
+![Landing Targets for Apache HBase on Azure](../images/flowchart-hbase-azure-landing-targets.png)
+
+- [Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
+- [Azure HDInsight](#migrationg-apache-hbase-to-azure-hdinsight)
+- [Azure Cosmos DB (SQL API)](#migrating-apache-hbase-to-azure-cosmos-db-sql-api)
+
 ## Lift and shift migration to Azure IaaS  
 
 ### **Planning and Sizing for Azure Compute & Storage**  
@@ -83,7 +89,7 @@ From compute and memory perspective, we recommend using the following Azure comp
 **Azure Storage**  
 For an Azure IaaS-based HBase deployment, Azure offers several storage options. The following flowchart uses features of various options to land on a storage target. Each storage option on Azure has a different performance, availability, and cost targets.  
 
-![Azure Storage Options for HBase](../images/flowchart-HBase-azure-storage-options.png)
+![Azure Storage Options for HBase](../images/flowchart-hbase-azure-storage-options.png)
 
 There are two key factors that influence of sizing of HBase storage – **volume** and **throughput**. These two parameters also have an implication on choice of Azure VM size/numbers and Azure Storage (Managed Disks or ADLS).
 
@@ -233,7 +239,7 @@ curl -XGET http://<HBase_master>:16010/jmx?qry=Hadoop:service=hbase,name=Master,
 
 Once configured, each individual source will appear under Custom Logs blade. In the snippet above, we used the name oms.api.metrics_regionservers for the input, Log Analytics uses the following format for displaying custom table name with a suffix_CL.
 
-![HBase Monitoring Custom Logs](../images/HBase-monitoring-logging-CL-screenshot.png)
+![HBase Monitoring Custom Logs](../images/hbase-monitoring-logging-CL-screenshot.png)
 
 ##### **Infrastructure (VM, storage disks and networking) logging and metrics**  
 
@@ -245,7 +251,11 @@ Azure Monitor relies on [Log Analytics agent](https://docs.microsoft.com/en-us/a
 
 Instructions for setting up Azure Monitor to collect data from Linux are available [here](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-linux-computer). Once data has been written to Log Analytics, analysis can be done using [Kusto](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial)
 
-### Migrating Apache HBase to Azure Cosmos DB (SQL API)
+## Migrationg Apache HBase to Azure HDInsight
+
+There is a detailed guide for migrating HBase to HDInsight HBase cluster. You can download it from [Guide to Migrating Big Data Workloads to Azure HDInsight](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/).
+
+## Migrating Apache HBase to Azure Cosmos DB (SQL API)
 
 Azure Cosmos DB is a scalable, globally distributed, fully managed database. It provides guaranteed low latency access to your data. To learn more about Azure Cosmos DB, see the [overview](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction) article. This section provides guide to migrate from HBase to Cosmos DB.
 
@@ -257,7 +267,7 @@ Before migrating, one must understand the differences between Cosmos DB and HBas
 The resource model of Cosmos DB is as follows.
 ![Graphical user interface, application, Teams  Description automatically generated](../images/clip_image002-1619013250925.png)
 
-See [“Overview of Apache HBase and Architecture”](#_Overview_of_Apache) section for the HBase resource model.
+See [“Overview of Apache HBase and Architecture”](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hbase/architecture-and-components.md#brief-introduction-to-apache-hbase) section for the HBase resource model.
 
 #### Resource mapping
 
@@ -326,21 +336,22 @@ The JSON object represents the data format in the Azure Cosmos DB SQL API. The p
 
 ```
 
+
+> [!TIP]
+HBase stores data in byte array, so if you want to migrate data that contains double-byte characters to Cosmos DB, the data must be UTF-8 encoded.
+
+
 #### Consistency model
 
 HBase offers strictly consistent reads and writes. Cosmos DB offers [five well-defined consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels). 
 
 Each level provides availability and performance trade-offs. From strongest to weakest, the consistency levels supported by Cosmos DB are:
 
-\-     Strong
-
-\-     Bounded staleness
-
-\-     Session
-
-\-     Consistent prefix
-
-\-     Eventual
+* Strong
+* Bounded staleness
+* Session
+* Consistent prefix
+* Eventual
 
 #### Sizing
 
@@ -361,15 +372,11 @@ The performance in terms of reads and writes is determined by the number of RUs 
 To estimate RUs consumed by your workload, consider the following [factors](https://docs.microsoft.com/en-au/azure/cosmos-db/request-units#request-unit-considerations):
 
  
-\-     **Item size -** Larger items consume more RUs to read or write.
-
-\-     **Item Indexing –** Default behaviour of Cosmos DB is to automatically index all properties associated with an item. Fewer RUs are consumed if you choose not to index some of your items in a container.
-
-\-     **Data Consistency -** The most consistent Strong and Bounded Staleness consistency levels consume approximately double the number of RUs when compared to other consistency levels.
-
-Type of reads – Point reads cost significantly fewer RUs than queries.
-
-\-     **Queries, stored procedures, and triggers -** The same query on the same data will always consume the same RUs, but queries with bigger result sets, many and/or complex predicates, and including user-defined functions will consume more RUs.
+* **Item size -** Larger items consume more RUs to read or write.
+* **Item Indexing –** Default behaviour of Cosmos DB is to automatically index all properties associated with an item. Fewer RUs are consumed if you choose not to index some of your items in a container.
+* **Data Consistency -** The most consistent Strong and Bounded Staleness consistency levels consume approximately double the number of RUs when compared to other consistency levels.
+* **Type of reads -** Point reads cost significantly fewer RUs than queries.
+* **Queries, stored procedures, and triggers -** The same query on the same data will always consume the same RUs, but queries with bigger result sets, many and/or complex predicates, and including user-defined functions will consume more RUs.
 
 There is a [capacity calculator](https://cosmos.azure.com/capacitycalculator/) available to assist with sizing exercise for RUs.
 
@@ -380,13 +387,9 @@ You can use [auto-scaling provisioning throughput](https://docs.microsoft.com/en
 Below are the use cases of autoscale:
 
 * **Variable or unpredictable workloads** - When your workloads have variable or unpredictable spikes in usage, autoscale helps by automatically scaling up and down based on usage.
-
 * **New applications** – If you're developing a new application and don't know the throughput you need (RU / sec), autoscaling is an easy way to get started.
-
 * **Infrequently used applications** – With autoscaling, capacity is adjusted to accommodate peak utilization and scaled down at the end of that period.
-
 * **Development and test workloads** - With autoscaling, you can save money by scaling down to a minimum when not in use.
-
 * **Scheduled production workloads/queries** – If you have a scheduled set of requests, operations, or queries that you are considering running during the idle period, you can easily run them with autoscaling.
 
 #### Distribution
@@ -432,7 +435,6 @@ This aspect of planning focuses on understanding upstream and downstream depende
 Example of downstream dependencies could be applications that read data from HBase. These must be refactored to read from Cosmos DB. These must be considered as part of the migration plan to Cosmos DB.
 
 * Questions for assessing dependencies Is the current HBase system a completely independent component? Or Does it call a process on another system, or is it called by a process on another system, or is it accessed using a directory service? Are other important processes working in your HBase cluster? These system dependencies need to be clarified to determine the impact of migration.
-
 * What is the RPO and RTO for HBase deployment on-premises?
 
 ##### Data migration
@@ -448,20 +450,13 @@ This aspect of planning is to understand performance targets for HBase and then 
 Questions to ask:
 
 * Is the HBase deployment read-heavy or write-heavy?
+* What is the split between reads and writes?
+* What is the P90 or P95 or P99 target IOPS on HBase.
+* How/what applications are used to load data into HBase?
+* How/what applications are used to read data from HBase?
 
-*   What is the split between reads and writes?
+When executing queries that request sorted data, HBase will return the result quickly because the data is sorted by RowKey. However, Cosmos DB doesn’t have such a concept. In order to optimize the performance, you can use [Composite indexes](https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes) as needed.
 
-*    What is the P90 or P95 or P99 target IOPS on HBase.
-
-*    How/what applications are used to load data into HBase?
-
-*    How/what applications are used to read data from HBase?
-
-When executing queries that request sorted data, HBase will return the result quickly because the data is sorted by RowKey. However, Cosmos DB doesn’t have such a concept. In order to optimize the performance, you can use composite index as needed.
-
-See this document for more details.
-
-https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes
 
 #### Assessment
 
@@ -469,13 +464,10 @@ Data Discovery
 
 Gather information in advance from your existing HBase cluster to identify the data you want to migrate. These can help you identify how to migrate, decide which tables to migrate, understand the structure within those tables, and decide how to build your data model.
 
-\-     HBase version
-
-\-     Migration target tables
-
-\-     Column family information
-
-\-     Table status
+* HBase version
+* Migration target tables
+* Column family information
+* Table status
 
 Here the data is collected using an “hbase shell” script and stored in the local file system of the operating machine.
 
@@ -577,13 +569,11 @@ You can get useful sizing information such as the size of heap memory, the numbe
 
 If you are using Apache Phoenix on HBase cluster, you need to collect data from Phoenix as well.
 
-\-     Migration target table 
+* Migration target table
+* Table schemas
+* Indexes
+* Primary key
 
-\-     Table schemas
-
-\-     Indexes
-
-\-     Primary key
 
 Connect to Apache Phoenix on your cluster.
 
@@ -619,11 +609,8 @@ Primary key details
 
 ##### Deployment
 
-You can use the Azure portal or Azure Cli to deploy the Cosmos DB SQL API. Since the migration destination is Cosmos DB SQL API, select "Core (SQL)" for the API as a parameter when deploying. In addition, set Geo-Redundancy, Multi-region Writes, and Availability Zones according to your availability requirements.
+You can use [the Azure portal or Azure Cli to deploy the Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal). Since the migration destination is Cosmos DB SQL API, select "Core (SQL)" for the API as a parameter when deploying. In addition, set Geo-Redundancy, Multi-region Writes, and Availability Zones according to your availability requirements.
 
-Please see the following documentation for more detail.
-
-https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal
 
 ##### Network consideration
 
@@ -631,14 +618,9 @@ Cosmos DB has three main network options. The first is a configuration that uses
 
 See the following documents for more information on the three network options:
 
-\-     Public IP with Firewall
- https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-firewall
-
-\-     Public IP with Service Endpoint
- https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-vnet-service-endpoint
-
-\-     Private Endpoint
- https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-private-endpoints
+* [Public IP with Firewall](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-firewall)
+* [Public IP with Service Endpoint](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-vnet-service-endpoint)
+* [Private Endpoint](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-private-endpoints)
 
 #### Data migration
 
@@ -653,7 +635,13 @@ There are various methods for data migration with Offline, but here we will intr
 | Apache Spark                                      | All versions | Support all versions  of HBase  Suitable for large  datasets  Spark setup required |
 | Custom tool with  Cosmos DB bulk executor library | All versions | Most flexible to  create custom data migration tools using libraries  Requires more effort  to setup |
 
-##### HBase 1.x
+
+The following flowchart uses some conditions to reach the available data migration methods.
+
+![Graphical user interface  Description automatically generated with low confidence](../images/flowchart-hbase-cosmosdb-migration-tools.png)
+
+*Data Migration Tools is the simplest of these tools, but it does not scale beyond one node. It is recommended to use Data Factory when choosing Data Factory and Data Migration Tool for not large data migrations. 
+
 
 **Data Factory**
 
@@ -661,11 +649,11 @@ Suitable for large datasets. The Azure Cosmos DB Bulk Executor library is used. 
 
 Data Factory's Copy activity supports HBase as a data source. Please refer to the following documents for the detailed method.
 
-https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase
+[Copy data from HBase using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
 
 You can specify Cosmos DB (SQL API) as the destination for your data. Please refer to the following documents for the detailed method.
 
-https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-cosmos-db
+[Copy and transform data in Azure Cosmos DB (SQL API) by using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-cosmos-db)
 
 ![Graphical user interface  Description automatically generated with low confidence](../images/clip_image019.png)
 
@@ -673,15 +661,13 @@ https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-cosmos-db
 
 A dedicated OSS tool for migrating data to Cosmos DB, suitable for small datasets. It can be installed, set up and used on a Windows machine.
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/import-data
+[Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)
 
 The source code is available here.
 
-https://github.com/azure/azure-documentdb-datamigrationtool
+[Azure Cosmos DB Data Migration Tool](https://github.com/azure/azure-documentdb-datamigrationtool)
 
 ![Graphical user interface, application  Description automatically generated](../images/clip_image021.png)
-
-##### HBase 2.x or later
 
 The Data Factory and Data Migration Tool do not support HBase 2.x or later REST APIs, but Spark can read HBase data and write it to Cosmos DB.
 
@@ -691,13 +677,13 @@ Here is an example assuming that HBase 2.1.0 and Spark 2.4.0 are running in the 
 
 Apache Spark – Apache HBase Connector repository can be found at:
 
-https://github.com/hortonworks-spark/shc
+[Apache Spark - Apache HBase Connector](https://github.com/hortonworks-spark/shc)
 
 For Cosmos DB Spark connector, refer to the following and download the appropriate library for your Spark version. 
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/spark-connector
+[Quick Start Guide for Cosmos DB Spark Connector](https://docs.microsoft.com/en-us/azure/cosmos-db/spark-connector)
 
-Copy hbase-site.xml to Spark configuration directory. ![Text Box: ]
+Copy hbase-site.xml to Spark configuration directory.
 
  ```console
 cp /etc/hbase/conf/hbase-site.xml /etc/spark2/conf/
@@ -783,15 +769,9 @@ It writes in parallel at high speed, its performance is quite high. On the other
 
 Phoenix is supported as a Data Factory data source. Please refer to the following documents for detailed steps.
 
-https://docs.microsoft.com/en-us/azure/data-factory/connector-phoenix
-
-Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB
-
-https://docs.microsoft.com/en-us/azure/cosmos-db/import-data
-
-Copy data from HBase using Azure Data Factory
-
-https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase
+* [Copy data from Phoenix using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-phoenix)
+* [Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)
+* [Copy data from HBase using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
 
 #### Migrate your code
 
@@ -799,11 +779,11 @@ This section describes the differences between creating Cosmos DB SQL APIs and H
 
 This example uses Apache HBase 2.x APIs and Cosmos DB Java SDK v4.
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-sdk-java-v4
+[Azure Cosmos DB Java SDK v4 for Core (SQL) API: release notes and resources](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-sdk-java-v4)
 
 The code for Cosmos DB presented here is based on the following documentation. You can access the full code example from the documentation. 
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-java-sdk-samples
+[Azure Cosmos DB SQL API: Java SDK v4 examples](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-java-sdk-samples)
 
 The mappings for code migration are shown here, but the HBase RowKeys and Cosmos DB Partition Keys used in these examples are not always well-designed. Please design according to the actual data model of the migration source.
 
@@ -899,10 +879,6 @@ UPSERT INTO FamilyTable (id, lastName) VALUES (1, ‘Witherspoon’);
 Azure Cosmos DB
 
 Azure Cosmos DB provides you type safety via data model. We use data model named ‘Family’.
-
-```console
-echo "describe '({Namespace}:){Table name}'" | hbase shell -n > {Table name} -schema.txt
-```
 
 ```java
 public class Family {
@@ -1109,13 +1085,10 @@ CosmosContainerResponse containerResp = database.getContainer(“FamilyContainer
 
 HBase clusters may be used with HBase workloads as well as MapReduce, Hive, Spark, and more. If you have other workloads with your current HBase, they also need to be migrated. For details, refer to each migration guides.
 
-\-     MapReduce
+* MapReduce
+* HBase
+* Spark
 
-\-     HBase
-
-\-     Spark
-
- 
 
 #### Server-side programming
 
@@ -1141,20 +1114,20 @@ HBase
 
 Azure Cosmos DB
 
-* Stored Procedure
+* [Stored Procedure](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#stored-procedures)
 
   - Cosmos DB stored procedures are written in JavaScript and can perform operations such as creating, updating, reading, querying, and deleting items in Cosmos DB containers.
- https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#stored-procedures
+ 
 
-* Trigger
+* [Trigger](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#triggers)
 
   - Triggers can be specified for operations on the database. There are two methods provided: a pre-trigger that runs before the database item changes and a post-trigger that runs after the database item changes.
- https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#triggers
+ 
 
-* UDF
+* [UDF](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#udfs)
 
   - Cosmos DB allows you to define User Defined Functions (UDFs). UDFs can also be written in JavaScript.
- https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#udfs
+ 
 
 
 Server-side programming mappings
@@ -1186,7 +1159,7 @@ Data security is a shared responsibility of the customer and the database provid
 | Physical  protection of servers in protected data centers    | It depends on the  data center where the system is located.  | For a list of the latest certifications,  see the global [Azure compliance site](https://docs.microsoft.com/en-us/compliance/regulatory/offering-home?view=o365-worldwide). |
 | Certifications                                               | Depends on the Hadoop  distribution.                         | See [Azure compliance documentation \| Microsoft Docs](https://docs.microsoft.com/en-us/azure/compliance/) |
 
-For more information on security, please refer to the following document. https://docs.microsoft.com/en-us/azure/cosmos-db/database-security
+For more information on security, please refer to [Security in Azure Cosmos DB - overview](https://docs.microsoft.com/en-us/azure/cosmos-db/database-security)
 
 #### Monitoring
 
@@ -1208,18 +1181,13 @@ HBase typically monitors the cluster using the cluster metric web UI or in conju
 
   - You can monitor your Azure Cosmos account by writing your own program using .NET, Java, Python, Node.js SDK, and REST API.
 
-For more information on Cosmos DB monitoring, please refer to the following document.
-
-https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db
+For more information on Cosmos DB monitoring, please refer to [Monitor Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db).
 
 If your environment implements HBase system monitoring to send alerts, such as by email, you may be able to replace it with Azure Monitor alerts. You can receive alerts based on metrics or activity log events for your Cosmos DB account.
 
-See the following documentation for details on alerts.
+For more information on alerts in Azure Monitor, please refere to [Create alerts for Azure Cosmos DB using Azure Monitor](https://docs.microsoft.com/en-us/azure/cosmos-db/create-alerts)
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/create-alerts
-
-Also, see below for Cosmos DB metrics and log types that can be collected by Azure Monitor. https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db-reference
-
+Also, see [Cosmos DB metrics and log types](https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db-reference) that can be collected by Azure Monitor. 
 #### BC-DR
 
 ##### Backup
@@ -1228,14 +1196,13 @@ There are several ways to get a backup of HBase. For example, Snapshot, Export, 
 
 Cosmos DB automatically backs up data at periodic intervals, which does not affect the performance or availability of database operations. Backups are stored in Azure storage and can be used to recover data if needed. There are two types of Cosmos DB backups:
 
-* Periodic backup
+* [Periodic backup](https://docs.microsoft.com/en-us/azure/cosmos-db/configure-periodic-backup-restore)
 
   - This is the default backup method. Backups are performed on a regular basis and, by default, keep the latest two backups. You can change the backup interval and retention period according to your requirements. The data is restored by making a request to Azure support team.
- https://docs.microsoft.com/en-us/azure/cosmos-db/configure-periodic-backup-restore
 
-* Continuous backup (Public Preview at the time of publication of this document 2021/3)
+* [Continuous backup](https://docs.microsoft.com/en-us/azure/cosmos-db/continuous-backup-restore-introduction) (Public Preview at the time of publication of this document 2021/6)
 
-  - You can restore to any point in the last 30 days. You need to select this backup mode when you create your Cosmos DB account to enable it. You can do a self-service restore using the Azure portal, PowerShell or CLI.https://docs.microsoft.com/en-us/azure/cosmos-db/continuous-backup-restore-introduction
+  - You can restore to any point in the last 30 days. You need to select this backup mode when you create your Cosmos DB account to enable it. You can do a self-service restore using the Azure portal, PowerShell or CLI.
 
 ##### Disaster Recovery
 
@@ -1245,4 +1212,4 @@ Cosmos DB is a globally distributed database with built-in Disaster Recovery cap
 
 Cosmos DB account that uses only a single region may lose availability in the event of a region failure. We recommend that you configure at least two regions to ensure high availability at all times. You can also ensure high availability for both writes and reads by configuring your Azure Cosmos account to span at least two regions with multiple write regions to ensure high availability for writes and reads. For multi-region accounts that consist of multiple write regions, failover between regions is detected and handled by the Azure Cosmos DB client. These are momentary and do not require any changes from the application.
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/high-availability
+For more information on High Availability, please refer to [How does Azure Cosmos DB provide high availability](https://docs.microsoft.com/en-us/azure/cosmos-db/high-availability)
