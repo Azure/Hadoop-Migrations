@@ -24,12 +24,16 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 - An SSH client.
 
 #### Create the topology
-Connect to your Storm cluster. Edit the command below by replacing CLUSTERNAME with the name of your Storm cluster, and then enter the command:
+1. Connect to your Storm cluster. Edit the command below by replacing CLUSTERNAME with the name of your Storm cluster, and then enter the command:
 
-```
+``` Bash
 ssh sshuser@CLUSTERNAME-ssh.clusterdomian.net
 ```
+2. Deploy the topology in the new cluster:
 
+``` Bash
+storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.WordCountTopology wordcount
+```
 #### Monitor the Topology
 
 Use the following steps to monitor the topology using the Storm UI:
