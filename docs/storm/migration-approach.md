@@ -34,8 +34,6 @@ ssh sshuser@CLUSTERNAME-ssh.clusterdomian.net
 
 #### Monitor the Topology
 
-Storm provides a web interface for working with running topologies, and is included on your HDInsight cluster.
-
 Use the following steps to monitor the topology using the Storm UI:
 
 1. To display the Storm UI, open a web browser to https://CLUSTERNAME.domain.net/stormui. Replace CLUSTERNAME with the name of your cluster.
