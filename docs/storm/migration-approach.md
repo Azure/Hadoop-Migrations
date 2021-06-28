@@ -66,11 +66,8 @@ Spark provides primitives for in-memory cluster computing. A Spark job can load 
 
 ![image](https://user-images.githubusercontent.com/7907123/122955375-59c09500-d380-11eb-83f0-202f89c027c9.png)
 
-### Planning
+### Migration From Storm to Spark
 
-### Migration
-
-#### From Storm to Spark
 To migrate your application from Storm to one of the Spark streaming APIs, do the following:
 
 1. Deploy a new cluster. Deploy a new Spark cluster in the same virtual network and deploy your Spark Streaming or Spark Structured Streaming application on it and test it thoroughly.
@@ -95,7 +92,7 @@ To migrate your application from Storm to one of the Spark streaming APIs, do th
 
 See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark)
 
-#### From Spark to Databricks
+### Migration From Spark to Databricks
 See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
 
 ## Migration to Azure Stream Analytics
