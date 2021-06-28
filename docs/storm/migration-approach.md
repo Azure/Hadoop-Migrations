@@ -93,6 +93,27 @@ To migrate your application from Storm to one of the Spark streaming APIs, do th
 See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark)
 
 ### Migration From Spark to Databricks
+
+This section provides the steps for moving your production jobs to Azure Databricks.
+
+1. Create an autoscaling pool. This is equivalent to creating an autoscaling cluster in other Spark platforms. On other platforms, if instances in the autoscaling cluster are idle for a few minutes or hours, you pay for them. Azure Databricks manages the instance pool for you for free. That is, you don’t pay Azure Databricks if these machines are not in use; you pay only the cloud provider. Azure Databricks charges only when jobs are run on the instances.
+
+![image](https://user-images.githubusercontent.com/7907123/123610921-59514f80-d801-11eb-96dc-e052cc5002e5.png)
+
+Key configurations:
+
+- **Min Idle:** Number of standby instances, not in use by jobs, that the pool maintains. You can set this to 0.
+- **Max Capacity:** This is an optional field. If you already have cloud provider instance limits set, you can leave this field empty. If you want to set additional max limits, set a high value so that a large number of jobs can share the pool.
+- **Idle Instance Auto Termination:** The instances over Min Idle are released back to the cloud provider if they are idle for the specified period. The higher the value, the more the instances are kept ready and thereby your jobs will start faster.
+
+2. Run a job on a pool
+
+You can run a job on a pool using the Jobs API or the UI. You must run each job by providing a cluster spec. When a job is about to start, Azure Databricks automatically creates a new cluster from the pool. The cluster is automatically terminated when the job finishes. You are charged exactly for the amount of time your job was run. This is the most cost-effective way to run jobs on Azure Databricks. Each new cluster has:
+
+- One associated SparkContext, which is equivalent to a Spark application on other Spark platforms.
+- A driver node and a specified number of workers. For a single job, you can specify a worker range. Azure Databricks autoscales a single Spark job based on the resources needed for that job. Azure Databricks benchmarks show that this can save you up to 30% on cloud costs, depending on the nature of your job.
+
+3. Troubleshoot jobs
 See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
 
 ## Migration to Azure Stream Analytics
