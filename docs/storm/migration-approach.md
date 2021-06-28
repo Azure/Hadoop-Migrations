@@ -28,7 +28,9 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 #### Create the topology
 Connect to your Storm cluster. Edit the command below by replacing CLUSTERNAME with the name of your Storm cluster, and then enter the command:
 
+```
 ssh sshuser@CLUSTERNAME-ssh.clusterdomian.net
+```
 
 The WordCount example is included on your HDInsight cluster at /usr/hdp/current/storm-client/contrib/storm-starter/. The topology generates random sentences and counts how many times words occur. Use the following command to start the wordcount topology on the cluster:
 
@@ -40,7 +42,7 @@ Storm provides a web interface for working with running topologies, and is inclu
 
 Use the following steps to monitor the topology using the Storm UI:
 
-1. To display the Storm UI, open a web browser to https://CLUSTERNAME.azurehdinsight.net/stormui. Replace CLUSTERNAME with the name of your cluster.
+1. To display the Storm UI, open a web browser to https://CLUSTERNAME.domain.net/stormui. Replace CLUSTERNAME with the name of your cluster.
 
 2. Under Topology Summary, select the wordcount entry in the Name column. Information about the topology is displayed.
 
