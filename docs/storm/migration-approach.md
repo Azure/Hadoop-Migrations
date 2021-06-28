@@ -15,8 +15,6 @@ See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architect
 
 ## Lift and shift migration to Azure IaaS  
 
-### Planning
-
 ### Migration
 
 #### Prerequisites
