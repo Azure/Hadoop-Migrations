@@ -46,8 +46,6 @@ The new page provides the following information:
 
 ![image](https://user-images.githubusercontent.com/7907123/123632381-25cdef80-d818-11eb-88ba-bde2029f7fb6.png)
 
-[Migration Storm to IaaS](https://docs.microsoft.com/en-us/azure/hdinsight/storm/apache-storm-quickstart)
-
 3. From this page, select an entry from the Spouts or Bolts section. Information about the selected component is displayed.
 
 ![image](https://user-images.githubusercontent.com/7907123/123632498-4a29cc00-d818-11eb-8cd9-7c58ef1093a2.png)
