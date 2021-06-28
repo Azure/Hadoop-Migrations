@@ -38,7 +38,7 @@ Use the following steps to monitor the topology using the Storm UI:
 
 1. To display the Storm UI, open a web browser to https://CLUSTERNAME.domain.net/stormui. Replace CLUSTERNAME with the name of your cluster.
 
-2. Under Topology Summary, select the wordcount entry in the Name column. Information about the topology is displayed.
+2. Under Topology Summary, select one of the jobs , in this case the wordcount entry in the Name column. Information about the topology is displayed.
 
 ![image](https://user-images.githubusercontent.com/7907123/123391245-18a4cc80-d59c-11eb-95fe-26229acb3f07.png)
 
