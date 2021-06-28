@@ -2,7 +2,7 @@
 
 Azure has several landing targets for Apache HBase. Depending on requirements and product features, customers can choose between Azure IaaS, HDI HBase or Cosmos DB (SQL API).  
 
-``` mermaid
+``` mermaid 
 graph TD;
 
  A(Start Analysis)-->B[Apache Hbase on-premises migration to Azure]
@@ -116,7 +116,7 @@ From compute and memory perspective, we recommend using the following Azure comp
 **Azure Storage**  
 For an Azure IaaS-based HBase deployment, Azure offers several storage options. The following flowchart uses features of various options to land on a storage target. Each storage option on Azure has a different performance, availability, and cost targets.  
 
-```mermaid
+```mermaid 
 
 graph TD;
  A(start)-->B{Hybrid <br/> storage model**}
@@ -168,7 +168,7 @@ Inputs from assessment and performance baseline should give customers a fairly a
 **Source is an HBase instance** but different versions i.e. HBase version at source is different from HBase version deployed on Azure VM. | Since source is also a HBase datastore, one can explore direct HBase cluster to cluster data migration options such as <br />  <br /> **HBase CopyTable** <br /> *Note* - CopyTable supports full and delta table copy features. <br /> OR <br /> **Azure HDI Spark or Databricks** <br /> OR <br /> **HBase Export and Import Utility** <br /> OR <br /> **HashTable/SyncTable** | Same as above plus a few related to specific tool used for migration. <br />  <br />  **HBase CopyTable** HBase version on source and target sides. <br />  <br /> Clusters must be online on source and target side. <br />  <br /> Additional resources required on source side to support additional read traffic on the source HBase instance. <br />  <br /> **CopyTable** feature by default, it only copies the latest version of a row cell. It also copies all Cells between a specified time range. There might be changes happening on source HBase while CopyTable is running, in such a scenario, new changes will either be completed included or excluded. <br />  <br /> **Azure HDI Spark or Databricks** require additional resources or a separate cluster for migrating data however it's a tried and tested approach. <br />  <br /> **HBase Export Utility** by default, always copies the latest version of a Cell across to HBbase target. <br />  <br /> **HashTable/SyncTable** is more efficient compared to CopyTable feature.
 Source is a HBase database with the same version i.e., data is being migrated between two instances of HBase. | All the options stated above <br /> and <br /> **HBase Snapshots** | Same considerations as stated above and certain that are related to **HBase Snapshots**. <br />  <br /> Snapshot doesn’t create copy of data however it does create a reference back to HFiles. The referenced HFiles are archived separately in case compaction is triggered on parent table which is referenced in a snapshot.<br />  <br /> Footprint on source and target HBase when a snapshot restore is triggered.<br /> <br /> Keeping data source and target (HBase) in-sync during migration and then planning for final cut-over.  <br /> <br /> Network latency between source and target.  
 
-``` mermaid
+``` mermaid 
 graph TD;
 
  A(Start Analysis)-->B[Apache Hbase on-premises migration to Azure]
