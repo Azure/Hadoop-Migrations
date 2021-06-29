@@ -15,16 +15,8 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
  
 |Component | Description| Decision Flow/Flowchats|
 |----------|-----------|-----------|
-|[Apache HDFS](docs/hdfs/architecture-and-components.md) |Distributed File System |
-|[Apache HBase](docs/hbase/architecture-and-components.md)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
-|[Apache Hive](docs/hive/architecture-and-components.md)      |Datawarehouse infrastructure |
-|[Apache Spark](docs/spark/architecture-and-components.md)     |Data processing Framework |
-|[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
-|[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
-|Pig       |Dataflow language and parallel execution framework |
-|Zookeeper |Distributed coordination service |
-|Chukwa    |System for collecting management data |
-|Avro      |Data serialization system |
+|[Apache HBase](docs/hbase/migration-approach.md)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
+
 
 
 
