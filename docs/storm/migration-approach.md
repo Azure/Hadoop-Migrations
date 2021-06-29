@@ -105,6 +105,8 @@ To migrate your application from Storm to one of the Spark streaming APIs, do th
 
 See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark)
 
+More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/)
+
 ### Migration From Spark to Databricks
 
 This section provides the steps for moving your production jobs to Azure Databricks.
@@ -219,8 +221,9 @@ While the job is running, you can go to the cluster page and look at the live Ga
 
 ![image](https://user-images.githubusercontent.com/7907123/123612752-1f814880-d803-11eb-8772-f6854ee3d6a0.png)
 
-
 See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
+
+More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/)
 
 ## Migration to Azure Stream Analytics
 
