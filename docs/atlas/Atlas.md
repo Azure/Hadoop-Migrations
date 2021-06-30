@@ -151,7 +151,7 @@ An attribute has the following properties:
 
 Azure Purview is a unified data governance service that helps you manage and govern your on-premises, multi-cloud, and software-as-a-service (SaaS) data. Easily create a holistic, up-to-date map of your data landscape with automated data discovery, sensitive data classification, and end-to-end data lineage. Empower data consumers to find valuable, trustworthy data.
 
-Refer the MS Docs for more informationIntroduction to Azure Purview (preview) - Azure Purview | Microsoft Docs
+For more information please refer Microsoft documentation [Azure Purview](https://docs.microsoft.com/en-us/azure/purview/overview) 
 
 ### Differences between Atlas and Purview
 
