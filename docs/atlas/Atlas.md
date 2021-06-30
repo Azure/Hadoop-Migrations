@@ -154,7 +154,18 @@ Azure Purview is a unified data governance service that helps you manage and gov
 
 For more information please refer Microsoft documentation [Azure Purview](https://docs.microsoft.com/en-us/azure/purview/overview) 
 
-### Differences between Atlas and Purview
+###  Purview excels over Atla in below features
+	
+-	Support for hybrid data platforms – This service supports sourcing metadata from supported data repositories hosted on-premises, on Azure cloud, as well as on cross-clouds
+	
+**Automated data discovery** – It offers a mechanism to scan data repositories and detect metadata with more than 100 classification rules that automatically classify the attributes based on the matching rules
+	
+**Lineage identification** – Purview has a mechanism with which one can bind it to services like Azure Data Factory from which it can automatically extract lineage
+	
+**Purview Metadata Catalog and Business Glossary** – It supports the creation of business glossary terms that can be used and mapped with the metadata created in the purview metadata catalog
+	
+**Data Map with Search** – Different data repositories from different hosting sources can be organized in the form of collections which allows the creation of data maps. The metadata created for these data sources can be easily discovered using the search functionality
+
 
 
 March Ahead with Azure Purview: Unify ALL your data using Apache Atlas open API support - Microsoft Tech Community
@@ -164,6 +175,7 @@ March Ahead with Azure Purview: Unify ALL your data using Apache Atlas open API 
 Azure Purview is compatible with Atlas API. If you are migrating from Atlas follow below steps:
 	
 -   it's recommended to scan your data sources first using Azure Purview. 
+	-    Please refer the Link for Hive metastore scan [Scan-Hive-Metastore](https://docs.microsoft.com/en-us/azure/purview/register-scan-hive-metastore-source)
 	
 -   Once the assets are available in your account, you can use similar Atlas APIs to integrate such as updating assets or adding custom lineage. 
 	
