@@ -202,6 +202,6 @@ Azure Purview is compatible with Atlas API. If you are migrating from Atlas foll
 	
 	  - extracting information from Atlas using REST Api
 	  
-	  ![Registering asset](../images/json_output.PNG)
+	  ![Registering asset](../images/json_output.png)
 -   Azure Purview modifies the Search API to use Azure Search so you should be able to use Advance Search.
 - 
