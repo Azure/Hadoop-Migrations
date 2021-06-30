@@ -156,7 +156,7 @@ For more information please refer Microsoft documentation [Azure Purview](https:
 
 ###  Purview excels over Atla in below features
 	
--	Support for hybrid data platforms – This service supports sourcing metadata from supported data repositories hosted on-premises, on Azure cloud, as well as on cross-clouds
+**Support for hybrid data platforms** – This service supports sourcing metadata from supported data repositories hosted on-premises, on Azure cloud, as well as on cross-clouds
 	
 **Automated data discovery** – It offers a mechanism to scan data repositories and detect metadata with more than 100 classification rules that automatically classify the attributes based on the matching rules
 	
