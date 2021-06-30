@@ -10,30 +10,30 @@ Atlas is an open source framework for data governance and Metadata Management. I
 
 ### Metadata types & instances
 
-•	Pre-defined types for various system’s metadata
-•	Provision to define new types for the metadata to be managed.
-•	Ability to define different Types of attributes( primitive attributes, complex attributes, object references)
-•	entities, metadata object details and their relationships
-•	REST APIs to work with types and instances allow easier integration.
+-	Pre-defined types for various system’s metadata
+	Provision to define new types for the metadata to be managed.
+-	Ability to define different Types of attributes( primitive attributes, complex attributes, object references)
+-	entities, metadata object details and their relationships
+-	REST APIs to work with types and instances allow easier integration.
 
 ### Lineage
 
-•	Inbuilt UI to view lineage of data flow.
-•	REST APIs to perform different function on lineage.
+-	Inbuilt UI to view lineage of data flow.
+-	REST APIs to perform different function on lineage.
 
 ### Classification
 
-•	 create classifications dynamically. 
-•	Entities can be associated with multiple classifications, enabling easier discovery and security enforcement
-•	Propagation of classifications via lineage - automatically ensures that classifications follow the data as it goes through various processing
+-	 create classifications dynamically. 
+-	Entities can be associated with multiple classifications, enabling easier discovery and security enforcement
+-	Propagation of classifications via lineage - automatically ensures that classifications follow the data as it goes through various processing
 
 ### Search/Discovery
 
-•	In built  UI to search entities by type, classification, attribute value or free-text
-•	Rich REST APIs 
-•	SQL like query language to search entities Security & Data Masking
-•	Granular level security for metadata access, enabling controls on access to entity instances and operations like add/update/remove classifications
-•	Tight Integration with Apache Ranger
+-	In built  UI to search entities by type, classification, attribute value or free-text
+-	Rich REST APIs 
+-	SQL like query language to search entities Security & Data Masking
+-	Granular level security for metadata access, enabling controls on access to entity instances and operations like add/update/remove classifications
+-	Tight Integration with Apache Ranger
 
 ## Type System
 
@@ -45,26 +45,45 @@ Atlas allows users to define a model for the metadata objects they want to manag
 A ‘Type’ in Atlas is a definition of how a particular type of metadata objects are stored and accessed. A type represents one or a collection of attributes that define the properties for the metadata object. Users with a development background will recognize the similarity of a type to a ‘Class’ definition of object oriented programming languages, or a ‘table schema’ of relational databases.
 An example of a type that comes natively defined with Atlas is a Hive table. A Hive table is defined with these attributes:
 
-  Name:         hive_table
-  TypeCategory: Entity
-  SuperTypes:   DataSet
-  Attributes:
-      name:             string
-      db:               hive_db
-      owner:            string
-      createTime:       date
-      lastAccessTime:   date
-      comment:          string
-      retention:        int
-      sd:               hive_storagedesc
-      partitionKeys:    array<hive_column>
-      aliases:          array<string>
-      columns:          array<hive_column>
-      parameters:       map<string,string>
-      viewOriginalText: string
-      viewExpandedText: string
-      tableType:        string
-      temporary:        boolean
+  >  Name:         hive_table	
+  >  
+ >  TypeCategory: Entity
+ >  
+ >   SuperTypes:   DataSet
+  >
+  >	Attributes:
+  >	
+  >    name:             string
+  >    
+  >    db:               hive_db
+  >    
+  >   owner:            string
+  >   
+  >   createTime:       date
+  >  
+  >    lastAccessTime:   date
+  >     
+  >    comment:          string
+  >     
+  >    retention:        int
+  >    
+  >   sd:               hive_storagedesc
+  >   
+  >   partitionKeys:    array<hive_column>
+  >   
+  >   aliases:          array<string>
+  >
+  >  columns:          array<hive_column>
+  >	
+  >    parameters:       map<string,string>
+  >	
+  >    viewOriginalText: string
+  >	
+  >    viewExpandedText: string
+  >	
+  >    tableType:        string
+  >	
+  >    temporary:        boolean
   
 #### Entities
   
