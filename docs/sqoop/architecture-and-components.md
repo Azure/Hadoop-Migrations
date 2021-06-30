@@ -29,7 +29,7 @@ There are two series of Apache Sqoop, Sqoop1 and Sqoop2. They differ in usage, i
 
 ![Sqoop2 Architecture](../images/sqoop2-architecture.png)
 
-##### **Sqoop2 Server and Client concept **
+##### **Sqoop2 Server and Client concept**
 - **Server**  
   Serve as an entry point for Sqoop clients 
 
