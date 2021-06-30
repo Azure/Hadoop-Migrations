@@ -98,6 +98,7 @@ An example of an entity will be a specific Hive Table. Say Hive has a table call
 >	values:
 	
  >   name:             “customers”
+	
          > db:               { "guid": "b42c6cfc-c1e7-42fd-a9e6-890e0adf33bc", "typeName": "hive_db" }
 	
 	    >  owner:            “admin”
@@ -150,9 +151,9 @@ An attribute has the following properties:
 
 Azure Purview is a unified data governance service that helps you manage and govern your on-premises, multi-cloud, and software-as-a-service (SaaS) data. Easily create a holistic, up-to-date map of your data landscape with automated data discovery, sensitive data classification, and end-to-end data lineage. Empower data consumers to find valuable, trustworthy data.
 
-Introduction to Azure Purview (preview) - Azure Purview | Microsoft Docs
+Refer the MS Docs for more informationIntroduction to Azure Purview (preview) - Azure Purview | Microsoft Docs
 
-Differences between Atlas and Purview
+### Differences between Atlas and Purview
 
 
 March Ahead with Azure Purview: Unify ALL your data using Apache Atlas open API support - Microsoft Tech Community
