@@ -147,7 +147,8 @@ An attribute has the following properties:
 	
 	
 # Azure Purview
-
+	
+## Overview
 
 Azure Purview is a unified data governance service that helps you manage and govern your on-premises, multi-cloud, and software-as-a-service (SaaS) data. Easily create a holistic, up-to-date map of your data landscape with automated data discovery, sensitive data classification, and end-to-end data lineage. Empower data consumers to find valuable, trustworthy data.
 
@@ -158,5 +159,12 @@ For more information please refer Microsoft documentation [Azure Purview](https:
 
 March Ahead with Azure Purview: Unify ALL your data using Apache Atlas open API support - Microsoft Tech Community
 
-Migration Approach:
-Azure Purview is compatible with Atlas API. If you are migrating from Atlas, it's recommended to scan your data sources first using Azure Purview. Once the assets are available in your account, you can use similar Atlas APIs to integrate such as updating assets or adding custom lineage. Azure Purview modifies the Search API to use Azure Search so you should be able to use Advance Search.
+### Migration Approach
+	
+Azure Purview is compatible with Atlas API. If you are migrating from Atlas follow below steps:
+	
+-   it's recommended to scan your data sources first using Azure Purview. 
+	
+-   Once the assets are available in your account, you can use similar Atlas APIs to integrate such as updating assets or adding custom lineage. 
+	
+-   Azure Purview modifies the Search API to use Azure Search so you should be able to use Advance Search.
