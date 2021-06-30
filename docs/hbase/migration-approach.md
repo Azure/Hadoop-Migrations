@@ -2,39 +2,7 @@
 
 Azure has several landing targets for Apache HBase. Depending on requirements and product features, customers can choose between Azure IaaS, HDI HBase or Cosmos DB (SQL API).  
 
-```mermaid 
-graph TD;
-
- A(Start Analysis)-->B[Apache Hbase on-premises migration to Azure]
- B --> C{Migrating to HBase on Azure IaaS?}
- C -- Yes --> D[Ensure HBase cluster is online]
- D --> E{Source is an HBase database?}
- E -- No --> Z(Use Bulk Load utility to <br/>read data from csv,tsv etc. and write <br/>to HFile directly.)
- click Z "http://hbase.apache.org/book.html#arch.bulk.load"
- E -- No --> Y(Use Spark to read data from source HBase cluster<br/> and write to target <br/> HBase on Azure IaaS.)
- E -- Yes --> F{Migrating to same version of HBase?}
- F -- No --> Z
- F -- No --> Y
- F -- No --> X(HBase import/export utility)
- click X "https://hbase.apache.org/book.html#import"
- F -- No --> W(HBase CopyTable)
- click W "https://hbase.apache.org/book.html#copy.table"
- F -- No --> V(HBase HashTable/SyncTable)
- click V "https://hbase.apache.org/book.html#hashtable.synctable"
- F -- Yes --> U(Hbase Snapshot)
- click U "https://hbase.apache.org/book.html#ops.snapshots"
- C -- No --> G(Azure PaaS)
- G --> H(Cosmos DB SQL API)
- click H "https://docs.microsoft.com/en-us/azure/cosmos-db/choose-api#coresql-api"
- H --> I{HBase version >=2}
- I -- Yes --> J(Spark to read from source HBase and write to CosmosDB using CosmosDB connector)
- I -- No --> K(Source is an HBase database)
- K --> L{Large dataset?}
- L -- No --> T(Data Migration Tool)
- click T "https://docs.microsoft.com/en-us/azure/cosmos-db/import-data"
- L -- Yes --> S(Azure Data Factory)
- click S "https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase"
- ```
+![Choosing a landing target for HBase on Azure](../images/clip_image149)
 
 ## Lift and shift migration to Azure IaaS  
 
@@ -101,7 +69,7 @@ In terms of nature of resource footprint, Apache HBase is designed to leverage m
 - HBase write path includes writing changes to a write-ahead log (WAL) which is a data structure persisted on a storage medium. Storing WAL on fast storage medium such as SSDs will improve write performance.
 - HBase is designed to scale-out as performance and storage requirements grow.  
 
-Scalability targets of Azure compute [Ds-series](https://docs.microsoft.com/en-us/azure/virtual-machines/dv2-dsv2-series-memory) and [Es-series](https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series) along with [premium SSD (managed disks)](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd) are available on Microsoft Docs and these must be considered during sizing and planning.  
+Scalability targets of Azure compute [Ds-series](https://docs.microsoft.com/en-us/azure/virtual-machines/dv2-dsv2-series-memory) and [Es-series](https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series) along with [premium SSD (managed disks)](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd) are available on Microsoft Docs and these should be considered during sizing and planning.  
 
 From compute and memory perspective, we recommend using the following Azure compute family types for various HBase node types:  
 
@@ -116,29 +84,12 @@ From compute and memory perspective, we recommend using the following Azure comp
 **Azure Storage**  
 For an Azure IaaS-based HBase deployment, Azure offers several storage options. The following flowchart uses features of various options to land on a storage target. Each storage option on Azure has a different performance, availability, and cost targets.  
 
-```mermaid 
+![Choosing storage for HBase on Azure IaaS](../images/clip_image148)
 
-graph TD;
- A(start)-->B{Hybrid <br/> storage model**}
- B -- No -->C{Full control of<br/> storage disks}
-  click C "https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview"
- C -- Yes --> Z[Azure Managed Disks]
-  click Z "https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd"
- C -- No --> D{Dependency on <br/>HDFS protocol}
- D -- Yes --> Z
- D -- No --> E{Ranger dependency <br/>at file-level***}
- E -- Yes --> Z
- E -- No --> F{Latency impact associated<br/> with network attached <br/>Azure Storage acceptable?}
- F -- No --> Z
- F -- Yes --> G{Support for <br/>Azure <br/>Disk encryption?}
-  click G "https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disk-encryption-overview"
- G -- Yes --> Z
- G -- No --> H{Uptime SLA> 99.99%}
- H -- Yes --> Z
- H -- No --> X[Azure Storage]
- B -- Yes --> Y[Combination of <br/>Premium Managed Disks <br/>and Azure Storage]
-
-```
+Further Reading  
+[Azure Managed Disks](https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)  
+[Azure Premium SSD](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd)  
+[Azure Disk Encryption](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disk-encryption-overview)  
 
 **In hybrid storage model, we leverage a mix of local storage and remote storage to strike a balance between performance and cost. The most common pattern is to write HBase WAL, which is on the write-path, to locally attached Premium Managed Disk. The long term data or HFiles are stored on Azure Storage (standard or premium) depending on cost and performance targets.
 
@@ -168,23 +119,17 @@ Inputs from assessment and performance baseline should give customers a fairly a
 **Source is an HBase instance** but different versions i.e. HBase version at source is different from HBase version deployed on Azure VM. | Since source is also a HBase datastore, one can explore direct HBase cluster to cluster data migration options such as <br />  <br /> **HBase CopyTable** <br /> *Note* - CopyTable supports full and delta table copy features. <br /> OR <br /> **Azure HDI Spark or Databricks** <br /> OR <br /> **HBase Export and Import Utility** <br /> OR <br /> **HashTable/SyncTable** | Same as above plus a few related to specific tool used for migration. <br />  <br />  **HBase CopyTable** HBase version on source and target sides. <br />  <br /> Clusters must be online on source and target side. <br />  <br /> Additional resources required on source side to support additional read traffic on the source HBase instance. <br />  <br /> **CopyTable** feature by default, it only copies the latest version of a row cell. It also copies all Cells between a specified time range. There might be changes happening on source HBase while CopyTable is running, in such a scenario, new changes will either be completed included or excluded. <br />  <br /> **Azure HDI Spark or Databricks** require additional resources or a separate cluster for migrating data however it's a tried and tested approach. <br />  <br /> **HBase Export Utility** by default, always copies the latest version of a Cell across to HBbase target. <br />  <br /> **HashTable/SyncTable** is more efficient compared to CopyTable feature.
 Source is a HBase database with the same version i.e., data is being migrated between two instances of HBase. | All the options stated above <br /> and <br /> **HBase Snapshots** | Same considerations as stated above and certain that are related to **HBase Snapshots**. <br />  <br /> Snapshot doesn’t create copy of data however it does create a reference back to HFiles. The referenced HFiles are archived separately in case compaction is triggered on parent table which is referenced in a snapshot.<br />  <br /> Footprint on source and target HBase when a snapshot restore is triggered.<br /> <br /> Keeping data source and target (HBase) in-sync during migration and then planning for final cut-over.  <br /> <br /> Network latency between source and target.  
 
-```mermaid 
-graph TD;
+![Tooling options for migrating HBase to Azure](../images/clip_image147)  
 
- A(Start Analysis)-->B[Apache Hbase on-premises migration to Azure]
- B --> C{Migrating to HBase on Azure IaaS?}
- C -- Yes --> D[Ensure HBase cluster is online]
- D --> E{Source is an HBase database?}
- E -- No --> Z(Use Bulk Load utility to <br/>read data from csv,tsv etc. and write <br/>to HFile directly.)
- E -- No --> Y(Use Spark to read data from source HBase cluster<br/> and write to target <br/> HBase on Azure IaaS.)
- E -- Yes --> F{Migrating to same version of HBase?}
- F -- No --> Z
- F -- No --> Y
- F -- No --> X(HBase import/export utility)
- F -- No --> W(HBase CopyTable)
- F -- No --> V(HBase HashTable/SyncTable)
- F -- Yes --> U(Hbase Snapshot)
- ```
+Further reading  
+[Use Bulk Load utility to read data from csv,tsv etc. and write to HFile directly.](http://hbase.apache.org/book.html#arch.bulk.load)  
+[HBase import/export utility](https://hbase.apache.org/book.html#import)  
+[HBase CopyTable](https://hbase.apache.org/book.html#copy.table)
+[HBase HashTable/SyncTable](https://hbase.apache.org/book.html#hashtable.synctable)
+[HBase Snapshot](https://hbase.apache.org/book.html#ops.snapshots)  
+[Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/choose-api#coresql-api)  
+[Data Migration Tool](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)  
+[Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
 
 #### **Security**  
 
@@ -309,7 +254,7 @@ curl -XGET http://<HBase_master>:16010/jmx?qry=Hadoop:service=hbase,name=Master,
 
 Once configured, each individual source will appear under Custom Logs blade. In the snippet above, we used the name oms.api.metrics_regionservers for the input, Log Analytics uses the following format for displaying custom table name with a suffix_CL.
 
-![HBase Monitoring Custom Logs](../images/hbase-monitoring-logging-CL-screenshot.jpg)
+![HBase Monitoring Custom Logs](../images/clip_image150.jpg)
 
 ##### **Infrastructure (VM, storage disks and networking) logging and metrics**  
 

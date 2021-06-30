@@ -6,6 +6,8 @@ YARN provides open source resource management for Hadoop, so you can move beyond
 
 ## Migrating Apache YARN to Azure  
 
-YARN doesn't have an equivalent service on Azure. It's primary role is resource management for Hadoop ecosystem and in case of PaaS (or modernization) migration path, the function played by YARN is abstracted from customers and managed by Azure platform itself.  
+YARN is one of the core components of Hadoop and installed/deployed as part of Apache Hadoop ecosystem.
 
-For IaaS (or lift and shift) migrations to Azure, YARN is migrated across along with Hadoop ecosystem. It's one of the core components of Hadoop along with HDFS and it gets deployed as part of Hadoop installation. This is true for both open source and proprietary versions of Hadoop.  
+In the context of **YARN migration to Azure IaaS**, YARN is deployed as part of Hadoop installation on Azure. This is true for all versions of Hadoop (open-source; Hortonworks or Cloudera). There are no scenarios where YARN is migrated to Azure independent of Hadoop cluster it manages.
+
+From **Azure PaaS** migration perspective, YARN doesn't have an equivalent service on Azure. The reason is that it's a supporting application whose primary function is to manage resources and the functions played by it are abstracted by Azure platform when one migrates Hadoop ecosystem to Azure PaaS.  

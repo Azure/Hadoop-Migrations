@@ -61,16 +61,8 @@ Once data is committed to WAL, data gets written to MemStore, which is an in-mem
 
 For long-term data persistence, HBase uses a data structure called HBase file (HFile). HFile is stored on HDFS. Depending on MemStore size and data flush interval, data from MemStore is written to HBase file or [Hfile](https://HBase.apache.org/book.html#_hfile_format_2).  
 
-The picture below has a conceptual view of write path.  
-
-```mermaid
-graph TD;
-
-A(write to HBase) -- PUT/DELETE --> WAL(Write to HBase WAL)
-WAL --> commit(Commit changes to WAL)
-commit --> memstore(Write to memstore)
-memstore -- Flush to HFile --> hfile(Write to HFile when WAL is full)
-```
+The picture shows conceptual view of HBase write path.  
+![HBase write path](../images/clip_image151)
 
 To summarise, the components on the write-path are:  
 - **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.
@@ -85,17 +77,8 @@ To deliver fast random and sequential reads, HBase uses several data structures.
 
 For scenarios where you want low latency on reads, there is an option to persist data in BucketCache which is also an off-heap in-memory data structure.
 
-The figure below shows conceptual view of read path of HBase.
-
-```mermaid
-
-graph TD;
-
-Start(Read META table to locate region <br/>address of the table to be read) --> Blockcache(Check BlockCache for data)
-Blockcache -- Data not found --> Memstore(Check Memstore for data)
-Memstore -- Data not found --> Hfile(Fetch data from HFile)
-
- ```
+The picture here shows conceptual view of read path of HBase.  
+![HBase read path](../images/clip_image152)
 
 To summarise, HBase tries to serve a read request using data stored in cache – BlockCache and MemStore. If data is not there, a read request is served using HFile.  
 
@@ -103,4 +86,4 @@ To summarise, HBase tries to serve a read request using data stored in cache –
 
 #### **Offheap Read and Write paths**
 
-To reduce read and write latencies, HBase 2.x has introduced a pool of offheap buffers that are used along read and write paths. The workflow for writing and reading data does its best to avoid on-heap memory allocations reducing the amount of work that Garbage Collection (GC) must do to complete reads and writes. These must be fine-tuned and optimized as part of the overall migration because they are heavily dependent on number of Regions and RegionServers; size of memory; and premium storage attached to the HBase cluster on Azure. The reason is that these parameters can change post-migration to Azure.
+To reduce read and write latencies, HBase 2.x has introduced a pool of offheap buffers that are used along read and write paths. The workflow for writing and reading data does its best to avoid on-heap memory allocations reducing the amount of work that Garbage Collection (GC) must do to complete reads and writes. These must be fine-tuned and optimized as part of the overall migration because they are heavily dependent on number of Regions and RegionServers; size of memory; and premium storage attached to the HBase cluster on Azure. The reason is that these parameters can change post-migration to Azure.  
