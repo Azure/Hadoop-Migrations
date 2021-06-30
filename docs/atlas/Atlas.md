@@ -178,5 +178,10 @@ Azure Purview is compatible with Atlas API. If you are migrating from Atlas foll
 	-    Please refer the Link for Hive metastore scan [Scan-Hive-Metastore](https://docs.microsoft.com/en-us/azure/purview/register-scan-hive-metastore-source)
 	
 -   Once the assets are available in your account, you can use similar Atlas APIs to integrate such as updating assets or adding custom lineage. 
+	- Please refer below links for Setup, Authentication, and using Purview Atlas Endpoints
+	   - For Purview tutorial using rest apis [tutorial-using-rest-apis](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis)
+	   - For additional Technical information on Unify ALL your data using Apache Atlas open API support [Purview Atlas APIs](https://techcommunity.microsoft.com/t5/azure-purview/march-ahead-with-azure-purview-unify-all-your-data-using-apache/ba-p/2185411)
+	   - For Azure Purview rest API deep Dive [Purview-Azure-Rest-API](https://www.youtube.com/watch?v=4qzjnMf1GN4&t=362s)
+	
 	
 -   Azure Purview modifies the Search API to use Azure Search so you should be able to use Advance Search.
