@@ -198,6 +198,10 @@ Azure Purview is compatible with Atlas API. If you are migrating from Atlas foll
 	   - For Purview tutorial using rest apis [tutorial-using-rest-apis](https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis)
 	   - For additional Technical information on Unify ALL your data using Apache Atlas open API support [Purview Atlas APIs](https://techcommunity.microsoft.com/t5/azure-purview/march-ahead-with-azure-purview-unify-all-your-data-using-apache/ba-p/2185411)
 	   - For Azure Purview rest API deep Dive [Purview-Azure-Rest-API](https://www.youtube.com/watch?v=4qzjnMf1GN4&t=362s)
+	   - Refer Apache Atlas API documentation for Rest API [Apache Atlas REST API](https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.0.0/using-atlas/content/apache_atlas_rest_api.html)
 	
-	
+	  - extracting information from Atlas using REST Api
+	  
+	  ![Registering asset](../images/json_output.PNG)
 -   Azure Purview modifies the Search API to use Azure Search so you should be able to use Advance Search.
+- 
