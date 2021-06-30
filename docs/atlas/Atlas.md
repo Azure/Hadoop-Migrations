@@ -177,15 +177,18 @@ Azure Purview is compatible with Atlas API. If you are migrating from Atlas foll
 	
 -   it's recommended to scan your data sources first using Azure Purview.
 
-        -  Finding Hive DB in Atlas
+      -  **Finding Hive DB in Atlas**
         
-![Registering asset](../images/hive_db_in_atlas.png)
- 
-        -  Regeistering Atlas  Asset in Purview
+       ![Registering asset](../images/hive_db_in_atlas.PNG)
+     
+       -   **Regeistering Atlas  Asset in Purview**
         
-         ![Registering asset](../images/Register_Hive_DB_In_purview.png)
+       ![Registering asset](../images/Register_Hive_DB_In_purview.PNG)
 	
-	-  
+	-  **Scanning registered asset in Purview**
+	
+	 ![Registering asset](../images/scanning_Atlas_Hive_db_in_Purview.PNG)
+
         
           
 	-    Please refer the Link for Hive metastore scan [Scan-Hive-Metastore](https://docs.microsoft.com/en-us/azure/purview/register-scan-hive-metastore-source)
