@@ -3,7 +3,7 @@
 Atlas is an open source framework for data governance and Metadata Management. It enables the effective compliance requirements of the organization within Hadoop and integrates with other systems across the organization.
 
 ## Apache Atlas Architecture
-![/https://github.com/Azure/Hadoop-Migrations/blob/Atlas/docs/images/Atlas_architecure.png]
+![Atlas Architecture](../images/Atlas_architecure.png)
  
 ## Features
 
