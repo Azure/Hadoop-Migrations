@@ -155,7 +155,7 @@ Azure Purview is a unified data governance service that helps you manage and gov
 
 For more information please refer Microsoft documentation [Azure Purview](https://docs.microsoft.com/en-us/azure/purview/overview) 
 
-###  Purview excels over Atla in below features
+###  Purview excels over Atlas in below features
 	
 **Support for hybrid data platforms** – This service supports sourcing metadata from supported data repositories hosted on-premises, on Azure cloud, as well as on cross-clouds
 	
