@@ -62,8 +62,6 @@ Strong Type Safe: operate on domain objects with compiled lambda functions. High
 
 
 
-
-
 ### Hadoop MapReduce architecture comprises of three layers - 
 
 1. Data Storage : Namenode and Datanode , Replication Management : HDFS- Hadoop Distributed File System
