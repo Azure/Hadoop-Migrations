@@ -8,7 +8,7 @@ The core architecture for Apache Spark is based upon it being scalable and ­if 
 
 ### Spark Driver Node:
 
-The Spark Driver Node is the primary entry point and the controller and when a job is sent to the Driver node, the Spark context is initiated and tasks are sent to worker nodes for processing. The Driver node is also responsible for the cluster management and autoscaling.
+Spark driver node is the primary entry point and the controller and when a job is sent to Driver node spark context is initiated and tasks are sent to worker nodes for processing. Driver node is also responsible for the cluster management and autoscaling. In Synapse Spark the driver node is abstracted from the user and is created as part of the head node. In addition to this the head node also runs Livy, Yarn Resource manager and zookeeper services
 
 ### Spark Worker Node (Executor Nodes):
 
@@ -16,7 +16,7 @@ Spark executor nodes register themselves to the Driver node and performs tasks s
 
 ### Spark Deployment Modes:
 
-Currently Spark supports deployment on YARN cluster, Mesos, Kubernetes and Standalone modes.
+Currently Spark support deployment on YARN cluster, Mesos, Kubernetes, Standalone modes and local modes. 
 
 ### Spark API interactions:
 
@@ -24,7 +24,7 @@ Jupyter type notebooks are used to interact with spark clusters and multiple lan
 
 ### Data processing:
 
-The Spark core data structure is called a DataFrame and provides connectors to read from several data sources and convert them into a DataFrame. Once the DataFrame is created you can use the Spark API to perform transformations
+Spark core data structure is called Resilient Distributed Dataset (RDD) and Spark SQL provides tabular abstraction on these RDD called Dataframe. In new version of Spark (2.0 and higher ) Datasets are introduced and are same as Dataframe but strongly types and helps in finding data type issues early on. Spark libraries provides connectors to read from several data sources and convert in dataframe. Once the Dataframe is created you can use Spark api to perform transformation.  
 
 Example:
 

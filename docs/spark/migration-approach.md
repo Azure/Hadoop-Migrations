@@ -4,6 +4,12 @@ The primary target for Synapse Spark is to provide Spark processing power to the
 
 ![img](../images/clip_image142.png)
 
+## Shared Metadata: 
+
+Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
+ 
+  Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/metadata/table)
+
 ## Synapse Spark Primary Use-Cases
 
 1.   Individual users who want to use Apache Spark to perform ad-hoc analytics. Not meant for high concurrency workloads. Every user gets their own cluster.
@@ -101,12 +107,12 @@ Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Micros
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen. 
 
-| Use case            | Sink                 | Comment        |
-| ------------------- | -------------------- | -------------- |
-| Data Warehouse      | Synapse table        |                |
-| API and fast access | Cosmos DB            |                |
-| Historical Analysis | ADLS Gen2 (Datalake) |                |
-| Integration         | EventHub             | Kafka protocol |
+| Use case            | Sink                 | Comment        |Reference Links|
+| ------------------- | -------------------- | --------------  |--------------|
+| Data Warehouse      | Synapse table        |                 |[Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
+| API and fast access | Cosmos DB            |                 |[Configuration references · Azure/azure-cosmosdb-spark Wiki](https://docs.microsoft.com/en-us/azure/cosmos-db/synapse-link)               |
+| Historical Analysis | ADLS Gen2 (Datalake) |                 |[Introduction to Microsoft Spark utilities - Azure Synapse Analytics](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-csharp)                |
+| Integration         | EventHub             | Kafka protocol        |[Azure/azure-event-hubs-spark](https://github.com/Azure/azure-event-hubs-spark)|
 
 ## Data Migration:
 

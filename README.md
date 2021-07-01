@@ -11,32 +11,47 @@
 
 Hadoop  provides a distributed file system and a framework for the analysis and transformation of very large data sets using the MapReduce paradigm. An important characteristic of Hadoop is the partitioning of data and computation across many (thousands) of hosts, and executing application computations in parallel close to their data. A Hadoop cluster scales computation capacity, storage capacity and IO bandwidth by simply adding commodity hardware.  The key components of an Hadoop system include-
 
-|Component | Description|
-|----------|-----------|
+
+ 
+|Component | Description| Decision Flow/Flowchats|
+|----------|-----------|-----------|
 |[Apache HDFS](docs/hdfs/architecture-and-components.md) |Distributed File System |
-|[Apache HBase](docs/hbase/architecture-and-components.md)      |Column-oriented table service |
+|[Apache HBase](docs/hbase/architecture-and-components.md)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
 |[Apache Hive](docs/hive/architecture-and-components.md)      |Datawarehouse infrastructure |
 |[Apache Spark](docs/spark/architecture-and-components.md)     |Data processing Framework |
 |[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
-|MapReduce |Distributed computation framework |
+|[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
 |Pig       |Dataflow language and parallel execution framework |
 |[Apache Zookeeper](docs/zookeeper/README.md) |Distributed coordination service |
 |[Apache YARN](docs/yarn/README.md) | Resource manager for Hadoop ecosystem |
 |Chukwa    |System for collecting management data |
 |Avro      |Data serialization system |
 
-This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing data storage -- HDFS , Other Cloud Storage like AWS S3 data to Azure.
 
-### Flowcharts
 
-- [Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png)
-- [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
+This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing platform/infrastructure -- On-Premises and Other Cloud like AWS to Azure.
+ 
 
 ### End State Reference Architecture
 
 #### Target States
 
 ![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_state.png)
+
+
+
+    
+-  **Modernize(Azure Synapse Analytics & Azure Databricks)**
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
+
+
+- **Lift and Shift(HDInsight)**
+
+![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
+
+
+For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
 
 - **Lift and Shift(IaaS)**  
 
@@ -84,20 +99,6 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 11. **Big data workloads** are hosted on a set of independent Azure virtual machines. Please refer to guidance for [Hadoop](/docs/hdfs/migration-approach.md), [HBase](/docs/hbase/migration-approach.md), [Hive](/docs/hive/migration-approach.md), [Ranger](/docs/ranger/migration-approach.md)and [Spark](/docs/spark/migration-approach.md) on Azure IaaS for more information.
 
 12. **[Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/user-guide/alm-devops-features?view=azure-devops)** is a SaaS offering from Microsoft and provides an integrated set of services and tools to manage your software projects, from planning and development through testing and deployment.
-    
--  **Modernize(Azure Synapse Analytics & Azure Databricks)**
-
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
-
-
-- **Lift and Shift(HDInsight)**
-
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
-
-
-For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
-
-
 
 
 ### Glossary of Terms and Acronyms

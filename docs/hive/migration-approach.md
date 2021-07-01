@@ -9,6 +9,7 @@
 - [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
 - [Lift and Shift - IAAS](#lift-and-shift---iaas)
 - [Decision Map/Flowchart](#decision-mapflowchart)
+- [Migrate Hive SQL Workloads](#migrate-hive-sql-workloads)
 
 ### Metadata
 
@@ -115,7 +116,15 @@ Other options to migrate Hive metastore are based upon underlying Databases and 
 
 ### Modernization Databricks
 
-When an Azure Databricks workspace is provisioned, a default Hive [Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) becomes automatically available within the workspace. Alternatively, an [external Hive Metastore](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/external-hive-metastore) can be provisioned in Azure and connected to Azure Databricks. The migration of on-premises Hive to Azure Databricks essentially includes two major parts: Metastore migration and the underlying hive table data migration.
+Azure Databricks is structured to enable secure cross-functional team collaboration while keeping a significant amount of backend services managed by Azure Databricks so you can stay focused on your data science, data analytics, and data engineering tasks.
+Although architectures can vary depending on custom configurations (such as when you’ve deployed a Azure Databricks workspace to your own virtual network, also known as VNet injection), the following architecture diagram represents the most common structure and flow of data for Azure Databricks.
+
+![image](https://user-images.githubusercontent.com/70247096/116026874-25816e80-a686-11eb-83c0-80cc14a0d111.png)
+
+
+#### Migration Approach
+
+When an Azure Databricks workspace provisioned, a default Hive Metastore comes automatically with the workspace. Alternative, an external Hive Metastore can be provision on Azure and connected to Azure Databricks. The migration of on-premises Hive to Azure Databricks essentially include two major parts: Metastore migration and Hive Data & Job Assets migration.
 
 #### Metastore Migration
 
@@ -471,6 +480,18 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 ## Decision Map/Flowchart
 
 ![img](../images/clip_image124.png)
+  
+## Migrate Hive SQL Workloads
+  
+**Migrate Hive SQL Queries to HDIsight Spark SQL**
+  
+[To Migrate Hive SQL Queries to HDIsight Spark SQL please refer MLens product from Knowledgelens.](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/knowledgelens1591334415709.knowledgelens_mlens?tab=Overview)
+
+**Migrate Hive SQL Queries to Databricks**
+  
+[To Migrate Hive SQL Queries to Databricks please refer MLens product from Knowledgelens.](https://www.youtube.com/watch?v=I3uQvZVIalo)
+
+Please contact harman@knowledgelens.com & deepanjali@knowledgelens.com for further assistance.
 
 ## Feature Map & Workaround
 
