@@ -22,11 +22,8 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
 |[Apache Sentry](docs/sentry/architecture-and-components.md)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
 |[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
-|Pig       |Dataflow language and parallel execution framework |
 |[Apache Zookeeper](docs/zookeeper/README.md) |Distributed coordination service |
 |[Apache YARN](docs/yarn/README.md) | Resource manager for Hadoop ecosystem |
-|Chukwa    |System for collecting management data |
-|Avro      |Data serialization system |
 |[Storm](docs/storm/architecture-and-components.md)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
 |[Sqoop](docs/sqoop/architecture-and-components.md)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
 
