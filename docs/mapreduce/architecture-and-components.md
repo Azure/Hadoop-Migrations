@@ -15,7 +15,7 @@ Output of the Map job is fed as input to a reduce job and it combines the key/va
 
 Input Data -> Map -> Shuffle and Sort -> Reduce -> Output Data
 
-### MapReduce Classes
+### MapReduce Classes and key methods
 
 There are 2 keys classes implemented in the MapReduce programming model when building MapReduce applications- 
     
@@ -34,6 +34,32 @@ There are 2 keys classes implemented in the MapReduce programming model when bui
         void reduce(KEYIN key, Iterable<VALUEIN> values, org.apache.hadoop.mapreduce.Reducer.Context context) 	This method called only once for each key.
         
     For other methods refer link - http://hadoop.apache.org/docs/current/api/org/apache/hadoop/mapreduce/Reducer.html
+
+### Spark Key APIs
+
+
+1. RDDs - Resilient Distributed Datasets
+
+Core building block of data processing pipelines (DAGs) (Spark 1.x)
+The primary generic data object in Spark is an RDD – Resilient Distributed Data. RDDs are built by manipulating distributed data sets (HDFS objects, other RDDs) through a myriad of parallel transformations (map, filter, join)
+Transformations are evaluated lazily. RDDs track lineage, and thus can be rebuilt automatically on machine failure
+There are two types of operations you can do on RDDs:
+
+    1. Transformations: lazily evaluated, do not cause the Spark cluster to execute your code
+
+    2. Actions: eagerly computed, trigger the execution of code on the Spark cluster
+
+
+2. Dataframe 
+
+High level APIs that use query optimizer to generate DAGs of RDDs (Spark 2.x)
+DataFrames is a collection of objects with schema that are known to Spark SQL.Extension to existing RDD API, think of them as RDDs with a Schema.A distributed collection of data organized into named columns. Conceptually equivalent to tables in relational database, or to DataFrames in R/Python. 
+
+3. Dataset
+
+High level APIs that use query optimizer to generate DAGs of RDDs (Spark 2.x)
+Strong Type Safe: operate on domain objects with compiled lambda functions. High Level API and DSL (Domain Specific Language) . Ease of use and Readability
+
 
 
 ### Hadoop MapReduce architecture comprises of three layers - 

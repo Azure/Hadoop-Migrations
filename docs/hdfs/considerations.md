@@ -17,6 +17,11 @@ There are some considerations when planning the migration of HDFS to ADLS. Based
 
 ![img](../images/hdfs_considerations_ADF_approach.png)
 
+
+- Data platforms are often used for longer term retention of information which may have been removed from systems of record. You should plan take backups or snapshots of the archive data, as well as potentially replicating the archive to a recovery site. Archival of data will generally be either for compliance, or for historical data purposes. Before creating an archive you should have a clear reason for keeping data. Also ensure that you understand when the data will be removed and put in place processes to remove it at that time.Azure Data Lake Storage archive tier can be planned for use that provides an ultra-low cost tier for long term retention of data while keeping your data available for future analytics needs. 
+
+  Refer the link for additional information - https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers?tabs=azure-portal#archive-access-tier
+  
 - As part of migration , when interacting with Azure Blob Storage via the Hadoop FileSystem client, there may be instances where the methods may not be supported.  by the AzureNativeFileSystem ie. throws an UnsupportedOperationException. For Eg - append(Path f, int bufferSize, Progressable progress) is an optional operation in AzureNativeFileSystem and is currently is not yet supported
 For other issues related to ABFS refer link - https://issues.apache.org/jira/browse/HADOOP-15763
 
