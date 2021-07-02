@@ -7,9 +7,9 @@
 
 *IMPORTANT - This documentation is currently private preview and the main branch will be updated once a week. Update schedule TBD.*
 
-## Brief introduction to Apache Hadoop 
+## Brief introduction to Apache Hadoop
 
-Hadoop  provides a distributed file system and a framework for the analysis and transformation of very large data sets using the MapReduce paradigm. An important characteristic of Hadoop is the partitioning of data and computation across many (thousands) of hosts, and executing application computations in parallel close to their data. A Hadoop cluster scales computation capacity, storage capacity and IO bandwidth by simply adding commodity hardware.  The key components of an Hadoop system include-   
+Hadoop  provides a distributed file system and a framework for the analysis and transformation of very large data sets using the MapReduce paradigm. An important characteristic of Hadoop is the partitioning of data and computation across many (thousands) of hosts, and executing application computations in parallel close to their data. A Hadoop cluster scales computation capacity, storage capacity and IO bandwidth by simply adding commodity hardware.  The key components of an Hadoop system include-
 
 
  
@@ -22,7 +22,8 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
 |[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
 |Pig       |Dataflow language and parallel execution framework |
-|Zookeeper |Distributed coordination service |
+|[Apache Zookeeper](docs/zookeeper/README.md) |Distributed coordination service |
+|[Apache YARN](docs/yarn/README.md) | Resource manager for Hadoop ecosystem |
 |Chukwa    |System for collecting management data |
 |Avro      |Data serialization system |
 
@@ -33,8 +34,7 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 
 ### End State Reference Architecture
 
-#### Target States 
-
+#### Target States
 
 ![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_state.png)
 
@@ -56,7 +56,6 @@ For more information Refer the GearUp link: <https://gearup.microsoft.com/resour
 - **Lift and Shift(IaaS)**  
 
 The following pattern presents a point of view on how to deploy OSS on Azure IaaS with a tight integration back to a customer's on-premises systems such as Active Directory; Domain Controller; DNS etc. The deployment follows Enterprise Scale Landing Zone guidance from Microsoft where management capabilities such as monitoring; security; governance; networking etc. are hosted within a management subscription. The workloads (all IaaS-based) are hosted in a separate subscription. ESLZ guidance is covered in details [here](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture#landing-zone-in-enterprise-scale).  
-
 
 ![image](docs/images/azure%20iaas%20target%20state%20v2.jpg)  
 

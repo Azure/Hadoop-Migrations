@@ -142,3 +142,4 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
     WANdisco LiveData Platform for Azure is one of Microsoft’s preferred solutions for Hadoop to Azure migrations and provides the capability through the Azure Portal and CLI.
 
     For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure](https://azure.microsoft.com/en-in/blog/migrate-your-hadoop-data-lakes-with-wandisco-livedata-platform-for-azure/)
+

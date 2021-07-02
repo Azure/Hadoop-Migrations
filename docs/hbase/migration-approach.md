@@ -6,8 +6,8 @@ Landing Targets for Apache HBase on Azure
 ![Landing Targets for Apache HBase on Azure](../images/flowchart-hbase-azure-landing-targets.png)
 
 - [Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
+- [Azure HDInsight](#migrationg-apache-hbase-to-azure-hdinsight)
 - [Azure Cosmos DB (SQL API)](#migrating-apache-hbase-to-azure-cosmos-db-sql-api)
-
 
 ## Lift and shift migration to Azure IaaS  
 
@@ -74,7 +74,7 @@ In terms of nature of resource footprint, Apache HBase is designed to leverage m
 - HBase write path includes writing changes to a write-ahead log (WAL) which is a data structure persisted on a storage medium. Storing WAL on fast storage medium such as SSDs will improve write performance.
 - HBase is designed to scale-out as performance and storage requirements grow.  
 
-Scalability targets of Azure compute [Ds-series](https://docs.microsoft.com/en-us/azure/virtual-machines/dv2-dsv2-series-memory) and [Es-series](https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series) along with [premium SSD (managed disks)](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd) are available on Microsoft Docs and these must be considered during sizing and planning.  
+Scalability targets of Azure compute [Ds-series](https://docs.microsoft.com/en-us/azure/virtual-machines/dv2-dsv2-series-memory) and [Es-series](https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series) along with [premium SSD (managed disks)](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd) are available on Microsoft Docs and these should be considered during sizing and planning.  
 
 From compute and memory perspective, we recommend using the following Azure compute family types for various HBase node types:  
 
@@ -89,7 +89,16 @@ From compute and memory perspective, we recommend using the following Azure comp
 **Azure Storage**  
 For an Azure IaaS-based HBase deployment, Azure offers several storage options. The following flowchart uses features of various options to land on a storage target. Each storage option on Azure has a different performance, availability, and cost targets.  
 
-![Azure Storage Options for HBase](../images/flowchart-hbase-azure-storage-options.png)
+![Choosing storage for HBase on Azure IaaS](../images/flowchart-hbase-azure-storage-options.png)
+
+Further Reading  
+[Azure Managed Disks](https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)  
+[Azure Premium SSD](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd)  
+[Azure Disk Encryption](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disk-encryption-overview)  
+
+**In hybrid storage model, we leverage a mix of local storage and remote storage to strike a balance between performance and cost. The most common pattern is to write HBase WAL, which is on the write-path, to locally attached Premium Managed Disk. The long term data or HFiles are stored on Azure Storage (standard or premium) depending on cost and performance targets.
+
+***Open source version of Apache Ranger cannot apply policies and access control at file-level for Azure Storage (Blob or ADLS). At the moment, this capability is supported by Ranger which ships with [Cloudera Data Platform (CDP)](https://blog.cloudera.com/access-control-for-azure-adls-cloud-object-storage/).
 
 There are two key factors that influence of sizing of HBase storage – **volume** and **throughput**. These two parameters also have an implication on choice of Azure VM size/numbers and Azure Storage (Managed Disks or ADLS).
 
@@ -107,13 +116,25 @@ Inputs from assessment and performance baseline should give customers a fairly a
 
 #### **Data Migration**  
 
-> [!NOTE] - Apache HBase persists data in a file called HFile which are stored on HDFS. From migration perspective, it’s **not recommended** to directly copy HFiles between two HBase clusters outside of HBase. For HBase cluster to cluster data migrations, recommendation is to use one of the out-of-the-box feature that HBase ships with.  
+> **NOTE!** - Apache HBase persists data in a file called HFile which are stored on HDFS. From migration perspective, it’s **not recommended** to directly copy HFiles between two HBase clusters outside of HBase. For HBase cluster to cluster data migrations, recommendation is to use one of the out-of-the-box feature that HBase ships with.  
 
 **Pattern** | **Migration Approach** | **Considerations**
 --- | --- | ---
 **Bulk load scenarios** where source data is not being read from an HBase instance.<br />  <br /> **Examples -** source data in a file format such as CSV, TSV, Parquet *OR* data is in a database or 3P proprietary format.<br />  <br /> For this pattern, depending on source(s) and/or tool used for reading and loading data into HBase   | Overall approach is to build a pipeline using tools such as **WANDisco** or **Databricks** to read from source and <br />  <br />**Source file format** - csv, parquet, tsv or a 3P proprietary format etc.  <br />  <br />  **Data migration tooling options -** If the data is sitting on a file-system or HDFS, then tools such as WANDisco or Spark (HDI or Databricks) can be leverged to read from source and write to HBase on Azure. <br /> <br /> At a high-level, a migration pipeline can be built per target table on HBase where data is extracted from source and written to Azure HDFS first. Then a separate pipeline can be built to read from Azure HDFS to Azure HBase. | **Separate infrastructure** required to host migration tool runtime. <br />  <br /> **Handling encryption** and tokenisation requirements during data migration. <br />  <br /> **Network latency** between source and target (Azure HBase).
 **Source is an HBase instance** but different versions i.e. HBase version at source is different from HBase version deployed on Azure VM. | Since source is also a HBase datastore, one can explore direct HBase cluster to cluster data migration options such as <br />  <br /> **HBase CopyTable** <br /> *Note* - CopyTable supports full and delta table copy features. <br /> OR <br /> **Azure HDI Spark or Databricks** <br /> OR <br /> **HBase Export and Import Utility** <br /> OR <br /> **HashTable/SyncTable** | Same as above plus a few related to specific tool used for migration. <br />  <br />  **HBase CopyTable** HBase version on source and target sides. <br />  <br /> Clusters must be online on source and target side. <br />  <br /> Additional resources required on source side to support additional read traffic on the source HBase instance. <br />  <br /> **CopyTable** feature by default, it only copies the latest version of a row cell. It also copies all Cells between a specified time range. There might be changes happening on source HBase while CopyTable is running, in such a scenario, new changes will either be completed included or excluded. <br />  <br /> **Azure HDI Spark or Databricks** require additional resources or a separate cluster for migrating data however it's a tried and tested approach. <br />  <br /> **HBase Export Utility** by default, always copies the latest version of a Cell across to HBbase target. <br />  <br /> **HashTable/SyncTable** is more efficient compared to CopyTable feature.
 Source is a HBase database with the same version i.e., data is being migrated between two instances of HBase. | All the options stated above <br /> and <br /> **HBase Snapshots** | Same considerations as stated above and certain that are related to **HBase Snapshots**. <br />  <br /> Snapshot doesn’t create copy of data however it does create a reference back to HFiles. The referenced HFiles are archived separately in case compaction is triggered on parent table which is referenced in a snapshot.<br />  <br /> Footprint on source and target HBase when a snapshot restore is triggered.<br /> <br /> Keeping data source and target (HBase) in-sync during migration and then planning for final cut-over.  <br /> <br /> Network latency between source and target.  
+
+![Tooling options for migrating HBase to Azure](../images/flowchart-hbase-azure-migration-tool.png)
+
+Further reading  
+[Use Bulk Load utility to read data from csv,tsv etc. and write to HFile directly.](http://hbase.apache.org/book.html#arch.bulk.load)  
+[HBase import/export utility](https://hbase.apache.org/book.html#import)  
+[HBase CopyTable](https://hbase.apache.org/book.html#copy.table)
+[HBase HashTable/SyncTable](https://hbase.apache.org/book.html#hashtable.synctable)
+[HBase Snapshot](https://hbase.apache.org/book.html#ops.snapshots)  
+[Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/choose-api#coresql-api)  
+[Data Migration Tool](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)  
+[Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
 
 #### **Security**  
 
@@ -125,7 +146,7 @@ To enable servers to authenticate to each other seamlessly, various authenticati
  
  Linux servers hosting Apache Hadoop ecosystem are domain-joined to an AD domain. In this setup, we see that there is no need to have a separately hosted KDC as this capability sits within Windows DC.  
 
- *Considerations*  
+ *Considerations*
 
  - Location of the domain controller.  
  - Role(s) assigned to the domain controller.
@@ -145,7 +166,6 @@ If the domain controller (DC) is located on-premises or outside of an Azure regi
 ##### **Standalone MIT KDC**  
 
 There are some deployments of Hadoop that use a standalone KDC such as MIT KDC. MIT KDC is deployed on a separate set of Azure VMs for HA. Instructions for deploying MIT KDC on Linux servers is available [here](https://web.mit.edu/kerberos/krb5-1.13/doc/admin/install_kdc.html).  
-
 *Considerations*  
 
 - Surface area of management
@@ -251,14 +271,18 @@ Azure Monitor relies on [Log Analytics agent](https://docs.microsoft.com/en-us/a
 
 Instructions for setting up Azure Monitor to collect data from Linux are available [here](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-linux-computer). Once data has been written to Log Analytics, analysis can be done using [Kusto](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial)
 
-### Migrating Apache HBase to Azure Cosmos DB (SQL API)
+## Migrationg Apache HBase to Azure HDInsight
+
+There is a detailed guide for migrating HBase to HDInsight HBase cluster. You can download it from [Guide to Migrating Big Data Workloads to Azure HDInsight](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/).
+
+## Migrating Apache HBase to Azure Cosmos DB (SQL API)
 
 Azure Cosmos DB is a scalable, globally distributed, fully managed database. It provides guaranteed low latency access to your data. To learn more about Azure Cosmos DB, see the [overview](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction) article. This section provides guide to migrate from HBase to Cosmos DB.
 
 ### Modernization – Cosmos DB (SQL API)
 
 Before migrating, one must understand the differences between Cosmos DB and HBase.
-#### Cosmos DB resource model
+#### Cosmos DB resource model ####
 
 The resource model of Cosmos DB is as follows.
 ![Graphical user interface, application, Teams  Description automatically generated](../images/clip_image002-1619013250925.png)
@@ -445,14 +469,17 @@ This aspect of planning is to understand performance targets for HBase and then 
 
 Questions to ask:
 
-* Is the HBase deployment read-heavy or write-heavy?
-* What is the split between reads and writes?
-* What is the P90 or P95 or P99 target IOPS on HBase.
-* How/what applications are used to load data into HBase?
-* How/what applications are used to read data from HBase?
+- Is the HBase deployment read-heavy or write-heavy?
+- What is the split between reads and writes?
+- What is the target IOPS expresses as percentile?
+- How/what applications are used to load data into HBase?
+- How/what applications are used to read data from HBase?
 
-When executing queries that request sorted data, HBase will return the result quickly because the data is sorted by RowKey. However, Cosmos DB doesn’t have such a concept. In order to optimize the performance, you can use [Composite indexes](https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes) as needed.
+When executing queries that request sorted data, HBase will return the result quickly because the data is sorted by RowKey. However, Cosmos DB doesn’t have such a concept. In order to optimize the performance, you can use composite index as needed.
 
+See this document for more details.
+
+https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes
 
 #### Assessment
 
@@ -876,10 +903,6 @@ Azure Cosmos DB
 
 Azure Cosmos DB provides you type safety via data model. We use data model named ‘Family’.
 
-```console
-echo "describe '({Namespace}:){Table name}'" | hbase shell -n > {Table name} -schema.txt
-```
-
 ```java
 public class Family {
     public Family() {
@@ -1128,7 +1151,7 @@ Azure Cosmos DB
 
   - Cosmos DB allows you to define User Defined Functions (UDFs). UDFs can also be written in JavaScript.
  
-
+Stored procedures and triggers consume RUs based on the complexity of the operations performed. When developing server-side processing, check the required usage to get a better understanding of the amount of RU consumed by each operation. See [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units) and [Optimize request cost in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/optimize-cost-reads-writes) for details.
 
 Server-side programming mappings
 
@@ -1147,7 +1170,7 @@ Data security is a shared responsibility of the customer and the database provid
 |                                                              | **HBase**                                                    | **Cosmos DB**                                                |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Network Security  and firewall setting                       | Control traffic  using security functions such as network devices. | Supports  policy-based IP-based access control on the inbound firewall. |
-| User  authentication and fine-grained user controls          | Fine-grained  access control by combining LDAP with security components such as Apache  Ranger. | You can use the  account primary key to create user and permission resources for each  database. Resource tokens are associated with permissions in the database to  determine how users can access application resources in the database (read /  write, read-only, or no access). |
+| User  authentication and fine-grained user controls          | Fine-grained  access control by combining LDAP with security components such as Apache  Ranger. | You can use the  account primary key to create user and permission resources for each  database. Resource tokens are associated with permissions in the database to  determine how users can access application resources in the database (read /  write, read-only, or no access). You can also use your Azure Active Directory (AAD) ID to authenticate your data requests. This allows you to authorize data requests using a fine-grained RBAC model.|
 | Ability to  replicate data globally for regional failures    | Make a database  replica in a remote data center using HBase's replication. | Cosmos DB  performs configuration-free global distribution and allows you to replicate  data to data centers around the world in Azure with the click of a button. In  terms of security, global replication ensures that your data is protected  from local failures. |
 | Ability to fail  over from one data center to another        | You need to implement  failover yourself.                    | If you're  replicating data to multiple data centers and the region's data center goes  offline, Azure Cosmos DB automatically rolls over the operation. |
 | Local data  replication within a data center                 | The HDFS  mechanism allows you to have multiple replicas across nodes within a single  file system. | Cosmos DB  automatically replicates data to maintain high availability, even within a  single data center. You can choose the consistency level yourself. |
@@ -1213,3 +1236,22 @@ Cosmos DB is a globally distributed database with built-in Disaster Recovery cap
 Cosmos DB account that uses only a single region may lose availability in the event of a region failure. We recommend that you configure at least two regions to ensure high availability at all times. You can also ensure high availability for both writes and reads by configuring your Azure Cosmos account to span at least two regions with multiple write regions to ensure high availability for writes and reads. For multi-region accounts that consist of multiple write regions, failover between regions is detected and handled by the Azure Cosmos DB client. These are momentary and do not require any changes from the application.
 
 For more information on High Availability, please refer to [How does Azure Cosmos DB provide high availability](https://docs.microsoft.com/en-us/azure/cosmos-db/high-availability)
+
+
+## FAQ
+
+#### Why migrate to SQL API instead of other APIs in Cosmos DB?
+
+SQL API provides the best end-to-end experience in terms of interface, service SDK client library. The new features rolled out to Azure Cosmos DB will be first available in your SQL API account. In addition, the SQL API supports analytics and provides performance separation between production and analytics workloads. If you want to use the modernized technologies to build your apps, SQL API is the recommended option.
+
+####  Can I assign the HBase RowKey to the Cosmos DB partition key?
+
+It may not be optimized as it is. In HBase, the data is sorted by the specified RowKey, stored in the Region, and divided into fixed sizes. This behaves differently than partitioning in Cosmos DB. Therefore, the keys need to be redesigned to better distribute the data according to the characteristics of the workload. See the [Distribution](#distribution) section for more details.
+
+#### Data is sorted by RowKey in HBase, but partitioning by key in Cosmos DB. How can Cosmos DB achieve sorting and collocation?
+
+In Cosmos DB, you can add a Composite Index to sort your data in ascending or descending order to improve the performance of equality and range queries. See the [Distribution](#distribution) section and the [Composite Index](https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes) in product documentation.
+
+#### Analytical processing is executed on HBase data with Hive or Spark. How can I modernize them in Cosmos DB?
+
+You can use the Azure Cosmos DB analytical store to automatically synchronize operational data to another column store. The column store format is suitable for large analytic queries that are executed in an optimized way, which improves latency for such queries. Azure Synapse Link allows you to build an ETL-free HTAP solution by linking directly from Azure Synapse Analytics to the Azure Cosmos DB analytical store. This allows you to perform large-scale, near-real-time analysis of operational data. Synapse Analytics supports Apache Spark and serverless SQL pools in the Cosmos DB analytics store. You can take advantage of this feature to migrate your analytical processing. See [Analytical store](https://docs.microsoft.com/en-us/azure/cosmos-db/analytical-store-introduction) for more information.
