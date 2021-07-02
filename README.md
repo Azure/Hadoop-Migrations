@@ -27,8 +27,8 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache YARN](docs/yarn/README.md) | Resource manager for Hadoop ecosystem |
 |Chukwa    |System for collecting management data |
 |Avro      |Data serialization system |
-|[Storm](docs/storm/architecture-and-components.md)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](doc/images/flowchart-storm-azure-landing-targets.png)|
-|[Sqoop](docs/sqoop/architecture-and-components.md)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](doc/images/flowchart-sqoop-azure-landing-targets.png)|
+|[Storm](docs/storm/architecture-and-components.md)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
+|[Sqoop](docs/sqoop/architecture-and-components.md)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
 
 
 
