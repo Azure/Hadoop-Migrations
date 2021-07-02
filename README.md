@@ -20,7 +20,7 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache Hive](docs/hive/architecture-and-components.md)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/clip_image124.png), [Selecting target DB for hive metadata](docs/images/clip_image067.png)|
 |[Apache Spark](docs/spark/architecture-and-components.md)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/clip_image142.png)|
 |[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
-|[Apache Sentry](docs/sentry/architecture-and-components.md)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](doc/images/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
+|[Apache Sentry](docs/sentry/architecture-and-components.md)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
 |[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
 |Pig       |Dataflow language and parallel execution framework |
 |[Apache Zookeeper](docs/zookeeper/README.md) |Distributed coordination service |
