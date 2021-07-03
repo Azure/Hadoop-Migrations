@@ -283,9 +283,9 @@ Storm Bolt and Stream Analytics Output
 
 #### Lookup table
 
-If you migrate existing Storm with Topology which references external table(s) using phrases specifically joins,  filters, etc. to Stream Analytics, you will also need to migrate the external table(s) into SQL Database, which can be referenced from Stream Analytics.
+If you migrate existing Storm with Topology which references external table(s) / file(s) using phrases specifically joins,  filters, etc. to Stream Analytics, you will also need to migrate the external table(s) / file(s) into SQL Database, Blob Storage or Data Lake Storage Gen2, which can be referenced from Stream Analytics.
 
-A sample query in a Stream Analytics job that references an external table is as follows.
+A sample query in a Stream Analytics job that references an external table on SQL Database is as follows.
 
 ```sql
 With Step1 as (
@@ -321,7 +321,7 @@ Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Su
 The basic abstraction of Apache Storm provides at-least-once processing guarantee. This is the same guarantee as when using a queuing system. The message will only be replayed in the event of a failure. exactly-once can be achieved with the higher abstraction of Trident API.
 
 ##### Stream Analytics
-Stream Analytics can guarantees exactly-once or at-least-once processing, depending on the output destination, exactly-once delivery is guaranteed when you use the following as the output destination. This is because the Stream Analytics output adapter writes output events transactionally.
+Stream Analytics always guarantees exactly-once processing. Exactly-once delivery is guaranteed when you use the following as the output destination. This is because the Stream Analytics output adapter writes output events transactionally.
 
 - Cosmos DB
 - SQL
@@ -331,13 +331,15 @@ From the above, you can see that when it comes to event handling and delivery as
 
 See [Event Delivery Guarantees](https://docs.microsoft.com/en-us/stream-analytics-query/event-delivery-guarantees-azure-stream-analytics) for more information. 
 
-#### Real-time vs Micro-batch
+#### Event processing model
 
-Storm provides a model to handle each event. All records received are processed as soon as they arrive. Stream Analytics applications must wait momentarily to collect each micro-batch of an event before sending it for processing. In contrast, the real-time application used by Storm Core handles each event immediately. However, Stream Analytics has a streaming latency of less than a few seconds. The advantage of the microbatch approach is the streamlining of data processing and aggregation calculations.
+**Storm**
 
-![Real-time vs Micro-batch](../images/real-time-vs-micro-batch.png)
+Storm provides a model to handle each event. All records received are processed as soon as they arrive. Storm is based on real-time event processing and at-least-once processing. As mentioned, by using Trident, microbatch processing and exactly-once processing can be guaranteed. Because you can use different levels of message processing on Storm, carefully review the business requirements for stream processing to determine what level of assurance you need.
 
-Storm is based on real-time event processing and at-least-once processing. As mentioned, by using Trident, microbatch processing and exactly-once processing can be guaranteed. Because you can use different levels of message processing on Storm, carefully review the business requirements for stream processing to determine what level of assurance you need.
+**Stream Analytics**
+
+Stream Analytics has a unique approach of adaptive batching. It constantly adjust batch size to balance latency and throughput. Stream Analytics typically do not write one message at a time, but use batches for efficiency. If both inbound and outbound events have high rates, Stream Analytics uses large batches. If the egress rate is low, use smaller batches to keep the latency low minimum batch size is 1). This allows to provide end-to-end latency from input to output starting under 100ms
 
 #### Distribition
 ##### Storm
@@ -358,6 +360,7 @@ Stream Analytics partitions the data into subsets to scale out query processing 
 The more input partitions you have, the more computation resources your job will consume. Optimize job performance by adjusting the number of streaming units and partitions described below. Partitioning is similar to Storm's Fields grouping. 
 
 Below is an image of the input partitioning. If the input, such as Event Hubs, is partitioned by Partition ID, Stream Analytics recommends partitioning with this Partition Key.
+
 ![Partitioning](../images/partitioning.png)
 
 When no partitions are available in the input stream, Stream Analytics can make the stream partitioned and/or shuffle them again, using repartitioning/reshuffling functionalities.
@@ -385,11 +388,11 @@ Choosing the number of SUs required for a particular job depends on the partitio
 The maximum number of SUs depend on both the number of query steps defined in the job and the number of partitions in each step. For more information on restrictions, see [this article](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-parallelization#calculate-the-maximum-streaming-units-of-a-job). 
 
 In general, the factors that increase the usage rate of SU are as follows.
-- Jobs with complex query logic --This is because if the query is complex, it is more likely to keep the state in memory.
-- Stateful query logic --Stateful processing such as window aggregation, joins, and analytic functions.
-- Number of input partitions --The more input partitions, the more buffers you have and the more resources your job consumes.
-- Reference data --Loaded into memory for fast retrieval of reference data. This will consume SU.
-- Using UDFs --Adding UDFs loads the JavaScript runtime into memory. This will consume SU. 
+- **Jobs with complex query logic** - This is because if the query is complex, it is more likely to keep the state in memory.
+- **Stateful query logic** - Stateful processing such as window aggregation, joins, and analytic functions.
+- **Number of input partitions** - The more input partitions, the more buffers you have and the more resources your job consumes.
+- **Reference data** - Loaded into memory for fast retrieval of reference data. This will consume SU.
+- **Using UDFs** - Adding UDFs loads the JavaScript runtime into memory. This will consume SU. 
 
 
 **Stream Analytics Cluster**
@@ -441,7 +444,7 @@ Before migrating your existing Storm to Stream Analytics, collect the following 
 |Stream jobs|Identify all streaming jobs running on Storm. You can see the currently running jobs on the Storm UI. Also make sure to identify jobs that are not running from your inventory, code repository, etc. |
 |Source and Sink in Topology|Identify all the data sources and Sinks in the Topology of each Storm streaming job. And ensure that you can remap the data sources and Sink migration destinations and services that you migrate with when you migrate Storm to Stream Analytics. In other words, it maps to the Input and Output supported by Stream Analytics listed in [Connectors](#connectors). If this is not possible, consider other migration targets instead of Stream Analytics.|
 |Applications that sends data to Source|Identify the application that sends the data to Storm's Source. Migrating the Storm Source to the Stream Analytics Input needs to be done as a set, so that migration should also be planned.|
-|Lookup table|If your Storm job references external data as a Lookup table, identify that data source as well. Stream Analytics uses Azure Blob Storage or SQL Database as reference data. Include them in your plan to migrate them to Azure as reference data. |
+|Lookup table|If your Storm job references external data as a Lookup table, identify that data source as well. Stream Analytics uses Azure Blob Storagem Data Lake Storage Gen2 or SQL Database as reference data. Include them in your plan to migrate them to Azure as reference data. |
 |Applications that use Sink data|Identify applications that utilize Storm's Sink data. Migrating Storm's Sink to Stream Analytics Output needs to be done as a set, so that migration should also be planned.|
 |Processing logic|Identify all the processing logic in the Topology of each Storm streaming job. |
 |Current sizing|Get information about the CPU, Memory, Disk, number of nodes, etc. of the host or virtual machine on which the Sqoop client or server is running. This allows you to estimate the base size required for your Azure virtual machine.|
@@ -456,7 +459,8 @@ Also, if you don't want to migrate all your dependent applications to Azure, the
 #### Migration
 Migrating Storm to Stream Analytics is highly dependent on the surrounding systems to which it connects. Migrating Storm's Source and Sink to Azure services must be done as a set. And that involves changing the application that sends the data to the Source system and the application that uses the data stored in Sink. Consider preparing, migrating, and switching in the following flow.
 
-##### Preparation and migration
+**Preparation and migration**
+
 1. Prepare to send data to [Stream Analytics Input](#connectors) in the applications that are the source of data using the test environment.
 2. Use the test environment to prepare the applications that use the data of Sink of the data to connect to [Output of Stream Analytics](#connectors) and run the service.
 3. Deploy and set up Input and Output resources and Stream Analytics in Azure. If you have lookup tables for Storm jobs, create Azure Blob Storage or SQL Database as well.
@@ -464,7 +468,8 @@ Migrating Storm to Stream Analytics is highly dependent on the surrounding syste
 5. Use the test environment to send data from the application to test a series of streaming processes.
 6. Adjust configurations and applications to ensure that the sequence of processes works without problems in terms of business and system requirements. 
 
-##### Switching system
+**Switching system**
+
 1. Launch a migrated Stream Analytics job
 2. Connect the applications that use the data of Sink in the production environment to [Output of Stream Analytics](#connectors) and switch them to be able to work.
 3. Switch the applications that are the source of the production environment so that they can be sent to [Input of Stream Analytics](#connectors).
@@ -472,7 +477,7 @@ Migrating Storm to Stream Analytics is highly dependent on the surrounding syste
 
 If possible, plan to run Storm and Stream Analytics in parallel by sending data from the applications that are the source of the data to the existing one and then to Azure at the same time. This allows you to quickly switch back to a working Storm if something goes wrong, making your migration safer. If you haven't had any problems running your Stream Analytics for a while, you can remove a set of hardware related to Storm.
 
-##### Job migration examples
+**Job migration examples**
 
 Stream Analytics Input and Output can be easily connected with a turnkey, so no code is required for the connection as described in Storm's Spout or Bolt. Here is a brief sample of the differences with some data transformations. Java is used for Storm's code samples here, and these sample codes are based on those described in [Storm's official documentation](https://storm.apache.org/releases/2.2.0/Stream-API.html). 
 
