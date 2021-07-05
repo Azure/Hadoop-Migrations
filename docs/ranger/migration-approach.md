@@ -1,6 +1,10 @@
-## Migration Approach
+## Migration Approach - Ranger
 
-### Modernization – AAD + Databricks
+## Replatforming to Azure PAAS Services
+
+When moving from On-premises Hadoop to hosting Big Data Environments on cloud, there can be a few different options architecture can be designed around based on needs, e.g Using **Azure Cosmos DB** while moving from Hbase and/or Hosting data and leveraging **Azure Synapse analytics** for Hive workload. As you will read in the upcoming sections **Databricks** can be heavily leveraged for multiple data sources such as, Hive jobs can usually be run out of the box on Spark, Spark SQL supports vast majority of Hive query features. Storm is legacy technology and can be replaced with Spark Streaming or serverless processing. Impala: in Databricks’s own published benchmarks, Databricks outperforms Impala also MapReduce is legacy technology and can be replaced with Spark.
+
+### Databricks
 
 All user authentication to the Azure Databricks Workspace is done via Azure Active Directory (AAD) single sign-on functionality. Additionally, AAD conditional access can be leveraged for fine-grain access control to the Databricks workspace.
 
@@ -8,9 +12,7 @@ Authorization is achieved using a combination of AAD and Databricks Access Contr
 
 Advanced security features can be implemented using 3rd party partner solutions, Privacera and Immuta.
 
-### Modernization – AAD + Azure PAAS Services
-
-When moving from On-premises Hadoop to hosting Big Data Environments on cloud, there can be a few different options architecture can be designed around based on needs, e.g Using **Azure Cosmos DB** while moving from Hbase and/or Hosting data and leveraging **Azure Synapse analytics** for Hive workload. Optionally as stated above **Databricks** can be heavily leveraged for multiple data sources such as, Hive jobs can usually be run out of the box on Spark, Spark SQL supports vast majority of Hive query features. Storm is legacy technology and can be replaced with Spark Streaming or serverless processing. Impala: in Databricks’s own published benchmarks, Databricks outperforms Impala also MapReduce is legacy technology and can be replaced with Spark.
+### Cosmos DB
 
 Security on Cosmos DB can be achieved with combination of various features available and other Azure security services. For more information head to *https://docs.microsoft.com/en-us/azure/cosmos-db/database-security*
 
@@ -29,6 +31,8 @@ The following screenshot shows how you can use audit logging and activity logs t
 
 *Image source: Microsoft Docs*
 
+### Synapse Analytics
+
 Security in Azure Synapse Analytics can be achieved by using below methods:
 
 | Security requirement            | Azure Synapse Analytics Security approach                    |
@@ -42,7 +46,9 @@ Security in Azure Synapse Analytics can be achieved by using below methods:
 
 To read more about Security in Synapse Analytics please follow *https://docs.microsoft.com/en-in/azure/synapse-analytics/security-controls-policy*
 
-### Lift and Shift – HDInsight
+## Lift and Shift
+
+### HDInsight
 
 HDInsight is a Hortonworks-derived distribution provided as a first party service on Azure. It supports the most common Big Data engines, including MapReduce, Hive on Tez, Hive LLAP, Spark, HBase, Storm, Kafka, and Microsoft R Server. It is aimed to provide a developer self-managed experience with optimized developer tooling and monitoring capabilities.
 
@@ -115,7 +121,7 @@ To successfully import policies, use the following database versions:
 
 Partial import is not supported.
 
-### Lift and Shift – IAAS (INFRASTRUCTURE AS A SERVICE)
+### IAAS (INFRASTRUCTURE AS A SERVICE)
 
 Cloudera Data Hub is a distribution of Hadoop running on Azure Virtual Machines. It can be deployed through the Azure marketplace.
 
