@@ -1049,7 +1049,7 @@ container.deleteItem(documentId, new PartitionKey(documentLastName), new CosmosI
 
 ##### Query Rows / Documents
 
-HBase allows you to retrieve multiple Rows using scan. You can use Filter to specify detailed scan conditions.
+HBase allows you to retrieve multiple Rows using scan. You can use Filter to specify detailed scan conditions. See [Client Request Filters](https://hbase.apache.org/book.html#client.filter) for HBase built-in filter types. 
 
 ```java
 HTable table = new HTable(config, “FamilyTable”);
@@ -1119,21 +1119,18 @@ HBase offers several server-side programming features. If you are using these fe
 
 HBase
 
-* Custom filters
+* [Custom filters](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/filter/Filter.html) 
 
-  - Various filters are available as default in HBase, but you can also implement your own custom filters. Custom filters may be implemented if the filters available as default on HBase do not meet your requirements.
+  Various filters are available as default in HBase, but you can also implement your own custom filters. Custom filters may be implemented if the filters available as default on HBase do not meet your requirements.
 
-* Coprocessor: 
+* [Coprocessor](https://hbase.apache.org/book.html#_types_of_coprocessors) 
 
-  - The Coprocessor is a framework that allows you to run your own code on the Region Server. By using the Coprocessor, it is possible to perform the processing that was being executed on the client side on the server side, and depending on the processing, it can be made more efficient. There are two types of Coprocessors, Observer and Endpoint.
+  The Coprocessor is a framework that allows you to run your own code on the Region Server. By using the Coprocessor, it is possible to perform the processing that was being executed on the client side on the server side, and depending on the processing, it can be made more efficient. There are two types of Coprocessors, Observer and Endpoint.
 
-* Observer
-
-  - Observer hooks specific operations and events. This is a function for adding arbitrary processing. This is a feature similar to RDBMS triggers. Endpoint
-
-* Endpoint
-
-  - Endpoint is a feature for extending HBase RPC. It is a function similar to an RDBMS stored procedure.
+  * Observer
+    - Observer hooks specific operations and events. This is a function for adding arbitrary processing. This is a feature similar to RDBMS triggers. Endpoint
+  * Endpoint
+    - Endpoint is a feature for extending HBase RPC. It is a function similar to an RDBMS stored procedure.
 
 Azure Cosmos DB
 
@@ -1155,11 +1152,11 @@ Stored procedures and triggers consume RUs based on the complexity of the operat
 
 Server-side programming mappings
 
-| HBase                   | Cosmos DB        |
-| ----------------------- | ---------------- |
-| Custom filters          | WHERE Clause     |
-| Coprocessor  (Observer) | Trigger          |
-| Coprocessor  (Endpoint) | Stored Procedure |
+| HBase                   | Cosmos DB        | Description |
+| ----------------------- | ---------------- | ---------------- |
+| Custom filters          | WHERE Clause     | If the processing implemented by the custom filter cannot be achieved by the WHERE clause in Cosmos DB, use UDF in combination. See [here](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-udfs#examples) for an example of using UDF to further filter the results of the WHERE clause. |
+| Coprocessor  (Observer) | Trigger          | Observer is a trigger that executes before and after a particular event. Just as Observer supports pre- and post-calls, Cosmos DB's Trigger also supports pre- and post-triggers. |
+| Coprocessor  (Endpoint) | Stored Procedure | Endpoint is a server-side data processing mechanism that is executed for each region. This is similar to an RDBMS stored procedure. Cosmos DB stored procedures are written using JavaScript. It provides access to all the operations you can perform on Cosmos DB through stored procedures. |
 
 *Please note that different mappings and implementations may be required in Cosmos DB depending on the processing implemented on HBase.
 
