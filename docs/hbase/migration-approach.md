@@ -678,7 +678,7 @@ You can specify Cosmos DB (SQL API) as the destination for your data. Please ref
 
 [Copy and transform data in Azure Cosmos DB (SQL API) by using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-cosmos-db)
 
-![Graphical user interface  Description automatically generated with low confidence](../images/clip_image019.png)
+![Graphical user interface  Description automatically generated with low confidence](../images/data-migration-hbase-cosmos-adf.png)
 
 **Data Migration Tool**
 
@@ -690,7 +690,7 @@ The source code is available here.
 
 [Azure Cosmos DB Data Migration Tool](https://github.com/azure/azure-documentdb-datamigrationtool)
 
-![Graphical user interface, application  Description automatically generated](../images/clip_image021.png)
+![Graphical user interface, application  Description automatically generated](../images/data-migration-hbase-cosmos-dmt.png)
 
 The Data Factory and Data Migration Tool do not support HBase 2.x or later REST APIs, but Spark can read HBase data and write it to Cosmos DB.
 
