@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "VNetName": {
+            "value": "vnet001"
+        },
+        "addressSpacePrefix": {
+            "value": "10.0.0.0/16"
+        },
+        "subnet1Name": {
+            "value": "subnet1"
+        },
+        "subnet1Prefix": {
+            "value": "10.0.1.0/24"
+        },
+        "subnet2Name": {
+            "value": "subnet2"
+        },
+        "subnet2Prefix": {
+            "value": "10.0.2.0/24"
+        },
+        "subnet3Name": {
+            "value": "subnet3"
+        },
+        "subnet3Prefix": {
+            "value": "10.0.3.0/24"
+        },
+        "networkSecurityGroupName": {
+            "value": "nsg001"
+        }
+    }
+}

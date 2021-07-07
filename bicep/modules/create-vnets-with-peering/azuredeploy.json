@@ -1,0 +1,165 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "7501831935072000562"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location of the resources"
+      }
+    },
+    "vNet1Name": {
+      "type": "string",
+      "defaultValue": "vNet1",
+      "metadata": {
+        "description": "Name for vNet1"
+      }
+    },
+    "vNet2Name": {
+      "type": "string",
+      "defaultValue": "vNet2",
+      "metadata": {
+        "description": "Name for vNet2"
+      }
+    },
+    "vNet1Config": {
+      "type": "object",
+      "defaultValue": {
+        "addressSpacePrefix": "10.0.0.0/16",
+        "subnet1Name": "subnet1",
+        "subnet1Prefix": "10.0.0.0/24",
+        "privateEndpointNetworkPolicies": "Disabled"
+      },
+      "metadata": {
+        "description": "Config  for vNet 1"
+      }
+    },
+    "vNet2Config": {
+      "type": "object",
+      "defaultValue": {
+        "addressSpacePrefix": "192.168.0.0/16",
+        "subnet1Name": "subnet1",
+        "subnet1Prefix": "192.168.0.0/24",
+        "privateEndpointNetworkPolicies": "Disabled"
+      },
+      "metadata": {
+        "description": "Config  for vNet 2"
+      }
+    },
+    "networkSecurityGroupName": {
+      "type": "string",
+      "defaultValue": "hdmp001nsg001",
+      "metadata": {
+        "description": "Network Security Group Name for all subnets"
+      }
+    }
+  },
+  "functions": [],
+  "variables": {
+    "vNet1tovNet2PeeringName": "[format('{0}-{1}', parameters('vNet1Name'), parameters('vNet2Name'))]",
+    "vNet2tovNet1PeeringName": "[format('{0}-{1}', parameters('vNet2Name'), parameters('vNet1Name'))]",
+    "vNetworkSecurityGroupId": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2020-05-01",
+      "name": "[parameters('vNet1Name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vNet1Config').addressSpacePrefix]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('vNet1Config').subnet1Name]",
+            "properties": {
+              "addressPrefix": "[parameters('vNet1Config').subnet1Prefix]",
+              "privateEndpointNetworkPolicies": "[parameters('vNet1Config').privateEndpointNetworkPolicies]",
+              "networkSecurityGroup": {
+                "id": "[variables('vNetworkSecurityGroupId')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+      "apiVersion": "2020-05-01",
+      "name": "[format('{0}/{1}', parameters('vNet1Name'), variables('vNet1tovNet2PeeringName'))]",
+      "properties": {
+        "allowVirtualNetworkAccess": true,
+        "allowForwardedTraffic": false,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": false,
+        "remoteVirtualNetwork": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet2Name'))]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet1Name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet2Name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2020-05-01",
+      "name": "[parameters('vNet2Name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vNet2Config').addressSpacePrefix]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('vNet2Config').subnet1Name]",
+            "properties": {
+              "addressPrefix": "[parameters('vNet2Config').subnet1Prefix]",
+              "privateEndpointNetworkPolicies": "[parameters('vNet2Config').privateEndpointNetworkPolicies]",
+              "networkSecurityGroup": {
+                "id": "[variables('vNetworkSecurityGroupId')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+      "apiVersion": "2020-05-01",
+      "name": "[format('{0}/{1}', parameters('vNet2Name'), variables('vNet2tovNet1PeeringName'))]",
+      "properties": {
+        "allowVirtualNetworkAccess": true,
+        "allowForwardedTraffic": false,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": false,
+        "remoteVirtualNetwork": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet1Name'))]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet1Name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet2Name'))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "outputmessage": {
+      "type": "string",
+      "value": "[format('{0} {1} creation done successfully with peering', parameters('vNet1Name'), parameters('vNet2Name'))]"
+    }
+  }
+}

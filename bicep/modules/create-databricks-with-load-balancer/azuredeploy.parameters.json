@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "workspaceName": {
+            "value": "hdmp001adb001"
+        },
+        "pricingTier": {
+            "value": "premium"
+        },
+        "disablePublicIp": {
+            "value": true
+        },
+        "nsgName": {
+            "value": "hdmp001nsg001"
+        },
+        "vnetADBName": {
+            "value": "vnetBlue"
+        },
+        "publicSubnetName": {
+            "value": "subnet-adb-pub"
+        },
+        "publicSubnetCidr": {
+            "value": "192.168.13.64/26"
+        },
+        "privateSubnetName": {
+            "value": "subnet-adb-prv"
+        },
+        "privateSubnetCidr": {
+            "value": "192.168.13.128/26"
+        },
+        "loadBalancerPublicIpName": {
+            "value": "hdmp001adb001lb001-ip"
+        },
+        "loadBalancerName": {
+            "value": "hdmp001adb001lb001"
+        },
+        "loadBalancerFrontendConfigName": {
+            "value": "hdmp001adb001lb001-fec"
+        },
+        "loadBalancerBackendPoolName": {
+            "value": "hdmp001adb001lb001-bep"
+        }
+    }
+}

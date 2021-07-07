@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Deploy Marketplace item",
+  "description": "This template deploys Marketplace items by creating required VMs",
+  "summary": "Deploy Marketplace items",
+  "githubUsername": "nudbeach",
+  "docOwner": "euchung",
+  "dateUpdated": "2021-05-03",
+  "environments": [
+    "AzureCloud"
+  ]
+}

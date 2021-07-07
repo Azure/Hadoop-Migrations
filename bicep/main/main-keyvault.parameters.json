@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "koreacentral"
+    },
+    "projectName": {
+      "value": "hdmp014"
+    },
+    "objectId": {
+      "value": "ec847c95-e7b1-4f60-89dc-0abe8c01949f" 
+    },
+    "skuName": {
+      "value": "standard"
+    },
+    "secretName": {
+      "value": "sec01"
+    },
+    "secretValue": {
+      "value": "secrete-value-here"
+    }
+  }
+}

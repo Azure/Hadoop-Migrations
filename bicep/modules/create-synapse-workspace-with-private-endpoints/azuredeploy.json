@@ -1,0 +1,408 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "4613096638825485055"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Specifies the location of all deployed resources."
+      }
+    },
+    "projectName": {
+      "type": "string",
+      "defaultValue": "hdmp001",
+      "metadata": {
+        "description": "Project name"
+      }
+    },
+    "skuSQLPool": {
+      "type": "string",
+      "defaultValue": "DW100c",
+      "metadata": {
+        "description": "Select the SKU of the SQL pool."
+      }
+    },
+    "metadataSync": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Choose whether you want to synchronise metadata."
+      }
+    },
+    "allowAllConnections": {
+      "type": "string",
+      "defaultValue": "true",
+      "metadata": {
+        "description": "Fire wall setting, whether to allow from all connections"
+      },
+      "allowedValues": [
+        "true",
+        "false"
+      ]
+    },
+    "sparkDeployment": {
+      "type": "string",
+      "defaultValue": "true",
+      "metadata": {
+        "description": "'True' deploys an Apache Spark pool as well as a SQL pool. 'False' does not deploy an Apache Spark pool."
+      },
+      "allowedValues": [
+        "true",
+        "false"
+      ]
+    },
+    "workspaceName": {
+      "type": "string",
+      "defaultValue": "[parameters('projectName')]",
+      "metadata": {
+        "description": "Workspace name of Synapse instance"
+      }
+    },
+    "sparkPoolName": {
+      "type": "string",
+      "defaultValue": "[toLower('spp01')]",
+      "metadata": {
+        "description": "Spark Pool name of workspace"
+      }
+    },
+    "sqlPoolName": {
+      "type": "string",
+      "defaultValue": "[toLower('sqp01')]",
+      "metadata": {
+        "description": "SQL Pool name of workspace"
+      }
+    },
+    "dataLakeStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Datalake Storage Account name for this workspace"
+      }
+    },
+    "dataLakeStorageFieshareName": {
+      "type": "string",
+      "metadata": {
+        "description": "Datalake Storage Account File Share name for this workspace"
+      }
+    },
+    "sqlAdministratorLogin": {
+      "type": "string",
+      "metadata": {
+        "description": "SQL user name"
+      }
+    },
+    "sqlAdministratorLoginPassword": {
+      "type": "secureString",
+      "metadata": {
+        "description": "SQL user password"
+      }
+    },
+    "sparkNodeSize": {
+      "type": "string",
+      "defaultValue": "Medium",
+      "metadata": {
+        "description": "This parameter will determine the node size if SparkDeployment is true"
+      },
+      "allowedValues": [
+        "Small",
+        "Medium",
+        "Large"
+      ]
+    },
+    "vnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the subnet which the private endpoint uses."
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the subnet which the private endpoint uses."
+      }
+    },
+    "privateDnsZoneNameSql": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the private dns zone for sql pools."
+      }
+    },
+    "privateDnsZoneNameDev": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the private dns zone for dev."
+      }
+    }
+  },
+  "functions": [],
+  "variables": {
+    "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+    "privateDnsZoneIdSql": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneNameSql'))]",
+    "privateDnsZoneIdDev": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneNameDev'))]",
+    "subnetId_var": "[variables('subnetId')]",
+    "privateDnsZoneIdSql_var": "[variables('privateDnsZoneIdSql')]",
+    "privateDnsZoneIdDev_var": "[variables('privateDnsZoneIdDev')]",
+    "privateEndpointNameSql_var": "[format('{0}-sql-pe', parameters('workspaceName'))]",
+    "privateEndpointNameSqlOnDemand_var": "[format('{0}-sqlondemand-pe', parameters('workspaceName'))]",
+    "privateEndpointNameDev_var": "[format('{0}-dev-pe', parameters('workspaceName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Synapse/workspaces",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[parameters('workspaceName')]",
+      "location": "[parameters('location')]",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "defaultDataLakeStorage": {
+          "accountUrl": "[format('https://{0}.dfs.core.windows.net/', parameters('dataLakeStorageAccountName'))]",
+          "filesystem": "[parameters('dataLakeStorageFieshareName')]"
+        },
+        "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
+        "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+        "managedVirtualNetwork": "default",
+        "managedResourceGroupName": "[parameters('workspaceName')]",
+        "managedVirtualNetworkSettings": {
+          "allowedAadTenantIdsForLinking": [
+            "[subscription().tenantId]"
+          ],
+          "linkedAccessCheckOnTargetResource": true,
+          "preventDataExfiltration": true
+        },
+        "connectivityEndpoints": {}
+      }
+    },
+    {
+      "condition": "[equals(parameters('allowAllConnections'), 'true')]",
+      "type": "Microsoft.Synapse/workspaces/firewallRules",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[format('{0}/allowAll', parameters('workspaceName'))]",
+      "properties": {
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/firewallRules",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[format('{0}/AllowAllWindowsAzureIps', parameters('workspaceName'))]",
+      "properties": {
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "0.0.0.0"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/managedIdentitySqlControlSettings",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[format('{0}/default', parameters('workspaceName'))]",
+      "properties": {
+        "grantSqlControlToManagedIdentity": {
+          "desiredState": "Enabled"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/sqlPools",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName'))]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('skuSQLPool')]"
+      },
+      "properties": {
+        "createMode": "Default",
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "condition": "[parameters('metadataSync')]",
+      "type": "Microsoft.Synapse/workspaces/sqlPools/metadataSync",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[format('{0}/config', format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName')))]",
+      "properties": {
+        "enabled": "[parameters('metadataSync')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces/sqlPools', split(format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName')), '/')[0], split(format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName')), '/')[1])]"
+      ]
+    },
+    {
+      "condition": "[equals(parameters('sparkDeployment'), 'true')]",
+      "type": "Microsoft.Synapse/workspaces/bigDataPools",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[format('{0}/{1}', parameters('workspaceName'), parameters('sparkPoolName'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "nodeCount": 5,
+        "nodeSizeFamily": "MemoryOptimized",
+        "nodeSize": "[parameters('sparkNodeSize')]",
+        "autoScale": {
+          "enabled": true,
+          "minNodeCount": 3,
+          "maxNodeCount": 40
+        },
+        "autoPause": {
+          "enabled": true,
+          "delayInMinutes": 15
+        },
+        "sparkVersion": "2.4"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints",
+      "apiVersion": "2020-05-01",
+      "name": "[variables('privateEndpointNameSql_var')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "privateLinkServiceConnections": [
+          {
+            "name": "[variables('privateEndpointNameSql_var')]",
+            "properties": {
+              "privateLinkServiceId": "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]",
+              "groupIds": [
+                "Sql"
+              ]
+            }
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "subnet": {
+          "id": "[variables('subnetId_var')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+      "apiVersion": "2020-05-01",
+      "name": "[format('{0}/aRecord', variables('privateEndpointNameSql_var'))]",
+      "properties": {
+        "privateDnsZoneConfigs": [
+          {
+            "name": "[format('{0}-aRecord', variables('privateEndpointNameSql_var'))]",
+            "properties": {
+              "privateDnsZoneId": "[variables('privateDnsZoneIdSql_var')]"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameSql_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints",
+      "apiVersion": "2020-05-01",
+      "name": "[variables('privateEndpointNameSqlOnDemand_var')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "privateLinkServiceConnections": [
+          {
+            "name": "[variables('privateEndpointNameSqlOnDemand_var')]",
+            "properties": {
+              "privateLinkServiceId": "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]",
+              "groupIds": [
+                "SqlOnDemand"
+              ]
+            }
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "subnet": {
+          "id": "[variables('subnetId_var')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+      "apiVersion": "2020-05-01",
+      "name": "[format('{0}/aRecord', variables('privateEndpointNameSqlOnDemand_var'))]",
+      "properties": {
+        "privateDnsZoneConfigs": [
+          {
+            "name": "[format('{0}-aRecord', variables('privateEndpointNameSqlOnDemand_var'))]",
+            "properties": {
+              "privateDnsZoneId": "[variables('privateDnsZoneIdSql_var')]"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameSqlOnDemand_var'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints",
+      "apiVersion": "2020-05-01",
+      "name": "[variables('privateEndpointNameDev_var')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "privateLinkServiceConnections": [
+          {
+            "name": "[variables('privateEndpointNameDev_var')]",
+            "properties": {
+              "privateLinkServiceId": "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]",
+              "groupIds": [
+                "Dev"
+              ]
+            }
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "subnet": {
+          "id": "[variables('subnetId_var')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+      "apiVersion": "2020-05-01",
+      "name": "[format('{0}/aRecord', variables('privateEndpointNameDev_var'))]",
+      "properties": {
+        "privateDnsZoneConfigs": [
+          {
+            "name": "[format('{0}-aRecord', variables('privateEndpointNameDev_var'))]",
+            "properties": {
+              "privateDnsZoneId": "[variables('privateDnsZoneIdDev_var')]"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameDev_var'))]"
+      ]
+    }
+  ]
+}

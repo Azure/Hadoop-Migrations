@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "11415534260824379371"
+    }
+  },
+  "parameters": {
+    "roleNameGuid": {
+      "type": "string",
+      "defaultValue": "[newGuid()]",
+      "metadata": {
+        "description": "A new GUID used to identify the role assignment"
+      }
+    },
+    "userAssignedIdentityName": {
+      "type": "string",
+      "metadata": {
+        "description": "User Assigned Identity name to create and assign Storage Blob Data Owner role to"
+      }
+    },
+    "clusterStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Strong Account Name to assign Storage Blob Data Owner role"
+      }
+    }
+  },
+  "functions": [],
+  "variables": {
+    "roleStorageBlobDataOwner": "[format('/subscriptions/{0}/providers/Microsoft.Authorization/roleDefinitions/b7e6dc6d-f1e8-4753-8033-0f276bb0955b', subscription().subscriptionId)]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-04-01-preview",
+      "scope": "[format('Microsoft.Storage/storageAccounts/{0}', parameters('clusterStorageAccountName'))]",
+      "name": "[parameters('roleNameGuid')]",
+      "properties": {
+        "roleDefinitionId": "[variables('roleStorageBlobDataOwner')]",
+        "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('userAssignedIdentityName')), '2018-11-30').principalId]"
+      }
+    }
+  ]
+}

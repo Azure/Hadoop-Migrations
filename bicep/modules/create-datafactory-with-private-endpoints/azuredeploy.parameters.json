@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "dataFactoryName": {
+            "value": "hdmp001adf001"
+        },
+        "keyVaultName": {
+            "value": "hdmp001kv001"
+        },
+        "vnetName": {
+            "value": "vnetBlue"
+        },
+        "subnetName": {
+            "value": "subnet1"
+        },
+        "privateDnsZoneNameDataFactory": {
+            "value": "hdmp001-pdns.com"
+        },
+        "privateDnsZoneNamePortal": {
+            "value": "hdmp001-pdns.com"
+        }
+    }
+}

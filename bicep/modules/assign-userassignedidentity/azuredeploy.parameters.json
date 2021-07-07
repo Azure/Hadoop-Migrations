@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "roleNameGuid": {
+            "value": "dc9953db-d3af-4ccc-96ec-ccb1196d6ecd" // Guid to give a random name 
+        },
+        "userAssignedIdentityName": {
+            "value": "hdmp001uain001"
+        },
+        "clusterStorageAccountName": {
+            "value": "hdmp001sa001"
+        }
+    }
+}

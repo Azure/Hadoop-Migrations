@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Create a CosmosDB instance",
+  "description": "This template creates a CosmosDB instance with basic settings",
+  "summary": "Create a CosmosDB instance",
+  "githubUsername": "nudbeach",
+  "docOwner": "euchung",
+  "dateUpdated": "2021-05-03",
+  "environments": [
+    "AzureCloud"
+  ]
+}

@@ -1,0 +1,1259 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "4996008434703309741"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location to create all resources"
+      }
+    },
+    "projectName": {
+      "type": "string",
+      "defaultValue": "hdmp001",
+      "metadata": {
+        "description": "Project name"
+      }
+    },
+    "vnetMgmtaddressSpacePrefix": {
+      "type": "string",
+      "defaultValue": "192.168.12.0/24",
+      "metadata": {
+        "description": "VNet address space prefix of Mgmt"
+      }
+    },
+    "vnetMgmtsubnet1Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.12.0/26",
+      "metadata": {
+        "description": "Subnet address prefix of Mgmt-subnet1"
+      }
+    },
+    "vnetBlueaddressSpacePrefix": {
+      "type": "string",
+      "defaultValue": "192.168.13.0/24",
+      "metadata": {
+        "description": "VNet address space prefix of Blue"
+      }
+    },
+    "vnetBluesubnet1Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.13.0/26",
+      "metadata": {
+        "description": "Subnet address prefix of Blue-subnet1"
+      }
+    },
+    "saType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "metadata": {
+        "description": "Type of Storage Account"
+      }
+    },
+    "optVMCreation": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Prompt to ask if VM creation needed"
+      },
+      "allowedValues": [
+        true,
+        false
+      ]
+    },
+    "vmMgmtSize": {
+      "type": "string",
+      "defaultValue": "Standard_B2s",
+      "metadata": {
+        "description": "VM SKU of Mgmt for test"
+      }
+    },
+    "vmBlueSize": {
+      "type": "string",
+      "defaultValue": "Standard_B2s",
+      "metadata": {
+        "description": "VM SKU of Blue for test"
+      }
+    },
+    "vmUserName": {
+      "type": "string",
+      "defaultValue": "azureuser",
+      "metadata": {
+        "description": "VM User Name"
+      }
+    },
+    "authenticationType": {
+      "type": "string",
+      "defaultValue": "password",
+      "metadata": {
+        "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+      },
+      "allowedValues": [
+        "sshPublicKey",
+        "password"
+      ]
+    },
+    "adminPasswordOrKey": {
+      "type": "secureString",
+      "metadata": {
+        "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+      }
+    }
+  },
+  "functions": [],
+  "variables": {
+    "vLocation": "[parameters('location')]",
+    "vProjectName": "[parameters('projectName')]",
+    "vAuthenticationType": "[parameters('authenticationType')]",
+    "vAdminPasswordOrKey": "[parameters('adminPasswordOrKey')]",
+    "vVNetMgmtName": "vnetMgmt",
+    "vVNetMgmtaddressSpacePrefix": "[parameters('vnetMgmtaddressSpacePrefix')]",
+    "vVNetMgmtsubnet1Name": "subnet1",
+    "vVNetMgmtsubnet1Prefix": "[parameters('vnetMgmtsubnet1Prefix')]",
+    "vVNetBlueName": "vnetBlue",
+    "vVNetBlueaddressSpacePrefix": "[parameters('vnetBlueaddressSpacePrefix')]",
+    "vVNetBluesubnet1Name": "subnet1",
+    "vVNetBluesubnet1Prefix": "[parameters('vnetBluesubnet1Prefix')]",
+    "vVMMgmtName": "vmMgmt",
+    "vVMMgmtSize": "[parameters('vmMgmtSize')]",
+    "vVMBlueName": "vmBlue",
+    "vVMBlueSize": "[parameters('vmBlueSize')]",
+    "vVMUserName": "[parameters('vmUserName')]",
+    "vNSGName": "[format('{0}nsg001', variables('vProjectName'))]",
+    "vSAName": "[format('{0}sa001', variables('vProjectName'))]",
+    "vSAType": "[parameters('saType')]",
+    "vPrivateDnsZoneName": "[format('{0}-pdns.com', variables('vProjectName'))]",
+    "vUserAssignedIdentityName": "[format('{0}uain001', variables('vProjectName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+      "apiVersion": "2018-11-30",
+      "name": "[variables('vUserAssignedIdentityName')]",
+      "location": "[variables('vLocation')]"
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-nsg",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "nsgName": {
+            "value": "[variables('vNSGName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "16747326829757680806"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location of the resources"
+              }
+            },
+            "nsgName": {
+              "type": "string",
+              "defaultValue": "nsg01",
+              "metadata": {
+                "description": "Network Security Group Name"
+              }
+            }
+          },
+          "functions": [],
+          "resources": [
+            {
+              "type": "Microsoft.Network/networkSecurityGroups",
+              "apiVersion": "2020-06-01",
+              "name": "[parameters('nsgName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "securityRules": [
+                  {
+                    "name": "SSH",
+                    "properties": {
+                      "priority": 1000,
+                      "protocol": "Tcp",
+                      "access": "Allow",
+                      "direction": "Inbound",
+                      "sourceAddressPrefix": "*",
+                      "sourcePortRange": "*",
+                      "destinationAddressPrefix": "*",
+                      "destinationPortRange": "22"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-vnets",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "vNet1Name": {
+            "value": "[variables('vVNetMgmtName')]"
+          },
+          "vNet1Config": {
+            "value": {
+              "addressSpacePrefix": "[variables('vVNetMgmtaddressSpacePrefix')]",
+              "subnet1Name": "[variables('vVNetMgmtsubnet1Name')]",
+              "subnet1Prefix": "[variables('vVNetMgmtsubnet1Prefix')]",
+              "privateEndpointNetworkPolicies": "Disabled"
+            }
+          },
+          "vNet2Name": {
+            "value": "[variables('vVNetBlueName')]"
+          },
+          "vNet2Config": {
+            "value": {
+              "addressSpacePrefix": "[variables('vVNetBlueaddressSpacePrefix')]",
+              "subnet1Name": "[variables('vVNetBluesubnet1Name')]",
+              "subnet1Prefix": "[variables('vVNetBluesubnet1Prefix')]",
+              "privateEndpointNetworkPolicies": "Disabled"
+            }
+          },
+          "networkSecurityGroupName": {
+            "value": "[variables('vNSGName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "7501831935072000562"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location of the resources"
+              }
+            },
+            "vNet1Name": {
+              "type": "string",
+              "defaultValue": "vNet1",
+              "metadata": {
+                "description": "Name for vNet1"
+              }
+            },
+            "vNet2Name": {
+              "type": "string",
+              "defaultValue": "vNet2",
+              "metadata": {
+                "description": "Name for vNet2"
+              }
+            },
+            "vNet1Config": {
+              "type": "object",
+              "defaultValue": {
+                "addressSpacePrefix": "10.0.0.0/16",
+                "subnet1Name": "subnet1",
+                "subnet1Prefix": "10.0.0.0/24",
+                "privateEndpointNetworkPolicies": "Disabled"
+              },
+              "metadata": {
+                "description": "Config  for vNet 1"
+              }
+            },
+            "vNet2Config": {
+              "type": "object",
+              "defaultValue": {
+                "addressSpacePrefix": "192.168.0.0/16",
+                "subnet1Name": "subnet1",
+                "subnet1Prefix": "192.168.0.0/24",
+                "privateEndpointNetworkPolicies": "Disabled"
+              },
+              "metadata": {
+                "description": "Config  for vNet 2"
+              }
+            },
+            "networkSecurityGroupName": {
+              "type": "string",
+              "defaultValue": "hdmp001nsg001",
+              "metadata": {
+                "description": "Network Security Group Name for all subnets"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "vNet1tovNet2PeeringName": "[format('{0}-{1}', parameters('vNet1Name'), parameters('vNet2Name'))]",
+            "vNet2tovNet1PeeringName": "[format('{0}-{1}', parameters('vNet2Name'), parameters('vNet1Name'))]",
+            "vNetworkSecurityGroupId": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks",
+              "apiVersion": "2020-05-01",
+              "name": "[parameters('vNet1Name')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "addressSpace": {
+                  "addressPrefixes": [
+                    "[parameters('vNet1Config').addressSpacePrefix]"
+                  ]
+                },
+                "subnets": [
+                  {
+                    "name": "[parameters('vNet1Config').subnet1Name]",
+                    "properties": {
+                      "addressPrefix": "[parameters('vNet1Config').subnet1Prefix]",
+                      "privateEndpointNetworkPolicies": "[parameters('vNet1Config').privateEndpointNetworkPolicies]",
+                      "networkSecurityGroup": {
+                        "id": "[variables('vNetworkSecurityGroupId')]"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/{1}', parameters('vNet1Name'), variables('vNet1tovNet2PeeringName'))]",
+              "properties": {
+                "allowVirtualNetworkAccess": true,
+                "allowForwardedTraffic": false,
+                "allowGatewayTransit": false,
+                "useRemoteGateways": false,
+                "remoteVirtualNetwork": {
+                  "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet2Name'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet1Name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet2Name'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks",
+              "apiVersion": "2020-05-01",
+              "name": "[parameters('vNet2Name')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "addressSpace": {
+                  "addressPrefixes": [
+                    "[parameters('vNet2Config').addressSpacePrefix]"
+                  ]
+                },
+                "subnets": [
+                  {
+                    "name": "[parameters('vNet2Config').subnet1Name]",
+                    "properties": {
+                      "addressPrefix": "[parameters('vNet2Config').subnet1Prefix]",
+                      "privateEndpointNetworkPolicies": "[parameters('vNet2Config').privateEndpointNetworkPolicies]",
+                      "networkSecurityGroup": {
+                        "id": "[variables('vNetworkSecurityGroupId')]"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/{1}', parameters('vNet2Name'), variables('vNet2tovNet1PeeringName'))]",
+              "properties": {
+                "allowVirtualNetworkAccess": true,
+                "allowForwardedTraffic": false,
+                "allowGatewayTransit": false,
+                "useRemoteGateways": false,
+                "remoteVirtualNetwork": {
+                  "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet1Name'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet1Name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vNet2Name'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "outputmessage": {
+              "type": "string",
+              "value": "[format('{0} {1} creation done successfully with peering', parameters('vNet1Name'), parameters('vNet2Name'))]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'create-nsg')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-storage-account",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "storageAccountType": {
+            "value": "[variables('vSAType')]"
+          },
+          "storageAccountName": {
+            "value": "[variables('vSAName')]"
+          },
+          "containerName": {
+            "value": "blob1"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "10286632647303668254"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for the resources"
+              }
+            },
+            "storageAccountType": {
+              "type": "string",
+              "defaultValue": "Standard_LRS",
+              "metadata": {
+                "description": "Storage Account type"
+              },
+              "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_ZRS",
+                "Premium_LRS"
+              ]
+            },
+            "storageAccountName": {
+              "type": "string",
+              "defaultValue": "sa001",
+              "metadata": {
+                "description": "Storage Account name"
+              }
+            },
+            "containerName": {
+              "type": "string",
+              "defaultValue": "blob01",
+              "metadata": {
+                "description": "Specifies the name of default blob container"
+              }
+            },
+            "fileServiceName": {
+              "type": "string",
+              "defaultValue": "file01",
+              "metadata": {
+                "description": "Specifies the name of default file service"
+              }
+            },
+            "queueServiceName": {
+              "type": "string",
+              "defaultValue": "queue01",
+              "metadata": {
+                "description": "Specifies the name of default queue service"
+              }
+            },
+            "tableServiceName": {
+              "type": "string",
+              "defaultValue": "table01",
+              "metadata": {
+                "description": "Specifies the name of default table service"
+              }
+            }
+          },
+          "functions": [],
+          "resources": [
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2019-06-01",
+              "name": "[parameters('storageAccountName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "[parameters('storageAccountType')]"
+              },
+              "kind": "StorageV2",
+              "properties": {
+                "encryption": {
+                  "keySource": "Microsoft.Storage",
+                  "services": {
+                    "blob": {
+                      "enabled": true
+                    },
+                    "file": {
+                      "enabled": true
+                    },
+                    "table": {
+                      "enabled": true
+                    },
+                    "queue": {
+                      "enabled": true
+                    }
+                  }
+                },
+                "isHnsEnabled": true,
+                "supportsHttpsTrafficOnly": true
+              }
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2019-06-01",
+              "name": "[format('{0}/default/{1}', parameters('storageAccountName'), parameters('containerName'))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+              "apiVersion": "2019-06-01",
+              "name": "[format('{0}/default/{1}', parameters('storageAccountName'), parameters('fileServiceName'))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/queueServices/queues",
+              "apiVersion": "2019-06-01",
+              "name": "[format('{0}/default/{1}', parameters('storageAccountName'), parameters('queueServiceName'))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/tableServices/tables",
+              "apiVersion": "2019-06-01",
+              "name": "[format('{0}/default/{1}', parameters('storageAccountName'), parameters('tableServiceName'))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "outputmessage": {
+              "type": "string",
+              "value": "[format('{0} creation done successfully', parameters('storageAccountName'))]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "assign-userassignedidentity-to-storage",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "userAssignedIdentityName": {
+            "value": "[variables('vUserAssignedIdentityName')]"
+          },
+          "clusterStorageAccountName": {
+            "value": "[variables('vSAName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "11415534260824379371"
+            }
+          },
+          "parameters": {
+            "roleNameGuid": {
+              "type": "string",
+              "defaultValue": "[newGuid()]",
+              "metadata": {
+                "description": "A new GUID used to identify the role assignment"
+              }
+            },
+            "userAssignedIdentityName": {
+              "type": "string",
+              "metadata": {
+                "description": "User Assigned Identity name to create and assign Storage Blob Data Owner role to"
+              }
+            },
+            "clusterStorageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Strong Account Name to assign Storage Blob Data Owner role"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "roleStorageBlobDataOwner": "[format('/subscriptions/{0}/providers/Microsoft.Authorization/roleDefinitions/b7e6dc6d-f1e8-4753-8033-0f276bb0955b', subscription().subscriptionId)]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2020-04-01-preview",
+              "scope": "[format('Microsoft.Storage/storageAccounts/{0}', parameters('clusterStorageAccountName'))]",
+              "name": "[parameters('roleNameGuid')]",
+              "properties": {
+                "roleDefinitionId": "[variables('roleStorageBlobDataOwner')]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('userAssignedIdentityName')), '2018-11-30').principalId]"
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'create-storage-account')]",
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('vUserAssignedIdentityName'))]"
+      ]
+    },
+    {
+      "condition": "[parameters('optVMCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-vm-mgmt",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "vmName": {
+            "value": "[variables('vVMMgmtName')]"
+          },
+          "vmSize": {
+            "value": "[variables('vVMMgmtSize')]"
+          },
+          "virtualNetworkName": {
+            "value": "[variables('vVNetMgmtName')]"
+          },
+          "subnetName": {
+            "value": "[variables('vVNetMgmtsubnet1Name')]"
+          },
+          "networkSecurityGroupName": {
+            "value": "[variables('vNSGName')]"
+          },
+          "adminUsername": {
+            "value": "[variables('vVMUserName')]"
+          },
+          "authenticationType": {
+            "value": "[variables('vAuthenticationType')]"
+          },
+          "adminPasswordOrKey": {
+            "value": "[variables('vAdminPasswordOrKey')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "18370304810338032293"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for the resources"
+              }
+            },
+            "vmName": {
+              "type": "string",
+              "defaultValue": "simpleLinuxVM1",
+              "metadata": {
+                "description": "The name of you Virtual Machine."
+              }
+            },
+            "adminUsername": {
+              "type": "string",
+              "defaultValue": "azureuser",
+              "metadata": {
+                "description": "Username for the Virtual Machine."
+              }
+            },
+            "authenticationType": {
+              "type": "string",
+              "defaultValue": "password",
+              "metadata": {
+                "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+              },
+              "allowedValues": [
+                "sshPublicKey",
+                "password"
+              ]
+            },
+            "adminPasswordOrKey": {
+              "type": "secureString",
+              "metadata": {
+                "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+              }
+            },
+            "dnsLabelPrefix": {
+              "type": "string",
+              "defaultValue": "[toLower(format('simplelinuxvm-{0}', uniqueString(resourceGroup().id)))]",
+              "metadata": {
+                "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+              }
+            },
+            "ubuntuOSVersion": {
+              "type": "string",
+              "defaultValue": "18.04-LTS",
+              "metadata": {
+                "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version."
+              },
+              "allowedValues": [
+                "12.04.5-LTS",
+                "14.04.5-LTS",
+                "16.04.0-LTS",
+                "18.04-LTS"
+              ]
+            },
+            "vmSize": {
+              "type": "string",
+              "defaultValue": "Standard_B2s",
+              "metadata": {
+                "description": "The size of the VM"
+              }
+            },
+            "virtualNetworkName": {
+              "type": "string",
+              "defaultValue": "vNet",
+              "metadata": {
+                "description": "Name of the VNET"
+              }
+            },
+            "subnetName": {
+              "type": "string",
+              "defaultValue": "Subnet",
+              "metadata": {
+                "description": "Name of the subnet in the virtual network"
+              }
+            },
+            "networkSecurityGroupName": {
+              "type": "string",
+              "defaultValue": "SecGroupNet",
+              "metadata": {
+                "description": "Name of the Network Security Group"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "publicIpAddressName_var": "[format('{0}-ip', parameters('vmName'))]",
+            "networkInterfaceName_var": "[format('{0}-nic', parameters('vmName'))]",
+            "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
+            "osDiskType": "Standard_LRS",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": true,
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "path": "[format('/home/{0}/.ssh/authorized_keys', parameters('adminUsername'))]",
+                    "keyData": "[parameters('adminPasswordOrKey')]"
+                  }
+                ]
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/networkInterfaces",
+              "apiVersion": "2020-06-01",
+              "name": "[variables('networkInterfaceName_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "ipconfig1",
+                    "properties": {
+                      "subnet": {
+                        "id": "[variables('subnetRef')]"
+                      },
+                      "privateIPAllocationMethod": "Dynamic",
+                      "publicIPAddress": {
+                        "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName_var'))]"
+                      }
+                    }
+                  }
+                ],
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/publicIPAddresses",
+              "apiVersion": "2020-06-01",
+              "name": "[variables('publicIpAddressName_var')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "Basic"
+              },
+              "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "publicIPAddressVersion": "IPv4",
+                "dnsSettings": {
+                  "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+                },
+                "idleTimeoutInMinutes": 4
+              }
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines",
+              "apiVersion": "2020-06-01",
+              "name": "[parameters('vmName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "hardwareProfile": {
+                  "vmSize": "[parameters('vmSize')]"
+                },
+                "storageProfile": {
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "managedDisk": {
+                      "storageAccountType": "[variables('osDiskType')]"
+                    }
+                  },
+                  "imageReference": {
+                    "publisher": "Canonical",
+                    "offer": "UbuntuServer",
+                    "sku": "[parameters('ubuntuOSVersion')]",
+                    "version": "latest"
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaces": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName_var'))]"
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "computerName": "[parameters('vmName')]",
+                  "adminUsername": "[parameters('adminUsername')]",
+                  "adminPassword": "[parameters('adminPasswordOrKey')]",
+                  "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName_var'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "outputmessage": {
+              "type": "string",
+              "value": "[format('{0} creation done successfully', parameters('vmName'))]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'create-nsg')]",
+        "[resourceId('Microsoft.Resources/deployments', 'create-vnets')]"
+      ]
+    },
+    {
+      "condition": "[parameters('optVMCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-vm-blue",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "vmName": {
+            "value": "[variables('vVMBlueName')]"
+          },
+          "vmSize": {
+            "value": "[variables('vVMBlueSize')]"
+          },
+          "virtualNetworkName": {
+            "value": "[variables('vVNetBlueName')]"
+          },
+          "subnetName": {
+            "value": "[variables('vVNetBluesubnet1Name')]"
+          },
+          "networkSecurityGroupName": {
+            "value": "[variables('vNSGName')]"
+          },
+          "adminUsername": {
+            "value": "[variables('vVMUserName')]"
+          },
+          "authenticationType": {
+            "value": "[variables('vAuthenticationType')]"
+          },
+          "adminPasswordOrKey": {
+            "value": "[variables('vAdminPasswordOrKey')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "18370304810338032293"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for the resources"
+              }
+            },
+            "vmName": {
+              "type": "string",
+              "defaultValue": "simpleLinuxVM1",
+              "metadata": {
+                "description": "The name of you Virtual Machine."
+              }
+            },
+            "adminUsername": {
+              "type": "string",
+              "defaultValue": "azureuser",
+              "metadata": {
+                "description": "Username for the Virtual Machine."
+              }
+            },
+            "authenticationType": {
+              "type": "string",
+              "defaultValue": "password",
+              "metadata": {
+                "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+              },
+              "allowedValues": [
+                "sshPublicKey",
+                "password"
+              ]
+            },
+            "adminPasswordOrKey": {
+              "type": "secureString",
+              "metadata": {
+                "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+              }
+            },
+            "dnsLabelPrefix": {
+              "type": "string",
+              "defaultValue": "[toLower(format('simplelinuxvm-{0}', uniqueString(resourceGroup().id)))]",
+              "metadata": {
+                "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+              }
+            },
+            "ubuntuOSVersion": {
+              "type": "string",
+              "defaultValue": "18.04-LTS",
+              "metadata": {
+                "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version."
+              },
+              "allowedValues": [
+                "12.04.5-LTS",
+                "14.04.5-LTS",
+                "16.04.0-LTS",
+                "18.04-LTS"
+              ]
+            },
+            "vmSize": {
+              "type": "string",
+              "defaultValue": "Standard_B2s",
+              "metadata": {
+                "description": "The size of the VM"
+              }
+            },
+            "virtualNetworkName": {
+              "type": "string",
+              "defaultValue": "vNet",
+              "metadata": {
+                "description": "Name of the VNET"
+              }
+            },
+            "subnetName": {
+              "type": "string",
+              "defaultValue": "Subnet",
+              "metadata": {
+                "description": "Name of the subnet in the virtual network"
+              }
+            },
+            "networkSecurityGroupName": {
+              "type": "string",
+              "defaultValue": "SecGroupNet",
+              "metadata": {
+                "description": "Name of the Network Security Group"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "publicIpAddressName_var": "[format('{0}-ip', parameters('vmName'))]",
+            "networkInterfaceName_var": "[format('{0}-nic', parameters('vmName'))]",
+            "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
+            "osDiskType": "Standard_LRS",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": true,
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "path": "[format('/home/{0}/.ssh/authorized_keys', parameters('adminUsername'))]",
+                    "keyData": "[parameters('adminPasswordOrKey')]"
+                  }
+                ]
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/networkInterfaces",
+              "apiVersion": "2020-06-01",
+              "name": "[variables('networkInterfaceName_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "ipconfig1",
+                    "properties": {
+                      "subnet": {
+                        "id": "[variables('subnetRef')]"
+                      },
+                      "privateIPAllocationMethod": "Dynamic",
+                      "publicIPAddress": {
+                        "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName_var'))]"
+                      }
+                    }
+                  }
+                ],
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/publicIPAddresses",
+              "apiVersion": "2020-06-01",
+              "name": "[variables('publicIpAddressName_var')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "Basic"
+              },
+              "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "publicIPAddressVersion": "IPv4",
+                "dnsSettings": {
+                  "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+                },
+                "idleTimeoutInMinutes": 4
+              }
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines",
+              "apiVersion": "2020-06-01",
+              "name": "[parameters('vmName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "hardwareProfile": {
+                  "vmSize": "[parameters('vmSize')]"
+                },
+                "storageProfile": {
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "managedDisk": {
+                      "storageAccountType": "[variables('osDiskType')]"
+                    }
+                  },
+                  "imageReference": {
+                    "publisher": "Canonical",
+                    "offer": "UbuntuServer",
+                    "sku": "[parameters('ubuntuOSVersion')]",
+                    "version": "latest"
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaces": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName_var'))]"
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "computerName": "[parameters('vmName')]",
+                  "adminUsername": "[parameters('adminUsername')]",
+                  "adminPassword": "[parameters('adminPasswordOrKey')]",
+                  "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName_var'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "outputmessage": {
+              "type": "string",
+              "value": "[format('{0} creation done successfully', parameters('vmName'))]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'create-nsg')]",
+        "[resourceId('Microsoft.Resources/deployments', 'create-vnets')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-private-dns",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "privateDnsZoneName": {
+            "value": "[variables('vPrivateDnsZoneName')]"
+          },
+          "vnetName": {
+            "value": "[variables('vVNetMgmtName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "8794722108512767813"
+            }
+          },
+          "parameters": {
+            "privateDnsZoneName": {
+              "type": "string",
+              "defaultValue": "contoso.com",
+              "metadata": {
+                "description": "Private DNS zone name"
+              }
+            },
+            "vmRegistration": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable automatic VM DNS registration in the zone"
+              }
+            },
+            "vnetName": {
+              "type": "string",
+              "defaultValue": "VNet1",
+              "metadata": {
+                "description": "VNet name"
+              }
+            }
+          },
+          "functions": [],
+          "resources": [
+            {
+              "type": "Microsoft.Network/privateDnsZones",
+              "apiVersion": "2020-01-01",
+              "name": "[parameters('privateDnsZoneName')]",
+              "location": "global"
+            },
+            {
+              "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+              "apiVersion": "2020-01-01",
+              "name": "[format('{0}/{1}-link', parameters('privateDnsZoneName'), parameters('privateDnsZoneName'))]",
+              "location": "global",
+              "properties": {
+                "registrationEnabled": "[parameters('vmRegistration')]",
+                "virtualNetwork": {
+                  "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "outputmessage": {
+              "type": "string",
+              "value": "[format('{0} creation done successfully', parameters('privateDnsZoneName'))]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'create-vnets')]"
+      ]
+    }
+  ]
+}

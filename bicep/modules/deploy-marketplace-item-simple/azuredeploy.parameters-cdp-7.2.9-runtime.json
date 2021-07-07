@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "projectName": {
+            "value": "hdmp001"
+        },
+        "suffix": {
+            "value": "cdp"
+        },
+        "virtualNetworkName": {
+            "value": "hdmp001vnet001"
+        },
+        "subnetName": {
+            "value": "subnet1"
+        },
+        "adminUsername": {
+            "value": "azureuser"
+        },
+        "adminStoredPublicKey": {
+            "value": "DEFAULT01"
+        },
+        "osDiskType": {
+            "value": "Premium_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D4s_v3"
+        },
+        "planName": {
+            "value": "runtime-7_2_9"
+        },
+        "planPublisher": {
+            "value": "cloudera"
+        },
+        "planProduct": {
+            "value": "cdp-7_2"
+        },
+        "imagePublisher": {
+            "value": "cloudera"
+        },
+        "imageOffer": {
+            "value": "cdp-7_2"
+        },
+        "imageSKU": {
+            "value": "runtime-7_2_9"
+        },
+        "imageVersion": {
+            "value": "latest"
+        }
+   }
+}

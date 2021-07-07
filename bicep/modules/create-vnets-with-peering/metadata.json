@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Create a pair of virtual networks with peering",
+  "description": "This template creates a pair of virtual networks with peering",
+  "summary": "Create a pair of virtual networks with peering",
+  "githubUsername": "nudbeach",
+  "docOwner": "euchung",
+  "dateUpdated": "2021-05-03",
+  "environments": [
+    "AzureCloud"
+  ]
+}

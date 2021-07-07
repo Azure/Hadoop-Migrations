@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "7642844370108994584"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location of the resources"
+      }
+    },
+    "diskName": {
+      "type": "string",
+      "defaultValue": "disk01",
+      "metadata": {
+        "description": "Name of the Disk"
+      }
+    },
+    "diskSizeGB": {
+      "type": "int",
+      "defaultValue": 4,
+      "metadata": {
+        "description": "Size in GB of the Disk"
+      }
+    },
+    "diskSKU": {
+      "type": "string",
+      "defaultValue": "Premium_LRS",
+      "metadata": {
+        "description": "SKU of the Disk"
+      }
+    }
+  },
+  "functions": [],
+  "resources": [
+    {
+      "type": "Microsoft.Compute/disks",
+      "apiVersion": "2020-12-01",
+      "name": "[parameters('diskName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('diskSKU')]"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": "[parameters('diskSizeGB')]"
+      }
+    }
+  ]
+}
