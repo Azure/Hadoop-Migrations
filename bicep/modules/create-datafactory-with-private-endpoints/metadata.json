@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Create a Azure Data Factory",
+  "description": "This template creates a Azure Data Factory with private endpoint links",
+  "summary": "Create a Azure Data Factory",
+  "githubUsername": "nudbeach",
+  "docOwner": "euchung",
+  "dateUpdated": "2021-05-03",
+  "environments": [
+    "AzureCloud"
+  ]
+}

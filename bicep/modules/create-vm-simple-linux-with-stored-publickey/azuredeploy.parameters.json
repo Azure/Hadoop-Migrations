@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "vmName": {
+            "value": "vmBlue002"
+        },
+        "adminUsername": {
+            "value": "azureuser"
+        },
+        "authenticationType": {
+            "value": "sshPublicKey"
+        },
+        "storedSSHKeyName": {
+            "value": "DEFAULT03"
+        },
+        "virtualNetworkName": {
+            "value": "vnetBlue"
+        },
+        "subnetName": {
+            "value": "subnet1"
+        },
+        "networkSecurityGroupName": {
+            "value": "hdmp011nsg001"
+        },
+        "vmSize": {
+            "value": "Standard_B2s"
+        }
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "clusterType": {
+            "value": "hadoop"
+        },
+        "clusterName": {
+            "value": "hdmp001hdi001"
+        },
+        "clusterLoginUserName": {
+            "value": "hdmpuser"
+        },
+        "clusterLoginPassword": {
+            "value": "hsafda#Sn$8"
+        },
+        "sshUserName": {
+            "value": "azureuser"
+        },
+        "sshPassword": {
+            "value": "hsafda#Sn$8"
+        },
+        "clusterStorageAccountName": {
+            "value": "hdmp001sa001"
+        },
+        "clusterWorkerNodeCount": {
+            "value": 4
+        },
+        "clusterHeadNodeCount": {
+            "value": 2
+        },
+        "clusterZookeeperNodeCount": {
+            "value": 3
+        },
+        "userAssignedIdentityName": {
+            "value": "hdmp001uain001"
+        },
+        "vmSizeHeadNode": {
+            "value": "Standard_E8_v3"
+        },
+        "vmSizeWorkerNode": {
+            "value": "Standard_A5"
+        },
+        "vmSizeZookeeperNode": {
+            "value": "Standard_A5"
+        },
+        "vnetHDIName": {
+            "value": "vnetBlue"
+        },
+        "hdiSubnetName": {
+            "value": "subnet-hdi"
+        },
+        "hdiSubnetCidr": {
+            "value": "192.168.13.192/26"
+        }
+    }
+}

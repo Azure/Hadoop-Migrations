@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Create a linux virtual machine",
+  "description": "This template creates a linux virtual machine with basic settings",
+  "summary": "Create a linux virtual machine",
+  "githubUsername": "nudbeach",
+  "docOwner": "euchung",
+  "dateUpdated": "2021-05-03",
+  "environments": [
+    "AzureCloud"
+  ]
+}

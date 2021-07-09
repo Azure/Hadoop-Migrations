@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "vNet1Name": {
+            "value": "vnetMgmt"
+        },
+        "vNet2Name": {
+            "value": "vnetBlue"
+        },
+        "vNet1Config": {
+            "value": {
+                "addressSpacePrefix": "192.168.12.0/23",
+                "subnet1Name": "subnet1",
+                "subnet1Prefix": "192.168.12.0/26",
+                "privateEndpointNetworkPolicies": "Disabled"
+            }
+        },
+        "vNet2Config": {
+            "value": {
+                "addressSpacePrefix": "192.168.14.0/23",
+                "subnet1Name": "subnet1",
+                "subnet1Prefix": "192.168.14.0/26",
+                //"subnet2Name": "subnet2",
+                //"subnet2Prefix": "192.168.15.0/26",
+                "privateEndpointNetworkPolicies": "Disabled"
+            }
+        },
+        "networkSecurityGroupName": {
+            "value": "hdmp001nsg001"
+        },
+        /*
+        "privateDnsZoneName": {
+            "type": "String",
+            "value": "contoso.com"
+        },
+        "vmRegistration": {
+            "type": "Bool",
+            "value": true
+        }
+        */
+    }
+}

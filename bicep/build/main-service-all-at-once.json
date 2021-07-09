@@ -1,0 +1,1814 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "247429433379931482"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location to create all resources"
+      }
+    },
+    "projectName": {
+      "type": "string",
+      "defaultValue": "hdmp001",
+      "metadata": {
+        "description": "Project name"
+      }
+    },
+    "optHDInsightCreation": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Prompt to ask if HDInsight cluster creation needed"
+      },
+      "allowedValues": [
+        true,
+        false
+      ]
+    },
+    "optCosmosDBCreation": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Prompt to ask if Cosmos DB creation needed"
+      },
+      "allowedValues": [
+        true,
+        false
+      ]
+    },
+    "optSynapseCreation": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Prompt to ask if Synapse Workspace creation needed"
+      },
+      "allowedValues": [
+        true,
+        false
+      ]
+    },
+    "optDataBrickCreation": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Prompt to ask if Azure Databrick creation needed"
+      },
+      "allowedValues": [
+        true,
+        false
+      ]
+    },
+    "optDataFactoryCreation": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Prompt to ask if Data Factory creation needed"
+      },
+      "allowedValues": [
+        true,
+        false
+      ]
+    },
+    "hdiClusterType": {
+      "type": "string",
+      "defaultValue": "hadoop",
+      "metadata": {
+        "description": "Type of HDI Cluster. storm is not supported in 4.0"
+      },
+      "allowedValues": [
+        "hadoop",
+        "hbase",
+        "spark",
+        "interactivehive"
+      ]
+    },
+    "hdiLoginUserName": {
+      "type": "string",
+      "defaultValue": "hdmpuser",
+      "metadata": {
+        "description": "Login user name of the HDI cluster"
+      }
+    },
+    "hdiLoginPassword": {
+      "type": "secureString",
+      "defaultValue": "H$ngh9731@",
+      "metadata": {
+        "description": "Login user password of the HDI cluster"
+      }
+    },
+    "hdiSSHUserName": {
+      "type": "string",
+      "defaultValue": "azureuser",
+      "metadata": {
+        "description": "Login user name of the HDI cluster VMs"
+      }
+    },
+    "hdiSSHPassword": {
+      "type": "secureString",
+      "defaultValue": "H$ngh9731@",
+      "metadata": {
+        "description": "Login user password of the HDI cluster VMs"
+      }
+    },
+    "hdiVMSizeHeads": {
+      "type": "string",
+      "defaultValue": "Standard_E8_v3",
+      "metadata": {
+        "description": "VM size of head nodes of the HDI cluster"
+      }
+    },
+    "hdiVMSizeWorker": {
+      "type": "string",
+      "defaultValue": "Standard_A5",
+      "metadata": {
+        "description": "VM size of worker nodes of the HDI cluster"
+      }
+    },
+    "hdiVMSizeZookeeper": {
+      "type": "string",
+      "defaultValue": "Standard_A5",
+      "metadata": {
+        "description": "VM size of ZooKeeper nodes of the HDI cluster"
+      }
+    },
+    "snpsSQLAdmUserName": {
+      "type": "string",
+      "defaultValue": "hdmpuser",
+      "metadata": {
+        "description": "Login user name of Synapse SQL"
+      }
+    },
+    "snpsSQLAdmPassword": {
+      "type": "secureString",
+      "defaultValue": "H$ngh9731@",
+      "metadata": {
+        "description": "Login user password of Synapse SQL"
+      }
+    }
+  },
+  "functions": [],
+  "variables": {
+    "vLocation": "[parameters('location')]",
+    "vProjectName": "[parameters('projectName')]",
+    "vKeyVaultName": "[format('{0}kv001', variables('vProjectName'))]",
+    "vVNetBlueName": "vnetBlue",
+    "vPrivateDnsZoneName": "[format('{0}-pdns.com', variables('vProjectName'))]",
+    "vUserAssignedIdentityName": "[format('{0}uain001', variables('vProjectName'))]",
+    "vNSGName": "[format('{0}nsg001', variables('vProjectName'))]",
+    "vSAName": "[format('{0}sa001', variables('vProjectName'))]",
+    "vHDIClusterName": "[format('{0}hdi001', variables('vProjectName'))]",
+    "vHDIClusterType": "[parameters('hdiClusterType')]",
+    "vHDILoginUserName": "[parameters('hdiLoginUserName')]",
+    "vHDILoginPassword": "[parameters('hdiLoginPassword')]",
+    "vHDISSHUserName": "[parameters('hdiSSHUserName')]",
+    "vHDISSHPassword": "[parameters('hdiSSHPassword')]",
+    "vHDIVMSizeHeads": "[parameters('hdiVMSizeHeads')]",
+    "vHDIVMSizeWorker": "[parameters('hdiVMSizeWorker')]",
+    "vHDIVMSizeZookeeper": "[parameters('hdiVMSizeZookeeper')]",
+    "vHDISubnetName": "subnet-hdi",
+    "vHDISubnetCidr": "192.168.13.192/26",
+    "vSNPSWorkspaceName": "[format('{0}snps001', variables('vProjectName'))]",
+    "vSNPSSparkPoolName": "[format('{0}spp001', variables('vProjectName'))]",
+    "vSNPSSQLPoolName": "[format('{0}sqp001', variables('vProjectName'))]",
+    "vSNPSDataLakeStorageAccountName": "[variables('vSAName')]",
+    "vSNPSDataLakeStorageFieshareName": "file01",
+    "vSNPSSQLAdmUserName": "[parameters('snpsSQLAdmUserName')]",
+    "vSNPSSQLAdmPassword": "[parameters('snpsSQLAdmPassword')]",
+    "vCSMSAccountName": "[format('{0}csms001', variables('vProjectName'))]",
+    "vADFName": "[format('{0}adf001', variables('vProjectName'))]",
+    "vADBWorkspaceName": "[format('{0}adb001', variables('vProjectName'))]",
+    "vADBPricingTier": "premium",
+    "vADBVNetName": "[variables('vVNetBlueName')]",
+    "vADBVSubnetPubName": "subnet-adb-pub",
+    "vADBVSubnetPubCider": "192.168.13.64/26",
+    "vADBVSubnetPvtName": "subnet-adb-prv",
+    "vADBVSubnetPvtCider": "192.168.13.128/26"
+  },
+  "resources": [
+    {
+      "condition": "[parameters('optHDInsightCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-hdinsight",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "clusterType": {
+            "value": "[variables('vHDIClusterType')]"
+          },
+          "clusterName": {
+            "value": "[variables('vHDIClusterName')]"
+          },
+          "clusterLoginUserName": {
+            "value": "[variables('vHDILoginUserName')]"
+          },
+          "clusterLoginPassword": {
+            "value": "[variables('vHDILoginPassword')]"
+          },
+          "sshUserName": {
+            "value": "[variables('vHDISSHUserName')]"
+          },
+          "sshPassword": {
+            "value": "[variables('vHDISSHPassword')]"
+          },
+          "clusterStorageAccountName": {
+            "value": "[variables('vSAName')]"
+          },
+          "userAssignedIdentityName": {
+            "value": "[variables('vUserAssignedIdentityName')]"
+          },
+          "vmSizeHeadNode": {
+            "value": "[variables('vHDIVMSizeHeads')]"
+          },
+          "vmSizeWorkerNode": {
+            "value": "[variables('vHDIVMSizeWorker')]"
+          },
+          "vmSizeZookeeperNode": {
+            "value": "[variables('vHDIVMSizeZookeeper')]"
+          },
+          "vnetHDIName": {
+            "value": "[variables('vVNetBlueName')]"
+          },
+          "hdiSubnetName": {
+            "value": "[variables('vHDISubnetName')]"
+          },
+          "hdiSubnetCidr": {
+            "value": "[variables('vHDISubnetCidr')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "16046990396881061705"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the Azure location where the key vault should be created."
+              }
+            },
+            "clusterType": {
+              "type": "string",
+              "metadata": {
+                "description": "The type of the HDInsight cluster to create."
+              },
+              "allowedValues": [
+                "hadoop",
+                "hbase",
+                "spark",
+                "interactivehive"
+              ]
+            },
+            "clusterName": {
+              "type": "string",
+              "metadata": {
+                "description": "The name of the HDInsight cluster to create."
+              }
+            },
+            "clusterLoginUserName": {
+              "type": "string",
+              "metadata": {
+                "description": "These credentials can be used to submit jobs to the cluster and to log into cluster dashboards."
+              }
+            },
+            "clusterLoginPassword": {
+              "type": "secureString",
+              "metadata": {
+                "description": "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
+              }
+            },
+            "sshUserName": {
+              "type": "string",
+              "metadata": {
+                "description": "These credentials can be used to remotely access the cluster."
+              }
+            },
+            "sshPassword": {
+              "type": "secureString",
+              "metadata": {
+                "description": "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
+              }
+            },
+            "clusterStorageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "The name of the Azure storage account to be created and be used as the cluster's primary storage."
+              }
+            },
+            "clusterWorkerNodeCount": {
+              "type": "int",
+              "defaultValue": 4,
+              "metadata": {
+                "description": "The number of nodes in the HDInsight cluster."
+              }
+            },
+            "clusterHeadNodeCount": {
+              "type": "int",
+              "defaultValue": 2,
+              "metadata": {
+                "description": "The number of head nodes in the HDInsight cluster."
+              }
+            },
+            "clusterZookeeperNodeCount": {
+              "type": "int",
+              "defaultValue": 3,
+              "metadata": {
+                "description": "The number of Zookeeper nodes in the HDInsight cluster."
+              }
+            },
+            "userAssignedIdentityName": {
+              "type": "string",
+              "defaultValue": "uain-001",
+              "metadata": {
+                "description": "The number of Zookeeper nodes in the HDInsight cluster."
+              }
+            },
+            "vmSizeHeadNode": {
+              "type": "string",
+              "defaultValue": "Standard_D3",
+              "metadata": {
+                "description": "VM Spec for Head Node"
+              }
+            },
+            "vmSizeWorkerNode": {
+              "type": "string",
+              "defaultValue": "Standard_D3",
+              "metadata": {
+                "description": "VM Spec for Worker Node"
+              }
+            },
+            "vmSizeZookeeperNode": {
+              "type": "string",
+              "defaultValue": "Standard_D3",
+              "metadata": {
+                "description": "VM Spec for ZooKeeper Node"
+              }
+            },
+            "vnetHDIName": {
+              "type": "string",
+              "defaultValue": "vnetBlue",
+              "metadata": {
+                "description": "VNet name where HDI is deployed"
+              }
+            },
+            "hdiSubnetName": {
+              "type": "string",
+              "defaultValue": "subnet-hdi",
+              "metadata": {
+                "description": "Subnet name where HDI is deployed"
+              }
+            },
+            "hdiSubnetCidr": {
+              "type": "string",
+              "defaultValue": "192.168.13.192/26",
+              "metadata": {
+                "description": "Subnet Cidr where HDI is deployed"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "vnetHDIId": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetHDIName'))]",
+            "managedIdentityId": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{2}', subscription().subscriptionId, resourceGroup().name, parameters('userAssignedIdentityName'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName'))]",
+              "properties": {
+                "addressPrefix": "[parameters('hdiSubnetCidr')]"
+              }
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2019-06-01",
+              "name": "[parameters('clusterStorageAccountName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "Standard_LRS"
+              },
+              "kind": "StorageV2",
+              "properties": {
+                "encryption": {
+                  "keySource": "Microsoft.Storage",
+                  "services": {
+                    "blob": {
+                      "enabled": true
+                    },
+                    "file": {
+                      "enabled": true
+                    }
+                  }
+                },
+                "accessTier": "Hot",
+                "isHnsEnabled": true,
+                "supportsHttpsTrafficOnly": true
+              }
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2019-06-01",
+              "name": "[format('{0}/default/blob01', parameters('clusterStorageAccountName'))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('clusterStorageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+              "apiVersion": "2019-06-01",
+              "name": "[format('{0}/default/file01', parameters('clusterStorageAccountName'))]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('clusterStorageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+              "apiVersion": "2018-11-30",
+              "name": "[parameters('userAssignedIdentityName')]",
+              "location": "[parameters('location')]"
+            },
+            {
+              "type": "Microsoft.HDInsight/clusters",
+              "apiVersion": "2018-06-01-preview",
+              "name": "[parameters('clusterName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "clusterVersion": "4.0",
+                "osType": "Linux",
+                "tier": "Standard",
+                "clusterDefinition": {
+                  "kind": "[parameters('clusterType')]",
+                  "configurations": {
+                    "gateway": {
+                      "restAuthCredential.isEnabled": true,
+                      "restAuthCredential.username": "[parameters('clusterLoginUserName')]",
+                      "restAuthCredential.password": "[parameters('clusterLoginPassword')]"
+                    }
+                  }
+                },
+                "storageProfile": {
+                  "storageaccounts": [
+                    {
+                      "name": "[format('{0}.dfs.core.windows.net', parameters('clusterStorageAccountName'))]",
+                      "isDefault": true,
+                      "fileSystem": "file01",
+                      "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('clusterStorageAccountName')), '2019-06-01').keys[0].value]",
+                      "resourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('clusterStorageAccountName'))]",
+                      "msiResourceId": "[variables('managedIdentityId')]"
+                    }
+                  ]
+                },
+                "computeProfile": {
+                  "roles": [
+                    {
+                      "name": "headnode",
+                      "targetInstanceCount": "[parameters('clusterHeadNodeCount')]",
+                      "hardwareProfile": {
+                        "vmSize": "[parameters('vmSizeHeadNode')]"
+                      },
+                      "osProfile": {
+                        "linuxOperatingSystemProfile": {
+                          "username": "[parameters('sshUserName')]",
+                          "password": "[parameters('sshPassword')]"
+                        }
+                      },
+                      "virtualNetworkProfile": {
+                        "id": "[variables('vnetHDIId')]",
+                        "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[0], split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[1])]"
+                      }
+                    },
+                    {
+                      "name": "workernode",
+                      "targetInstanceCount": "[parameters('clusterWorkerNodeCount')]",
+                      "hardwareProfile": {
+                        "vmSize": "[parameters('vmSizeWorkerNode')]"
+                      },
+                      "osProfile": {
+                        "linuxOperatingSystemProfile": {
+                          "username": "[parameters('sshUserName')]",
+                          "password": "[parameters('sshPassword')]"
+                        }
+                      },
+                      "virtualNetworkProfile": {
+                        "id": "[variables('vnetHDIId')]",
+                        "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[0], split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[1])]"
+                      }
+                    },
+                    {
+                      "name": "zookeepernode",
+                      "targetInstanceCount": "[parameters('clusterZookeeperNodeCount')]",
+                      "hardwareProfile": {
+                        "vmSize": "[parameters('vmSizeZookeeperNode')]"
+                      },
+                      "osProfile": {
+                        "linuxOperatingSystemProfile": {
+                          "username": "[parameters('sshUserName')]",
+                          "password": "[parameters('sshPassword')]"
+                        }
+                      },
+                      "virtualNetworkProfile": {
+                        "id": "[variables('vnetHDIId')]",
+                        "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[0], split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[1])]"
+                      }
+                    }
+                  ]
+                }
+              },
+              "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                  "[variables('managedIdentityId')]": {}
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('clusterStorageAccountName'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[0], split(format('{0}/{1}', parameters('vnetHDIName'), parameters('hdiSubnetName')), '/')[1])]"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "condition": "[parameters('optCosmosDBCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-cosmosdb-with-private-endpoints",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "cosmosAccountName": {
+            "value": "[variables('vCSMSAccountName')]"
+          },
+          "keyVaultName": {
+            "value": "[variables('vKeyVaultName')]"
+          },
+          "vnetName": {
+            "value": "[variables('vVNetBlueName')]"
+          },
+          "subnetName": {
+            "value": "[reference(resourceId('Microsoft.Network/virtualNetworks', variables('vVNetBlueName')), '2020-05-01').subnets[0].name]"
+          },
+          "privateDnsZoneName": {
+            "value": "[variables('vPrivateDnsZoneName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "4060682184892268073"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the location of all deployed resources."
+              }
+            },
+            "cosmosAccountName": {
+              "type": "string",
+              "defaultValue": "hdmp001csms001",
+              "metadata": {
+                "description": "Specifies the Cosmos DB account name (max length 44 characters)."
+              }
+            },
+            "keyVaultName": {
+              "type": "string",
+              "defaultValue": "hdmp001kv001",
+              "metadata": {
+                "description": "Specifies the resource id of the key vault to store the storage access key."
+              }
+            },
+            "vnetName": {
+              "type": "string",
+              "defaultValue": "vnetBlue",
+              "metadata": {
+                "description": "Specifies the name of the VNet which the private endpoint uses."
+              }
+            },
+            "subnetName": {
+              "type": "string",
+              "defaultValue": "subnet1",
+              "metadata": {
+                "description": "Specifies the name of the subnet which the private endpoint uses."
+              }
+            },
+            "privateDnsZoneName": {
+              "type": "string",
+              "defaultValue": "hdmp001-pdns.com",
+              "metadata": {
+                "description": "Specifies the name of the private dns zone."
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+            "privateDnsZoneId": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneName'))]",
+            "location_var": "[parameters('location')]",
+            "cosmosAccountName_var": "[parameters('cosmosAccountName')]",
+            "privateEndpointName_var": "[format('{0}-pe', variables('cosmosAccountName_var'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts",
+              "apiVersion": "2020-06-01-preview",
+              "name": "[variables('cosmosAccountName_var')]",
+              "kind": "GlobalDocumentDB",
+              "location": "[variables('location_var')]",
+              "properties": {
+                "consistencyPolicy": {
+                  "defaultConsistencyLevel": "BoundedStaleness",
+                  "maxIntervalInSeconds": 10,
+                  "maxStalenessPrefix": 200
+                },
+                "locations": [
+                  {
+                    "locationName": "[variables('location_var')]",
+                    "failoverPriority": 0,
+                    "isZoneRedundant": true
+                  }
+                ],
+                "databaseAccountOfferType": "Standard",
+                "ipRules": [],
+                "isVirtualNetworkFilterEnabled": true,
+                "enableAutomaticFailover": true,
+                "virtualNetworkRules": [],
+                "enableMultipleWriteLocations": false,
+                "enableCassandraConnector": false,
+                "publicNetworkAccess": "Disabled",
+                "capabilities": [],
+                "disableKeyBasedMetadataWriteAccess": true,
+                "enableAnalyticalStorage": false,
+                "backupPolicy": {
+                  "type": "Periodic",
+                  "periodicModeProperties": {
+                    "backupIntervalInMinutes": 240,
+                    "backupRetentionIntervalInHours": 8
+                  }
+                },
+                "cors": [],
+                "createMode": "Default"
+              }
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2020-05-01",
+              "name": "[variables('privateEndpointName_var')]",
+              "location": "[variables('location_var')]",
+              "properties": {
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "[variables('privateEndpointName_var')]",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmosAccountName_var'))]",
+                      "groupIds": [
+                        "sql"
+                      ]
+                    }
+                  }
+                ],
+                "manualPrivateLinkServiceConnections": [],
+                "subnet": {
+                  "id": "[variables('subnetId')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmosAccountName_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.KeyVault/vaults/secrets",
+              "apiVersion": "2019-09-01",
+              "name": "[format('{0}/cosmosConnectionString', parameters('keyVaultName'))]",
+              "properties": {
+                "contentType": "text/plain",
+                "value": "[listConnectionStrings(resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmosAccountName_var')), '2020-04-01').connectionStrings[0].connectionString]",
+                "attributes": {
+                  "enabled": true
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmosAccountName_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/aRecord', variables('privateEndpointName_var'))]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "[format('{0}-aRecord', variables('privateEndpointName_var'))]",
+                    "properties": {
+                      "privateDnsZoneId": "[variables('privateDnsZoneId')]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointName_var'))]"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "condition": "[parameters('optDataBrickCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-databricks-with-loadbalancer",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "workspaceName": {
+            "value": "[variables('vADBWorkspaceName')]"
+          },
+          "pricingTier": {
+            "value": "[variables('vADBPricingTier')]"
+          },
+          "nsgName": {
+            "value": "[variables('vNSGName')]"
+          },
+          "disablePublicIp": {
+            "value": true
+          },
+          "vnetADBName": {
+            "value": "[variables('vADBVNetName')]"
+          },
+          "publicSubnetName": {
+            "value": "[variables('vADBVSubnetPubName')]"
+          },
+          "publicSubnetCidr": {
+            "value": "[variables('vADBVSubnetPubCider')]"
+          },
+          "privateSubnetName": {
+            "value": "[variables('vADBVSubnetPvtName')]"
+          },
+          "privateSubnetCidr": {
+            "value": "[variables('vADBVSubnetPvtCider')]"
+          },
+          "loadBalancerPublicIpName": {
+            "value": "[format('{0}lb001-ip', variables('vADBWorkspaceName'))]"
+          },
+          "loadBalancerName": {
+            "value": "[format('{0}lb001', variables('vADBWorkspaceName'))]"
+          },
+          "loadBalancerFrontendConfigName": {
+            "value": "[format('{0}lb001-fec', variables('vADBWorkspaceName'))]"
+          },
+          "loadBalancerBackendPoolName": {
+            "value": "[format('{0}lb001-bep', variables('vADBWorkspaceName'))]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "11529131004587089374"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for the resources"
+              }
+            },
+            "workspaceName": {
+              "type": "string",
+              "defaultValue": "hdmp001adb001",
+              "metadata": {
+                "description": "The name of the Azure Databricks workspace to create."
+              }
+            },
+            "pricingTier": {
+              "type": "string",
+              "defaultValue": "premium",
+              "metadata": {
+                "description": "The pricing tier of workspace."
+              }
+            },
+            "disablePublicIp": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Specifies whether to deploy Azure Databricks workspace with Secure Cluster Connectivity (No Public IP) enabled or not"
+              }
+            },
+            "nsgName": {
+              "type": "string",
+              "defaultValue": "hdmp001nsg001",
+              "metadata": {
+                "description": "The name of the network security group to create."
+              }
+            },
+            "vnetADBName": {
+              "type": "string",
+              "defaultValue": "vnetBlue",
+              "metadata": {
+                "description": "The name of the virtual network to create."
+              }
+            },
+            "publicSubnetName": {
+              "type": "string",
+              "defaultValue": "subnet-adb-pub",
+              "metadata": {
+                "description": "The name of the public subnet to create."
+              }
+            },
+            "publicSubnetCidr": {
+              "type": "string",
+              "defaultValue": "192.168.13.64/26",
+              "metadata": {
+                "description": "Cidr range for the public subnet.."
+              }
+            },
+            "privateSubnetName": {
+              "type": "string",
+              "defaultValue": "subnet-adb-prv",
+              "metadata": {
+                "description": "The name of the private subnet to create."
+              }
+            },
+            "privateSubnetCidr": {
+              "type": "string",
+              "defaultValue": "192.168.13.128/26",
+              "metadata": {
+                "description": "Cidr range for the private subnet."
+              }
+            },
+            "loadBalancerPublicIpName": {
+              "type": "string",
+              "defaultValue": "ip-krc-001-adblb",
+              "metadata": {
+                "description": "Name of the outbound Load Balancer public IP."
+              }
+            },
+            "loadBalancerName": {
+              "type": "string",
+              "defaultValue": "lb-krc-001-adblb",
+              "metadata": {
+                "description": "Name of the outbound Load Balancer."
+              }
+            },
+            "loadBalancerFrontendConfigName": {
+              "type": "string",
+              "defaultValue": "lbfe-cfg-krc-001-adblb",
+              "metadata": {
+                "description": "Name of the outbound Load Balancer's Frontend Config."
+              }
+            },
+            "loadBalancerBackendPoolName": {
+              "type": "string",
+              "defaultValue": "lbbep-name-krc-001-adblb",
+              "metadata": {
+                "description": "Name of the outbound Load Balancer's Backend Pool."
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "loadBalancerId": "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName'))]",
+            "loadBalancerBackendPoolId": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancerName'), parameters('loadBalancerBackendPoolName'))]",
+            "loadBalancerFrontendConfigId": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', parameters('loadBalancerName'), parameters('loadBalancerFrontendConfigName'))]",
+            "managedResourceGroupName": "[format('databricks-rg-{0}-{1}', parameters('workspaceName'), uniqueString(parameters('workspaceName'), resourceGroup().id))]",
+            "managedResourceGroupId": "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('managedResourceGroupName'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/{1}', parameters('vnetADBName'), parameters('publicSubnetName'))]",
+              "properties": {
+                "addressPrefix": "[parameters('publicSubnetCidr')]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+                },
+                "delegations": [
+                  {
+                    "name": "databricks-del-public",
+                    "properties": {
+                      "serviceName": "Microsoft.Databricks/workspaces"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/{1}', parameters('vnetADBName'), parameters('privateSubnetName'))]",
+              "properties": {
+                "addressPrefix": "[parameters('privateSubnetCidr')]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+                },
+                "delegations": [
+                  {
+                    "name": "databricks-del-private",
+                    "properties": {
+                      "serviceName": "Microsoft.Databricks/workspaces"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', split(format('{0}/{1}', parameters('vnetADBName'), parameters('publicSubnetName')), '/')[0], split(format('{0}/{1}', parameters('vnetADBName'), parameters('publicSubnetName')), '/')[1])]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/publicIPAddresses",
+              "apiVersion": "2020-06-01",
+              "name": "[parameters('loadBalancerPublicIpName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "Standard"
+              },
+              "properties": {
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4
+              }
+            },
+            {
+              "type": "Microsoft.Network/loadBalancers",
+              "apiVersion": "2019-04-01",
+              "name": "[parameters('loadBalancerName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "Standard"
+              },
+              "properties": {
+                "frontendIPConfigurations": [
+                  {
+                    "name": "[parameters('loadBalancerFrontendConfigName')]",
+                    "properties": {
+                      "publicIPAddress": {
+                        "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('loadBalancerPublicIpName'))]"
+                      }
+                    }
+                  }
+                ],
+                "backendAddressPools": [
+                  {
+                    "name": "[parameters('loadBalancerBackendPoolName')]"
+                  }
+                ],
+                "outboundRules": [
+                  {
+                    "name": "databricks-outbound-rule",
+                    "properties": {
+                      "allocatedOutboundPorts": 0,
+                      "protocol": "All",
+                      "enableTcpReset": true,
+                      "idleTimeoutInMinutes": 4,
+                      "backendAddressPool": {
+                        "id": "[variables('loadBalancerBackendPoolId')]"
+                      },
+                      "frontendIPConfigurations": [
+                        {
+                          "id": "[variables('loadBalancerFrontendConfigId')]"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('loadBalancerPublicIpName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Databricks/workspaces",
+              "apiVersion": "2018-04-01",
+              "name": "[parameters('workspaceName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "[parameters('pricingTier')]"
+              },
+              "properties": {
+                "managedResourceGroupId": "[variables('managedResourceGroupId')]",
+                "parameters": {
+                  "customVirtualNetworkId": {
+                    "value": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetADBName'))]"
+                  },
+                  "customPublicSubnetName": {
+                    "value": "[parameters('publicSubnetName')]"
+                  },
+                  "customPrivateSubnetName": {
+                    "value": "[parameters('privateSubnetName')]"
+                  },
+                  "enableNoPublicIp": {
+                    "value": "[parameters('disablePublicIp')]"
+                  },
+                  "loadBalancerId": {
+                    "value": "[variables('loadBalancerId')]"
+                  },
+                  "loadBalancerBackendPoolName": {
+                    "value": "[parameters('loadBalancerBackendPoolName')]"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancerName'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', split(format('{0}/{1}', parameters('vnetADBName'), parameters('privateSubnetName')), '/')[0], split(format('{0}/{1}', parameters('vnetADBName'), parameters('privateSubnetName')), '/')[1])]"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "condition": "[parameters('optSynapseCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-synapse-with-private-endpoints",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "projectName": {
+            "value": "[variables('vProjectName')]"
+          },
+          "workspaceName": {
+            "value": "[variables('vSNPSWorkspaceName')]"
+          },
+          "sparkPoolName": {
+            "value": "[variables('vSNPSSparkPoolName')]"
+          },
+          "sqlPoolName": {
+            "value": "[variables('vSNPSSQLPoolName')]"
+          },
+          "dataLakeStorageAccountName": {
+            "value": "[variables('vSNPSDataLakeStorageAccountName')]"
+          },
+          "dataLakeStorageFieshareName": {
+            "value": "[variables('vSNPSDataLakeStorageFieshareName')]"
+          },
+          "sqlAdministratorLogin": {
+            "value": "[variables('vSNPSSQLAdmUserName')]"
+          },
+          "sqlAdministratorLoginPassword": {
+            "value": "[variables('vSNPSSQLAdmPassword')]"
+          },
+          "vnetName": {
+            "value": "[variables('vVNetBlueName')]"
+          },
+          "subnetName": {
+            "value": "[reference(resourceId('Microsoft.Network/virtualNetworks', variables('vVNetBlueName')), '2020-05-01').subnets[0].name]"
+          },
+          "privateDnsZoneNameSql": {
+            "value": "[variables('vPrivateDnsZoneName')]"
+          },
+          "privateDnsZoneNameDev": {
+            "value": "[variables('vPrivateDnsZoneName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "4613096638825485055"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the location of all deployed resources."
+              }
+            },
+            "projectName": {
+              "type": "string",
+              "defaultValue": "hdmp001",
+              "metadata": {
+                "description": "Project name"
+              }
+            },
+            "skuSQLPool": {
+              "type": "string",
+              "defaultValue": "DW100c",
+              "metadata": {
+                "description": "Select the SKU of the SQL pool."
+              }
+            },
+            "metadataSync": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Choose whether you want to synchronise metadata."
+              }
+            },
+            "allowAllConnections": {
+              "type": "string",
+              "defaultValue": "true",
+              "metadata": {
+                "description": "Fire wall setting, whether to allow from all connections"
+              },
+              "allowedValues": [
+                "true",
+                "false"
+              ]
+            },
+            "sparkDeployment": {
+              "type": "string",
+              "defaultValue": "true",
+              "metadata": {
+                "description": "'True' deploys an Apache Spark pool as well as a SQL pool. 'False' does not deploy an Apache Spark pool."
+              },
+              "allowedValues": [
+                "true",
+                "false"
+              ]
+            },
+            "workspaceName": {
+              "type": "string",
+              "defaultValue": "[parameters('projectName')]",
+              "metadata": {
+                "description": "Workspace name of Synapse instance"
+              }
+            },
+            "sparkPoolName": {
+              "type": "string",
+              "defaultValue": "[toLower('spp01')]",
+              "metadata": {
+                "description": "Spark Pool name of workspace"
+              }
+            },
+            "sqlPoolName": {
+              "type": "string",
+              "defaultValue": "[toLower('sqp01')]",
+              "metadata": {
+                "description": "SQL Pool name of workspace"
+              }
+            },
+            "dataLakeStorageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Datalake Storage Account name for this workspace"
+              }
+            },
+            "dataLakeStorageFieshareName": {
+              "type": "string",
+              "metadata": {
+                "description": "Datalake Storage Account File Share name for this workspace"
+              }
+            },
+            "sqlAdministratorLogin": {
+              "type": "string",
+              "metadata": {
+                "description": "SQL user name"
+              }
+            },
+            "sqlAdministratorLoginPassword": {
+              "type": "secureString",
+              "metadata": {
+                "description": "SQL user password"
+              }
+            },
+            "sparkNodeSize": {
+              "type": "string",
+              "defaultValue": "Medium",
+              "metadata": {
+                "description": "This parameter will determine the node size if SparkDeployment is true"
+              },
+              "allowedValues": [
+                "Small",
+                "Medium",
+                "Large"
+              ]
+            },
+            "vnetName": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the subnet which the private endpoint uses."
+              }
+            },
+            "subnetName": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the subnet which the private endpoint uses."
+              }
+            },
+            "privateDnsZoneNameSql": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the private dns zone for sql pools."
+              }
+            },
+            "privateDnsZoneNameDev": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the private dns zone for dev."
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+            "privateDnsZoneIdSql": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneNameSql'))]",
+            "privateDnsZoneIdDev": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneNameDev'))]",
+            "subnetId_var": "[variables('subnetId')]",
+            "privateDnsZoneIdSql_var": "[variables('privateDnsZoneIdSql')]",
+            "privateDnsZoneIdDev_var": "[variables('privateDnsZoneIdDev')]",
+            "privateEndpointNameSql_var": "[format('{0}-sql-pe', parameters('workspaceName'))]",
+            "privateEndpointNameSqlOnDemand_var": "[format('{0}-sqlondemand-pe', parameters('workspaceName'))]",
+            "privateEndpointNameDev_var": "[format('{0}-dev-pe', parameters('workspaceName'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Synapse/workspaces",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[parameters('workspaceName')]",
+              "location": "[parameters('location')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "defaultDataLakeStorage": {
+                  "accountUrl": "[format('https://{0}.dfs.core.windows.net/', parameters('dataLakeStorageAccountName'))]",
+                  "filesystem": "[parameters('dataLakeStorageFieshareName')]"
+                },
+                "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
+                "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+                "managedVirtualNetwork": "default",
+                "managedResourceGroupName": "[parameters('workspaceName')]",
+                "managedVirtualNetworkSettings": {
+                  "allowedAadTenantIdsForLinking": [
+                    "[subscription().tenantId]"
+                  ],
+                  "linkedAccessCheckOnTargetResource": true,
+                  "preventDataExfiltration": true
+                },
+                "connectivityEndpoints": {}
+              }
+            },
+            {
+              "condition": "[equals(parameters('allowAllConnections'), 'true')]",
+              "type": "Microsoft.Synapse/workspaces/firewallRules",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[format('{0}/allowAll', parameters('workspaceName'))]",
+              "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "255.255.255.255"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Synapse/workspaces/firewallRules",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[format('{0}/AllowAllWindowsAzureIps', parameters('workspaceName'))]",
+              "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "0.0.0.0"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Synapse/workspaces/managedIdentitySqlControlSettings",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[format('{0}/default', parameters('workspaceName'))]",
+              "properties": {
+                "grantSqlControlToManagedIdentity": {
+                  "desiredState": "Enabled"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Synapse/workspaces/sqlPools",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName'))]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "[parameters('skuSQLPool')]"
+              },
+              "properties": {
+                "createMode": "Default",
+                "collation": "SQL_Latin1_General_CP1_CI_AS"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "condition": "[parameters('metadataSync')]",
+              "type": "Microsoft.Synapse/workspaces/sqlPools/metadataSync",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[format('{0}/config', format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName')))]",
+              "properties": {
+                "enabled": "[parameters('metadataSync')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces/sqlPools', split(format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName')), '/')[0], split(format('{0}/{1}', parameters('workspaceName'), parameters('sqlPoolName')), '/')[1])]"
+              ]
+            },
+            {
+              "condition": "[equals(parameters('sparkDeployment'), 'true')]",
+              "type": "Microsoft.Synapse/workspaces/bigDataPools",
+              "apiVersion": "2019-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('workspaceName'), parameters('sparkPoolName'))]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "nodeCount": 5,
+                "nodeSizeFamily": "MemoryOptimized",
+                "nodeSize": "[parameters('sparkNodeSize')]",
+                "autoScale": {
+                  "enabled": true,
+                  "minNodeCount": 3,
+                  "maxNodeCount": 40
+                },
+                "autoPause": {
+                  "enabled": true,
+                  "delayInMinutes": 15
+                },
+                "sparkVersion": "2.4"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2020-05-01",
+              "name": "[variables('privateEndpointNameSql_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "[variables('privateEndpointNameSql_var')]",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]",
+                      "groupIds": [
+                        "Sql"
+                      ]
+                    }
+                  }
+                ],
+                "manualPrivateLinkServiceConnections": [],
+                "subnet": {
+                  "id": "[variables('subnetId_var')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/aRecord', variables('privateEndpointNameSql_var'))]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "[format('{0}-aRecord', variables('privateEndpointNameSql_var'))]",
+                    "properties": {
+                      "privateDnsZoneId": "[variables('privateDnsZoneIdSql_var')]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameSql_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2020-05-01",
+              "name": "[variables('privateEndpointNameSqlOnDemand_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "[variables('privateEndpointNameSqlOnDemand_var')]",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]",
+                      "groupIds": [
+                        "SqlOnDemand"
+                      ]
+                    }
+                  }
+                ],
+                "manualPrivateLinkServiceConnections": [],
+                "subnet": {
+                  "id": "[variables('subnetId_var')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/aRecord', variables('privateEndpointNameSqlOnDemand_var'))]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "[format('{0}-aRecord', variables('privateEndpointNameSqlOnDemand_var'))]",
+                    "properties": {
+                      "privateDnsZoneId": "[variables('privateDnsZoneIdSql_var')]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameSqlOnDemand_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2020-05-01",
+              "name": "[variables('privateEndpointNameDev_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "[variables('privateEndpointNameDev_var')]",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]",
+                      "groupIds": [
+                        "Dev"
+                      ]
+                    }
+                  }
+                ],
+                "manualPrivateLinkServiceConnections": [],
+                "subnet": {
+                  "id": "[variables('subnetId_var')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('workspaceName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/aRecord', variables('privateEndpointNameDev_var'))]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "[format('{0}-aRecord', variables('privateEndpointNameDev_var'))]",
+                    "properties": {
+                      "privateDnsZoneId": "[variables('privateDnsZoneIdDev_var')]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameDev_var'))]"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "condition": "[parameters('optDataFactoryCreation')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "create-datafactory-with-private-endpoints",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[variables('vLocation')]"
+          },
+          "dataFactoryName": {
+            "value": "[variables('vADFName')]"
+          },
+          "keyVaultName": {
+            "value": "[variables('vKeyVaultName')]"
+          },
+          "vnetName": {
+            "value": "[variables('vVNetBlueName')]"
+          },
+          "subnetName": {
+            "value": "[reference(resourceId('Microsoft.Network/virtualNetworks', variables('vVNetBlueName')), '2020-05-01').subnets[0].name]"
+          },
+          "privateDnsZoneNameDataFactory": {
+            "value": "[variables('vPrivateDnsZoneName')]"
+          },
+          "privateDnsZoneNamePortal": {
+            "value": "[variables('vPrivateDnsZoneName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.3.255.40792",
+              "templateHash": "8448041492227030101"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for your data factory"
+              }
+            },
+            "dataFactoryName": {
+              "type": "string",
+              "defaultValue": "hdmp001adf001",
+              "metadata": {
+                "description": "Name of the instance"
+              }
+            },
+            "keyVaultName": {
+              "type": "string",
+              "defaultValue": "hdmp001kv001",
+              "metadata": {
+                "description": "Specifies the resource id of the key vault to store the storage access key."
+              }
+            },
+            "vnetName": {
+              "type": "string",
+              "defaultValue": "vnetBlue",
+              "metadata": {
+                "description": "Specifies the name of the VNet which the private endpoint uses."
+              }
+            },
+            "subnetName": {
+              "type": "string",
+              "defaultValue": "subnet1",
+              "metadata": {
+                "description": "Specifies the name of the subnet which the private endpoint uses."
+              }
+            },
+            "privateDnsZoneNameDataFactory": {
+              "type": "string",
+              "defaultValue": "hdmp001-pdns.com",
+              "metadata": {
+                "description": "Specifies the name of the private dns zone, Data Factory"
+              }
+            },
+            "privateDnsZoneNamePortal": {
+              "type": "string",
+              "defaultValue": "hdmp001-pdns.com",
+              "metadata": {
+                "description": "Specifies the name of the private dns zone, Portal"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "keyVaultId": "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]",
+            "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+            "privateDnsZoneIdDataFactory": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneNameDataFactory'))]",
+            "privateDnsZoneIdPortal": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZoneNamePortal'))]",
+            "defaultManagedVnetIntegrationRuntimeName": "AutoResolveIntegrationRuntime",
+            "dataFactoryName_var": "[parameters('dataFactoryName')]",
+            "keyVaultId_var": "[variables('keyVaultId')]",
+            "subnetId_var": "[variables('subnetId')]",
+            "privateDnsZoneIdDataFactory_var": "[variables('privateDnsZoneIdDataFactory')]",
+            "privateDnsZoneIdPortal_var": "[variables('privateDnsZoneIdPortal')]",
+            "privateEndpointNameDataFactory_var": "[format('{0}-datafactory-pe', variables('dataFactoryName_var'))]",
+            "privateEndpointNamePortal_var": "[format('{0}-portal-pe', variables('dataFactoryName_var'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.DataFactory/factories",
+              "apiVersion": "2018-06-01",
+              "name": "[parameters('dataFactoryName')]",
+              "location": "[parameters('location')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "globalParameters": {},
+                "publicNetworkAccess": "Disabled"
+              }
+            },
+            {
+              "type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+              "apiVersion": "2018-06-01",
+              "name": "[format('{0}/default', parameters('dataFactoryName'))]",
+              "properties": {},
+              "dependsOn": [
+                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DataFactory/factories/integrationRuntimes",
+              "apiVersion": "2018-06-01",
+              "name": "[format('{0}/{1}', parameters('dataFactoryName'), variables('defaultManagedVnetIntegrationRuntimeName'))]",
+              "properties": {
+                "type": "Managed",
+                "managedVirtualNetwork": {
+                  "type": "ManagedVirtualNetworkReference",
+                  "referenceName": "default"
+                },
+                "typeProperties": {
+                  "computeProperties": {
+                    "location": "AutoResolve"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', split(format('{0}/default', parameters('dataFactoryName')), '/')[0], split(format('{0}/default', parameters('dataFactoryName')), '/')[1])]",
+                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]"
+              ]
+            },
+            {
+              "condition": "[not(empty(variables('keyVaultId_var')))]",
+              "type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+              "apiVersion": "2018-06-01",
+              "name": "[format('{0}/{1}', format('{0}/default', parameters('dataFactoryName')), replace(parameters('keyVaultName'), '-', ''))]",
+              "properties": {
+                "privateLinkResourceId": "[variables('keyVaultId_var')]",
+                "groupId": "vault"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', split(format('{0}/default', parameters('dataFactoryName')), '/')[0], split(format('{0}/default', parameters('dataFactoryName')), '/')[1])]",
+                "[resourceId('Microsoft.DataFactory/factories/integrationRuntimes', split(format('{0}/{1}', parameters('dataFactoryName'), variables('defaultManagedVnetIntegrationRuntimeName')), '/')[0], split(format('{0}/{1}', parameters('dataFactoryName'), variables('defaultManagedVnetIntegrationRuntimeName')), '/')[1])]",
+                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]"
+              ]
+            },
+            {
+              "condition": "[not(empty(variables('keyVaultId_var')))]",
+              "type": "Microsoft.DataFactory/factories/linkedservices",
+              "apiVersion": "2018-06-01",
+              "name": "[format('{0}/{1}', parameters('dataFactoryName'), replace(parameters('keyVaultName'), '-', ''))]",
+              "properties": {
+                "type": "AzureKeyVault",
+                "annotations": [],
+                "connectVia": {
+                  "type": "IntegrationRuntimeReference",
+                  "referenceName": "[variables('defaultManagedVnetIntegrationRuntimeName')]"
+                },
+                "description": "Key Vault for data product",
+                "parameters": {},
+                "typeProperties": {
+                  "baseUrl": "[format('https://{0}.vault.azure.net/', parameters('keyVaultName'))]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DataFactory/factories/managedVirtualNetworks', split(format('{0}/default', parameters('dataFactoryName')), '/')[0], split(format('{0}/default', parameters('dataFactoryName')), '/')[1])]",
+                "[resourceId('Microsoft.DataFactory/factories/integrationRuntimes', split(format('{0}/{1}', parameters('dataFactoryName'), variables('defaultManagedVnetIntegrationRuntimeName')), '/')[0], split(format('{0}/{1}', parameters('dataFactoryName'), variables('defaultManagedVnetIntegrationRuntimeName')), '/')[1])]",
+                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2020-05-01",
+              "name": "[variables('privateEndpointNameDataFactory_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "[variables('privateEndpointNameDataFactory_var')]",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]",
+                      "groupIds": [
+                        "dataFactory"
+                      ]
+                    }
+                  }
+                ],
+                "manualPrivateLinkServiceConnections": [],
+                "subnet": {
+                  "id": "[variables('subnetId_var')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/aRecord', variables('privateEndpointNameDataFactory_var'))]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "[format('{0}-aRecord', variables('privateEndpointNameDataFactory_var'))]",
+                    "properties": {
+                      "privateDnsZoneId": "[variables('privateDnsZoneIdDataFactory_var')]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNameDataFactory_var'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2020-05-01",
+              "name": "[variables('privateEndpointNamePortal_var')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "[variables('privateEndpointNamePortal_var')]",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]",
+                      "groupIds": [
+                        "portal"
+                      ]
+                    }
+                  }
+                ],
+                "manualPrivateLinkServiceConnections": [],
+                "subnet": {
+                  "id": "[variables('subnetId_var')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DataFactory/factories', parameters('dataFactoryName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2020-05-01",
+              "name": "[format('{0}/aRecord', variables('privateEndpointNamePortal_var'))]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "[format('{0}-aRecord', variables('privateEndpointNamePortal_var'))]",
+                    "properties": {
+                      "privateDnsZoneId": "[variables('privateDnsZoneIdPortal_var')]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateEndpoints', variables('privateEndpointNamePortal_var'))]"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "projectName": {
+            "value": "hdmp001"
+        },
+        "skuSQLPool": {
+            "value": "DW100c"
+        },
+        "metadataSync": {
+            "value": false
+        },
+        "allowAllConnections": {
+            "value": "true"
+        },
+        "sparkDeployment": {
+            "value": "true"
+        },
+        "workspaceName": {
+            "value": "hdmp001snps001"
+        },
+        "sparkPoolName": {
+            "value": "hdmp001spp001"
+        },
+        "sqlPoolName": {
+            "value": "hdmp001sqp001"
+        },
+        "dataLakeStorageAccountName": {
+            "value": "hdmp001sa001"
+        },
+        "dataLakeStorageFieshareName": {
+            "value": "file01"
+        },
+        "sqlAdministratorLogin": {
+            "value": "hdmpuser"
+        },
+        "sqlAdministratorLoginPassword": {
+            "value": "H$ngh9731@"
+        },
+        "sparkNodeSize": {
+            "value": "Medium"
+        },
+        "vnetName": {
+            "value": "vnetBlue"
+        },
+        "subnetName": {
+            "value": "subnet1"
+        },
+        "privateDnsZoneNameSql": {
+            "value": "hdmp001-pdns.com"
+        },
+        "privateDnsZoneNameDev": {
+            "value": "hdmp001-pdns.com"
+        }
+    }
+}

@@ -1,0 +1,5 @@
+Software plan Price Description
+Hortonworks Sandbox with HDP 2.6.4
+
+Bring your own license (BYOL) (+ Azure infrastructure costs)
+Sandbox is an enterprise Hadoop environment with many interactive tutorials to jumpstart your learning. Sandbox includes many of the most exciting developments from the latest HDP distribution, which you can get up and running in under 15 minutes. It comes with tutorials to help you learn Hadoop, Spark, Pig, Hive, Kafka, Storm, HBase, Ranger, Falcon, Ambari and YARN.

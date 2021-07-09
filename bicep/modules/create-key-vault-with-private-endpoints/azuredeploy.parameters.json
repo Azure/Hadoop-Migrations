@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "koreacentral"
+        },
+        "keyVaultName": {
+            "value": "hdmp001kv001"
+        },
+        "enabledForDeployment": {
+            "value": true
+        },
+        "enabledForDiskEncryption": {
+            "value": true
+        },
+        "enabledForTemplateDeployment": {
+            "value": true
+        },
+        "tenantId": {
+            "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "objectId": {
+            "value": "ec847c95-e7b1-4f60-89dc-0abe8c01949f"
+        },
+        "keysPermissions": {
+            "value": [
+                "all"
+            ]
+        },
+        "secretsPermissions": {
+            "value": [
+                "all"
+            ]
+        },
+        "skuName": {
+            "value": "standard"
+        },
+        "secretName": {
+            "value": "sec01"
+        },
+        "secretValue": {
+            "value": "sec01-secret-value"
+        },
+        "vnetName": {
+            "value": "vnetBlue"
+        },
+        "subnetName": {
+            "value": "subnet1"
+        },
+        "privateDnsZoneName": {
+            "value": "hdmp001-pdns.com"
+        }
+    }
+}

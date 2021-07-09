@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Deploy data platform",
+  "description": "This template deploys end-state archtiecture of data platform which described from Hadoop-Migration project",
+  "summary": "Deploys end-state archtiecture of data platform",
+  "githubUsername": "nudbeach",
+  "docOwner": "euchung",
+  "dateUpdated": "2021-06-03",
+  "environments": [
+    "AzureCloud"
+  ]
+}

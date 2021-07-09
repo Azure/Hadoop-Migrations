@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "koreacentral"
+    },
+    "projectName": {
+      "value": "hdmp014"
+    },
+    "optHDInsightCreation": {
+      "value": true
+    },
+    "optCosmosDBCreation": {
+      "value": true
+    },
+    "optSynapseCreation": {
+      "value": true
+    },
+    "optDataBrickCreation": {
+      "value": true
+    },
+    "optDataFactoryCreation": {
+      "value": true
+    },
+
+    "hdiClusterType": {
+      "value": "hadoop"
+    },
+    "hdiLoginUserName": {
+      "value": "hdmpuser"
+    },
+    "hdiLoginPassword": {
+      "value": "H$ngh9731@"
+    },
+    "hdiSSHUserName": {
+      "value": "azureuser"
+    },
+    "hdiSSHPassword": {
+      "value": "H$ngh9731@"
+    },
+    "hdiVMSizeHeads": {
+      "value": "Standard_E8_v3"
+    },
+    "hdiVMSizeWorker": {
+      "value": "Standard_A5"
+    },
+    "hdiVMSizeZookeeper": {
+      "value": "Standard_A5"
+    },
+
+    "snpsSQLAdmUserName": {
+      "value": "hdmpuser"
+    },
+    "snpsSQLAdmPassword": {
+      "value": "H$ngh9731@"
+    }
+
+  }
+}
