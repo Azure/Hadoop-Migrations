@@ -2,7 +2,7 @@
 
 The primary target for Synapse Spark is to provide Spark processing power to the Synapse table in the same eco system.
 
-![img](../images/clip_image142.png)
+![img](../images/flowchart-spark-azure-landing-targets.png)
 
 ## Shared Metadata: 
 
