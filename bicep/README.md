@@ -152,8 +152,8 @@ There are 4 ways to deploy the reference architecture, let's look at each one in
 
 - Infrastructure
 
-[![Deploy To Azure](images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnudbeach%2Fdata-platform-migration%2Fmain%2Fbuild%2Fmain-infra.json)
-[![Visualize](images/visualizebutton.svg)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fnudbeach%2Fdata-platform-migration%2Fmain%2Fbuild%2Fmain-infra.json)
+[![Deploy To Azure](images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2FAzure%2FHadoop-Migrations%2Fblob%2Fmain%2Fbicep%2Fbuild%2Fmain-infra.json)
+[![Visualize](images/visualizebutton.svg)](http://armviz.io/#/?load=https%3A%2F%2Fgithub.com%2FAzure%2FHadoop-Migrations%2Fblob%2Fmain%2Fbicep%2Fbuild%2Fmain-infra.json)
 
 - Key Vault
 
