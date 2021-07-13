@@ -33,5 +33,10 @@ In order to migrate all policies from a Ranger cluster to another cluster we sho
 ```console  
   curl -iv -u <user>:<password> -d @<policy payload> -H "Content-Type: application/json" -X POST http://<RANGER-Host>:6080/service/public/api/policy/
 ```  
+On the other hand we can use the import/export button on the Ranger UI
+![image](https://user-images.githubusercontent.com/7907123/125410503-3906c080-e3bd-11eb-9026-758cf6b1e81c.png)
+![image](https://user-images.githubusercontent.com/7907123/125410524-3efca180-e3bd-11eb-939f-0042e67cf096.png)
 
+
+More detail on the following documentation:[Import-Export Ranger Policies](https://cwiki.apache.org/confluence/display/RANGER/User+Guide+For+Import-Export)
 
