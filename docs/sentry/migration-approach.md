@@ -4,6 +4,8 @@
 Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions:
 https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-authorization
 
+# Authorization Methods 
+
 ## ABAC
 Attribute-based access control (ABAC) is an authorization system that defines access based on attributes associated with security principals, resources, and environment. With ABAC, you can grant a security principal access to a resource based on attributes.
 
