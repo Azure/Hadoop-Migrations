@@ -31,6 +31,8 @@ https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databr
 
 # Ranger from CDP/HDP to HDInsight 
 
+## Using the API
+
 In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and exporte it one by one as follows:
 
 1.Export policies from CDP/HDP cluster:
@@ -41,7 +43,10 @@ In order to migrate all policies from a Ranger cluster to another cluster we sho
 ```console  
   curl -iv -u <user>:<password> -d @<policy payload> -H "Content-Type: application/json" -X POST http://<RANGER-Host>:6080/service/public/api/policy/
 ```  
-On the other hand we can use the import/export button on the Ranger UI
+## Using the UI
+
+We can use the import/export button on the Ranger UI in order to export and import all the ranger policies as we can see on the following pictures
+
 ![image](https://user-images.githubusercontent.com/7907123/125410503-3906c080-e3bd-11eb-9026-758cf6b1e81c.png)
 ![image](https://user-images.githubusercontent.com/7907123/125410524-3efca180-e3bd-11eb-939f-0042e67cf096.png)
 
