@@ -6,7 +6,7 @@ https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-autho
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)
+![Sentry](https://user-images.githubusercontent.com/7907123/125590459-1324bfb6-7d6e-4fec-b9ea-edf2b346b207.png)
 
 # Sentry to Azure RBAC
 Curretly we do not have any Automatic procedure, but we can do a manual migration, following the steps on this documentation:
