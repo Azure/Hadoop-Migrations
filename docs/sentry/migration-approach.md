@@ -9,11 +9,11 @@ Landing Targets for Apache Sentry on Azure
 ![Sentry](https://user-images.githubusercontent.com/7907123/125590459-1324bfb6-7d6e-4fec-b9ea-edf2b346b207.png)
 
 
-| Migration Service                      | Manual Migration                       | Automatic Migration |
+| Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| HDInsights                         |      + |     + |
-| Databricks                             |     + |     - | 
-| Active directory integration (Azure RBAC) |     + |     - |
+| HDInsights                         |      + |     + |     + |
+| Databricks                             |     + |     - |      + |
+| Active directory integration (Azure RBAC) |     + |     - |      - |
 
 
 
