@@ -8,6 +8,15 @@ Landing Targets for Apache Sentry on Azure
 
 ![Sentry](https://user-images.githubusercontent.com/7907123/125590459-1324bfb6-7d6e-4fec-b9ea-edf2b346b207.png)
 
+
+| Migration Service                      | Manual Migration                       | Automatic Procedure |
+| ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| HDInsights                         | - | - |
+| Databricks                             | - | - | 
+| Active directory integration (Azure RBAC) | - | - |
+
+
+
 # Sentry to Azure RBAC
 Curretly we do not have any Automatic procedure, but we can do a manual migration, following the steps on this documentation:
 https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
