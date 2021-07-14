@@ -8,6 +8,10 @@ Landing Targets for Apache Sentry on Azure
 
 ![Sentry](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)
 
+# Sentry to Azure RBAC
+Curretly we do not have any Automatic procedure, but we can do a manual migration, following the steps on this documentation:
+https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
+
 # Sentry to Ranger
 
 Currently there is only a way to migrate Sentry RBAC policies to Ranger ABAC policies, but is under the path of a third-party vendor.
