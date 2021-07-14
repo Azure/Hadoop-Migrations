@@ -9,7 +9,7 @@ Landing Targets for Apache Sentry on Azure
 ![Sentry](https://user-images.githubusercontent.com/7907123/125590459-1324bfb6-7d6e-4fec-b9ea-edf2b346b207.png)
 
 
-| Migration Service                      | Manual Migration                       | Automatic Procedure |
+| Migration Service                      | Manual Migration                       | Automatic Migration |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | HDInsights                         | + | - |
 | Databricks                             | + | - | 
