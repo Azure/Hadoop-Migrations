@@ -11,9 +11,9 @@ Landing Targets for Apache Sentry on Azure
 
 | Migration Service                      | Manual Migration                       | Automatic Procedure |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| HDInsights                         | - | - |
-| Databricks                             | - | - | 
-| Active directory integration (Azure RBAC) | - | - |
+| HDInsights                         | + | - |
+| Databricks                             | + | - | 
+| Active directory integration (Azure RBAC) | + | - |
 
 
 
