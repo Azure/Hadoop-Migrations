@@ -14,22 +14,35 @@ Access management for cloud resources is a critical function for any organizatio
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)
+![Sentry](https://user-images.githubusercontent.com/7907123/125590459-1324bfb6-7d6e-4fec-b9ea-edf2b346b207.png)
 
-# Sentry to Ranger
+
+| Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
+| ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
+| HDInsights                         |      + |     + |     + |
+| Databricks                             |     + |     - |      + |
+| Active directory integration (Azure RBAC) |     + |     - |      - |
+
+
+
+# Migration to Azure RBAC
+Curretly we do not have any Automatic procedure, but we can do a manual migration, following the steps on this documentation:
+https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
+
+# Migration to Ranger
 
 Currently there is only a way to migrate Sentry RBAC policies to Ranger ABAC policies, but is under the path of a third-party vendor.
 
 https://docs.cloudera.com/cdp-private-cloud/latest/upgrade-cdh/topics/cdpdc-sentry-pre-upgrade-migration-to-ranger.html
 
 
-# Ranger to Databricks
+# Migration to Databricks
 
 Some companies are migrating Ranger Policies to databricks cluster using an intermediate solution:
 
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
-# Ranger from CDP/HDP to HDInsight 
+# Migration to  HDInsight 
 
 ## Using the API
 
