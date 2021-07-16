@@ -15,17 +15,17 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
  
 |Component | Description| Decision Flow/Flowchats|
 |----------|-----------|-----------|
-|[Apache HDFS](docs/hdfs/architecture-and-components.md) |Distributed File System |[Planning the data migration](/docs/images/hdfs_1Datamigrationplanning.png) ,  [Pre-checks prior to data migration](docs/images/hdfs_2prechecks.png)
-|[Apache HBase](docs/hbase/architecture-and-components.md)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
-|[Apache Hive](docs/hive/architecture-and-components.md)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/clip_image124.png), [Selecting target DB for hive metadata](docs/images/clip_image067.png)|
-|[Apache Spark](docs/spark/architecture-and-components.md)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/clip_image142.png)|
-|[Apache Ranger](docs/ranger/architecture-and-components.md)    |Frame work to monitor and manage Data secuirty |
-|[Apache Sentry](docs/sentry/architecture-and-components.md)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
-|[Apache MapReduce](docs/mapreduce/architecture-and-components.md) |Distributed computation framework |
-|[Apache Zookeeper](docs/zookeeper/README.md) |Distributed coordination service |
-|[Apache YARN](docs/yarn/README.md) | Resource manager for Hadoop ecosystem |
-|[Storm](docs/storm/architecture-and-components.md)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
-|[Sqoop](docs/sqoop/architecture-and-components.md)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
+|[Apache HDFS](docs/hdfs/) |Distributed File System |[Planning the data migration](/docs/images/hdfs_1Datamigrationplanning.png) ,  [Pre-checks prior to data migration](docs/images/hdfs_2prechecks.png)
+|[Apache HBase](docs/hbase/)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
+|[Apache Hive](docs/hive/)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/clip_image124.png), [Selecting target DB for hive metadata](docs/images/clip_image067.png)|
+|[Apache Spark](docs/spark/)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/clip_image142.png)|
+|[Apache Ranger](docs/ranger/)    |Frame work to monitor and manage Data secuirty |
+|[Apache Sentry](docs/sentry/)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
+|[Apache MapReduce](docs/mapreduce/) |Distributed computation framework |
+|[Apache Zookeeper](docs/zookeeper/) |Distributed coordination service |
+|[Apache YARN](docs/yarn/) | Resource manager for Hadoop ecosystem |
+|[Storm](docs/storm/)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
+|[Sqoop](docs/sqoop/)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
 
 
 
@@ -34,28 +34,32 @@ This guide recognizes that Hadoop provides an extensive ecosystem of services an
 
 ### End State Reference Architecture
 
+One of the challenges while migrating workloads from on-premises Hadoop to Azure is having the right deployment done which is aligning with the desired end state architecture and the application. With this bicep project we are aiming to reduce a significant effort which goes behind deploying the PaaS services on Azure and having a production ready architecture up and running.
+
+We will be looking at the end state architecture for big data workloads on Azure PaaS listing all the components deployed as a part of bicep template deployment. With Bicep we also have an additional advantage of deploying only the modules we prefer for a customised architecture. In the later sections we will cover the pre-requisites for the template and different methods of deploying the resources on Azure such as Oneclick, Azure CLI, Github Actions and DevOps Pipeline.
+
+See [Reference Architecture Deployment](bicep) for more information.
+
 #### Target States
 
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Target_state.png)
+![image](docs/images/Target_state.png)
 
 
-
-    
 -  **Modernize(Azure Synapse Analytics & Azure Databricks)**
 
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/end_State_architecture_Modernize.png)
+![image](docs/images/end_State_architecture_Modernize.png)
 
 
 - **Lift and Shift(HDInsight)**
 
-![image](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/images/Hdinight%20end%20state.png)
+![image](docs/images/Hdinight%20end%20state.png)
 
-
-For more information Refer the GearUp link: <https://gearup.microsoft.com/resources/azure-hdinsight>
+For more information Refer the [Guide to migrating Big 
+Data workloads to Azure HDInsight](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/)
 
 - **Lift and Shift(IaaS)**  
 
-The following pattern presents a point of view on how to deploy OSS on Azure IaaS with a tight integration back to a customer's on-premises systems such as Active Directory; Domain Controller; DNS etc. The deployment follows Enterprise Scale Landing Zone guidance from Microsoft where management capabilities such as monitoring; security; governance; networking etc. are hosted within a management subscription. The workloads (all IaaS-based) are hosted in a separate subscription. ESLZ guidance is covered in details [here](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture#landing-zone-in-enterprise-scale).  
+The following pattern presents a point of view on how to deploy OSS on Azure IaaS with a tight integration back to a customer's on-premises systems such as Active Directory; Domain Controller; DNS etc. The deployment follows Enterprise Scale Landing Zone guidance from Microsoft where management capabilities such as monitoring; security; governance; networking etc. are hosted within a management subscription. The workloads (all IaaS-based) are hosted in a separate subscription. Enterprise Scale Landing Zones (ESLZ) guidance is covered in details [here](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/architecture#landing-zone-in-enterprise-scale).  
 
 ![image](docs/images/azure%20iaas%20target%20state%20v2.jpg)  
 
