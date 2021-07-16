@@ -62,7 +62,7 @@ Once data is committed to WAL, data gets written to MemStore, which is an in-mem
 For long-term data persistence, HBase uses a data structure called HBase file (HFile). HFile is stored on HDFS. Depending on MemStore size and data flush interval, data from MemStore is written to HBase file or [Hfile](https://HBase.apache.org/book.html#_hfile_format_2).  
 
 The picture shows conceptual view of HBase write path.  
-![HBase write path](../images/clip_image151)
+![HBase write path](../images/clip_image151.png)
 
 To summarise, the components on the write-path are:  
 - **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.
@@ -78,7 +78,7 @@ To deliver fast random and sequential reads, HBase uses several data structures.
 For scenarios where you want low latency on reads, there is an option to persist data in BucketCache which is also an off-heap in-memory data structure.
 
 The picture here shows conceptual view of read path of HBase.  
-![HBase read path](../images/clip_image152)
+![HBase read path](../images/clip_image152.png)
 
 To summarise, HBase tries to serve a read request using data stored in cache – BlockCache and MemStore. If data is not there, a read request is served using HFile.  
 
