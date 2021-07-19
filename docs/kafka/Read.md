@@ -10,8 +10,10 @@ Azure EventHub for Kafka
 Event Hubs provides an endpoint compatible with the Apache Kafka® producer and consumer APIs that can be used by most existing Apache Kafka client applications as an alternative to running your own Apache Kafka cluster. Event Hubs supports Apache Kafka's producer and consumer APIs clients at version 1.0 and above.
 
 Apache Kafka and Event Hub feature differences
-Event Hubs and Kafka similar?	How are Event Hubs and Kafka different?
-•	Both use partitioned consumer
+|Event Hubs and Kafka similar? |How are Event Hubs and Kafka different? |
+|-------------------------------|----------------------------------------
+|Both use partitioned consumer |
+•	
 •	Partitions are independent
 •	Both use a client side cursor concept
 •	Both can scale to very high workloads
