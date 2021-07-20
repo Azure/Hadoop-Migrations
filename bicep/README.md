@@ -32,7 +32,7 @@ For the reference architecture, the following services are created
   * [VM](https://docs.microsoft.com/en-us/azure/virtual-machines/)
   * [Private DNS Zone](https://docs.microsoft.com/en-us/azure/dns/private-dns-overview)
 
-For more details regarding the services that will be deployed, please read the Domains guide(link) in the Hardoop Migration documentation.
+For more details regarding the services that will be deployed, please read the [Hardoop Migration documentation.](https://github.com/Azure/Hadoop-Migrations)
 
 ## Before you start 
 
@@ -89,6 +89,8 @@ az group create -l <Your Region> -n <Resource Group Name> --subscription <Your S
 ### 2. Service Principal and access
 
 An Azure service principal is an identity created for use with applications, hosted services, and automated tools to access Azure resources programatically. It needs to be generated for authentication and authorization by Key Vault. Following the principal of least privilege, assign the contributor role to the service principal where scope is resource group. Get the subscription id from the output saved earlier, open Cloud shell or Azure CLI, set the Azure context and execute the following commands to generate the required credentials:
+
+> Note: The SP requires the Contributor role at a resource group scope in order to deploy the resources inside the resource group dedicated to a specific data domain and Network Contributor role to manage all network resources.
 
 
 ```commands
@@ -152,8 +154,8 @@ There are 4 ways to deploy the reference architecture, let's look at each one in
 
 - Infrastructure
 
-[![Deploy To Azure](images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2FAzure%2FHadoop-Migrations%2Fblob%2Fmain%2Fbicep%2Fbuild%2Fmain-infra.json)
-[![Visualize](images/visualizebutton.svg)](http://armviz.io/#/?load=https%3A%2F%2Fgithub.com%2FAzure%2FHadoop-Migrations%2Fblob%2Fmain%2Fbicep%2Fbuild%2Fmain-infra.json)
+[![Deploy To Azure](images/deploytoazure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnudbeach%2Fdata-platform-migration%2Fmain%2Fbuild%2Fmain-infra.json)
+[![Visualize](images/visualizebutton.svg)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fnudbeach%2Fdata-platform-migration%2Fmain%2Fbuild%2Fmain-infra.json)
 
 - Key Vault
 
@@ -173,7 +175,6 @@ Login to Azure.
 az login
 ```
 
-You can run all following commands at home directory of `data-platform-migration`
 Create a resource group with location using your subscription id from previous step
 
 ```command
@@ -298,7 +299,7 @@ Open the workflow file from `.github/workflows`, 'deployment-hdmi001.yml' and yo
 - AZURE_RESOURCE_GROUP_NAME
 - AZURE_LOCATION
 
-You can externalize these environment variables to env file. See [this](https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable) for further details
+You can externalize these environment variables to env file. Refer [Github docs](https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable) for further details
 
 Run the following command to update your repo.
 
@@ -306,9 +307,7 @@ Run the following command to update your repo.
 git add . ; git commit -m "my first commit" ; git push
 ```
 
-In this example, we are it only manually works by `workflow_dispatch` event, it never automatically runs by pull and push events. You can do this by un-remarking initial parts like this
-
-For this example we will run the workflow manually with `workflow_dispatch` event. 
+For this example, we are running the workflow manually with `workflow_dispatch` event. 
 
 ```javascript
 # Controls when the action will run. 
@@ -348,7 +347,7 @@ In the "New Service Connection" tab, select "Azure Resource Manager", and select
 
 Select "Service principal (manual)" and click "Next"
 
-![New Azure Service Connection](images/new_azure_service_connection.png)
+![New Azure Service Connection](images/new_azure_serviceconnection.png)
 
 From "New Azure service connection" tab, choose "Subscription" and give your subscription ID and Name, fill the service principal details saved earlir
 
@@ -358,11 +357,10 @@ From "New Azure service connection" tab, choose "Subscription" and give your sub
 
 Click on Verify to make sure the connection works. 
 
-![Verify Settings](images/verify_it.png)
+![Verify Settings](images/verifyit.png)
 
 Input your user-friendly connection name to use when referring to this service connection and description if you want. Take note of the name as this will be required in the parameter update process.
 
-That's it!
 
 ### 2. Configure your Pipeline
 
