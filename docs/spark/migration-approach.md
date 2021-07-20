@@ -46,15 +46,8 @@ Synapse Spark is a good entry point when on-boarding a customer with Synapse and
 |                | Job performance and SLA e.g., long running                   |                                                  |
 | Application    | Spark version currently in use                               | Currently Synapse Spark support version 2.4 only |
 |                | Python, Java, Scala, R version in use                        |                                                  |
-
- 
-
 | Security and administration | How to enforce data security policy e.g., column level masking |      |
-| --------------------------- | ------------------------------------------------------------ | ---- |
-|                             |                                                              |      |
-|                             |                                                              |      |
-|                             |                                                              |      |
-|                             |                                                              |      |
+
 
 ## Creating an Apache Spark Pool
 
