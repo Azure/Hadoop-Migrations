@@ -110,7 +110,6 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 - [Glossary of Terms and Acronyms](docs/appendix/glossary.md)
 
 
-
 ## Trademarks
 
 This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
@@ -125,8 +124,7 @@ This project welcomes contributions and suggestions.  Most contributions require
 
 When you submit a pull request, a CLA bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
 This repo is adhering to Microsoft documentation standards. Please make sure that you use Visual Studio Code for alterations and have the [Azure Docs Extension](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-authoring-pack) installed. Please refer to [Docs Authoring Pack for VS Code](https://docs.microsoft.com/contribute/how-to-write-docs-auth-pack) on how to use this extension and the [Microsoft Writing Style Guide](https://docs.microsoft.com/style-guide/welcome/).
+
+## Final Note
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the Code of [Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com]((mailto:opencode@microsoft.com)) with any additional questions or comments.
