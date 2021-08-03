@@ -1,4 +1,4 @@
-## HDFS Architecture and Components
+# HDFS Architecture and Components
 
 Hadoop Distributed Filesystem (HDFS) - a Java-based distributed file system that follows the master-slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
 
@@ -59,3 +59,14 @@ Hadoop Distributed Filesystem (HDFS) - a Java-based distributed file system that
 | **Permission inheritance**                | ADLS Gen2 uses the the POSIX-style model and follows the  same as in Hadoop if ACLs are used to control access on an object  Ref : [Access control lists in Azure Data Lake Storage   Gen2 \| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-access-control) | Permissions for an item are stored on the item itself. In  other words, permissions for an item cannot be inherited from the parent  items if the permissions are set after the child item has already been  created. Permissions are only inherited if default permissions have  been set on the parent items before the child items have been created. |
 | **Data Replication**                      | Data in an Azure Storage account is  replicated three times in the primary region. Zone – redundant storage is the  most recommended replication option that synchronously replicates across three Azure availability zones in  the primary region. | By default a file’s replication factor is  three. For critical files or files which are accessed very often, having a  higher replication factor improves their tolerance against faults and  increase their read bandwidth |
 | **Sticky bit**                            | In the context of Data Lake Storage Gen2, it is unlikely  that the sticky bit will be needed. In summary, if the sticky bit is enabled  on a directory, a child item can only be deleted or renamed by the child  item's owning user.  The sticky bit isn't shown in the Azure portal. | The Sticky bit can be set on  directories, preventing anyone except the superuser, directory owner or file owner from deleting or moving the files within the directory.  Setting the sticky bit for a  file has no effect. |
+
+## Further Reading
+
+Refer to the below sections to know more about the Migration approach for HDFS - 
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
+[Migration approach](migration-approach.md)
+
