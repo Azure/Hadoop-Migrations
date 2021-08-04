@@ -1,4 +1,6 @@
-## Hive Architecture and Components
+# Hive Architecture and Components
+
+## Overview
 
 Apache Hive is a popular data warehouse software that enables you to easily and quickly write SQL-like queries to efficiently extract data from Apache Hadoop.
 
@@ -19,3 +21,12 @@ A simple syntax used by Hive for matching database objects.
 **Hive Client Applications**
 
 Can be accessed either directly (using its Thrift interface), or indirectly via another client application such as Beeline or HiveServer2.
+
+
+## Further Reading
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
+[Migration Approach](migration-approach.md)
