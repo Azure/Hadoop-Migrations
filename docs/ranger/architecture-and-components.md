@@ -1,4 +1,6 @@
-## Apache Ranger Architecture and Components
+# Apache Ranger Architecture and Components
+
+## Overview 
 
 Apache Ranger is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.
 
@@ -35,3 +37,12 @@ On a high level below is the list of features that Ranger provides:
 *    Key Management System
 
 *    Security Zone (New feature)
+
+## Further Reading
+
+[Challenges](challenges.md)
+
+[Additional Third Party tools](considerations.md)
+
+[Migration Approach](migration-approach.md)
+
