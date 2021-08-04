@@ -1,7 +1,7 @@
 
 # HBase Architecture and Components
 
-## Brief introduction to Apache HBase
+## Overview
 
 Apache HBase is a Java-based, NoSQL column-store, distributed application that is built on top of Apache Hadoop Distributed Filesystem (HDFS). It is modelled after Google BigTable paper and brings most of the BigTable capabilities to Hadoop ecosystem.  
 
@@ -88,7 +88,7 @@ To reduce read and write latencies, HBase 2.x has introduced a pool of offheap b
 
 ### Further Reading
 
-Refer to the below sections to know more about Migration approach for Hbase-
+Refer to the below sections to read more about Migration approach for Hbase
 
 [Challenges](challenges.md)
 
