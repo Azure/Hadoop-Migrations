@@ -39,30 +39,33 @@ Event Hubs provides an endpoint compatible with the Apache Kafka® producer and 
 
 **Kafka & Event Hub – Durability Differences:**
 
-Kafka	Event Hubs
-•	Volatile by default
-•	Replicated after ACK
-•	Depends on disk & quorum	•	Always durable
-•	Replicated before ACK
-•	Provided by storage
+|**Kafka**	                   |**Event Hubs**                                    |
+|----------------------------------|--------------------------------------------------|
+|Volatile by default               |    Always durable                                |
+|Replicated after ACK              |     Replicated before ACK                        |
+|Depends on disk & quorum	   |	 Provided by storage                           |
+	
 
-Kafka & Event Hub – Security Differences:
-Kafka	Event Hubs
-•	SSL & SASL
-•	File like ACLs
-•	Optional transport encryption
-•	User based	•	SAS & SASL/PLAIN RFC 4618
-•	Policy
-•	Mandatory TLS
-•	Token based (unlimited)
+**Kafka & Event Hub – Security Differences:**
+
+|**Kafka**       	           |**Event Hubs**                                     |
+|----------------------------------|---------------------------------------------------|
+|SSL & SASL                        |SAS & SASL/PLAIN RFC 4618                          |
+|File like ACLs                    |Policy                                             |
+|Optional transport encryption	   |Mandatory TLS                                      |
+|User based                        |Token based (unlimited)                            |
+
 
 Migrate to Azure Event Hubs for Apache Kafka - Azure Event Hubs | Microsoft Docs
+https://docs.microsoft.com/en-us/azure/event-hubs/apache-kafka-migration-guide
 
 Kafka on Azure HDInsight
 An introduction to Apache Kafka on HDInsight - Azure | Microsoft Docs
+https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-introduction
 
 Kafka on AKS
 Use Azure Kubernetes Service with Kafka on HDInsight | Microsoft Docs
+https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-azure-container-services
 
 Kafka Data Migration
 The MirrorMaker tool can leverage on the Apache Kafka's mirroring feature topics from one cluster to another. It can help to perform the Kafka data migration after the new Kafka cluster is provisioned. 
