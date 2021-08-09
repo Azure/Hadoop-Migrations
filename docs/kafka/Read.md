@@ -12,21 +12,14 @@ Event Hubs provides an endpoint compatible with the Apache Kafka® producer and 
 Apache Kafka and Event Hub feature differences
 |Event Hubs and Kafka similar? |How are Event Hubs and Kafka different? |
 |-------------------------------|----------------------------------------
-|Both use partitioned consumer |
-•	
-•	Partitions are independent
-•	Both use a client side cursor concept
-•	Both can scale to very high workloads
-•	Conceptually they are nearly the same
-•	Both does not use HTTP protocol for receive
-	•	PaaS vs. Software differences
-•	Partitioning differences
-•	API differences
-•	Runtime differences
-•	Protocol differences
-•	Durability differences
-•	Security differences
-•	Throttling differences
+| Both use partitioned consumer | PaaS vs. Software differences         |
+|Partitions are independent       |Partitioning differences	        |
+|Both use a client side cursor concept |API differences                 |
+|Both can scale to very high workloads	|Runtime differences            |
+|Conceptually they are nearly the same	|Protocol differences
+|Both does not use HTTP protocol for receive  |Durability differences	|
+ |                                           |  Security differences     |
+|					      |Throttling differences   |
 
 Kafka & Event Hub – Partitioning Differences:
 Kafka	Event Hubs
