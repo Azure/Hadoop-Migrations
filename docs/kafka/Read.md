@@ -9,7 +9,8 @@ https://github.com/Azure/azure-quickstart-templates/tree/master/application-work
 Azure EventHub for Kafka
 Event Hubs provides an endpoint compatible with the Apache Kafka® producer and consumer APIs that can be used by most existing Apache Kafka client applications as an alternative to running your own Apache Kafka cluster. Event Hubs supports Apache Kafka's producer and consumer APIs clients at version 1.0 and above.
 
-Apache Kafka and Event Hub feature differences
+**Apache Kafka and Event Hub feature differences:**
+
 |Event Hubs and Kafka similar? |How are Event Hubs and Kafka different? |
 |-------------------------------|----------------------------------------
 | Both use partitioned consumer | PaaS vs. Software differences         |
@@ -21,13 +22,13 @@ Apache Kafka and Event Hub feature differences
  |                                           |  Security differences     |
 |					      |Throttling differences   |
 
-Kafka & Event Hub – Partitioning Differences:
-Kafka	Event Hubs
-•	Scale is managed by partition count
-•	You must load balance partitions across machines
-•	You must manually re-shard via split & merge	•	Scale is managed by throughput units
-•	Automatic load balancing
-•	No repartitioning required
+**Kafka & Event Hub – Partitioning Differences:**
+|Kafka	                            |Event Hubs                                       |
+|-----------------------------------|-------------------------------------------------|
+|Scale is managed by partition count |Scale is managed by throughput units            |
+|You must load balance partitions across machines|Automatic load balancing            |
+|You must manually re-shard via split & merge	| No repartitioning required	      |
+	
 
 Kafka & Event Hub – Other Differences:
 Kafka	Event Hubs
