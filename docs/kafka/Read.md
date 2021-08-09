@@ -11,7 +11,7 @@ Event Hubs provides an endpoint compatible with the Apache Kafka® producer and 
 
 **Apache Kafka and Event Hub feature differences:**
 
-|Event Hubs and Kafka similar? |How are Event Hubs and Kafka different? |
+|**Event Hubs and Kafka similar?** |**How are Event Hubs and Kafka different?**|
 |-------------------------------|----------------------------------------
 | Both use partitioned consumer | PaaS vs. Software differences         |
 |Partitions are independent       |Partitioning differences	        |
@@ -19,26 +19,26 @@ Event Hubs provides an endpoint compatible with the Apache Kafka® producer and 
 |Both can scale to very high workloads	|Runtime differences            |
 |Conceptually they are nearly the same	|Protocol differences
 |Both does not use HTTP protocol for receive  |Durability differences	|
- |                                           |  Security differences     |
+|                                           |  Security differences     |
 |					      |Throttling differences   |
 
 **Kafka & Event Hub – Partitioning Differences:**
-|Kafka	                            |Event Hubs                                       |
+|**Kafka	     **                    |**Event Hubs**                            |
 |-----------------------------------|-------------------------------------------------|
 |Scale is managed by partition count |Scale is managed by throughput units            |
 |You must load balance partitions across machines|Automatic load balancing            |
 |You must manually re-shard via split & merge	| No repartitioning required	      |
 	
 
-Kafka & Event Hub – Other Differences:
-Kafka	Event Hubs
-•	Does not throttle
-•	Uses proprietary protocol
-•	Does not use HTTP for send	•	Throttling is supported
-•	Uses AMQP 1.0 Protocol
-•	Uses HTTP Send and Batch Send
+**Kafka & Event Hub – Other Differences:**
+|**Kafka **	                            | **Event Hubs **                           |
+|-----------------------------------|--------------------------------------------------|
+|Does not throttle                  |Throttling is supported                            |
+|Uses proprietary protocol          |Uses AMQP 1.0 Protocol                             |
+|Does not use HTTP for send	    |Uses HTTP Send and Batch Send                      |
 
-Kafka & Event Hub – Durability Differences 
+**Kafka & Event Hub – Durability Differences:**
+
 Kafka	Event Hubs
 •	Volatile by default
 •	Replicated after ACK
