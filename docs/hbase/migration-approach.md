@@ -802,6 +802,8 @@ This section describes the differences between creating Cosmos DB SQL APIs and H
 
 This example uses Apache HBase 2.x APIs and Cosmos DB Java SDK v4.
 
+These HBase's sample codes are based on those described in [HBase's official documentation](https://hbase.apache.org/book.html).
+
 [Azure Cosmos DB Java SDK v4 for Core (SQL) API: release notes and resources](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-sdk-java-v4)
 
 The code for Cosmos DB presented here is based on the following documentation. You can access the full code example from the documentation. 
