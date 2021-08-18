@@ -2,7 +2,7 @@
 
 The migration approach of HDFS to ADLS typically involves the below 6 steps.
 
-![img](../images/clip_image012.png)
+![hdfs-steps-to-migrate-hdfs-to-adls](../images/hdfs-steps-to-migrate-hdfs-to-adls.png)
 
 ### HDFS Assessment
 
@@ -32,11 +32,11 @@ HDFS commands and reports that can help with getting the key assessment metrics 
 
 - **List of small files -**      generates reports that     can help assess the on premise Hadoop system . The sample below generates     a report on the small files being generated – that helps with planning the     next action on moving to Azure.
 
-![img](../images/clip_image016.jpg)
+![hdfs-unravel-report-for-small-files](../images/hdfs-unravel-report-for-small-files.jpg)
 
 - **list of file files based on size** – generates reports based on the data volume and groups     into- large, medium , tiny , empty
 
-![Graphical user interface, application  Description automatically generated](../images/clip_image018.jpg)
+![hdfs-unravel-report-for-sizebased-files](../images/hdfs-unravel-report-for-sizebased-files.jpg)
 
 ### Data Transfer
 
@@ -67,10 +67,10 @@ Based on the identified strategy for data migration identify the data sets to be
 ![img](../images/Plan_storage_accounts.png)
 
 
-Refer the link [Securing Storage Accounts ](https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#trusted-microsoft-services) to secure all traffic between your VNet and the storage account over a private link.
+Refer the link [Securing Storage Accounts ](https://docs.microsoft.com/azure/storage/common/storage-network-security?tabs=azure-portal#trusted-microsoft-services) to secure all traffic between your VNet and the storage account over a private link.
 
 
-Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account?toc=/azure/storage/blobs/toc.json) that describes default limits for Azure storage accounts. The ingress limit refers to all data that is sent to a storage account. The egress limit refers to all data that is received from a storage account
+Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/azure/storage/common/scalability-targets-standard-account?toc=/azure/storage/blobs/toc.json) that describes default limits for Azure storage accounts. The ingress limit refers to all data that is sent to a storage account. The egress limit refers to all data that is received from a storage account
 
 
 
@@ -91,7 +91,7 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
 
     Check if NFS is enabled on the on premise Hadoop platform checking the core-site.xml file , that holds the property – nfsserver.groups and nfsserver.hosts. The NFS3.0 feature is currently in preview in ADLS Gen 2 and a few features aren’t yet supported with ADLS Gen2 -
 
-    Refer the link - https://docs.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support for the NFS 3.0 features that aren't yet supported with Azure Data Lake Storage Gen2 .
+    Refer the link - https://docs.microsoft.com/azure/storage/blobs/network-file-system-protocol-support for the NFS 3.0 features that aren't yet supported with Azure Data Lake Storage Gen2 .
 
 ![img](../images/Check_NFSenabled.png)
 
@@ -103,7 +103,7 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
 
     Data transfer can be online over the network or offline using physical shippable devices based on the data volume, network bandwidth and the frequency of the data transfer( historical data would be a one time transfer and incremental load would be at periodic interval ).
 
-    For more details on the option to choose refer the link - https://docs.microsoft.com/en-us/azure/storage/common/storage-choose-data-transfer-solution
+    For more details on the option to choose refer the link - https://docs.microsoft.com/azure/storage/common/storage-choose-data-transfer-solution
 
     **1.**  **Azcopy**
     
@@ -133,13 +133,13 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
 
     Azure Data Factory is a data-integration service that helps create data-driven workflows orchestrating and automating data movement and data transformation.  This option can be used when there is high network bandwidth available and there is a need to orchestrate and monitor the data migration process. Also can be an approach for regular incremental load of data when the incremental data arrives on the on premise system as a first hop and cannot be directly transferred to the Azure storage account due to security requirements.
 
-    For details on comparison of the approaches refer the link - [Azure data transfer options for large datasets, moderate to high network bandwidth | Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-solution-large-dataset-moderate-high-network)
+    For details on comparison of the approaches refer the link - [Azure data transfer options for large datasets, moderate to high network bandwidth | Microsoft Docs](https://docs.microsoft.com/azure/storage/common/storage-solution-large-dataset-moderate-high-network)
 
-    For details on copying data from HDFS using ADF refer the link [Copy data from HDFS by using Azure Data Factory - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs#hdfs-as-source)
+    For details on copying data from HDFS using ADF refer the link [Copy data from HDFS by using Azure Data Factory - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/azure/data-factory/connector-hdfs#hdfs-as-source)
 
     **5.**  **Third Party solutions like – WANDISCO Live Data Migration**
 
     WANdisco LiveData Platform for Azure is one of Microsoft’s preferred solutions for Hadoop to Azure migrations and provides the capability through the Azure Portal and CLI.
 
-    For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure](https://azure.microsoft.com/en-in/blog/migrate-your-hadoop-data-lakes-with-wandisco-livedata-platform-for-azure/)
+    For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure](https://azure.microsoft.com/blog/migrate-your-hadoop-data-lakes-with-wandisco-livedata-platform-for-azure/)
 

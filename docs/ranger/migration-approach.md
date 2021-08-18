@@ -8,13 +8,13 @@ When moving from On-premises Hadoop to hosting Big Data Environments on cloud, t
 
 All user authentication to the Azure Databricks Workspace is done via Azure Active Directory (AAD) single sign-on functionality. Additionally, AAD conditional access can be leveraged for fine-grain access control to the Databricks workspace.
 
-Authorization is achieved using a combination of AAD and Databricks Access Control Lists (ACLs). Users and groups defined within AAD can be imported to the Databricks workspace via SCIM. Access to data residing in ADLS gen1&2 (at the file or folder levels) can be orchestrated using AAD credential passthrough. Access to the Databricks workspace objects are governed by ACLs. Row-level and column-level permissions and [data masking](https://docs.microsoft.com/en-us/azure/databricks/security/access-control/table-acls/object-privileges#data-masking) for table data is managed using Databricks dynamic views.
+Authorization is achieved using a combination of AAD and Databricks Access Control Lists (ACLs). Users and groups defined within AAD can be imported to the Databricks workspace via SCIM. Access to data residing in ADLS gen1&2 (at the file or folder levels) can be orchestrated using AAD credential passthrough. Access to the Databricks workspace objects are governed by ACLs. Row-level and column-level permissions and [data masking](https://docs.microsoft.com/azure/databricks/security/access-control/table-acls/object-privileges#data-masking) for table data is managed using Databricks dynamic views.
 
 Advanced security features can be implemented using 3rd party partner solutions, Privacera and Immuta.
 
 ### Cosmos DB
 
-Security on Cosmos DB can be achieved with combination of various features available and other Azure security services. For more information head to *https://docs.microsoft.com/en-us/azure/cosmos-db/database-security*
+Security on Cosmos DB can be achieved with combination of various features available and other Azure security services. For more information head to *https://docs.microsoft.com/azure/cosmos-db/database-security*
 
 | Security requirement                      | Azure Cosmos DB's security approach                          |
 | ----------------------------------------- | ------------------------------------------------------------ |
@@ -27,7 +27,7 @@ Security on Cosmos DB can be achieved with combination of various features avail
 
 The following screenshot shows how you can use audit logging and activity logs to monitor your account:
 
-![img](../images/clip_image128.png)
+![ranger-policies-cosmosdb](../images/ranger-policies-cosmosdb.png)
 
 *Image source: Microsoft Docs*
 
@@ -44,7 +44,7 @@ Security in Azure Synapse Analytics can be achieved by using below methods:
 | Authentication and pass-through | With Azure AD authentication, you can centrally  manage user identities that have access to Azure Synapse to simplify  permission management.  Use Multi-factor AAD authentication with  Synapse SQL (SSMS support for MFA)  Optionally one may also choose to use SQL  Authentication to gain user access to the data. |
 | Access Control                  | Entry-level                                                  |
 
-To read more about Security in Synapse Analytics please follow *https://docs.microsoft.com/en-in/azure/synapse-analytics/security-controls-policy*
+To read more about Security in Synapse Analytics please follow *https://docs.microsoft.com/azure/synapse-analytics/security-controls-policy*
 
 ## Lift and Shift
 
@@ -74,13 +74,13 @@ You can export and import policies from the Ranger Admin UI for migration and cl
 
 You can import and export policies from the Service Manager page:
 
- ![img](../images/clip_image130.png)
+ ![ranger-export-policies-service-manager](../images/ranger-export-policies-service-manager.png)
 
 You can also export policies from the Reports page:
 
- ![img](../images/clip_image132.png)
+ ![ranger-export-policies-report-page](../images/ranger-export-policies-report-page.png)
 
- ![img](../images/clip_image134.png)
+ ![ranger-export-policies-report-page1](../images/ranger-export-policies-report-page1.png)
 
 **Filtering** 
 

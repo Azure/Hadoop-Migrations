@@ -53,7 +53,7 @@ It is important to understand the core concepts of HBase architecture and data m
 • **Scans** – allows iteration over multiple rows for specified attributes.  
 • **Delete** – removes a row from the table. A marker (called tombstone) is placed on record mark for deletion. These are then removed during major compactions.  
 
-![img](../images/clip_image032.jpg)
+![hbase-data-model](../images/hbase-data-model.jpg)
 
 #### **Write Path**
 HBase uses a combination of data structures that reside in-memory and persistent storage to deliver fast writes. When a write happens, data first gets written to a Write-Ahead Log (WAL), which is a data structure stored on persistent storage. Role of WAL is to track changes so that logs can be replayed in case there’s a server failure. WAL is purely for resiliency purposes.
@@ -62,7 +62,7 @@ Once data is committed to WAL, data gets written to MemStore, which is an in-mem
 For long-term data persistence, HBase uses a data structure called HBase file (HFile). HFile is stored on HDFS. Depending on MemStore size and data flush interval, data from MemStore is written to HBase file or [Hfile](https://HBase.apache.org/book.html#_hfile_format_2).  
 
 The picture shows conceptual view of HBase write path.  
-![HBase write path](../images/clip_image151.png)
+![hbase-write-path](../images/hbase-write-path.png)
 
 To summarise, the components on the write-path are:  
 - **Write Ahead Log (WAL)** is a data structure that is stored on persistent storage.
@@ -78,7 +78,7 @@ To deliver fast random and sequential reads, HBase uses several data structures.
 For scenarios where you want low latency on reads, there is an option to persist data in BucketCache which is also an off-heap in-memory data structure.
 
 The picture here shows conceptual view of read path of HBase.  
-![HBase read path](../images/clip_image152.png)
+![hbase-read-path](../images/hbase-read-path.png)
 
 To summarise, HBase tries to serve a read request using data stored in cache – BlockCache and MemStore. If data is not there, a read request is served using HFile.  
 
