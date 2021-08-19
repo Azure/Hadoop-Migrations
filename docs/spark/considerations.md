@@ -2,7 +2,7 @@
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
-## Data Storage:
+## Data Storage
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
@@ -13,7 +13,7 @@ Spark is a processing framework and does not store any data, once the processing
 | Historical Analysis | ADLS Gen2 (Datalake) |                |
 | Integration         | EventHub             | Kafka protocol |
 
-## Data Migration:
+## Data Migration
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
 
@@ -21,9 +21,9 @@ Internal migration from Synapse SQL Pool to Synapse Spark Pool is documented in 
 
 ## Ingesting SQL pool data into a Spark database
 
-1.   Create Notebook (default language is pyspark)
+1. Create Notebook (default language is pyspark)
 
-2.   If we need to read table create in Synapse (sqlpool001.dbo.TaxiTrip)
+2. If we need to read table create in Synapse (sqlpool001.dbo.TaxiTrip)
 
 ```sql
 %%spark
@@ -35,13 +35,13 @@ val df = spark. read. sqlanalytics("sqlpool001.dbo.TaxiTrip")
 df. write. mode("overwrite").saveAsTable("sparknyc.taxitrip")
 ```
 
-3.   Now you can use the regular DataFrame operation to perform transformations.
+3. Now you can use the regular DataFrame operation to perform transformations.
 
 ## Ingesting Spark table data into an SQL pool table
 
-1.   Create Notebook (default language is pyspark)
+1. Create Notebook (default language is pyspark)
 
-2.   to create a synapse table, execute as below.
+2. to create a synapse table, execute as below.
 
 ```sql
 %%spark
@@ -51,8 +51,8 @@ val df = spark.sql ("SELECT * FROM sparknyc. passengerstats")
 df. write. sqlanalytics("sqlpool001.dbo.PassengerStats",Constants.INTERNAL)
 ```
 
-3.   Now you can use the regular DataFrame operation to perform transformations.
+3. Now you can use the regular DataFrame operation to perform transformations.
 
 ## Integrating with Pipelines
 
-Reference link for pipeline and data flow: [QuickStart: to load data into dedicated SQL pool using the copy activity - Azure Synapse Analytics | Microsoft Docs](
+Reference link for pipeline and data flow: [QuickStart: to load data into dedicated SQL pool using the copy activity - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-copy-activity-load-sql-pool)

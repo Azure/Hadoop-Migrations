@@ -1,6 +1,6 @@
-## Architecture and Components:
+# Spark Architecture and Components
 
-### Introduction to Spark and Synapse Spark:
+## Overview Spark and Synapse Spark
 
 Apache Spark is an open-source tool for processing large amounts of structured, semi-structured data across multiple nodes (worker nodes). One of the primary advantages of using Spark is due to the speed (in-memory) computing and support for different programming languages like Python, R, Java, Scala, and the ability to run SQL queries. Spark API automatically splits the tasks into multiple tasks regardless of the programming language.
 
@@ -51,3 +51,11 @@ Azure Synapse Analytics takes the best of Azure SQL Data Warehouse and modernize
 *    Synapse Spark is built for individual users to run ad-hoc processing on Synapse tables with the ability to read/write to ADLS Gen2.
 
 *    Synapse Spark makes the entry barrier easy for someone new to Spark by providing opinionated cluster types (Small, Medium, Large etc.) and are ephemeral in nature.
+
+## Further Reading
+
+[Considerations](considerations.md)
+
+[Databricks Migration](databricks-migration.md)
+
+[Synapse Migration](migration-approach.md)

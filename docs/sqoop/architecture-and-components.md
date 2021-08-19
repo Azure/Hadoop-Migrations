@@ -1,5 +1,5 @@
 
-# Brief introduction to Apache Sqoop
+# Apache Sqoop Architecture and Components 
 
 ## Overview
 Apache Sqoop is a command line interface tool for transferring data between Apache Hadoop clusters and relational databases.
@@ -36,6 +36,14 @@ There are two series of Apache Sqoop, Sqoop1 and Sqoop2. They differ in usage, i
 - **Client**  
   Install it on the required node and interact with the Sqoop server. Since the client only needs to communicate with the server, there is no need to make settings such as MapReduce.
   
+
+## Further Reading
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
+[Migration Approach](migration-approach.md)
 
 
 

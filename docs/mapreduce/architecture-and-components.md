@@ -1,6 +1,7 @@
-## Architecture and Components:
+# Mapreduce Architecture and Components
 
-### Introduction to MapReduce:
+## Overview
+
 MapReduce is an open source framework/programming model that supports scalability across multiple servers in a Hadoop cluster. It is one of the key processing of Apache Hadoop. Mapreduce aims at processing structured and unstructured data in HDFS. It processes data from the disk and is suitable for batch processing. This framework has been developed using Java. MapReduce can run queries using the Hive Query Language.
 
 
@@ -73,3 +74,9 @@ Strong Type Safe: operate on domain objects with compiled lambda functions. High
 2. Management Framework : YARN
 3. API : Spark Core Engine , Spark SQL,Spark MLib , GraphX
 For additional details refer link - https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-overview
+
+## Further reading 
+
+[Consideration](considerations.md)
+
+[Migration Approach](migration-approach.md)

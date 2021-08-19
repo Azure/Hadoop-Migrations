@@ -1,7 +1,7 @@
 
 # HBase Architecture and Components
 
-## Brief introduction to Apache HBase
+## Overview
 
 Apache HBase is a Java-based, NoSQL column-store, distributed application that is built on top of Apache Hadoop Distributed Filesystem (HDFS). It is modelled after Google BigTable paper and brings most of the BigTable capabilities to Hadoop ecosystem.  
 
@@ -82,8 +82,19 @@ The picture here shows conceptual view of read path of HBase.
 
 To summarise, HBase tries to serve a read request using data stored in cache – BlockCache and MemStore. If data is not there, a read request is served using HFile.  
 
-**Note** - there is also option of using [BucketCache](https://hbase.apache.org/book.html#offheap.blockcache) which is an off-heap data structure. When enabled, BucketCache can help in offloading data from BlockCache thereby reducing data stored on-heap.
+**Note** - There is also option of using [BucketCache](https://hbase.apache.org/book.html#offheap.blockcache) which is an off-heap data structure. When enabled, BucketCache can help in offloading data from BlockCache thereby reducing data stored on heap.
 
 #### **Offheap Read and Write paths**
 
 To reduce read and write latencies, HBase 2.x has introduced a pool of offheap buffers that are used along read and write paths. The workflow for writing and reading data does its best to avoid on-heap memory allocations reducing the amount of work that Garbage Collection (GC) must do to complete reads and writes. These must be fine-tuned and optimized as part of the overall migration because they are heavily dependent on number of Regions and RegionServers; size of memory; and premium storage attached to the HBase cluster on Azure. The reason is that these parameters can change post-migration to Azure.  
+
+### Further Reading
+
+Refer to the below sections to read more about Migration approach for Hbase
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
+[Migration Approach](migration-approach.md)
+
