@@ -73,7 +73,7 @@ Strong Type Safe: operate on domain objects with compiled lambda functions. High
 1. Data Storage : Azure Blob Storage / Data Lake Store
 2. Management Framework : YARN
 3. API : Spark Core Engine , Spark SQL,Spark MLib , GraphX
-For additional details refer link - https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-overview
+For additional details refer link - https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-overview
 
 ## Further reading 
 
