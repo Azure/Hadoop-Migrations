@@ -2,7 +2,7 @@
 # Migration Approach
 
 Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions:
-https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-authorization
+https://docs.microsoft.com/azure/app-service/overview-authentication-authorization
 
 # Authorization Methods 
 
@@ -27,7 +27,7 @@ Landing Targets for Apache Sentry on Azure
 
 # Migration to Azure RBAC
 Curretly we do not have any Automatic procedure, but we can do a manual migration, following the steps on this documentation:
-https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
+https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal?tabs=current
 
 # Migration to Ranger
 

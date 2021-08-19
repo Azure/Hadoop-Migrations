@@ -33,6 +33,6 @@ There are different approaches to migration of workloads from Hadoop on Azure Da
 
 Another approach is to move workloads associated to the various teams within the organization. For example, all the data and scripts used by the Data Science team could be migrated first, followed by all the resourced needed by the Data Engineering team. This approach takes on more of a bulk migration approach, but can be implemented independently and parallel by the various teams involved.
 
-Data migration can be accomplished by copying on-prem data onto an Azure storage solution, like Azure Data Lake Gen2. This copying can be accomplished via Azure Data Factory, involving potential data conversions to optimized formats like [Parquet](https://docs.microsoft.com/en-us/azure/data-factory/format-parquet) and [Delta](https://docs.microsoft.com/en-us/azure/data-factory/format-delta).
+Data migration can be accomplished by copying on-prem data onto an Azure storage solution, like Azure Data Lake Gen2. This copying can be accomplished via Azure Data Factory, involving potential data conversions to optimized formats like [Parquet](https://docs.microsoft.com/azure/data-factory/format-parquet) and [Delta](https://docs.microsoft.com/azure/data-factory/format-delta).
 
-![img](../images/clip_image030.png)
+![databricks-deltalake-at-scale-on-azure](../images/databricks-deltalake-at-scale-on-azure.png)

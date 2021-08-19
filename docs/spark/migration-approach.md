@@ -8,9 +8,9 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 
 ### Shared Metadata
 
-Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link
+Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
 
-Reference Link: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/metadata/table)
+Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
 
 ### Synapse Spark Primary Use-Cases
 
@@ -22,6 +22,7 @@ Reference Link: [Shared metadata tables - Azure Synapse Analytics | Microsoft Do
 
 4. Built in support for .NET for spark application enables existing user skill set to take advantage of Apache Spark distributed data processing.
 
+![spark-synapse-options](../images/spark-synapse-options.png)
 5. Unified security and monitoring features including Managed VNets throughout all workloads with one Azure Synapse workspace
 
 6. Existing spark user to take advantage of Microsoft proprietary optimizations e.g., Hyperspace: An indexing subsystem for Apache Spark.
@@ -44,7 +45,7 @@ Reference Link: [Shared metadata tables - Azure Synapse Analytics | Microsoft Do
 
 An Apache Spark pool in your Synapse Workspace provides Spark environment to load data, model process and get faster insights.
 
-Reference Link: [QuickStart: Create a serverless Apache Spark pool using the Azure portal - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-apache-spark-pool-portal)
+Reference Link: [QuickStart: Create a serverless Apache Spark pool using the Azure portal - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/quickstart-create-apache-spark-pool-portal)
 
 ### Spark Instances
 
@@ -79,13 +80,13 @@ Examples on how the spark pools behave are shown below, Spark pools need to be c
 * Another user, U2, submits a Job, J3, that uses 10 nodes, a new Spark instance, SI2, is created to process the job.
 * You now submit another job, J2, that uses 10 nodes because there's still capacity in the pool and the instance, J2, is processed by SI1.
 
-Reference Link: [Apache Spark core concepts - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-concepts#spark-instances)
+Reference Link: [Apache Spark core concepts - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-concepts#spark-instances)
 
 >[!NOTE] Each Synapse workspace has a default quota limit at the Workspace level and also at the Spark pool level. These requirements need to be captured during the assessment phase (Infrastructure)
 
 ### Performance Considerations
 
-Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
+Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
 ### Data Storage:
 
@@ -93,16 +94,16 @@ Spark is a processing framework and does not store any data, once the processing
 
 | Use case            | Sink                 | Comment        |Reference Links|
 | ------------------- | -------------------- | --------------  |--------------|
-| Data Warehouse      | Synapse table        |                 |[Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
-| API and fast access | Cosmos DB            |                 |[Configuration references · Azure/azure-cosmosdb-spark Wiki](https://docs.microsoft.com/en-us/azure/cosmos-db/synapse-link)               |
-| Historical Analysis | ADLS Gen2 (Datalake) |                 |[Introduction to Microsoft Spark utilities - Azure Synapse Analytics](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-csharp)                |
+| Data Warehouse      | Synapse table        |                 |[Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
+| API and fast access | Cosmos DB            |                 |[Configuration references · Azure/azure-cosmosdb-spark Wiki](https://docs.microsoft.com/azure/cosmos-db/synapse-link)               |
+| Historical Analysis | ADLS Gen2 (Datalake) |                 |[Introduction to Microsoft Spark utilities - Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-csharp)                |
 | Integration         | EventHub             | Kafka protocol        |[Azure/azure-event-hubs-spark](https://github.com/Azure/azure-event-hubs-spark)|
 
 ### Data Migration:
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
 
-Internal migration from Synapse SQL Pool to Synapse Spark Pool is documented in detail at [Import and Export data between serverless Apache Spark pools and SQL pools - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)
+Internal migration from Synapse SQL Pool to Synapse Spark Pool is documented in detail at [Import and Export data between serverless Apache Spark pools and SQL pools - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)
 
 ### Ingesting SQL pool data into a Spark database
 
@@ -140,26 +141,27 @@ df. write. sqlanalytics("sqlpool001.dbo.PassengerStats",Constants.INTERNAL)
 
 ### Integrating with Pipelines
 
-Reference link for pipeline and data flow: [QuickStart: to load data into dedicated SQL pool using the copy activity - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-copy-activity-load-sql-pool)
+Reference link for pipeline and data flow: [QuickStart: to load data into dedicated SQL pool using the copy activity - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/quickstart-copy-activity-load-sql-pool)
 
 ### Monitoring
 
-Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/monitoring/apache-spark-applications)
+Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
 
 ## Modernization – Databricks
 
-[Azure Databricks](https://azure.microsoft.com/en-us/services/databricks/) is a fast, easy, and collaborative Apache Spark based analytics service. Engineered by the original creators of Apace Spark, Azure Databricks provides the latest versions of Apache Spark and allows you to seamlessly integrate with open-source libraries. You can spin up clusters and build quickly in a fully managed Apache Spark environment with the global scale and availability of Azure. Clusters are set up, configured, and fine-tuned to ensure reliability and performance without the need for monitoring. Take advantage of autoscaling and auto-termination to improve total cost of ownership (TCO).
+[Azure Databricks](https://azure.microsoft.com/services/databricks/) is a fast, easy, and collaborative Apache Spark based analytics service. Engineered by the original creators of Apace Spark, Azure Databricks provides the latest versions of Apache Spark and allows you to seamlessly integrate with open-source libraries. You can spin up clusters and build quickly in a fully managed Apache Spark environment with the global scale and availability of Azure. Clusters are set up, configured, and fine-tuned to ensure reliability and performance without the need for monitoring. Take advantage of autoscaling and auto-termination to improve total cost of ownership (TCO).
 
 On top of Apache Spark, Azure Databricks offers additional capabilities:
 
 * [Photon Engine](https://techcommunity.microsoft.com/t5/analytics-on-azure/turbocharge-azure-databricks-with-photon-powered-delta-engine/ba-p/1694929) - a vectorized query engine that leverages modern CPU architecture to enhance Apache Spark 3.0’s performance by up to 20x.
 
-* [DBIO Cache](https://docs.microsoft.com/en-us/azure/databricks/delta/optimizations/delta-cache) - Transparent caching of Parquet data on worker local disk
+-    [DBIO Cache](https://docs.microsoft.com/azure/databricks/delta/optimizations/delta-cache) - Transparent caching of Parquet data on worker local disk
 
-* [Skew Join Optimization](https://docs.microsoft.com/en-us/azure/databricks/delta/join-performance/skew-join)
+-    [Skew Join Optimization](https://docs.microsoft.com/azure/databricks/delta/join-performance/skew-join)
 
-* [Managed Delta Lake](https://docs.microsoft.com/en-us/azure/databricks/delta/)
+-    [Managed Delta Lake](https://docs.microsoft.com/azure/databricks/delta/)
 
-* [Managed MLflow](https://docs.microsoft.com/en-us/azure/databricks/applications/mlflow/)
+-    [Managed MLflow](https://docs.microsoft.com/azure/databricks/applications/mlflow/)
 
-The migration of Spark jobs onto Azure Databricks is trivial, and requires minimal, if any, modifications to scripts. Job scripts can be imported into Azure Databricks in bulk using the [Workspace CLI](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/cli/workspace-cli).
+The migration of Spark jobs onto Azure Databricks is trivial, and requires minimal, if any, modifications to scripts. Job scripts can be imported into Azure Databricks in bulk using the [Workspace CLI](https://docs.microsoft.com/azure/databricks/dev-tools/cli/workspace-cli).
+

@@ -11,7 +11,7 @@ Landing Targets for Apache Storm on Azure
 - [Migration to Azure Stream Analytics](#migration-to-azure-stream-analytics)
 - [Migration to Azure Functions](#migration-to-azure-functions)
 
-See [Azure Architecture Center](https://docs.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/stream-processing) for a detailed comparison of stream processing technology in Azure. 
+See [Azure Architecture Center](https://docs.microsoft.com/azure/architecture/data-guide/technology-choices/stream-processing) for a detailed comparison of stream processing technology in Azure. 
 
 ## Lift and shift migration to Azure IaaS  
 
@@ -103,9 +103,9 @@ To migrate your application from Storm to one of the Spark streaming APIs, do th
 ![image](https://user-images.githubusercontent.com/7907123/123608931-83097700-d7ff-11eb-8ac0-db5412be84a9.png)
 
 
-See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark)
+See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/azure/hdinsight/storm/migrate-storm-to-spark)
 
-More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/)
+More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/)
 
 ### Migration From Spark to Databricks
 
@@ -196,10 +196,10 @@ databricks jobs create --json
 If you use spark-submit to submit Spark jobs, the following table shows how spark-submit parameters map to different arguments in the Jobs Create API.
 
 ### Airflow
-Azure Databricks offers an Airflow operator if you want to use Airflow to submit jobs in Azure Databricks. The Databricks Airflow operator calls the Jobs Run API to submit jobs to Azure Databricks. [See Apache Airflow](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/data-pipelines#airflow).
+Azure Databricks offers an Airflow operator if you want to use Airflow to submit jobs in Azure Databricks. The Databricks Airflow operator calls the Jobs Run API to submit jobs to Azure Databricks. [See Apache Airflow](https://docs.microsoft.com/azure/databricks/dev-tools/data-pipelines#airflow).
 
 ### UI
-Azure Databricks provides a simple and intuitive easy-to-use UI to submit and schedule jobs. To create and submit jobs from the UI, follow the [step-by-step guide](https://docs.microsoft.com/en-us/azure/databricks/jobs#job-create).
+Azure Databricks provides a simple and intuitive easy-to-use UI to submit and schedule jobs. To create and submit jobs from the UI, follow the [step-by-step guide](https://docs.microsoft.com/azure/databricks/jobs#job-create).
 
 ![image](https://user-images.githubusercontent.com/7907123/123611845-4db25880-d802-11eb-8b56-5bec83f441e8.png)
 
@@ -217,19 +217,19 @@ You can also forward cluster logs to your cloud storage location. To send logs t
 
 
 #### View metrics
-While the job is running, you can go to the cluster page and look at the live Ganglia metrics in the Metrics tab. Azure Databricks also snapshots these metrics every 15 minutes and stores them, so you can look at these metrics even after your job is completed. To send metrics to your metrics server, you can install custom agents in the cluster. See [Monitor performance](https://docs.microsoft.com/en-us/azure/databricks/clusters/clusters-manage#cluster-performance).
+While the job is running, you can go to the cluster page and look at the live Ganglia metrics in the Metrics tab. Azure Databricks also snapshots these metrics every 15 minutes and stores them, so you can look at these metrics even after your job is completed. To send metrics to your metrics server, you can install custom agents in the cluster. See [Monitor performance](https://docs.microsoft.com/azure/databricks/clusters/clusters-manage#cluster-performance).
 
 ![image](https://user-images.githubusercontent.com/7907123/123612752-1f814880-d803-11eb-8772-f6854ee3d6a0.png)
 
-See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/en-us/azure/databricks/migration/production)
+See reference documentation: [Migration Spark to Databricks](https://docs.microsoft.com/azure/databricks/migration/production)
 
-More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/)
+More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/)
 
 ## Migration to Azure Stream Analytics
 
 Azure Stream Analytics is a real-time analytics and complex event processing engine for large amounts of streaming data. Stream Analytics consists of inputs, queries, and outputs. With just a few clicks, you can connect to an input source for streaming data, enter a query, and connect to an output destination to create an end-to-end pipeline. Queries can easily filter, sort, aggregate, and join streaming data over a period of time using SQL-based queries. The SQL language can also be extended with JavaScript and C # user-defined functions (UDFs). 
 
-When choosing Stream Analytics, also see [Cases where Stream Analytics is suitable and cases where other technologies are used](https://docs.microsoft.com/en-us/azure/stream-analytics/streaming-technologies). 
+When choosing Stream Analytics, also see [Cases where Stream Analytics is suitable and cases where other technologies are used](https://docs.microsoft.com/azure/stream-analytics/streaming-technologies). 
 
 
 ### Difference between Storm and Stream Analytics 
@@ -301,7 +301,7 @@ FROM    Step1
 JOIN    refData2 ON refData2.Desc = Step1.Desc
 ```
 
-See [Using reference data for lookups in Stream Analytics](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-use-reference-data) for more information. 
+See [Using reference data for lookups in Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-use-reference-data) for more information. 
 
 
 #### Architecture
@@ -312,9 +312,9 @@ Stream Analytics is a PaaS type service, so users do not need to be aware of int
 
 ![Stream Analytics pipeline](../images/stream-analytics-e2e-pipeline.png)
 
-Image source : https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction
+Image source : https://docs.microsoft.com/azure/stream-analytics/stream-analytics-introduction
 
-Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. In contrast, Stream Analytics is a fully managed service that implements ingenuity to improve the fault tolerance of internal components. Therefore, users can check their availability based on SLAs. See [SLA for Azure Stream Analytics](https://azure.microsoft.com/en-us/support/legal/sla/stream-analytics/v1_0/) for more information. 
+Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. In contrast, Stream Analytics is a fully managed service that implements ingenuity to improve the fault tolerance of internal components. Therefore, users can check their availability based on SLAs. See [SLA for Azure Stream Analytics](https://azure.microsoft.com/support/legal/sla/stream-analytics/v1_0/) for more information. 
 
 #### Event delivery guarantee
 
@@ -332,7 +332,7 @@ Stream Analytics always guarantees exactly-once processing. Exactly-once deliver
 
 From the above, you can see that when it comes to event handling and delivery assurance, migrating from Storm to Stream Analytics can provide the same or better level. However, please note that at-least-once demonstrates better performance than exactly-once in typical cases.
 
-See [Event Delivery Guarantees](https://docs.microsoft.com/en-us/stream-analytics-query/event-delivery-guarantees-azure-stream-analytics) for more information. 
+See [Event Delivery Guarantees](https://docs.microsoft.com/stream-analytics-query/event-delivery-guarantees-azure-stream-analytics) for more information. 
 
 #### Event processing model
 
@@ -391,8 +391,8 @@ There are various ways to improve performance on Storm, specifically scaling up/
 
 **SU sizing**
 
-Choosing the number of SUs required for a particular job depends on the partitioning configuration of the input and the queries defined in the job. In general, it is best practice to start with 6 SUs for queries that do not use PARTITION BY. And then, it is the best way for you to examine the optimum number of SUs step-by-step seeing monitored SU usage rate with the actual data flow. Please refer to [Understand and ajust Streaming Units](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-streaming-unit-consumption) for details of SU and how to set it. 
-The maximum number of SUs depend on both the number of query steps defined in the job and the number of partitions in each step. For more information on restrictions, see [this article](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-parallelization#calculate-the-maximum-streaming-units-of-a-job). 
+Choosing the number of SUs required for a particular job depends on the partitioning configuration of the input and the queries defined in the job. In general, it is best practice to start with 6 SUs for queries that do not use PARTITION BY. And then, it is the best way for you to examine the optimum number of SUs step-by-step seeing monitored SU usage rate with the actual data flow. Please refer to [Understand and ajust Streaming Units](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-streaming-unit-consumption) for details of SU and how to set it. 
+The maximum number of SUs depend on both the number of query steps defined in the job and the number of partitions in each step. For more information on restrictions, see [this article](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-parallelization#calculate-the-maximum-streaming-units-of-a-job). 
 
 In general, the factors that increase the usage rate of SU are as follows.
 - **Jobs with complex query logic** - This is because if the query is complex, it is more likely to keep the state in memory.
@@ -405,13 +405,13 @@ In general, the factors that increase the usage rate of SU are as follows.
 **Stream Analytics Cluster**
 
 A single-tenant environment for complex and demanding scenarios is provided as a Stream Analytics Cluster. Fully scaled cluster environment can process data no less than 200MB/s. If you need more processing power than the regular version of Stream Analytics as a result of sizing, consider using Stream Analytics Cluster. Stream Analytics Cluster can also use Private Endpoint to connect to a Private virtual network.
-For more information on Stream Anlytics Cluster, see [Overview of Azure Stream Analytics Cluster](https://docs.microsoft.com/en-us/azure/stream-analytics/cluster-overview). 
+For more information on Stream Anlytics Cluster, see [Overview of Azure Stream Analytics Cluster](https://docs.microsoft.com/azure/stream-analytics/cluster-overview). 
 
 #### Language
 
 Storm applications are developed in Java etc. Stream Analytics uses SQL-based queries to describe the process.
-For more information on Stream Analytics query language, see [this Reference here](https://docs.microsoft.com/en-us/stream-analytics-query/stream-analytics-query-language-reference).
-You can also increase flexibility through custom functions that are called in your query. Custom functions can be written in JavaScript or C #. See [User-defined functions in Azure Stream Analytics](https://docs.microsoft.com/en-us/azure/stream-analytics/functions-overview) for more information on UDF / UDA. 
+For more information on Stream Analytics query language, see [this Reference here](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference).
+You can also increase flexibility through custom functions that are called in your query. Custom functions can be written in JavaScript or C #. See [User-defined functions in Azure Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/functions-overview) for more information on UDF / UDA. 
 
 #### Windowing
 
@@ -428,19 +428,19 @@ Here's how the difference between Storm Core and Stream Analytics in Windowing. 
 #### Disaster Recovery
 
 If you have Disaster Recovery configured in Storm, you may want to configure Disaster Recovery as well when migrating to Stream Analytics. Stream Analytics does not provide automatic geo-failover, but it can be achieved by deploying the same Stream Analytics job in multiple Azure regions and configuring Input and Output. The application that generates the event can ensure data redundancy by sending data to both regions.
-See [Achieve geo-redundancy for Azure Stream Analytics jobs](https://docs.microsoft.com/en-us/azure/stream-analytics/geo-redundancy) for more information.
+See [Achieve geo-redundancy for Azure Stream Analytics jobs](https://docs.microsoft.com/azure/stream-analytics/geo-redundancy) for more information.
 
 #### Security
 
-Data security is a shared responsibility of the customer and the service provider. For on-premises solutions, customers have to provide everything from endpoint protection to physical hardware security, which is not an easy task. If you choose a PaaS cloud service provider, customer involvement will be significantly reduced. For Microsoft's security shared responsibility model, see [Security Baselines](https://docs.microsoft.com/en-us/security/benchmark/azure/baselines/stream-analytics-security-baseline?toc=/azure/stream-analytics/TOC.json) for Cloud Computing. Stream Analytics runs on the Azure platform, so it can be enhanced in a different way than Storm. Stream Analytics does not require any additional components to be installed for security. We recommend that you consider migrating your stream processing system security implementation using the following checklist :
+Data security is a shared responsibility of the customer and the service provider. For on-premises solutions, customers have to provide everything from endpoint protection to physical hardware security, which is not an easy task. If you choose a PaaS cloud service provider, customer involvement will be significantly reduced. For Microsoft's security shared responsibility model, see [Security Baselines](https://docs.microsoft.com/security/benchmark/azure/baselines/stream-analytics-security-baseline?toc=/azure/stream-analytics/TOC.json) for Cloud Computing. Stream Analytics runs on the Azure platform, so it can be enhanced in a different way than Storm. Stream Analytics does not require any additional components to be installed for security. We recommend that you consider migrating your stream processing system security implementation using the following checklist :
 
 ||Storm|Stream Analytics|
 |---|---|---|
-|Network Security|Control traffic using security functions such as network devices.|Stream Analytics jobs establish outbound connections to I/O resources, process data in real time, and produce results. The Stream Analytics service runs from networks that normally cannot be included directly in network rules. When using Stram Analytics Cluster, you can use Private Endpoint to create Stream Analytics endpoints within a customer-defined virtual network to communicate with private addresses. See [Connect Stream Analytics jobs to resources in an Azure Virtual Network (VNet)](https://docs.microsoft.com/en-us/azure/stream-analytics/connect-job-to-vnet) for more information.|
+|Network Security|Control traffic using security functions such as network devices.|Stream Analytics jobs establish outbound connections to I/O resources, process data in real time, and produce results. The Stream Analytics service runs from networks that normally cannot be included directly in network rules. When using Stram Analytics Cluster, you can use Private Endpoint to create Stream Analytics endpoints within a customer-defined virtual network to communicate with private addresses. See [Connect Stream Analytics jobs to resources in an Azure Virtual Network (VNet)](https://docs.microsoft.com/azure/stream-analytics/connect-job-to-vnet) for more information.|
 |Identity and Access Control|Storm offers pluggable authentication support through thrift and SASL. It also has an authorization mechanism for access control for jobs.|Authenticate with Azure AD and control access using RBAC.|
-|Data Protection|Storm itself does not have encryption capabilities.|Stream Analytics holds query definitions, user-defined custom functions, checkpoint data, reference data snapshots, and input and output connection information. Stream Analytics has [Data encryption function](https://docs.microsoft.com/en-us/azure/stream-analytics/data-protection) to protect the security of data.|
-|Regulatory Compliance controls|You can set policies using security components such as Apache Ranger.|Regulatory compliance in Azure Policy provides an initiative definition created and managed by Microsoft called "embedded" for compliance domains and security controls associated with various compliance standards. Please refer to [this document](https://docs.microsoft.com/en-us/azure/stream-analytics/security-controls-policy) for details.|
-|Data Recovery|There is no backup feature. You need to implement data backup yourself.|Stream Analytics allows you to [copy or back up](https://docs.microsoft.com/en-us/azure/stream-analytics/copy-job) a job.|
+|Data Protection|Storm itself does not have encryption capabilities.|Stream Analytics holds query definitions, user-defined custom functions, checkpoint data, reference data snapshots, and input and output connection information. Stream Analytics has [Data encryption function](https://docs.microsoft.com/azure/stream-analytics/data-protection) to protect the security of data.|
+|Regulatory Compliance controls|You can set policies using security components such as Apache Ranger.|Regulatory compliance in Azure Policy provides an initiative definition created and managed by Microsoft called "embedded" for compliance domains and security controls associated with various compliance standards. Please refer to [this document](https://docs.microsoft.com/azure/stream-analytics/security-controls-policy) for details.|
+|Data Recovery|There is no backup feature. You need to implement data backup yourself.|Stream Analytics allows you to [copy or back up](https://docs.microsoft.com/azure/stream-analytics/copy-job) a job.|
 
 
 
@@ -458,7 +458,7 @@ Before migrating your existing Storm to Stream Analytics, collect the following 
 |Applications that use Sink data|Identify applications that utilize Storm's Sink data. Migrating Storm's Sink to Stream Analytics Output needs to be done as a set, so that migration should also be planned.|
 |Processing logic|Identify all the processing logic in the Topology of each Storm streaming job. |
 |Current sizing|Get information about the CPU, Memory, Disk, number of nodes, etc. of the host or virtual machine on which the Sqoop client or server is running. This allows you to estimate the base size required for your Azure virtual machine.|
-|HA, BC and DR|If you have some kind of troubleshooting measures for running Storm, you need to check whether it will be realized on Azure. For example, if you have a disaster recovery configuration on two separated data centers, you need to consider [geo-redundancy deployment](https://docs.microsoft.com/en-us/azure/stream-analytics/geo-redundancy).|
+|HA, BC and DR|If you have some kind of troubleshooting measures for running Storm, you need to check whether it will be realized on Azure. For example, if you have a disaster recovery configuration on two separated data centers, you need to consider [geo-redundancy deployment](https://docs.microsoft.com/azure/stream-analytics/geo-redundancy).|
 
 #### Planning
 
@@ -543,7 +543,7 @@ GROUP BY TumblingWindow(seconds,10)
 
 ## Migration to Azure Functions
 
-[Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) is a serverless solution with less control over the platform. Users don't have to worry about deploying or managing servers because they manage and provide the resources needed to run applications on the Azure side. There are [various scenarios](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) for Azure Functions, but in the context of migrating from Apache Storm to Azure Functions, real-time data processing scenarios fit.
+[Azure Functions](https://docs.microsoft.com/azure/azure-functions/) is a serverless solution with less control over the platform. Users don't have to worry about deploying or managing servers because they manage and provide the resources needed to run applications on the Azure side. There are [various scenarios](https://docs.microsoft.com/azure/azure-functions/functions-overview) for Azure Functions, but in the context of migrating from Apache Storm to Azure Functions, real-time data processing scenarios fit.
 Azure Functions, like Stream Analytics, is a serverless PaaS that allows you to easily connect to various Azure services. In addition, it is highly flexible because it is processed by custom code as the basis for executing the function.
 Unlike other migration targets, Azure Functions is not a service dedicated to streaming processing, so there are significant functional differences. Familiarize yourself with the differences between Storm and Functions in the next section before planning your migration. 
 
@@ -594,7 +594,7 @@ Storm Bolt and Functions Output
 
 #### Event delivery guarantee
 
-Functions provides an "at-least-once" guarantee when using input in a message queuing system like Event Hubs. See [the Functions documentation on trusted message handling for more information](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reliable-event-processing). 
+Functions provides an "at-least-once" guarantee when using input in a message queuing system like Event Hubs. See [the Functions documentation on trusted message handling for more information](https://docs.microsoft.com/azure/azure-functions/functions-reliable-event-processing). 
 
 #### Distribition
 **Storm**
@@ -603,33 +603,33 @@ See [here](#storm-1) for Storm distributions.
 **Functions**
 Functions are evenly distributed to the nodes for each request in triggers such as HTTP. For Event Hub triggers, one EventProcessorHost instance corresponds to each instance of the function triggered by the event. Event Hubs triggers allow only one EventProcessorHost instance to take a lease for a particular partition. It works to evenly allocate Event Hubs partitions according to the number of EventProcessorHost instances. 
 Functions can be processed in parallel using up to 200 instances.
-https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale
+https://docs.microsoft.com/azure/azure-functions/functions-scale
 
 #### Performance and Reliability consideration
 
-Storm performance is basically improved by scaling up or out of hardware, tuning memory, adjusting the number of worker threads, etc. Also Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. See [guidance for improving Functions performance and reliability](https://docs.microsoft.com/en-us/azure/azure-functions/functions-best-practices). Understand how to describe and configure functions for scalability and reliability. 
+Storm performance is basically improved by scaling up or out of hardware, tuning memory, adjusting the number of worker threads, etc. Also Storm provides a fail-fast, fault-tolerant system with Numbus, ZooKeeper, and Supervisor configurations. See [guidance for improving Functions performance and reliability](https://docs.microsoft.com/azure/azure-functions/functions-best-practices). Understand how to describe and configure functions for scalability and reliability. 
 
 **Event Driven Scaling**
 Event-driven scaling is available as a unique feature of Functions. The Functions component monitors the event rate and decides whether to scale out or scale in. The unit of scale for Azure Functions is a function app. When your function app scales out, you'll be allocated additional resources to run multiple instances of your Azure Functions host. Conversely, when the demand for computing decreases, the scale controller deletes the instance of the function host.
 
 ![image](../images/central-listener.png)
 
-Image source : https://docs.microsoft.com/en-us/azure/azure-functions/event-driven-scaling
+Image source : https://docs.microsoft.com/azure/azure-functions/event-driven-scaling
 
-See [Event-driven scalling in Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/event-driven-scaling) for more information.
+See [Event-driven scalling in Azure Functions](https://docs.microsoft.com/azure/azure-functions/event-driven-scaling) for more information.
 
 
 
 #### Disaster Recovery
 
-If you have Disaster Recovery configured in Storm, you may want to configure Disaster Recovery as well when migrating to Functions. Functions themselves do not provide automatic geo-failover, but it can be achieved by applying geo disaster recovery strategy. See [Azure Functions geo-disaster recovery](https://docs.microsoft.com/en-us/azure/azure-functions/functions-geo-disaster-recovery) for more information.
+If you have Disaster Recovery configured in Storm, you may want to configure Disaster Recovery as well when migrating to Functions. Functions themselves do not provide automatic geo-failover, but it can be achieved by applying geo disaster recovery strategy. See [Azure Functions geo-disaster recovery](https://docs.microsoft.com/azure/azure-functions/functions-geo-disaster-recovery) for more information.
 
 #### Security
-Data security is a shared responsibility of the customer and the service provider. For on-premises solutions, customers have to provide everything from endpoint protection to physical hardware security, which is not an easy task. If you choose a PaaS cloud service provider, customer involvement will be significantly reduced. For Microsoft's security shared responsibility model, see [Security Baselines](https://docs.microsoft.com/en-us/security/benchmark/azure/baselines/stream-analytics-security-baseline?toc=/azure/stream-analytics/TOC.json) for Cloud Computing. Stream Analytics runs on the Azure platform, so it can be enhanced in a different way than Storm. Stream Analytics does not require any additional components to be installed for security. We recommend that you consider migrating your stream processing system security implementation using the following checklist :
+Data security is a shared responsibility of the customer and the service provider. For on-premises solutions, customers have to provide everything from endpoint protection to physical hardware security, which is not an easy task. If you choose a PaaS cloud service provider, customer involvement will be significantly reduced. For Microsoft's security shared responsibility model, see [Security Baselines](https://docs.microsoft.com/security/benchmark/azure/baselines/stream-analytics-security-baseline?toc=/azure/stream-analytics/TOC.json) for Cloud Computing. Stream Analytics runs on the Azure platform, so it can be enhanced in a different way than Storm. Stream Analytics does not require any additional components to be installed for security. We recommend that you consider migrating your stream processing system security implementation using the following checklist :
 
 ||Storm|Functions|
 |---|---|---|
-|Network Security|Control traffic using security functions such as network devices.|Incoming IP restrictions, virtual network integration, hybrid connectivity, and outbound IP restrictions to Functions endpoints are available. Please refer to this [Document](https://docs.microsoft.com/en-us/azure/azure-functions/functions-networking-options) for details, as the available features differ depending on the Functions plan. |
+|Network Security|Control traffic using security functions such as network devices.|Incoming IP restrictions, virtual network integration, hybrid connectivity, and outbound IP restrictions to Functions endpoints are available. Please refer to this [Document](https://docs.microsoft.com/azure/azure-functions/functions-networking-options) for details, as the available features differ depending on the Functions plan. |
 |Identity and Access Control|Storm offers pluggable authentication support through thrift and SASL. It also has an authorization mechanism for access control for jobs.|You can authenticate with the Functions key. The App Service platform can also use Azure Active Directory (AAD) and several third-party identity providers to authenticate clients. You can use this method to implement custom authorization rules for your function and manipulate the user information in your function code. You can also use Azure API Management (APIM) to authenticate your request.|
 |Data Protection|Storm itself does not have encryption capabilities.|Functions uses Azure Storage. Azure Storage encrypts all the data in your stored storage account.|
 |Regulatory Compliance controls|You can set policies using security components such as Apache Ranger.|Regulatory compliance in Azure Policy provides an initiative definition created and managed by Microsoft called "embedded" for compliance domains and security controls associated with various compliance standards.|

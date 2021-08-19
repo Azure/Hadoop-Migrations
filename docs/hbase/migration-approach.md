@@ -44,9 +44,9 @@ The following set of assessment questions are designed to gain an insight into e
 
 There are several third-party (3P) solutions that can assist with assessment. [Unravel](https://www.unraveldata.com/cloud-migration-assessment/) is one such partner that offers solutions that can help customers fast-track assessment for data migrations to Azure.  
 
-**[Azure Virtual Machines](https://docs.microsoft.com/en-au/azure/virtual-machines/linux/overview)** is one of several types of on-demand, scalable computing resources that Azure offers. Typically, you choose a VM when you need more control over the computing environment than the other choices offer. This article gives you information about what you should consider before you create a VM, how you create it, and how you manage it.  
+**[Azure Virtual Machines](https://docs.microsoft.com/azure/virtual-machines/linux/overview)** is one of several types of on-demand, scalable computing resources that Azure offers. Typically, you choose a VM when you need more control over the computing environment than the other choices offer. This article gives you information about what you should consider before you create a VM, how you create it, and how you manage it.  
 
-**[What do I need to think about before creating a VM?](https://docs.microsoft.com/en-au/azure/virtual-machines/linux/overview#what-do-i-need-to-think-about-before-creating-a-vm)**  
+**[What do I need to think about before creating a VM?](https://docs.microsoft.com/azure/virtual-machines/linux/overview#what-do-i-need-to-think-about-before-creating-a-vm)**  
 There are always a multitude of design considerations when you build out an application infrastructure in Azure. These aspects of a VM are important to think about before you start:  
 - The names of your application resources  
 - The location where the resources are stored  
@@ -56,15 +56,15 @@ There are always a multitude of design considerations when you build out an appl
 - The configuration of the VM after it starts  
 - The related resources that the VM needs
 
-**[Azure VM Families and Limits](https://docs.microsoft.com/en-au/azure/virtual-machines/linux/overview#vm-size)**  
+**[Azure VM Families and Limits](https://docs.microsoft.com/azure/virtual-machines/linux/overview#vm-size)**  
 Azure VM families are optimized to suit different use-cases and provide a balance of compute (vCores) and memory.  
 
 | Type  | Size | Description  |
 |---|---|---|
-|  [Entry Level](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general) | A,Av2   | A-series VMs have CPU performance and memory configurations best suited for entry level workloads like development and test. They are economical and provide a low-cost option to get started with Azure.   |
-| [General Purpose](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general)   | D, DSv2, Dv2   | Balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.  |
-| [Compute Optimized](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-compute)  | F    | These VMs have a high CPU-to-memory ratio. Good for medium traffic web servers, network appliances, batch processes, and application servers.  |
-|  [Memory Optimized](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-memory) | Esv3, Ev3   | These VMs have a high memory-to-CPU ratio. Great for relational database servers, medium to large caches, and in-memory analytics.  |
+|  [Entry Level](https://docs.microsoft.com/azure/virtual-machines/sizes-general) | A,Av2   | A-series VMs have CPU performance and memory configurations best suited for entry level workloads like development and test. They are economical and provide a low-cost option to get started with Azure.   |
+| [General Purpose](https://docs.microsoft.com/azure/virtual-machines/sizes-general)   | D, DSv2, Dv2   | Balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.  |
+| [Compute Optimized](https://docs.microsoft.com/azure/virtual-machines/sizes-compute)  | F    | These VMs have a high CPU-to-memory ratio. Good for medium traffic web servers, network appliances, batch processes, and application servers.  |
+|  [Memory Optimized](https://docs.microsoft.com/azure/virtual-machines/sizes-memory) | Esv3, Ev3   | These VMs have a high memory-to-CPU ratio. Great for relational database servers, medium to large caches, and in-memory analytics.  |
 |   |   |   |  
 
 In terms of nature of resource footprint, Apache HBase is designed to leverage memory and premium storage (such as SSDs).  
@@ -74,7 +74,7 @@ In terms of nature of resource footprint, Apache HBase is designed to leverage m
 - HBase write path includes writing changes to a write-ahead log (WAL) which is a data structure persisted on a storage medium. Storing WAL on fast storage medium such as SSDs will improve write performance.
 - HBase is designed to scale-out as performance and storage requirements grow.  
 
-Scalability targets of Azure compute [Ds-series](https://docs.microsoft.com/en-us/azure/virtual-machines/dv2-dsv2-series-memory) and [Es-series](https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series) along with [premium SSD (managed disks)](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd) are available on Microsoft Docs and these should be considered during sizing and planning.  
+Scalability targets of Azure compute [Ds-series](https://docs.microsoft.com/azure/virtual-machines/dv2-dsv2-series-memory) and [Es-series](https://docs.microsoft.com/azure/virtual-machines/ev3-esv3-series) along with [premium SSD (managed disks)](https://docs.microsoft.com/azure/virtual-machines/disks-types#premium-ssd) are available on Microsoft Docs and these should be considered during sizing and planning.  
 
 From compute and memory perspective, we recommend using the following Azure compute family types for various HBase node types:  
 
@@ -92,9 +92,9 @@ For an Azure IaaS-based HBase deployment, Azure offers several storage options. 
 ![Choosing storage for HBase on Azure IaaS](../images/flowchart-hbase-azure-storage-options.png)
 
 Further Reading  
-[Azure Managed Disks](https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)  
-[Azure Premium SSD](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd)  
-[Azure Disk Encryption](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disk-encryption-overview)  
+[Azure Managed Disks](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)  
+[Azure Premium SSD](https://docs.microsoft.com/azure/virtual-machines/disks-types#premium-ssd)  
+[Azure Disk Encryption](https://docs.microsoft.com/azure/virtual-machines/linux/disk-encryption-overview)  
 
 **In hybrid storage model, we leverage a mix of local storage and remote storage to strike a balance between performance and cost. The most common pattern is to write HBase WAL, which is on the write-path, to locally attached Premium Managed Disk. The long term data or HFiles are stored on Azure Storage (standard or premium) depending on cost and performance targets.
 
@@ -112,7 +112,7 @@ If you are planning a greenfield deployment of HBase on Azure IaaS and there's n
 
 For more sizing accuracy and establishing a performance baseline, we recommend customers to run tests on Azure IaaS using HBase dataset, model, and workload pattern. If moving data is not possible, we recommend using benchmarking tools such as YCSB to generate synthetic data and simulate sequential and random I/O traffic. The intent of this exercise is to help customers gain an understanding of level of performance one can expect using a combination of Azure compute and premium storage. It’s worth calling out that the tests should include day-to-day workload pattern and special cases like any workloads which may cause a spike in resource usage such as month-end or year-end activities. For example, a retailer using HBase will observe spike in resource usage around holiday periods whereas a financial services customer will observe spikes around key financial periods.  
 
-Inputs from assessment and performance baseline should give customers a fairly accurate view of sizing on Azure IaaS. Due to the nature of the workloads, there will be room to optimize operations by scaling-out or scaling-in clusters post go-live. We recommend customers should familiarise themselves with various [Cost Optimization](https://docs.microsoft.com/en-us/azure/architecture/framework/cost/overview) levers available to them to optimize costs and operations.  
+Inputs from assessment and performance baseline should give customers a fairly accurate view of sizing on Azure IaaS. Due to the nature of the workloads, there will be room to optimize operations by scaling-out or scaling-in clusters post go-live. We recommend customers should familiarise themselves with various [Cost Optimization](https://docs.microsoft.com/azure/architecture/framework/cost/overview) levers available to them to optimize costs and operations.  
 
 #### **Data Migration**  
 
@@ -132,9 +132,9 @@ Further reading
 [HBase CopyTable](https://hbase.apache.org/book.html#copy.table)
 [HBase HashTable/SyncTable](https://hbase.apache.org/book.html#hashtable.synctable)
 [HBase Snapshot](https://hbase.apache.org/book.html#ops.snapshots)  
-[Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/choose-api#coresql-api)  
-[Data Migration Tool](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)  
-[Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
+[Cosmos DB SQL API](https://docs.microsoft.com/azure/cosmos-db/choose-api#coresql-api)  
+[Data Migration Tool](https://docs.microsoft.com/azure/cosmos-db/import-data)  
+[Azure Data Factory](https://docs.microsoft.com/azure/data-factory/connector-hbase)
 
 #### **Security**  
 
@@ -151,11 +151,11 @@ To enable servers to authenticate to each other seamlessly, various authenticati
  - Location of the domain controller.  
  - Role(s) assigned to the domain controller.
 
-If the domain controller (DC) is located on-premises or outside of an Azure region or in a 3P cloud, latency impact must be considered/factored-in for operations requiring interaction with the domain controller. One option could be to host a second [domain controller on Azure](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/identity/adds-extend-domain). The Azure-based DC is then used for all authentication and authorisation scenarios for workloads running on Azure. We recommend you do not assign operations [masters roles to the domain controllers](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/planning-operations-master-role-placement) deployed in Azure. In such a scenario, primary DC (or PDC) is hosted on-premises.  
+If the domain controller (DC) is located on-premises or outside of an Azure region or in a 3P cloud, latency impact must be considered/factored-in for operations requiring interaction with the domain controller. One option could be to host a second [domain controller on Azure](https://docs.microsoft.com/azure/architecture/reference-architectures/identity/adds-extend-domain). The Azure-based DC is then used for all authentication and authorisation scenarios for workloads running on Azure. We recommend you do not assign operations [masters roles to the domain controllers](https://docs.microsoft.com/windows-server/identity/ad-ds/plan/planning-operations-master-role-placement) deployed in Azure. In such a scenario, primary DC (or PDC) is hosted on-premises.  
 
 ##### **Kerberized Linux environment using Azure Active Directory Domain Services (AAD-DS)**  
 
-[Azure Active Directory Domain Services (AD DS)](https://docs.microsoft.com/en-us/azure/active-directory-domain-services/overview) provides managed domain services such as domain join, group policy, lightweight directory access protocol (LDAP), and Kerberos/NTLM authentication. One can use AAD-DS without the need to deploy, manage, and patch domain controllers (DCs) in the cloud.  
+[Azure Active Directory Domain Services (AD DS)](https://docs.microsoft.com/azure/active-directory-domain-services/overview) provides managed domain services such as domain join, group policy, lightweight directory access protocol (LDAP), and Kerberos/NTLM authentication. One can use AAD-DS without the need to deploy, manage, and patch domain controllers (DCs) in the cloud.  
 
 *Considerations*  
 
@@ -201,8 +201,8 @@ In addition to the standard output contexts supported by the Hadoop metrics pack
 
 Using Log Analytics Agent, it’s possible to capture custom JSON data sources and store the output in Log Analytics for reporting via Azure Monitor.  
 
-- Once Linux servers have been deployed. Please [install](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-linux-computer) and configure Log Analytics agent for Linux.  
-- Configure Log Analytics agent to [collect custom JSON data](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/data-sources-json). The output of the following endpoints is a JSON output which can be collected and parsed using various FluentD plugins.  
+- Once Linux servers have been deployed. Please [install](https://docs.microsoft.com/azure/azure-monitor/vm/quick-collect-linux-computer) and configure Log Analytics agent for Linux.  
+- Configure Log Analytics agent to [collect custom JSON data](https://docs.microsoft.com/azure/azure-monitor/agents/data-sources-json). The output of the following endpoints is a JSON output which can be collected and parsed using various FluentD plugins.  
 - Here’s a sample of how to configure input and output plugin to collect metrics for HBase RegionServer Write-Ahead Logs (WAL).  
 
 ```xml
@@ -267,17 +267,17 @@ Azure Monitor and Log Analytics Agent
 
 Linux distros ships with several out-of-the-box tools (sar etc.) for capturing and reporting on metrics. Whilst this is good for monitoring health of an individual virtual machine, however for a large enterprise-grade deployment of Apache HBase, it’s not feasible to rely on such options. Hence, our recommendation is to leverage Azure Monitor which provides a single pane of glass for monitoring all the virtual machines.  
 
-Azure Monitor relies on [Log Analytics agent](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/log-analytics-agent?context=/azure/virtual-machines/context/context) (installed on each Azure VM). The agent captures data written to Syslog and performance data from individual virtual machines and sends them to Azure Log Analytics for storage and indexing. Azure Monitor dashboards then pull data from a configured Log Analytics Workspace and presents administrators a view of overall health of all the virtual machines. This is a native option which can be enabled seamlessly for Linux-based Azure VMs.  
+Azure Monitor relies on [Log Analytics agent](https://docs.microsoft.com/azure/azure-monitor/agents/log-analytics-agent?context=/azure/virtual-machines/context/context) (installed on each Azure VM). The agent captures data written to Syslog and performance data from individual virtual machines and sends them to Azure Log Analytics for storage and indexing. Azure Monitor dashboards then pull data from a configured Log Analytics Workspace and presents administrators a view of overall health of all the virtual machines. This is a native option which can be enabled seamlessly for Linux-based Azure VMs.  
 
-Instructions for setting up Azure Monitor to collect data from Linux are available [here](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-linux-computer). Once data has been written to Log Analytics, analysis can be done using [Kusto](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial)
+Instructions for setting up Azure Monitor to collect data from Linux are available [here](https://docs.microsoft.com/azure/azure-monitor/vm/quick-collect-linux-computer). Once data has been written to Log Analytics, analysis can be done using [Kusto](https://docs.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
 
 ## Migrationg Apache HBase to Azure HDInsight
 
-There is a detailed guide for migrating HBase to HDInsight HBase cluster. You can download it from [Guide to Migrating Big Data Workloads to Azure HDInsight](https://azure.microsoft.com/en-us/resources/migrating-big-data-workloads-hdinsight/).
+There is a detailed guide for migrating HBase to HDInsight HBase cluster. You can download it from [Guide to Migrating Big Data Workloads to Azure HDInsight](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/).
 
 ## Migrating Apache HBase to Azure Cosmos DB (SQL API)
 
-Azure Cosmos DB is a scalable, globally distributed, fully managed database. It provides guaranteed low latency access to your data. To learn more about Azure Cosmos DB, see the [overview](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction) article. This section provides guide to migrate from HBase to Cosmos DB.
+Azure Cosmos DB is a scalable, globally distributed, fully managed database. It provides guaranteed low latency access to your data. To learn more about Azure Cosmos DB, see the [overview](https://docs.microsoft.com/azure/cosmos-db/introduction) article. This section provides guide to migrate from HBase to Cosmos DB.
 
 ### Modernization – Cosmos DB (SQL API)
 
@@ -285,7 +285,7 @@ Before migrating, one must understand the differences between Cosmos DB and HBas
 #### Cosmos DB resource model ####
 
 The resource model of Cosmos DB is as follows.
-![Graphical user interface, application, Teams  Description automatically generated](../images/clip_image002-1619013250925.png)
+![cosmosdb-resource-model](../images/cosmosdb-resource-model.png)
 
 See [“Overview of Apache HBase and Architecture”](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hbase/architecture-and-components.md#brief-introduction-to-apache-hbase) section for the HBase resource model.
 
@@ -314,7 +314,7 @@ The key differences regarding the data structure of Cosmos DB and HBase data are
 
 **RowKey**
 
-HBase is sorted and stored by [RowKey](https://hbase.apache.org/book.html#rowkey.design) and horizontally partitioned into Regions by the range of RowKey specified at the time of creation of a table. Cosmos DB is distributes data into partitions based on hash value of specified [Partition key](https://docs.microsoft.com/en-us/azure/cosmos-db/partitioning-overview).
+HBase is sorted and stored by [RowKey](https://hbase.apache.org/book.html#rowkey.design) and horizontally partitioned into Regions by the range of RowKey specified at the time of creation of a table. Cosmos DB is distributes data into partitions based on hash value of specified [Partition key](https://docs.microsoft.com/azure/cosmos-db/partitioning-overview).
 
 **Column Family**
 
@@ -322,7 +322,7 @@ HBase columns are grouped within a Column Family (CF). Cosmos DB (SQL API) store
 
 **Timestamp**
 
-HBase uses timestamp to version multiple instances of a given cell. Users can query different versions of a cell using timestamp. Cosmos DB ships with[ Change Feed feature](https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed) which tracks persistent record of changes to a container in the order they occur. It then outputs the sorted list of documents that were changed in the order in which they were modified.  
+HBase uses timestamp to version multiple instances of a given cell. Users can query different versions of a cell using timestamp. Cosmos DB ships with[ Change Feed feature](https://docs.microsoft.com/azure/cosmos-db/change-feed) which tracks persistent record of changes to a container in the order they occur. It then outputs the sorted list of documents that were changed in the order in which they were modified.  
 
 **HBase data format**
 
@@ -363,7 +363,7 @@ HBase stores data in byte array, so if you want to migrate data that contains do
 
 #### Consistency model
 
-HBase offers strictly consistent reads and writes. Cosmos DB offers [five well-defined consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels). 
+HBase offers strictly consistent reads and writes. Cosmos DB offers [five well-defined consistency levels](https://docs.microsoft.com/azure/cosmos-db/consistency-levels). 
 
 Each level provides availability and performance trade-offs. From strongest to weakest, the consistency levels supported by Cosmos DB are:
 
@@ -381,7 +381,7 @@ For an enterprise-scale deployment of HBase,Master; Region servers; and ZooKeepe
 
 **Cosmos DB**
 
-Cosmos DB is a PaaS offering from Microsoft and underlying infrastructure deployment details are abstracted from the end-users. When a Cosmos DB container is provisioned, Azure platform automatically provisions underlying infrastructure (compute, storage, memory, networking stack) to support the performance requirements of a given workload. The cost of all database operations is normalized by Azure Cosmos DB and is expressed by [Request Units (or RUs, for short).](https://docs.microsoft.com/en-au/azure/cosmos-db/request-units) 
+Cosmos DB is a PaaS offering from Microsoft and underlying infrastructure deployment details are abstracted from the end-users. When a Cosmos DB container is provisioned, Azure platform automatically provisions underlying infrastructure (compute, storage, memory, networking stack) to support the performance requirements of a given workload. The cost of all database operations is normalized by Azure Cosmos DB and is expressed by [Request Units (or RUs, for short).](https://docs.microsoft.com/azure/cosmos-db/request-units) 
 
 Request unit is a performance currency abstracting the system resources such as CPU, IOPS, and memory that are required to perform the database operations supported by Azure Cosmos DB.
 
@@ -389,7 +389,7 @@ Request unit is a performance currency abstracting the system resources such as 
 
 The performance in terms of reads and writes is determined by the number of RUs provisioned. So, when it comes to sizing, Cosmos DB performance is driven purely by RUs provisioned at either the Database or Container-level.
 
-To estimate RUs consumed by your workload, consider the following [factors](https://docs.microsoft.com/en-au/azure/cosmos-db/request-units#request-unit-considerations):
+To estimate RUs consumed by your workload, consider the following [factors](https://docs.microsoft.com/azure/cosmos-db/request-units#request-unit-considerations):
 
  
 * **Item size -** Larger items consume more RUs to read or write.
@@ -402,7 +402,7 @@ There is a [capacity calculator](https://cosmos.azure.com/capacitycalculator/) a
 
  
 
-You can use [auto-scaling provisioning throughput](https://docs.microsoft.com/en-us/azure/cosmos-db/provision-throughput-autoscale) in Azure Cosmos DB to automatically and instantly scale your database or container throughput (RU / sec). Throughput is scaled based on usage without impacting workload availability, latency, throughput, or performance.
+You can use [auto-scaling provisioning throughput](https://docs.microsoft.com/azure/cosmos-db/provision-throughput-autoscale) in Azure Cosmos DB to automatically and instantly scale your database or container throughput (RU / sec). Throughput is scaled based on usage without impacting workload availability, latency, throughput, or performance.
 
 Below are the use cases of autoscale:
 
@@ -420,7 +420,7 @@ Below are the use cases of autoscale:
 
 **Cosmos DB**
 
-  Cosmos DB uses [partitioning](https://docs.microsoft.com/en-us/azure/cosmos-db/partitioning-overview) to scale individual containers in the database. Partitioning divides the items in a container into specific subsets called "logical partitions". Logical partitions are formed based on the value of the "partition key" associated with each item in the container. All items in a logical partition have the same partition key value. Each logical partition can hold up to 20GB of data.
+  Cosmos DB uses [partitioning](https://docs.microsoft.com/azure/cosmos-db/partitioning-overview) to scale individual containers in the database. Partitioning divides the items in a container into specific subsets called "logical partitions". Logical partitions are formed based on the value of the "partition key" associated with each item in the container. All items in a logical partition have the same partition key value. Each logical partition can hold up to 20GB of data.
 
 Physical partitions each contain a replica of your data and an instance of the Cosmos DB database engine. This structure makes your data durable and highly available and throughput is divided equally amongst the local physical partitions. Physical partitions are automatically created and configured, and it's not possible to control their size, location, or which logical partitions they contain. Logical partitions are not split between physical partitions.
 
@@ -465,7 +465,7 @@ When performing offline data migration, it depends on the version of HBase you a
  
 ##### Performance considerations
 
-This aspect of planning is to understand performance targets for HBase and then translating them across to Cosmos DB semantics. For example – to hit *“X”* IOPS on HBase, how many Request Units ([RUs](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units)) will be required on Cosmos DB. There are differences between HBase and Cosmos DB, this exercise focuses on building a view of how performance targets from HBase will be translated across to Cosmos DB. This will drive scaling exercise for Cosmos DB.
+This aspect of planning is to understand performance targets for HBase and then translating them across to Cosmos DB semantics. For example – to hit *“X”* IOPS on HBase, how many Request Units ([RUs](https://docs.microsoft.com/azure/cosmos-db/request-units)) will be required on Cosmos DB. There are differences between HBase and Cosmos DB, this exercise focuses on building a view of how performance targets from HBase will be translated across to Cosmos DB. This will drive scaling exercise for Cosmos DB.
 
 Questions to ask:
 
@@ -479,7 +479,7 @@ When executing queries that request sorted data, HBase will return the result qu
 
 See this document for more details.
 
-https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes
+https://docs.microsoft.com/azure/cosmos-db/index-policy#composite-indexes
 
 #### Assessment
 
@@ -632,7 +632,7 @@ Primary key details
 
 ##### Deployment
 
-You can use [the Azure portal or Azure Cli to deploy the Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal). Since the migration destination is Cosmos DB SQL API, select "Core (SQL)" for the API as a parameter when deploying. In addition, set Geo-Redundancy, Multi-region Writes, and Availability Zones according to your availability requirements.
+You can use [the Azure portal or Azure Cli to deploy the Cosmos DB SQL API](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal). Since the migration destination is Cosmos DB SQL API, select "Core (SQL)" for the API as a parameter when deploying. In addition, set Geo-Redundancy, Multi-region Writes, and Availability Zones according to your availability requirements.
 
 
 ##### Network consideration
@@ -641,9 +641,9 @@ Cosmos DB has three main network options. The first is a configuration that uses
 
 See the following documents for more information on the three network options:
 
-* [Public IP with Firewall](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-firewall)
-* [Public IP with Service Endpoint](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-vnet-service-endpoint)
-* [Private Endpoint](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-configure-private-endpoints)
+* [Public IP with Firewall](https://docs.microsoft.com/azure/cosmos-db/how-to-configure-firewall)
+* [Public IP with Service Endpoint](https://docs.microsoft.com/azure/cosmos-db/how-to-configure-vnet-service-endpoint)
+* [Private Endpoint](https://docs.microsoft.com/azure/cosmos-db/how-to-configure-private-endpoints)
 
 #### Data migration
 
@@ -672,11 +672,11 @@ Suitable for large datasets. The Azure Cosmos DB Bulk Executor library is used. 
 
 Data Factory's Copy activity supports HBase as a data source. Please refer to the following documents for the detailed method.
 
-[Copy data from HBase using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
+[Copy data from HBase using Azure Data Factory](https://docs.microsoft.com/azure/data-factory/connector-hbase)
 
 You can specify Cosmos DB (SQL API) as the destination for your data. Please refer to the following documents for the detailed method.
 
-[Copy and transform data in Azure Cosmos DB (SQL API) by using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-cosmos-db)
+[Copy and transform data in Azure Cosmos DB (SQL API) by using Azure Data Factory](https://docs.microsoft.com/azure/data-factory/connector-azure-cosmos-db)
 
 ![Graphical user interface  Description automatically generated with low confidence](../images/data-migration-hbase-cosmos-adf.png)
 
@@ -684,7 +684,7 @@ You can specify Cosmos DB (SQL API) as the destination for your data. Please ref
 
 A dedicated OSS tool for migrating data to Cosmos DB, suitable for small datasets. It can be installed, set up and used on a Windows machine.
 
-[Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)
+[Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/import-data)
 
 The source code is available here.
 
@@ -704,7 +704,7 @@ Apache Spark – Apache HBase Connector repository can be found at:
 
 For Cosmos DB Spark connector, refer to the following and download the appropriate library for your Spark version. 
 
-[Quick Start Guide for Cosmos DB Spark Connector](https://docs.microsoft.com/en-us/azure/cosmos-db/spark-connector)
+[Quick Start Guide for Cosmos DB Spark Connector](https://docs.microsoft.com/azure/cosmos-db/spark-connector)
 
 Copy hbase-site.xml to Spark configuration directory.
 
@@ -792,9 +792,9 @@ It writes in parallel at high speed, its performance is quite high. On the other
 
 Phoenix is supported as a Data Factory data source. Please refer to the following documents for detailed steps.
 
-* [Copy data from Phoenix using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-phoenix)
-* [Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/import-data)
-* [Copy data from HBase using Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/connector-hbase)
+* [Copy data from Phoenix using Azure Data Factory](https://docs.microsoft.com/azure/data-factory/connector-phoenix)
+* [Tutorial: Use Data migration tool to migrate your data to Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/import-data)
+* [Copy data from HBase using Azure Data Factory](https://docs.microsoft.com/azure/data-factory/connector-hbase)
 
 #### Migrate your code
 
@@ -804,11 +804,11 @@ This example uses Apache HBase 2.x APIs and Cosmos DB Java SDK v4.
 
 These HBase's sample codes are based on those described in [HBase's official documentation](https://hbase.apache.org/book.html).
 
-[Azure Cosmos DB Java SDK v4 for Core (SQL) API: release notes and resources](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-sdk-java-v4)
+[Azure Cosmos DB Java SDK v4 for Core (SQL) API: release notes and resources](https://docs.microsoft.com/azure/cosmos-db/sql-api-sdk-java-v4)
 
 The code for Cosmos DB presented here is based on the following documentation. You can access the full code example from the documentation. 
 
-[Azure Cosmos DB SQL API: Java SDK v4 examples](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-java-sdk-samples)
+[Azure Cosmos DB SQL API: Java SDK v4 examples](https://docs.microsoft.com/azure/cosmos-db/sql-api-java-sdk-samples)
 
 The mappings for code migration are shown here, but the HBase RowKeys and Cosmos DB Partition Keys used in these examples are not always well-designed. Please design according to the actual data model of the migration source.
 
@@ -1136,27 +1136,27 @@ HBase
 
 Azure Cosmos DB
 
-* [Stored Procedure](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#stored-procedures)
+* [Stored Procedure](https://docs.microsoft.com/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#stored-procedures)
 
   - Cosmos DB stored procedures are written in JavaScript and can perform operations such as creating, updating, reading, querying, and deleting items in Cosmos DB containers.
  
 
-* [Trigger](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#triggers)
+* [Trigger](https://docs.microsoft.com/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#triggers)
 
   - Triggers can be specified for operations on the database. There are two methods provided: a pre-trigger that runs before the database item changes and a post-trigger that runs after the database item changes.
  
 
-* [UDF](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#udfs)
+* [UDF](https://docs.microsoft.com/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs#udfs)
 
   - Cosmos DB allows you to define User Defined Functions (UDFs). UDFs can also be written in JavaScript.
  
-Stored procedures and triggers consume RUs based on the complexity of the operations performed. When developing server-side processing, check the required usage to get a better understanding of the amount of RU consumed by each operation. See [Request Units in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/request-units) and [Optimize request cost in Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/optimize-cost-reads-writes) for details.
+Stored procedures and triggers consume RUs based on the complexity of the operations performed. When developing server-side processing, check the required usage to get a better understanding of the amount of RU consumed by each operation. See [Request Units in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/request-units) and [Optimize request cost in Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/optimize-cost-reads-writes) for details.
 
 Server-side programming mappings
 
 | HBase                   | Cosmos DB        | Description |
 | ----------------------- | ---------------- | ---------------- |
-| Custom filters          | WHERE Clause     | If the processing implemented by the custom filter cannot be achieved by the WHERE clause in Cosmos DB, use UDF in combination. See [here](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-query-udfs#examples) for an example of using UDF to further filter the results of the WHERE clause. |
+| Custom filters          | WHERE Clause     | If the processing implemented by the custom filter cannot be achieved by the WHERE clause in Cosmos DB, use UDF in combination. See [here](https://docs.microsoft.com/azure/cosmos-db/sql-query-udfs#examples) for an example of using UDF to further filter the results of the WHERE clause. |
 | Coprocessor  (Observer) | Trigger          | Observer is a trigger that executes before and after a particular event. Just as Observer supports pre- and post-calls, Cosmos DB's Trigger also supports pre- and post-triggers. |
 | Coprocessor  (Endpoint) | Stored Procedure | Endpoint is a server-side data processing mechanism that is executed for each region. This is similar to an RDBMS stored procedure. Cosmos DB stored procedures are written using JavaScript. It provides access to all the operations you can perform on Cosmos DB through stored procedures. |
 
@@ -1175,13 +1175,13 @@ Data security is a shared responsibility of the customer and the database provid
 | Local data  replication within a data center                 | The HDFS  mechanism allows you to have multiple replicas across nodes within a single  file system. | Cosmos DB  automatically replicates data to maintain high availability, even within a  single data center. You can choose the consistency level yourself. |
 | Automatic data  backups                                      | There is no automatic  backup function. You need to implement data backup yourself. | Cosmos DB is  backed up regularly and stored in the geo redundant storage. |
 | Protect and  isolate sensitive data                          | For example, if  you are using Apache Ranger, you can use Ranger policy to apply the policy to  the table. | You can separate  personal and other sensitive data into specific containers and read / write,  or limit read-only access to specific users. |
-| Monitoring for  attacks                                      | It needs to be  implemented using 3rd party products.        | By using [audit logging and activity logs](https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db), you can monitor your account  for normal and abnormal activity. |
+| Monitoring for  attacks                                      | It needs to be  implemented using 3rd party products.        | By using [audit logging and activity logs](https://docs.microsoft.com/azure/cosmos-db/monitor-cosmos-db), you can monitor your account  for normal and abnormal activity. |
 | Responding to  attacks                                       | It needs to be  implemented using 3rd party products.        | When you contact  Azure support and report a potential attack, a five-step incident response  process begins. |
 | Ability to  geo-fence data to adhere to data governance restrictions | You need to check  the restrictions of each country and implement it yourself. | Guarantees data  governance for sovereign regions (Germany, China, US Gov, etc.). |
-| Physical  protection of servers in protected data centers    | It depends on the  data center where the system is located.  | For a list of the latest certifications,  see the global [Azure compliance site](https://docs.microsoft.com/en-us/compliance/regulatory/offering-home?view=o365-worldwide). |
-| Certifications                                               | Depends on the Hadoop  distribution.                         | See [Azure compliance documentation \| Microsoft Docs](https://docs.microsoft.com/en-us/azure/compliance/) |
+| Physical  protection of servers in protected data centers    | It depends on the  data center where the system is located.  | For a list of the latest certifications,  see the global [Azure compliance site](https://docs.microsoft.com/compliance/regulatory/offering-home?view=o365-worldwide). |
+| Certifications                                               | Depends on the Hadoop  distribution.                         | See [Azure compliance documentation \| Microsoft Docs](https://docs.microsoft.com/azure/compliance/) |
 
-For more information on security, please refer to [Security in Azure Cosmos DB - overview](https://docs.microsoft.com/en-us/azure/cosmos-db/database-security)
+For more information on security, please refer to [Security in Azure Cosmos DB - overview](https://docs.microsoft.com/azure/cosmos-db/database-security)
 
 #### Monitoring
 
@@ -1203,13 +1203,13 @@ HBase typically monitors the cluster using the cluster metric web UI or in conju
 
   - You can monitor your Azure Cosmos account by writing your own program using .NET, Java, Python, Node.js SDK, and REST API.
 
-For more information on Cosmos DB monitoring, please refer to [Monitor Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db).
+For more information on Cosmos DB monitoring, please refer to [Monitor Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/monitor-cosmos-db).
 
 If your environment implements HBase system monitoring to send alerts, such as by email, you may be able to replace it with Azure Monitor alerts. You can receive alerts based on metrics or activity log events for your Cosmos DB account.
 
-For more information on alerts in Azure Monitor, please refere to [Create alerts for Azure Cosmos DB using Azure Monitor](https://docs.microsoft.com/en-us/azure/cosmos-db/create-alerts)
+For more information on alerts in Azure Monitor, please refere to [Create alerts for Azure Cosmos DB using Azure Monitor](https://docs.microsoft.com/azure/cosmos-db/create-alerts)
 
-Also, see [Cosmos DB metrics and log types](https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db-reference) that can be collected by Azure Monitor. 
+Also, see [Cosmos DB metrics and log types](https://docs.microsoft.com/azure/cosmos-db/monitor-cosmos-db-reference) that can be collected by Azure Monitor. 
 #### BC-DR
 
 ##### Backup
@@ -1218,11 +1218,11 @@ There are several ways to get a backup of HBase. For example, Snapshot, Export, 
 
 Cosmos DB automatically backs up data at periodic intervals, which does not affect the performance or availability of database operations. Backups are stored in Azure storage and can be used to recover data if needed. There are two types of Cosmos DB backups:
 
-* [Periodic backup](https://docs.microsoft.com/en-us/azure/cosmos-db/configure-periodic-backup-restore)
+* [Periodic backup](https://docs.microsoft.com/azure/cosmos-db/configure-periodic-backup-restore)
 
   - This is the default backup method. Backups are performed on a regular basis and, by default, keep the latest two backups. You can change the backup interval and retention period according to your requirements. The data is restored by making a request to Azure support team.
 
-* [Continuous backup](https://docs.microsoft.com/en-us/azure/cosmos-db/continuous-backup-restore-introduction) (Public Preview at the time of publication of this document 2021/6)
+* [Continuous backup](https://docs.microsoft.com/azure/cosmos-db/continuous-backup-restore-introduction) (Public Preview at the time of publication of this document 2021/6)
 
   - You can restore to any point in the last 30 days. You need to select this backup mode when you create your Cosmos DB account to enable it. You can do a self-service restore using the Azure portal, PowerShell or CLI.
 
@@ -1234,7 +1234,7 @@ Cosmos DB is a globally distributed database with built-in Disaster Recovery cap
 
 Cosmos DB account that uses only a single region may lose availability in the event of a region failure. We recommend that you configure at least two regions to ensure high availability at all times. You can also ensure high availability for both writes and reads by configuring your Azure Cosmos DB account to span at least two regions with multiple write regions to ensure high availability for writes and reads. For multi-region accounts that consist of multiple write regions, failover between regions is detected and handled by the Azure Cosmos DB client. These are momentary and do not require any changes from the application. In this way, you can achieve an availability configuration that includes Disaster Recovery for Cosmos DB. As mentioned earlier, HBase replication can be set up with three models, but Cosmos DB can be set up with SLA-based availability by configuring single-write and multi-write regions. 
 
-For more information on High Availability, please refer to [How does Azure Cosmos DB provide high availability](https://docs.microsoft.com/en-us/azure/cosmos-db/high-availability)
+For more information on High Availability, please refer to [How does Azure Cosmos DB provide high availability](https://docs.microsoft.com/azure/cosmos-db/high-availability)
 
 
 ## FAQ
@@ -1249,7 +1249,7 @@ It may not be optimized as it is. In HBase, the data is sorted by the specified 
 
 #### Data is sorted by RowKey in HBase, but partitioning by key in Cosmos DB. How can Cosmos DB achieve sorting and collocation?
 
-In Cosmos DB, you can add a Composite Index to sort your data in ascending or descending order to improve the performance of equality and range queries. See the [Distribution](#distribution) section and the [Composite Index](https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy#composite-indexes) in product documentation.
+In Cosmos DB, you can add a Composite Index to sort your data in ascending or descending order to improve the performance of equality and range queries. See the [Distribution](#distribution) section and the [Composite Index](https://docs.microsoft.com/azure/cosmos-db/index-policy#composite-indexes) in product documentation.
 
 #### Analytical processing is executed on HBase data with Hive or Spark. How can I modernize them in Cosmos DB?
 
@@ -1261,4 +1261,3 @@ Cosmos DB doesn't have exactly the same timestamp versioning feature as HBase. B
 -	Store every version/change as a separate item.
 -	Read the change feed to merge/consolidate changes and trigger appropriate actions downstream by filtering with “_ts” field.
 Additionally, for old version of data, you can expire old versions using [TTL](https://docs.microsoft.com/en-us/azure/cosmos-db/time-to-live).
-
