@@ -1,5 +1,5 @@
 
-# Brief introduction to Apache Storm
+# Apache Storm Architecture and Components
 
 ## Overview
 [Apache Storm](https://storm.apache.org/) is an open source distributed real-time computing system. Storm ensures that you can process streams of data in real time. Storm has use cases such as real-time analytics, online machine learning, and ETL. It's scalable, fault tolerant, and guarantees data processing.
@@ -30,5 +30,11 @@ The daemon configuration for Storm clusters is similar to Hadoop clusters. There
 
 ![Storm Daemons](../images/storm-diagram-nimbus.png)
 
+## Further Reading
 
+[Considerations](considerations.md)
+
+[Databricks Migration](databricks-migration.md)
+
+[Synapse Migration](migration-approach.md)
 
