@@ -34,7 +34,7 @@ The daemon configuration for Storm clusters is similar to Hadoop clusters. There
 
 [Considerations](considerations.md)
 
-[Databricks Migration](databricks-migration.md)
+[Challenges](challenges.md)
 
-[Synapse Migration](migration-approach.md)
+[Migration Approach](migration-approach.md)
 
