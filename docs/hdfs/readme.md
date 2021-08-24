@@ -2,7 +2,7 @@
 
 ## Overview
 
-Hadoop Distributed Filesystem (HDFS) - a Java-based distributed file system that follows the master-slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
+[Hadoop Distributed Filesystem (HDFS)](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html) - a Java-based distributed file system that follows the master-slave architecture – with NameNode being the master and DataNode being the slave providing scalable and reliable data storage designed to span large clusters of commodity servers.
 
  ![hdfs-architecture-components](../images/hdfs-architecture-components.png)
 

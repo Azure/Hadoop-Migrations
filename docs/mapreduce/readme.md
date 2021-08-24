@@ -2,7 +2,7 @@
 
 ## Overview
 
-MapReduce is an open source framework/programming model that supports scalability across multiple servers in a Hadoop cluster. It is one of the key processing of Apache Hadoop. Mapreduce aims at processing structured and unstructured data in HDFS. It processes data from the disk and is suitable for batch processing. This framework has been developed using Java. MapReduce can run queries using the Hive Query Language.
+[MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) is an open source framework/programming model that supports scalability across multiple servers in a Hadoop cluster. It is one of the key processing of Apache Hadoop. Mapreduce aims at processing structured and unstructured data in HDFS. It processes data from the disk and is suitable for batch processing. This framework has been developed using Java. MapReduce can run queries using the Hive Query Language.
 
 
 MapReduce performs 2 tasks - Map task and a Reduce task. Programming languages like Python, Ruby , Java etc are supported to create the Map and Reduce tasks. 
