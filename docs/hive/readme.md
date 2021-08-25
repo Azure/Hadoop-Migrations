@@ -2,7 +2,7 @@
 
 ## Overview
 
-Apache Hive is a popular data warehouse software that enables you to easily and quickly write SQL-like queries to efficiently extract data from Apache Hadoop.
+[Apache Hive](https://hive.apache.org/) is a popular data warehouse software that enables you to easily and quickly write SQL-like queries to efficiently extract data from Apache Hadoop.
 
 Hadoop is an open-source framework for storing and processing massive amounts of data. While Hadoop offers many advantages over traditional relational databases, the task of learning and using Hadoop is daunting since it requires SQL queries to be implemented in the MapReduce Java AP.
 

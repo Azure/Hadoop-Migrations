@@ -2,7 +2,7 @@
 
 ## Overview Spark and Synapse Spark
 
-Apache Spark is an open-source tool for processing large amounts of structured, semi-structured data across multiple nodes (worker nodes). One of the primary advantages of using Spark is due to the speed (in-memory) computing and support for different programming languages like Python, R, Java, Scala, and the ability to run SQL queries. Spark API automatically splits the tasks into multiple tasks regardless of the programming language.
+[Apache Spark](https://spark.apache.org/) is an open-source tool for processing large amounts of structured, semi-structured data across multiple nodes (worker nodes). One of the primary advantages of using Spark is due to the speed (in-memory) computing and support for different programming languages like Python, R, Java, Scala, and the ability to run SQL queries. Spark API automatically splits the tasks into multiple tasks regardless of the programming language.
 
 The core architecture for Apache Spark is based upon it being scalable and ­if you require more processing power you add more nodes to the clusters and reduce/decrease the nodes when not in use. Spark is a processing framework and the data is stored on high performance distributed storage like HDFS or ADLS Gen2. This de-coupled (storage and analytics) makes it ideal for organizations to save costs when moving to the cloud compared to always on on-premises Hadoop cluster. Apache spark has many built in libraries for building transformation and support a wide range of storage formats such as Parquet, Orc, text (csv, json) etc.
 

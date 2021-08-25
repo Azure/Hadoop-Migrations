@@ -1,6 +1,6 @@
 # Overview
 
-Atlas is an open source framework for data governance and Metadata Management. It enables the effective compliance requirements of the organization within Hadoop and integrates with other systems across the organization.
+[Apache Atlas](https://atlas.apache.org/) is an open source framework for data governance and Metadata Management. It enables the effective compliance requirements of the organization within Hadoop and integrates with other systems across the organization.
 
 ## Apache Atlas Architecture
 ![Atlas Architecture](../images/Atlas_architecure.png)
