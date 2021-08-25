@@ -1,0 +1,135 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.255.40792",
+      "templateHash": "2073077618182674437"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location of the resources"
+      }
+    },
+    "nsEventHub": {
+      "type": "string",
+      "defaultValue": "eh-krc-001",
+      "metadata": {
+        "description": "Event Hub Namespace Name"
+      }
+    },
+    "ehName": {
+      "type": "string",
+      "defaultValue": "eh001",
+      "metadata": {
+        "description": "Event Hub Name"
+      }
+    },
+    "authName": {
+      "type": "string",
+      "defaultValue": "tester001",
+      "metadata": {
+        "description": "Authorization Name"
+      }
+    },
+    "consumerGroupName": {
+      "type": "string",
+      "defaultValue": "$Default",
+      "metadata": {
+        "description": "Consumer Group Name"
+      }
+    }
+  },
+  "functions": [],
+  "resources": [
+    {
+      "type": "Microsoft.EventHub/namespaces",
+      "apiVersion": "2021-01-01-preview",
+      "name": "[parameters('nsEventHub')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard",
+        "tier": "Standard",
+        "capacity": 1
+      },
+      "properties": {
+        "zoneRedundant": false,
+        "isAutoInflateEnabled": false,
+        "maximumThroughputUnits": 0,
+        "kafkaEnabled": true
+      }
+    },
+    {
+      "type": "Microsoft.EventHub/namespaces/authorizationRules",
+      "apiVersion": "2021-01-01-preview",
+      "name": "[format('{0}/RootManageSharedAccessKey', parameters('nsEventHub'))]",
+      "properties": {
+        "rights": [
+          "Listen",
+          "Manage",
+          "Send"
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.EventHub/namespaces', parameters('nsEventHub'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.EventHub/namespaces/eventhubs",
+      "apiVersion": "2021-01-01-preview",
+      "name": "[format('{0}/{1}', parameters('nsEventHub'), parameters('ehName'))]",
+      "properties": {
+        "messageRetentionInDays": 1,
+        "partitionCount": 1,
+        "status": "Active"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.EventHub/namespaces', parameters('nsEventHub'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.EventHub/namespaces/networkRuleSets",
+      "apiVersion": "2021-01-01-preview",
+      "name": "[format('{0}/default', parameters('nsEventHub'))]",
+      "properties": {
+        "defaultAction": "Deny",
+        "virtualNetworkRules": [],
+        "ipRules": []
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.EventHub/namespaces', parameters('nsEventHub'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
+      "apiVersion": "2021-01-01-preview",
+      "name": "[format('{0}/{1}', format('{0}/{1}', parameters('nsEventHub'), parameters('ehName')), parameters('authName'))]",
+      "properties": {
+        "rights": [
+          "Manage",
+          "Listen",
+          "Send"
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.EventHub/namespaces', parameters('nsEventHub'))]",
+        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', split(format('{0}/{1}', parameters('nsEventHub'), parameters('ehName')), '/')[0], split(format('{0}/{1}', parameters('nsEventHub'), parameters('ehName')), '/')[1])]"
+      ]
+    },
+    {
+      "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
+      "apiVersion": "2021-01-01-preview",
+      "name": "[format('{0}/{1}', format('{0}/{1}', parameters('nsEventHub'), parameters('ehName')), parameters('consumerGroupName'))]",
+      "properties": {},
+      "dependsOn": [
+        "[resourceId('Microsoft.EventHub/namespaces', parameters('nsEventHub'))]",
+        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', split(format('{0}/{1}', parameters('nsEventHub'), parameters('ehName')), '/')[0], split(format('{0}/{1}', parameters('nsEventHub'), parameters('ehName')), '/')[1])]"
+      ]
+    }
+  ]
+}
