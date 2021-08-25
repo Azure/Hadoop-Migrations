@@ -1,0 +1,16 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "purviewName": {
+        "value": "hdmp003pv001"
+      },
+      "location": {
+        //'eastus,westeurope,southeastasia,canadacentral,southcentralus,brazilsouth,centralindia,uksouth,australiaeast,eastus2'
+        "value": "eastus2"
+      },
+      "env":{
+        "value": "dev"
+      }
+    }
+  }
