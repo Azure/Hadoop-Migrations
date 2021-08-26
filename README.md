@@ -24,10 +24,10 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache MapReduce](docs/mapreduce/) |Distributed computation framework |
 |[Apache Zookeeper](docs/zookeeper/) |Distributed coordination service |
 |[Apache YARN](docs/yarn/) | Resource manager for Hadoop ecosystem |
-|[Storm](docs/storm/)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
-|[Sqoop](docs/sqoop/)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
-|[Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system||
-|[Atlas](docs/atlas/)|Open source framework for data governance and Metadata Management||
+|[Apache Storm](docs/storm/)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
+|[Apache Sqoop](docs/sqoop/)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
+|[Apache Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system||
+|[Apache Atlas](docs/atlas/)|Open source framework for data governance and Metadata Management||
 
 
 
