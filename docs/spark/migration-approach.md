@@ -165,3 +165,17 @@ On top of Apache Spark, Azure Databricks offers additional capabilities:
 
 The migration of Spark jobs onto Azure Databricks is trivial, and requires minimal, if any, modifications to scripts. Job scripts can be imported into Azure Databricks in bulk using the [Workspace CLI](https://docs.microsoft.com/azure/databricks/dev-tools/cli/workspace-cli).
 
+### Migrate Spark jobs configured with Oozie to Data Factory 
+
+If you are using Oozie to migrate anything running Spark, including Spark SQL, to Data Factory, you have the following migration paths, depending on your current execution method: 
+
+
+ **a) Running Python or Scala/Java as JAR**
+  - [HDIinsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/spark-best-practices)
+  - [Azure Databricks python activity](https://docs.microsoft.com/en-us/azure/data-factory/transform-data-databricks-python)
+  - [Azure Databricks Jar activity](https://docs.microsoft.com/en-us/azure/data-factory/transform-data-databricks-jar)
+  - [Synapse Spark job](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-job-definitions) in Sypapse pipelines
+
+ **b) Running Spark in Notebooks**  
+  - [Azure Databricks Notebooks activity](https://docs.microsoft.com/en-us/azure/data-factory/transform-data-databricks-notebook)
+  - [Synapse notebook activity](https://docs.microsoft.com/en-us/azure/synapse-analytics/synapse-notebook-activity?tabs=classical) in Synapse pipelines
