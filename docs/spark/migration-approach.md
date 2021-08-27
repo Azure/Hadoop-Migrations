@@ -23,6 +23,7 @@ Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](h
 4. Built in support for .NET for spark application enables existing user skill set to take advantage of Apache Spark distributed data processing.
 
 ![spark-synapse-options](../images/spark-synapse-options.png)
+
 5. Unified security and monitoring features including Managed VNets throughout all workloads with one Azure Synapse workspace
 
 6. Existing spark user to take advantage of Microsoft proprietary optimizations e.g., Hyperspace: An indexing subsystem for Apache Spark.
