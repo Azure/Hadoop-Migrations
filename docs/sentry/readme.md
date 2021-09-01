@@ -8,8 +8,9 @@
 
 There are components involved in the authorization process:
 
+![Sentry](../images/sentry.png)
 
-![image](https://user-images.githubusercontent.com/7907123/121877268-bd0c5080-cd0a-11eb-884a-976b2c1c74ee.png)
+Image source : https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial
 
 **Sentry Server**: The Sentry RPC server manages the authorization metadata. It supports interface to securely retrieve and manipulate the metadata;
 
