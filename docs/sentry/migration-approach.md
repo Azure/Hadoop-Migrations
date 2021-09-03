@@ -42,7 +42,7 @@ Some companies are migrating Ranger Policies to databricks cluster using an inte
 
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
-# Migration to  HDInsight 
+# Migration to  HDInsight from Ranger
 
 ## Using the API
 
