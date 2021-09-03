@@ -1,7 +1,4 @@
-**General disclaimer: DO NOT COPY - UNDER DEVELOPMENT - MS INTERNAL ONLY** \
-&nbsp;
-
-# Hadoop Platform migration to Azure
+# EHMA - Enabling Hadoop Migration on Azure
 
 **Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Sunil Sattiraju, Danny Liu, Nagaraj Seeplapudur Venkatesan, Jose Mendez.**
 
