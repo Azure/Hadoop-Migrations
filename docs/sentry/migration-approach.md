@@ -30,7 +30,7 @@ Landing Targets for Apache Sentry on Azure
 First what we can do is to get all the sentry policies following this procedure:
 https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61309948
 
-Curretly we do not have any Automatic procedure, but we can do a manual migration, following the steps on this documentation:
+Once we have all the policies  and as we do not have an automatic procedure , we can do a manual migration, following the steps on this documentation:
 https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
 
 # Migration to Ranger
