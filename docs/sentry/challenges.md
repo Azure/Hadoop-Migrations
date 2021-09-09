@@ -1,4 +1,4 @@
-# Challenges of Sentry on-premise  
+# Sentry Migration Challenges
 
 Common challenges associated with Sentry migrations:
 
