@@ -25,7 +25,7 @@ Landing Targets for Apache Sentry on Azure
 
 
 
-# Migration to Azure RBAC
+# Migration to Azure Active Directory (RBAC)
 
 First what we can do is to get all the sentry policies following this procedure:
 https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61309948
