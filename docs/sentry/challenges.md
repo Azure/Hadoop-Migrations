@@ -2,7 +2,7 @@
 
 Common challenges associated with Sentry migrations:
 
-## From RBAC to ABAC
+**From RBAC to ABAC**
 
 Sentry is an authorization engine and uses a Rol Base Access Control (RBAC) to manage the accessibility & Authorisation of folders, tables and services inside a hadoop cluster 
 where as for example Ranger or other authorization engines use an Attribute Base Access Control (ABAC) to manage the accessibility & Authorisation of folders, tables and services inside a hadoop cluster , this is something difficult to convert from one to the other as we are talking about two different concepts.
