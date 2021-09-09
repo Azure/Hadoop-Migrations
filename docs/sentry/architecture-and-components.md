@@ -1,4 +1,5 @@
 
+
 # Apache Sentry
 
 Apache Sentry is a granular, role-based authorization module for Hadoop. Sentry provides the ability to control and enforce precise levels of privileges on data for authenticated users and applications on a Hadoop cluster. Sentry currently works out of the box with Apache Hive, Hive Metastore/HCatalog, Apache Solr, Impala and HDFS (limited to Hive table data). Sentry is designed to be a pluggable authorization engine for Hadoop components. It allows you to define authorization rules to validate a user or application’s access requests for Hadoop resources. Sentry is highly modular and can support authorization for a wide variety of data models in Hadoop.
@@ -30,6 +31,11 @@ There are components involved in the authorization process:
 - 	***Role*** - A set of privileges; a template to combine multiple access rules
 
 - 	***Authorization models*** - Defines the objects to be subject to authorization rules and the granularity of actions allowed. For example, in the SQL model, the objects can be databases or tables, and the actions are SELECT, INSERT, CREATE and so on. For the Search model, the objects are indexes, collections and documents; the access modes are query, update and so on.
+
+
+**Sentry Integration with the Hadoop Ecosystem**
+
+<img width="360" alt="Sentry_Architecture" src="https://user-images.githubusercontent.com/7907123/132703663-d038910c-95e7-410e-80f3-a0e8da12e4c0.PNG">
 
 **Role-Based Access Control**
  
