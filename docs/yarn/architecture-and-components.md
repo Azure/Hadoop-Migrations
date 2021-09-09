@@ -1,7 +1,7 @@
 
 ![Yarn](https://user-images.githubusercontent.com/7907123/132715866-1ebaf075-9117-4ce2-b374-11dbf507b456.png)
 
-**Yarn Components:**
+***Yarn Components:***
 
 Client: Applications which request resources to yarn through a mapreduce job.
 Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignment and management. Whenever it receives a processing request, it forwards it to the corresponding node manager and allocates resources for the completion of the request accordingly. It has two major components:
