@@ -14,7 +14,7 @@ Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignme
 
 ***Application Master:*** The application master send a Container which includes all that the applications need for running once the node manager recieve the request from the application master and keeps the comunications to know the status of the application to the resource manager.
 
-***Container:*** is a conteiner of resources where the applications runs the jobs and contains all the information that require as environment variables, security tokens, dependencies etc...
+***Container:*** Is a container of resources where the applications runs the jobs and contains all the information that require as environment variables, security tokens, dependencies etc...
 
 
 https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html
