@@ -1,4 +1,4 @@
-## Apache YARN ##
+## Apache YARN Architecture and Components. ##
 
 YARN stands for “Yet Another Resource Negotiator“, the fundamental idea of YARN is to split up the functionalities of resource management and job scheduling/monitoring into separate daemons. The idea is to have a global ResourceManager (RM) and per-application ApplicationMaster (AM). An application is either a single job or a DAG of jobs.
 
