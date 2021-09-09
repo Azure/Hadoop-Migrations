@@ -32,16 +32,14 @@ There are components involved in the authorization process:
 
 - 	***Authorization models*** - Defines the objects to be subject to authorization rules and the granularity of actions allowed. For example, in the SQL model, the objects can be databases or tables, and the actions are SELECT, INSERT, CREATE and so on. For the Search model, the objects are indexes, collections and documents; the access modes are query, update and so on.
 
-
-**Sentry Integration with the Hadoop Ecosystem**
-
-<img width="360" alt="Sentry_Architecture" src="https://user-images.githubusercontent.com/7907123/132703663-d038910c-95e7-410e-80f3-a0e8da12e4c0.PNG">
-
 **Role-Based Access Control**
  
 Role-based access control (RBAC) is a powerful mechanism to manage authorization for a large set of users and data objects in a typical enterprise. New data objects get added or removed, users join, move, or leave organisations all the time. RBAC makes managing this a lot easier. Hence, as an extension of the discussed previously, if Carol joins the Finance Department, all you need to do is add her to the
 
 finance-department group in AD. This will give Carol access to data from the Sales and Customer tables.
 
- 
-information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
+**Sentry Integration with the Hadoop Ecosystem**
+
+<img width="360" alt="Sentry_Architecture" src="https://user-images.githubusercontent.com/7907123/132703663-d038910c-95e7-410e-80f3-a0e8da12e4c0.PNG">
+
+Information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
