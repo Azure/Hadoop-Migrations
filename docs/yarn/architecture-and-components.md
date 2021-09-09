@@ -8,7 +8,7 @@ Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignme
 
 1. ***Application manager:*** Is the daemon which accepts the applications and request the containers once it know how resources will need,also restarts the Application Manager container if a task fails.
 
-2. ***Scheduler:***The purpouse of the scheduler is the management of resources share pool among all the jobs, YARN use the Capacity Scheduler and Fair Scheduler to partition the cluster resources using this different queues prioritization.
+2. ***Scheduler:*** The purpouse of the scheduler is the management of resources share pool among all the jobs, YARN use the Capacity Scheduler and Fair Scheduler to partition the cluster resources using this different queues prioritization.
 
 ***Node Manager:*** The main purpouse of the node manager is to keep-up with the resource manager and also, monitors resources usage, performs log management and also kills a container based on directions from the resource manager. It is also responsible for creating the container process and start it on the request of Application master.
 
