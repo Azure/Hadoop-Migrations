@@ -1,4 +1,5 @@
 
+
 # Migration Approach
 
 Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions:
@@ -14,8 +15,7 @@ Access management for cloud resources is a critical function for any organizatio
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/132667597-81c2b345-8924-4e25-a085-395f0ad98ba8.png)
-
+![Sentry](https://user-images.githubusercontent.com/7907123/132668414-78b53265-13cb-4da2-8065-b22b2f356f39.png)
 
 | Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
