@@ -1,4 +1,4 @@
-## Apache Yarn ##
+## Apache Yarn Considerations ##
 As Yarn is the Resource Manager of Hadoop we will need to consider the following things:
   
   1. Jobs are running manage by Yarn
