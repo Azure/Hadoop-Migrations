@@ -495,4 +495,4 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 Please contact harman@knowledgelens.com & deepanjali@knowledgelens.com for further assistance.
 
-[Previous](docs/hive/considerations.md) 
+[Previous](considerations.md) 
