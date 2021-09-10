@@ -2,7 +2,7 @@
 
 # Migration Approach
 
-## Replatforming to Azure PAAS Services ##
+## Replatforming to Azure PaaS Services ##
 
 Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions:
 https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-authorization
