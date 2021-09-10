@@ -88,6 +88,10 @@ To summarise, HBase tries to serve a read request using data stored in cache –
 
 To reduce read and write latencies, HBase 2.x has introduced a pool of offheap buffers that are used along read and write paths. The workflow for writing and reading data does its best to avoid on-heap memory allocations reducing the amount of work that Garbage Collection (GC) must do to complete reads and writes. These must be fine-tuned and optimized as part of the overall migration because they are heavily dependent on number of Regions and RegionServers; size of memory; and premium storage attached to the HBase cluster on Azure. The reason is that these parameters can change post-migration to Azure.  
 
+### Next step
+
+[Challenges](challenges.md)
+
 ### Further Reading
 
 Refer to the below sections to read more about Migration approach for Hbase

@@ -1261,3 +1261,14 @@ Cosmos DB doesn't have exactly the same timestamp versioning feature as HBase. B
 -	Store every version/change as a separate item.
 -	Read the change feed to merge/consolidate changes and trigger appropriate actions downstream by filtering with “_ts” field.
 Additionally, for old version of data, you can expire old versions using [TTL](https://docs.microsoft.com/en-us/azure/cosmos-db/time-to-live).
+
+## Further Reading
+
+Refer to the below sections to read more about Migration approach for Hbase
+
+[Architecture and Components](readme.md)
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
