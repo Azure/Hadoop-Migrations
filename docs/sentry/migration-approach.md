@@ -17,7 +17,8 @@ Access management for cloud resources is a critical function for any organizatio
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/132668414-78b53265-13cb-4da2-8065-b22b2f356f39.png)
+![Sentry](https://user-images.githubusercontent.com/7907123/132817284-6bbd3702-475f-4327-b3e9-db21df8418d3.png)
+
 
 | Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
