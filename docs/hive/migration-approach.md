@@ -479,7 +479,7 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 ***Details to be added***
 
-## Decision Map/Flowchart
+### Decision Map/Flowchart
 
 ![hive-decisssion-flow-matrix](../images/hive-decisssion-flow-matrix.png)
   
