@@ -271,7 +271,7 @@ Azure Monitor relies on [Log Analytics agent](https://docs.microsoft.com/azure/a
 
 Instructions for setting up Azure Monitor to collect data from Linux are available [here](https://docs.microsoft.com/azure/azure-monitor/vm/quick-collect-linux-computer). Once data has been written to Log Analytics, analysis can be done using [Kusto](https://docs.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
 
-## Migrationg Apache HBase to Azure HDInsight
+## Migrating Apache HBase to Azure HDInsight
 
 There is a detailed guide for migrating HBase to HDInsight HBase cluster. You can download it from [Guide to Migrating Big Data Workloads to Azure HDInsight](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/).
 
