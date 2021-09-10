@@ -17,7 +17,8 @@ Access management for cloud resources is a critical function for any organizatio
 
 Landing Targets for Apache Sentry on Azure
 
-![Sentry](https://user-images.githubusercontent.com/7907123/132818095-532cb610-7df4-4352-89c4-5d22e65dd6ad.png)
+![Sentry](https://user-images.githubusercontent.com/7907123/132818354-ed3967bb-66af-47f5-82fb-a044d9c7eb24.png)
+
 
 
 
