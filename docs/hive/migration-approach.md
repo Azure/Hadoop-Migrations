@@ -481,7 +481,7 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 ## Decision Map/Flowchart
 
-![imhive-decission-flow](../images/hive-decission-flow.png)
+![hive-decisssion-flow-matrix](../images/hive-decisssion-flow-matrix.png)
   
 ## Migrate Hive SQL Workloads
   
@@ -495,22 +495,4 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 Please contact harman@knowledgelens.com & deepanjali@knowledgelens.com for further assistance.
 
-## Feature Map & Workaround
-
-## Reference Implementation - ARM Templates  
-
-TBD v2
-
-## Pseudocode
-
-TBD v2
-
-## Architectural Guidance
-
-TBD v2
-
-### Patterns & Anti – Patterns
-
-### Performance Tuning
-
-### HA & DR
+[Previous](docs/hive/considerations.md) 
