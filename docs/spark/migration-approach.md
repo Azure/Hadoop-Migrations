@@ -180,3 +180,12 @@ If you are using Oozie to migrate anything running Spark, including Spark SQL, t
  **b) Running Spark in Notebooks**  
   - [Azure Databricks Notebooks activity](https://docs.microsoft.com/en-us/azure/data-factory/transform-data-databricks-notebook)
   - [Synapse notebook activity](https://docs.microsoft.com/en-us/azure/synapse-analytics/synapse-notebook-activity?tabs=classical) in Synapse pipelines
+
+
+## Further Reading
+
+[Spark Architecture and Components](readme.md)
+
+[Considerations](considerations.md)
+
+[Databricks Migration](databricks-migration.md)

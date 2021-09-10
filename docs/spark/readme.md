@@ -52,6 +52,10 @@ Azure Synapse Analytics takes the best of Azure SQL Data Warehouse and modernize
 
 *    Synapse Spark makes the entry barrier easy for someone new to Spark by providing opinionated cluster types (Small, Medium, Large etc.) and are ephemeral in nature.
 
+## Next step
+
+[Considerations](considerations.md)
+
 ## Further Reading
 
 [Considerations](considerations.md)

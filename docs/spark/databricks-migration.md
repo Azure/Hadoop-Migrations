@@ -36,3 +36,16 @@ Another approach is to move workloads associated to the various teams within the
 Data migration can be accomplished by copying on-prem data onto an Azure storage solution, like Azure Data Lake Gen2. This copying can be accomplished via Azure Data Factory, involving potential data conversions to optimized formats like [Parquet](https://docs.microsoft.com/azure/data-factory/format-parquet) and [Delta](https://docs.microsoft.com/azure/data-factory/format-delta).
 
 ![databricks-deltalake-at-scale-on-azure](../images/databricks-deltalake-at-scale-on-azure.png)
+
+
+## Next step
+
+[Synapse Migration](migration-approach.md)
+
+## Further Reading
+
+[Spark Architecture and Components](readme.md)
+
+[Considerations](considerations.md)
+
+[Synapse Migration](migration-approach.md)
