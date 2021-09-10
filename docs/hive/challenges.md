@@ -14,4 +14,4 @@
 
 - Automations
 
-[Previous](docs/hive/readme.md)   [Next](docs/hive/considerations.md)
+[Previous](readme.md)   [Next](considerations.md)
