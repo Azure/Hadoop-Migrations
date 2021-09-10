@@ -56,3 +56,15 @@ df. write. sqlanalytics("sqlpool001.dbo.PassengerStats",Constants.INTERNAL)
 ## Integrating with Pipelines
 
 Reference link for pipeline and data flow: [QuickStart: to load data into dedicated SQL pool using the copy activity - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-copy-activity-load-sql-pool)
+
+## Next step
+
+[Databricks Migration](databricks-migration.md)
+
+## Further Reading
+
+[Spark Architecture and Components](readme.md)
+
+[Databricks Migration](databricks-migration.md)
+
+[Synapse Migration](migration-approach.md)
