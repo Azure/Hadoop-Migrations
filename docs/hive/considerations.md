@@ -7,4 +7,4 @@
 *    Selecting the right partition in order to maintain performance
 
 
-[Previous](docs/hive/challenges.md)   [Next](docs/hive/migration-approach.md)
+[Previous](challenges.md)   [Next](migration-approach.md)
