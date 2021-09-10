@@ -13,3 +13,5 @@
 - DevOps
 
 - Automations
+
+[Previous](docs/hive/readme.md)   [Next](docs/hive/considerations.md)

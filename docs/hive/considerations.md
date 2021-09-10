@@ -5,3 +5,6 @@
 *    Consider the right instance for the metastore and not to share with other components.
 
 *    Selecting the right partition in order to maintain performance
+
+
+[Previous](docs/hive/challenges.md)   [Next](docs/hive/migration-approach.md)
