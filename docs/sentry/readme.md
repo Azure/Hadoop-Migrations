@@ -43,6 +43,9 @@ finance-department group in AD. This will give Carol access to data from the Sal
  
 information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
 
+## Next step
+
+[Challenges](challenges.md)
 
 ## Further Reading 
 

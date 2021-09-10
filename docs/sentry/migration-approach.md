@@ -66,3 +66,11 @@ We can use the import/export button on the Ranger UI in order to export and impo
 
 More detail on the following documentation:[Import-Export Ranger Policies](https://cwiki.apache.org/confluence/display/RANGER/User+Guide+For+Import-Export)
 
+
+## Further Reading 
+
+[Sentry Architecture and Components](readme.md)
+
+[Challenges](challenges.md)
+
+[Additional Third Party tools](considerations.md)
