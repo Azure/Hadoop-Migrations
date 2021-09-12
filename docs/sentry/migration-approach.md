@@ -21,14 +21,6 @@ Landing Targets for Apache Sentry on Azure
 ![Sentry](https://user-images.githubusercontent.com/7907123/132818412-f2f22608-7dc9-4a9b-b26f-c18571634ba9.png)
 
 
-| Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
-| ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
-| HDInsights                         |      + |     + |     + |
-| Databricks                             |     + |     - |      + |
-| CosmosDB |     + |     - |      - |
-| Active directory integration (Azure RBAC) |     + |     - |      - |
-
-
 # Migration to Azure Active Directory (RBAC)
 Sentry is the authorization method for the Hadoop cluster and is base on ACL's and Role Base Access Control (RBAC) and as the Azure mothod for authorization is Azure Active Directory which is base on RBAC the migration approach is direct.
 
@@ -81,5 +73,12 @@ We can use the import/export button on the Ranger UI in order to export and impo
 
 More detail on the following documentation:[Import-Export Ranger Policies](https://cwiki.apache.org/confluence/display/RANGER/User+Guide+For+Import-Export)
 
+
+| Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
+| ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
+| HDInsights                         |      + |     + |     + |
+| Databricks                             |     + |     - |      + |
+| CosmosDB |     + |     - |      - |
+| Active directory integration (Azure RBAC) |     + |     - |      - |
 
 ## Lift & Shift to Azure IaaS ##
