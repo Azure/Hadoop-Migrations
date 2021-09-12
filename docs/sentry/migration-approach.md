@@ -50,7 +50,8 @@ Some companies are migrating Ranger Policies to databricks cluster using an inte
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
 **Migration to CosmosDB**
-Active directory integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
+
+Cosmos DB use Active directory integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
 
 **Migration to  HDInsight from Ranger**
 
