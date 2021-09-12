@@ -10,7 +10,7 @@ https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-autho
 **Access Control Methods** 
 
 *ABAC*
-Attribute-based access control (ABAC) is an authorization system that defines access based on attributes associated with security principals, resources, and environment. With ABAC, you can grant a security principal access to a resource based on attributes.
+Attribute-based access control (ABAC) is an authorization system that defines access based on attributes associated with security principals, resources, and environment. With ABAC, you can grant a security principal access to a resource base on attributes.
 
 *RBAC*
 Access management for cloud resources is a critical function for any organization that is using the cloud. Role-based access control (RBAC) helps you manage who has access to resources, what they can do with those resources, and what areas they have access to based on Roles
@@ -22,7 +22,7 @@ Landing Targets for Apache Sentry on Azure
 
 
 # Migration to Azure Active Directory (RBAC)
-Sentry is the authorization method for the Hadoop cluster and is base on ACL's and Role Base Access Control (RBAC) and as the Azure mothod for authorization is Azure Active Directory which is base on RBAC the migration approach is direct.
+Sentry is the authorization method for the Hadoop cluster and is base on ACL's and Role Base Access Control (RBAC) and as the Azure method for authorization is Azure Active Directory which is base on RBAC the migration approach is direct.
 
 First what we can do is to get all the sentry policies following this procedure:
 https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61309948
@@ -41,7 +41,7 @@ https://docs.cloudera.com/cdp-private-cloud/latest/upgrade-cdh/topics/cdpdc-sent
 
 # Migration to Databricks
 
-The authentication method of Aaure Databricks is Azure Active Directory (AAD) which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions. 
+The authentication method of Azure Databricks is Azure Active Directory (AAD) which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions. 
 
 This access control is base on the AAD and the databricks ACL's, as Sentry use ACL's as Databricks this will be an advantage to migrate the service. 
 
@@ -51,11 +51,11 @@ https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databr
 
 # Migration to  HDInsight from Ranger
 
-The main Authorization service of HDInsights is Ranger and to migrate the same servie from one cluster to another we can do as follow:
+The main Authorization service of HDInsights is Ranger and to migrate the same service from one cluster to another we can do as follow:
 
 ## Using the API
 
-In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and exporte it one by one as follows:
+In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and export it one by one as follows:
 
 1.Export policies from CDP/HDP cluster:
 ```console
