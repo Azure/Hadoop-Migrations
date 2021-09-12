@@ -41,7 +41,9 @@ https://docs.cloudera.com/cdp-private-cloud/latest/upgrade-cdh/topics/cdpdc-sent
 
 # Migration to Databricks
 
-The authentication method of Aaure Databricks is Azure Active Directory (AAD) which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions . This access control is base on the AAD and the databricks ACL's, as Sentry use ACL's as Databricks this will be an advantage to migrate the service. 
+The authentication method of Aaure Databricks is Azure Active Directory (AAD) which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions. 
+
+This access control is base on the AAD and the databricks ACL's, as Sentry use ACL's as Databricks this will be an advantage to migrate the service. 
 
 Some companies are migrating Ranger Policies to databricks cluster using an intermediate solution:
 
@@ -74,7 +76,7 @@ We can use the import/export button on the Ranger UI in order to export and impo
 More detail on the following documentation:[Import-Export Ranger Policies](https://cwiki.apache.org/confluence/display/RANGER/User+Guide+For+Import-Export)
 
 
-Summary Table:
+**Summary Table:**
 
 | Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
