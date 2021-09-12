@@ -57,7 +57,7 @@ Cosmos DB use Active directory integration (Azure RBAC)	You can also provide or 
 
 The main Authorization service of HDInsights is Ranger and to migrate the same service from one cluster to another we can do as follow:
 
-## Using the API
+*Using the API*
 
 In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and export it one by one as follows:
 
@@ -69,7 +69,7 @@ In order to migrate all policies from a Ranger cluster to another cluster we sho
 ```console  
   curl -iv -u <user>:<password> -d @<policy payload> -H "Content-Type: application/json" -X POST http://<RANGER-Host>:6080/service/public/api/policy/
 ```  
-## Using the UI
+*Using the UI*
 
 We can use the import/export button on the Ranger UI in order to export and import all the ranger policies as we can see on the following pictures
 
