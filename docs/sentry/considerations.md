@@ -1,10 +1,5 @@
 # Additional Third-party tools 
 
-## Privecera
-
-Privacera helps enterprises leverage data efficiently by providing a centralized platform built natively on top of Apache Ranger. This enables, monitors, and manages data security within Hadoop and cloud services for highly scalable data access and associated policy management. 
-For more information visit https://docs.privacera.com.
-
 ## MLens
 
 MLens is an accelerator toolkit from Knowledge Lens which enables automated workload migration from Hadoop- Cloudera or Hortonworks distributions to Databricks. They provide one-time migration utilities to migrate policy data intelligently to Azure Service.

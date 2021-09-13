@@ -8,9 +8,8 @@
 
 There are components involved in the authorization process:
 
-![Sentry](../images/sentry.png)
 
-Image source : https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial
+![image](https://user-images.githubusercontent.com/7907123/121877268-bd0c5080-cd0a-11eb-884a-976b2c1c74ee.png)
 
 **Sentry Server**: The Sentry RPC server manages the authorization metadata. It supports interface to securely retrieve and manipulate the metadata;
 
@@ -20,19 +19,19 @@ Image source : https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutoria
 
 **Key Concepts:**
 
--	Authentication - Verifying credentials to reliably identify a user
+- 	***Authentication*** - Verifying credentials to reliably identify a user
 
--	Authorization - Limiting the user’s access to a given resource
+- 	***Authorization*** - Limiting the user’s access to a given resource
 
--	User - Individual identified by underlying authentication system
+- 	***User*** - Individual identified by underlying authentication system
 
--	Group - A set of users, maintained by the authentication system
+- 	***Group*** - A set of users, maintained by the authentication system
 
--	Privilege - An instruction or rule that allows access to an object
+- 	***Privilege*** - An instruction or rule that allows access to an object
 
--	Role - A set of privileges; a template to combine multiple access rules
+- 	***Role*** - A set of privileges; a template to combine multiple access rules
 
--	Authorization models - Defines the objects to be subject to authorization rules and the granularity of actions allowed. For example, in the SQL model, the objects can be databases or tables, and the actions are SELECT, INSERT, CREATE and so on. For the Search model, the objects are indexes, collections and documents; the access modes are query, update and so on.
+- 	***Authorization models*** - Defines the objects to be subject to authorization rules and the granularity of actions allowed. For example, in the SQL model, the objects can be databases or tables, and the actions are SELECT, INSERT, CREATE and so on. For the Search model, the objects are indexes, collections and documents; the access modes are query, update and so on.
 
 **Role-Based Access Control**
  
@@ -40,8 +39,12 @@ Role-based access control (RBAC) is a powerful mechanism to manage authorization
 
 finance-department group in AD. This will give Carol access to data from the Sales and Customer tables.
 
- 
-information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
+**Sentry Integration with the Hadoop Ecosystem**
+
+<img width="360" alt="Sentry_Architecture" src="https://user-images.githubusercontent.com/7907123/132703663-d038910c-95e7-410e-80f3-a0e8da12e4c0.PNG">
+
+Information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
+
 
 ## Next step
 
