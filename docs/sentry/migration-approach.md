@@ -89,6 +89,6 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 | CosmosDB |     + |     - |      - |
 | Active directory integration (Azure RBAC) |     + |     - |      - |
 
-* Doing a Previuos migration to Ranger
+(*) Doing a Previous migration to Ranger
 
 ## Lift & Shift to Azure IaaS ##
