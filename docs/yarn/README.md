@@ -1,6 +1,6 @@
 # Apache YARN
 
-YARN (Yet Another Resource Negotiator) is responsible for managing resources and job schedules in Hadoop. YARN is the resource management framework that enables arbitrary applications to share the same compute resources to access a common pool of data in a distributed file system.  
+[YARN (Yet Another Resource Negotiator)](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) is responsible for managing resources and job schedules in Hadoop. YARN is the resource management framework that enables arbitrary applications to share the same compute resources to access a common pool of data in a distributed file system.  
 
 YARN provides open source resource management for Hadoop, so you can move beyond batch processing and open up your data to a diverse set of workloads, including interactive SQL, advanced modeling, and real-time streaming.
 

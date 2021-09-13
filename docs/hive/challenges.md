@@ -13,3 +13,5 @@
 - DevOps
 
 - Automations
+
+[Previous](readme.md)   [Next](considerations.md)

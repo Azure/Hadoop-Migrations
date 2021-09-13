@@ -28,9 +28,9 @@ For the reference architecture, the following services are created
 - [Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/)
 - Infrastructure
   * [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general)
-  * [VNet](https://docs.microsoft.com/en-us/azure/virtual-network/)
-  * [VM](https://docs.microsoft.com/en-us/azure/virtual-machines/)
-  * [Private DNS Zone](https://docs.microsoft.com/en-us/azure/dns/private-dns-overview)
+  * [VNet](https://docs.microsoft.com/azure/virtual-network/)
+  * [VM](https://docs.microsoft.com/azure/virtual-machines/)
+  * [Private DNS Zone](https://docs.microsoft.com/azure/dns/private-dns-overview)
 
 For more details regarding the services that will be deployed, please read the [Hardoop Migration documentation.](https://github.com/Azure/Hadoop-Migrations)
 
@@ -116,7 +116,7 @@ Save the `appId` and `password` for the upcoming steps.
 This is an optional step, follow when you want to deploy VMs at VNets for testing purpose:
 This article shows you how to quickly generate and use an SSH public-private key file pair for Linux VMs
 
-[To create and use an SSH public-private key pair for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys)
+[To create and use an SSH public-private key pair for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys)
 
 ```commands
 cat ~/.ssh/id_rsa.pub
@@ -138,7 +138,7 @@ Most of Azure regions have all majority data & analytics services available, som
 - West US	
 - West US 2
 
-To know more about a region or service availability you may refer [Azure docs](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=all)
+To know more about a region or service availability you may refer [Azure docs](https://azure.microsoft.com/global-infrastructure/services/?products=all)
 
 
 ## Deployment methods

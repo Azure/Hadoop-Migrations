@@ -5,7 +5,7 @@
 ## Replatforming to Azure PaaS Services ##
 
 Azure has several landing targets for Apache Sentry. Depending on requirements and product features, App Service and Azure Functions:
-https://docs.microsoft.com/en-us/azure/app-service/overview-authentication-authorization
+https://docs.microsoft.com/azure/app-service/overview-authentication-authorization
 
 **Access Control Methods** 
 
@@ -91,4 +91,10 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 
 (*) Doing a Previous migration to Ranger
 
-## Lift & Shift to Azure IaaS ##
+## Further Reading 
+
+[Sentry Architecture and Components](readme.md)
+
+[Challenges](challenges.md)
+
+[Additional Third Party tools](considerations.md)
