@@ -4,7 +4,7 @@ YARN (Yet Another Resource Negotiator) is responsible for managing resources and
 
 YARN provides open source resource management for Hadoop, so you can move beyond batch processing and open up your data to a diverse set of workloads, including interactive SQL, advanced modeling, and real-time streaming.
 
-## Migrating Apache YARN to Azure  
+**Migrating Apache YARN to Azure** 
 
 YARN is one of the core components of Hadoop and installed/deployed as part of Apache Hadoop ecosystem.
 
