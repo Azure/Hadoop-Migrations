@@ -84,11 +84,11 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 
 | Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
-| HDInsights                         |      + |     + |     + |
+| HDInsights                         |      + |     +* |     + |
 | Databricks                             |     + |     - |      + |
 | CosmosDB |     + |     - |      - |
 | Active directory integration (Azure RBAC) |     + |     - |      - |
 
-
+* Doing a Previuos migration to Ranger
 
 ## Lift & Shift to Azure IaaS ##
