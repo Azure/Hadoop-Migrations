@@ -43,3 +43,16 @@ finance-department group in AD. This will give Carol access to data from the Sal
 <img width="360" alt="Sentry_Architecture" src="https://user-images.githubusercontent.com/7907123/132703663-d038910c-95e7-410e-80f3-a0e8da12e4c0.PNG">
 
 Information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
+
+
+## Next step
+
+[Challenges](challenges.md)
+
+## Further Reading 
+
+[Challenges](challenges.md)
+
+[Additional Third Party tools](considerations.md)
+
+[Migration Approach](migration-approach.md)
