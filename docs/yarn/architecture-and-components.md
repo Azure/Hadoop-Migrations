@@ -1,3 +1,4 @@
+
 ## Apache YARN Architecture and Components. ##
 
 YARN stands for “Yet Another Resource Negotiator“, the fundamental idea of YARN is to split up the functionalities of resource management and job scheduling/monitoring into separate daemons. The idea is to have a global ResourceManager (RM) and per-application ApplicationMaster (AM). An application is either a single job or a DAG of jobs.
@@ -14,6 +15,8 @@ Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignme
 1. ***Application manager:*** Is the daemon which accepts the applications and request the containers once it know how resources will need,also restarts the Application Manager container if a task fails.
 
 2. ***Scheduler:*** The purpouse of the scheduler is the management of resources share pool among all the jobs, YARN use the Capacity Scheduler and Fair Scheduler to partition the cluster resources using this different queues prioritization.
+
+![Yarn-Queues](https://user-images.githubusercontent.com/7907123/133042587-c482f763-7e8c-4587-8c05-df88f0ac9971.png)
 
 ***Node Manager:*** The main purpouse of the node manager is to keep-up with the resource manager and also, monitors resources usage, performs log management and also kills a container based on directions from the resource manager. It is also responsible for creating the container process and start it on the request of Application master.
 
