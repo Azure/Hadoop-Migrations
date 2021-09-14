@@ -16,7 +16,7 @@ For more information visit https://www.immuta.com/capabilities/data-access-gover
 
 ## Further Reading 
 
-[Sentry Architecture and Components](readme.md)
+[Architecture and Components](architecture-and-components.md)
 
 [Challenges](challenges.md)
 
