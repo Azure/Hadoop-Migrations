@@ -13,8 +13,10 @@ One of the main Yarn components is the Scheduler , where we define all the queue
 
 ![Yarn-Queues](https://user-images.githubusercontent.com/7907123/133042587-c482f763-7e8c-4587-8c05-df88f0ac9971.png)
 
-For that if we want to migrate Yarn As a PaaS compoenent will be something that we will need to regenerate and replatforming as we do not have any similar services as apache Yarn to manage workload on the cloud.
+For that if we want to migrate Yarn as a PaaS component will be something that we will need to regenerate and replatforming as we do not have any similar services as apache Yarn to manage workload on the cloud.
 
 
 
 ## Lift & Shift IaaS ##
+
+once we have an up and running hadoop cluster on Azure IaaS we can regenereate the same queues that we have on the on-premise cluster via the Yarn-Queue UI
