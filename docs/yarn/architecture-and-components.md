@@ -27,7 +27,8 @@ Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignme
 
 One example of resources group where we assign users in order to get a porcentage of the total resources depending on the configuration that we will applied 
 
-![Yarn-Queues](https://user-images.githubusercontent.com/7907123/133042587-c482f763-7e8c-4587-8c05-df88f0ac9971.png)
+![Yarn-Queues](https://user-images.githubusercontent.com/7907123/133262862-e252993d-3d0d-409d-a232-a4c0f6b1c0f1.png)
+
 
 **Yarn Application workflow**
 
