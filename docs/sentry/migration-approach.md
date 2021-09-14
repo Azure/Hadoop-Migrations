@@ -1,5 +1,3 @@
-
-
 # Migration Approach
 
 ## Replatforming to Azure PaaS Services ##
@@ -49,15 +47,17 @@ Some companies are migrating Ranger Policies to databricks cluster using an inte
 
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
+
 **Migration to CosmosDB**
 
 Cosmos DB use Active directory integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
+
 
 **Migration to  HDInsight from Ranger**
 
 The main Authorization service of HDInsights is Ranger and to migrate the same service from one cluster to another we can do as follow:
 
-*Using the API*
+**_Using the API_**
 
 In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and export it one by one as follows:
 
@@ -90,6 +90,8 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 | Active directory integration (Azure RBAC) |     + |     - |      - |
 
 (*) Doing a Previous migration to Ranger
+
+
 
 
 ## Lift & Shift IaaS ##
