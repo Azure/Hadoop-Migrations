@@ -91,6 +91,9 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 
 (*) Doing a Previous migration to Ranger
 
+
+## Lift & Shift IaaS ##
+
 ## Further Reading 
 
 [Sentry Architecture and Components](readme.md)
