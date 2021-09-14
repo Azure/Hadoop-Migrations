@@ -21,7 +21,7 @@ Landing Targets for Apache Sentry on Azure
 ![Sentry](https://user-images.githubusercontent.com/7907123/132818412-f2f22608-7dc9-4a9b-b26f-c18571634ba9.png)
 
 
-**Migration to Azure Active Directory (RBAC)**
+###### Migration to Azure Active Directory (RBAC)
 Sentry is the authorization method for the Hadoop cluster and is base on ACL's and Role Base Access Control (RBAC) and as the Azure method for authorization is Azure Active Directory which is base on RBAC the migration approach is direct.
 
 First what we can do is to get all the sentry policies following this procedure:
@@ -30,7 +30,7 @@ https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61309948
 Once we have all the policies  and as we do not have an automatic procedure , we can do a manual migration, following the steps on this documentation:
 https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
 
-**Migration to Ranger**
+###### Migration to Ranger
 
 As Ranger and Sentry were the main service for the authorization layer for most of the hadoop clusters is common to migrate from Sentry to Ranger as Sentry is a deprecated service is common and HDInsights use Ranger
 
@@ -39,7 +39,7 @@ Currently there is only a way to migrate Sentry RBAC policies to Ranger ABAC pol
 https://docs.cloudera.com/cdp-private-cloud/latest/upgrade-cdh/topics/cdpdc-sentry-pre-upgrade-migration-to-ranger.html
 
 
-**Migration to Databricks**
+###### Migration to Databricks
 
 The authentication method of Azure Databricks is Azure Active Directory (AAD) which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions. 
 
@@ -49,11 +49,11 @@ Some companies are migrating Ranger Policies to databricks cluster using an inte
 
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
-**Migration to CosmosDB**
+###### Migration to CosmosDB
 
 Cosmos DB use Active directory integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
 
-**Migration to  HDInsight from Ranger**
+###### Migration to  HDInsight from Ranger
 
 The main Authorization service of HDInsights is Ranger and to migrate the same service from one cluster to another we can do as follow:
 
@@ -80,7 +80,7 @@ We can use the import/export button on the Ranger UI in order to export and impo
 More detail on the following documentation:[Import-Export Ranger Policies](https://cwiki.apache.org/confluence/display/RANGER/User+Guide+For+Import-Export)
 
 
-**Summary Table:**
+***Summary Table:***
 
 | Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
