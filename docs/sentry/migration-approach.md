@@ -103,7 +103,7 @@ Basically we have to way of do in it:
 Shell for import/export
 The following arguments are added to sentry’s config-tool for import/export:
 
-For import:
+**_For import:_**
 
 ```
 sentry -command config-tool -I <filepath> -o 
@@ -111,7 +111,7 @@ sentry -command config-tool -I <filepath> -o
 -o,--overwrite             Overwrite the exist role data when do the import, default is true
 ```
 
-For export:
+**_For export:_**
 
 ```
 sentry -command config-tool -E <filepath> -b <specific auth object> -E,--export <filepath>       The path of export policy file 
