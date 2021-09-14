@@ -100,8 +100,8 @@ Once of the biggest challenges when we migrate an Apache Sentry cluster to anoth
 
 Basically we have to way of do in it:
 
-1. Manually from the Sentry UI
-2. using commandline commands:
+1. Manually from Sentry 
+2. Using commandline commands:
 Shell for import/export
 The following arguments are added to sentry’s config-tool for import/export:
 
