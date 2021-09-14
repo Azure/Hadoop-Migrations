@@ -22,6 +22,13 @@ Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignme
 
 ***Container:*** Is a container of resources where the applications runs the jobs and contains all the information that require as environment variables, security tokens, dependencies etc...
 
+
+***Scheduler***
+
+One example of resources group where we assign users in order to get a porcentage of the total resources depending on the configuration that we will applied 
+
+![Yarn-Queues](https://user-images.githubusercontent.com/7907123/133042587-c482f763-7e8c-4587-8c05-df88f0ac9971.png)
+
 **Yarn Application workflow**
 
 1. Client submits an application
@@ -35,9 +42,6 @@ Resource Manager:Master Yarn daemon , responsible of all mapreduce jobs assignme
 
 ![Yarn](https://user-images.githubusercontent.com/7907123/132715866-1ebaf075-9117-4ce2-b374-11dbf507b456.png)
 
-***Scheduler***
-
-![Yarn-Queues](https://user-images.githubusercontent.com/7907123/133042587-c482f763-7e8c-4587-8c05-df88f0ac9971.png)
 
 
 More information: https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html
