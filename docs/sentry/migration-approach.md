@@ -105,14 +105,16 @@ The following arguments are added to sentry’s config-tool for import/export:
 
 For import:
 
-```sentry -command config-tool -I <filepath> -o 
+```
+sentry -command config-tool -I <filepath> -o 
 -I,--import <filepath>    The path of import policy file 
 -o,--overwrite             Overwrite the exist role data when do the import, default is true
 ```
 
 For export:
 
-```sentry -command config-tool -E <filepath> -b <specific auth object> -E,--export <filepath>       The path of export policy file 
+```
+sentry -command config-tool -E <filepath> -b <specific auth object> -E,--export <filepath>       The path of export policy file 
 -b,--objectPath <specific auth object> Optional, the specific authorization object for export 
 eg: sentry -command config-tool -E /tmp/export.ini -b db=db1->table=table1
 ```
