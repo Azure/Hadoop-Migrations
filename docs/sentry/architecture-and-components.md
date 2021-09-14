@@ -45,7 +45,7 @@ Information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutor
 
 ## Further Reading 
 
-[Challenges](challenges.md)
+[Architecture and Components](architecture-and-components.md)
 
 [Additional Third Party tools](considerations.md)
 
