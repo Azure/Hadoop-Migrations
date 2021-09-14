@@ -1,5 +1,5 @@
 
-# Sentry Architecture and Components
+# Apache Sentry
 
 ## Overview 
 
