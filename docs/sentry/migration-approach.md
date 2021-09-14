@@ -123,7 +123,7 @@ eg: sentry -command config-tool -E /tmp/export.ini -b db=db1->table=table1
 
 ## Further Reading 
 
-[Sentry Architecture and Components](readme.md)
+[Architecture and Components](architecture-and-components.md)
 
 [Challenges](challenges.md)
 
