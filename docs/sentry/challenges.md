@@ -15,7 +15,7 @@ Sentry use ACL's to give access to the folder for different users and Ranger+Atl
 
 ## Further Reading 
 
-[Sentry Architecture and Components](readme.md)
+[Architecture and Components](architecture-and-components.md)
 
 [Additional Third Party tools](considerations.md)
 

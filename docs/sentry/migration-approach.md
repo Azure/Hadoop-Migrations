@@ -1,5 +1,3 @@
-
-
 # Migration Approach
 
 ## Replatforming to Azure PaaS Services ##
@@ -49,15 +47,17 @@ Some companies are migrating Ranger Policies to databricks cluster using an inte
 
 https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databricks/
 
+
 **Migration to CosmosDB**
 
 Cosmos DB use Active directory integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
+
 
 **Migration to  HDInsight from Ranger**
 
 The main Authorization service of HDInsights is Ranger and to migrate the same service from one cluster to another we can do as follow:
 
-*Using the API*
+**_Using the API_**
 
 In order to migrate all policies from a Ranger cluster to another cluster we should get all the policies and export it one by one as follows:
 
@@ -80,7 +80,7 @@ We can use the import/export button on the Ranger UI in order to export and impo
 More detail on the following documentation:[Import-Export Ranger Policies](https://cwiki.apache.org/confluence/display/RANGER/User+Guide+For+Import-Export)
 
 
-**Summary Table:**
+***Summary Table:***
 
 | Migration Service                      | Manual Migration                       | Automatic Migration | Third-Party Tool |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |------------------------------------------------------------ |
@@ -91,9 +91,39 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 
 (*) Doing a Previous migration to Ranger
 
+
+
+
+## Lift & Shift IaaS ##
+
+Once of the biggest challenges when we migrate an Apache Sentry cluster to another IaaS environment is tho migrate and synchonize all policies to the new cluster.
+
+Basically we have to way of do in it:
+
+1. Manually from Sentry 
+2. Using commandline commands:
+Shell for import/export
+The following arguments are added to sentry’s config-tool for import/export:
+
+**_For import:_**
+
+```
+sentry -command config-tool -I <filepath> -o 
+-I,--import <filepath>    The path of import policy file 
+-o,--overwrite             Overwrite the exist role data when do the import, default is true
+```
+
+**_For export:_**
+
+```
+sentry -command config-tool -E <filepath> -b <specific auth object> -E,--export <filepath>       The path of export policy file 
+-b,--objectPath <specific auth object> Optional, the specific authorization object for export 
+eg: sentry -command config-tool -E /tmp/export.ini -b db=db1->table=table1
+```
+
 ## Further Reading 
 
-[Sentry Architecture and Components](readme.md)
+[Architecture and Components](architecture-and-components.md)
 
 [Challenges](challenges.md)
 
