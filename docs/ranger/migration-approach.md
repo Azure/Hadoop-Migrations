@@ -1,4 +1,4 @@
-## Migration Approach - Ranger
+# Migration Approach - Ranger
 
 ## Replatforming to Azure PAAS Services
 
@@ -14,7 +14,7 @@ Advanced security features can be implemented using 3rd party partner solutions,
 
 ### Cosmos DB
 
-Security on Cosmos DB can be achieved with combination of various features available and other Azure security services. For more information head to *https://docs.microsoft.com/azure/cosmos-db/database-security*
+Security on Cosmos DB can be achieved with combination of various features available and other Azure security services. For more information head to *<https://docs.microsoft.com/azure/cosmos-db/database-security>*
 
 | Security requirement                      | Azure Cosmos DB's security approach                          |
 | ----------------------------------------- | ------------------------------------------------------------ |
@@ -29,7 +29,7 @@ The following screenshot shows how you can use audit logging and activity logs t
 
 ![ranger-policies-cosmosdb](../images/ranger-policies-cosmosdb.png)
 
-*Image source: Microsoft Docs*
+**Image source: Microsoft Docs
 
 ### Synapse Analytics
 
@@ -44,7 +44,7 @@ Security in Azure Synapse Analytics can be achieved by using below methods:
 | Authentication and pass-through | With Azure AD authentication, you can centrally  manage user identities that have access to Azure Synapse to simplify  permission management.  Use Multi-factor AAD authentication with  Synapse SQL (SSMS support for MFA)  Optionally one may also choose to use SQL  Authentication to gain user access to the data. |
 | Access Control                  | Entry-level                                                  |
 
-To read more about Security in Synapse Analytics please follow *https://docs.microsoft.com/azure/synapse-analytics/security-controls-policy*
+To read more about Security in Synapse Analytics please follow *<https://docs.microsoft.com/azure/synapse-analytics/security-controls-policy>*
 
 ## Lift and Shift
 
@@ -54,23 +54,23 @@ HDInsight is a Hortonworks-derived distribution provided as a first party servic
 
 Its Enterprise features include:
 
-*    Ranger support (Kerberos based Security)
+* Ranger support (Kerberos based Security)
 
-*    Log Analytics via OMS
+* Log Analytics via OMS
 
-*    Orchestration via Azure Data Factory
+* Orchestration via Azure Data Factory
 
-*Secure and govern cluster with Enterprise Security Package* 
+## Secure and govern cluster with Enterprise Security Package
 
 The Enterprise Security Package (ESP) supports Active Directory-based authentication, multiuser support, and role-based access control. With the ESP option chosen, HDInsight cluster is joined to the Active Directory domain and the enterprise admin can configure role-based access control (RBAC) for Apache Hive security by using Apache Ranger. The admin can also audit the data access by employees and any changes done to access control policies.
 
 ESP is available on the following cluster types: Apache Hadoop, Apache Spark, Apache HBase, Apache Kafka, and Interactive Query (Hive LLAP).
 
-*Importing and exporting resource-based policies* 
+## Importing and exporting resource-based policies
 
 You can export and import policies from the Ranger Admin UI for migration and cluster resiliency (backups), during recovery operations, or when moving policies from test clusters to production clusters. You can export/import a specific subset of policies (such as those that pertain to specific resources or user/groups) or clone the entire repository (or multiple repositories) via Ranger Admin UI.
 
-*Interfaces* 
+## Interfaces
 
 You can import and export policies from the Service Manager page:
 
@@ -82,19 +82,19 @@ You can also export policies from the Reports page:
 
  ![ranger-export-policies-report-page1](../images/ranger-export-policies-report-page1.png)
 
-**Filtering** 
+## Filtering
 
 When exporting from the Reports page, you can apply filters before saving the file.
 
-**Export Formats** 
+## Export Formats
 
 You can export policies in the following formats:
 
-*    Excel
+* Excel
 
-*    JSON
+* JSON
 
-*    CSV
+* CSV
 
 > [!NOTE] CSV format is not supported for importing policies.
 
@@ -105,34 +105,36 @@ The Ranger admin user can import and export only Resource & Tag based policies. 
 
 The Ranger KMS keyadmin user can import and export only KMS policies. The default credentials for this user are *keyadmin*/*keyadmin*.
 
-**Limitations** 
+## Limitations
 
 To successfully import policies, use the following database versions:
 
-*    MariaDB: 10.1.16
+* MariaDB: 10.1.16
 
-*    MySQL: 5.6.x
+* MySQL: 5.6.x
 
-*    Oracle: 11gR2+
+* Oracle: 11gR2+
 
-*    PostgreSQL: 8.4+
+* PostgreSQL: 8.4+
 
-*    MS SQL: 2008 R2+
+* MS SQL: 2008 R2+
 
 Partial import is not supported.
 
-### IAAS (INFRASTRUCTURE AS A SERVICE)
+## IAAS (INFRASTRUCTURE AS A SERVICE)
 
 Cloudera Data Hub is a distribution of Hadoop running on Azure Virtual Machines. It can be deployed through the Azure marketplace.
 
 Cloudera Data Hub is designed to build a unified enterprise data platform. Its Enterprise features include:
 
-*    Full hybrid support & parity with on-premises Cloudera deployments
+* Full hybrid support & parity with on-premises Cloudera deployments
 
-*    Ranger support (Kerberos-based Security) and fine-grained authorization (Sentry)
+* Ranger support (Kerberos-based Security) and fine-grained authorization (Sentry)
 
-*    Widest portfolio of Hadoop technologies
+* Widest portfolio of Hadoop technologies
 
-*    Single platform serving multiple applications seamlessly on-premises and on-cloud.
+* Single platform serving multiple applications seamlessly on-premises and on-cloud.
 
-For more information please follow : *https://docs.cloudera.com/documentation/other/reference-architecture/topics/ra_azure_deployment.html*
+For more information please follow : *<https://docs.cloudera.com/documentation/other/reference-architecture/topics/ra_azure_deployment.html>*
+
+[Previous](considerations.md)

@@ -1,4 +1,4 @@
-## Challenges of Ranger on premise
+# Challenges of Ranger on premise
 
 **Security risks**. Apart from the usual risk of cyber attacks, when you have physical servers, you take on ‘real-world’ risks including damage, destruction, natural disasters, fire, water damage or simply hardware ‘wear and tear’.
 
@@ -10,16 +10,18 @@ Azure Active Directory is a multi-tenant, cloud-based directory and identity man
 
 In addition, it offers an extensive suite of identity management services which include:
 
-*    Device registration.
+* Device registration.
 
-*    Multi-factor authentication.
+* Multi-factor authentication.
 
-*    Role-based access control.
+* Role-based access control.
 
-*    Self-service group management.
+* Self-service group management.
 
-*    Application usage monitoring.
+* Application usage monitoring.
 
 These services keep your business secure, ensuring only relevant users have access to your most sensitive information.
 
 Not only that, but by rejecting physical servers for the cloud you also eliminate the risk of physical security as you don’t have on-premise servers to take care of in your building. Between that and your virtual security, Azure helps secure your business on two fronts.
+
+[Previous](readme.md)   [Next](considerations.md)
