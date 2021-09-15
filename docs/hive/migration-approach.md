@@ -562,9 +562,9 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 [How to use Apache Hive replication in Azure HDInsight clusters | Microsoft Docs](https://docs.microsoft.com/azure/hdinsight/interactive-query/apache-hive-replication)
 
-## Decision Map/Flowchart
 
-![imhive-decission-flow](../images/hive-decission-flow.png)
+
+![hive-decisssion-flow-matrix](../images/hive-decisssion-flow-matrix.png)
   
 ## Migrate Hive SQL Workloads
   
@@ -578,4 +578,6 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 Please contact harman@knowledgelens.com & deepanjali@knowledgelens.com for further assistance.
 
-[Previous](considerations.md)
+
+[Previous](considerations.md) 
+

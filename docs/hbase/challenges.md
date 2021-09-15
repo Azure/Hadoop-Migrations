@@ -15,3 +15,17 @@ Common challenges associated with HBase deployments:
   * Monitoring
   * DevOps
   * Automation
+
+### Next step
+
+[Considerations](considerations.md)
+
+### Further Reading
+
+Refer to the below sections to read more about Migration approach for Hbase
+
+[Architecture and Components](readme.md)
+
+[Considerations](considerations.md)
+
+[Migration Approach](migration-approach.md)

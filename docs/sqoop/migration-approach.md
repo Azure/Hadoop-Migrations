@@ -150,7 +150,7 @@ See “Azure Data Factory Managed Virtual Network”(https://docs.microsoft.com/
 #### Private Link
 You can use [Private Link](https://docs.microsoft.com/azure/private-link/) in Data Factory to create a Data Factory private endpoint in your customer's virtual network and enable a private connection to your Data Factory instance.
 
-![Managed VNET and Privete Endpoints](../images/managed-vnet-architecture-diagram.png)
+![Managed VNET and Privete Endpoints](../images/private-link-architecture.png)
 
 See “Azure Private Link for Azure Data Factory”(https://docs.microsoft.com/azure/data-factory/data-factory-private-link).
 
