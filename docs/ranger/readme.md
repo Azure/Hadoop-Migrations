@@ -1,6 +1,6 @@
 # Apache Ranger Architecture and Components
 
-## Overview 
+## Overview
 
 [Apache Ranger](https://ranger.apache.org/) is a framework to enable, monitor and manage comprehensive data security across the Hadoop platform.
 
@@ -18,31 +18,30 @@ The Apache Ranger has a decentralized architecture with the following internal c
 | Ranger plugins      | Plugins are lightweight Java programs which are embedded within processes of each cluster component. For example, the Apache  Ranger plugin for Apache Hive is embedded within Hiveserver2. These plugins  pull in policies from a central server and store them locally in a file. When  a user request comes through the component, these plugins intercept the  request and evaluate it against the security policy. Plugins also collect  data from the user request and follow a separate thread to send this data  back to the audit server. |
 | User group sync     | Apache Ranger provides a user  synchronization utility to pull users and groups from Unix or from LDAP or  Active Directory. The user or group information is stored within Ranger  portal and used for policy definition. |
 
-*Information source: Apache Ranger | Cloudera*
+### Information source: Apache Ranger | Cloudera
 
 On a high level below is the list of features that Ranger provides:
 
-*    Centralized policy administration
+* Centralized policy administration
 
-*    Centralized auditing
+* Centralized auditing
 
-*    Dynamic row filtering
+* Dynamic row filtering
 
-*    Dynamic data masking
+* Dynamic data masking
 
-*    Tag based authorisation
+* Tag based authorisation
 
-*    Rich and extendable policy enforcement engine
+* Rich and extendable policy enforcement engine
 
-*    Key Management System
+* Key Management System
 
-*    Security Zone (New feature)
+* Security Zone (New feature)
 
-## Further Reading
+### Further Reading
 
 [Challenges](challenges.md)
 
 [Additional Third Party tools](considerations.md)
 
 [Migration Approach](migration-approach.md)
-
