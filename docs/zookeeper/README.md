@@ -21,4 +21,17 @@ In scenarios where customer is deploying vanilla version of Apache HBase, Kafka 
 As highlighted earlier, ZK's role is to provide coordination between distributed processes. Hence, migration of an instance of ZK on its own to Azure PaaS is not a common scenario. However, if you have built an application that relies on ZK, guidance is to deploy ZK on Azure IaaS. Other popular applications such as Kafka, Storm, HBase etc. do have an equivalent Azure PaaS version which transparently takes care of the challenges which ZK solves, hence a separate ZK deployment while migrating to Azure PaaS is not required.  
 
 
+## Next step
+
+[Architecture and Components](architecture-and-components.md)
+
+## Further Reading 
+
+[Migration Approach](migration-approach.md)
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
+
 
