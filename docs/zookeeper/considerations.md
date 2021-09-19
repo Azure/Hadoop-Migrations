@@ -11,3 +11,15 @@
 ## Reliability
   
 - For production deployments, we recommend using an ensemble of 5 ZK nodes. From HA perspective, these should be deployed in different Azure Availability Zones (AZ). If AZs are not available, deploy ensemble in an Availability Set (AvSet).
+
+## Next step
+
+[Challenges](challenges.md)
+
+## Further Reading 
+
+[Migration Approach](migration-approach.md)
+
+[Considerations](considerations.md)
+
+[Architecture and Components](architecture-and-components.md)
