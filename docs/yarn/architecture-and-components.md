@@ -46,3 +46,16 @@ One example of resources group where we assign users in order to get a porcentag
 
 
 More information: https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html
+
+
+## Next step
+
+[Challenges](challenges.md)
+
+## Further Reading 
+
+[Architecture and Components](architecture-and-components.md)
+
+[Considerations](considerations.md)
+
+[Migration Approach](migration-approach.md)
