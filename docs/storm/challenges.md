@@ -1,4 +1,4 @@
-# Challenges of Sqoop on premise  
+# Challenges of Storm on premise  
 
 Common challenges associated with Storm deployments:
 
