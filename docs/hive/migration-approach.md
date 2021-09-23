@@ -630,7 +630,7 @@ Import table data from transient folder on target cluster.
 ```sql
 import table t1 from '/temp/t1';
 ```
-
+## Decision Map/Flowchart
 We can use Hive replication approach to migrate Hive to new cluster. Refer below link which depicts the replication to HDInsight
 
 [How to use Apache Hive replication in Azure HDInsight clusters | Microsoft Docs](https://docs.microsoft.com/azure/hdinsight/interactive-query/apache-hive-replication)
