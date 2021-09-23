@@ -106,15 +106,49 @@ hdfs dfs -du -h /apps/hive/warehouse
 
 ### Finding number of databases
 
+```sql
+select count(DB_ID) from hive.DBS
+```
+
 ![hive-db-information](../images/hive-db-information.png)
 
 ### Finding number of tables
+
+```sql
+select count(*) from hive.TBLS;
+```
 
 ![hive-tables-information](../images/hive-tables-information.png)
 
 ### Executing script to find out the table/DB information
 
+```bash
+sh generate_hive_metadata.sh
+```
+
 ![hive-script-for-metadata-information](../images/hive-script-for-metadata-information.png)
+
+The following set of assessment questions are designed to gain an insight into existing deployment of Hive and establish a set of requirements that must be considered for any type of Hive migration scenario to Azure.
+
+| Layer  | Questions | Background  |
+|------- |---|---|
+|  **Infrastructure**  | Number of servers for each type of role -   Hive Services; Metadata DB; Processing layer | Understand scale and design of incumbent solution.  
+&nbsp; | Number of cores per server | ```lscpu``` *OR* ```cat /proc/cpuinfo``` commands can be used to list cores per server.
+&nbsp; | Available memory per server | This is the total memory available per server. On Linux, commands such as ```free -mg``` *OR* ```cat /proc/meminfo``` can be used to report on memory available on each server.
+&nbsp; | Is the existing environment virtualized or deployed on bare-metal servers? | The information will be used as one of the inputs when it comes to sizing and understanding performance characterstics of on-premises Hive environment.
+&nbsp; | Network | Understand the network bandwidth each VM can support; and if any special NIC configuration is used to support high bandwidth between Hive servers.   Use the following commands to extract details of VM network configuration ```ifconfig -a``` *OR* ```ethtool <name of the interface>```
+&nbsp; | Storage | What is the total size of data post-replication? Usually, default configuration of HDFS replicates data 3x.
+**Operating System** | Version and distro type | The following command will print out details of Linux distro and version in use  ```uname -a```
+&nbsp; | Kernel parameters | Understand if customer has applied any specific kernel-level parameters to improve the performance of Hive deployment. Hence, we do not recommend changing default parameters straightaway unless it has been recommended by your OS and/or application vendor. In most cases, customers tweak these parameters to address specific workload performance requirements. Whilst it's fairly straight-forward to change config, however customers usually arrive at this decision after carrying out extensive testing.   <br> **Linux memory and block device parameters** <br> ```cat /sys/kernel/mm/transparent_hugepage/enabled``` <br>```cat /sys/kernel/mm/transparent_hugepage/defrag```<br>```cat /sys/block/sda/queue/scheduler```<br>```cat /sys/class/block/sda/queue/rotational```<br>```cat /sys/class/block/sda/queue/read_ahead_kb```<br>```cat /proc/sys/vm/zone_reclaim_mode```<br> **Linux network stack parameters** <br> ```sudo sysctl -a \ grep -i "net.core.rmem_max\|net.core.wmem_max\|net.core.rmem_default\| net.core.wmem_default\|net.core.optmem_max\|net.ipv4.tcp_rmem\|net.ipv4.tcp_wmem"```
+|
+**Security & administration** | Accessing Hive | How do users access the data in Hive? Is it via APIs or directly via Hive shell?<br> How applications consume data?<br> How is data written to HIve and proximity of these systems? Are they within the same data centre or located outside of DC where Hive is deployed?
+&nbsp; | User provisioning | How are users authenticated and authorized? <br>•Ranger?<br>•Knox?<br>•Kerberos?
+&nbsp; | Encryption | Is there a requirement to have data encrypted in transport and/or at-rest? What encryption solutions are currently in-use?
+&nbsp; | Tokenization | Is there a requirement to tokenize data? If yes, how is data tokenized? Popular applications used for tokenization include (but not limited to) Protegrity; Vormetric etc.
+&nbsp; | Compliance | Are there any special regulatory requirements applicable to Hive workloads? For example – PCI-DSS; HIPAA etc.
+&nbsp; | Keys, certificates, and secrets management policies. | If applicable, please describe and what tools/applications are used for this function.
+**High-Availability and Disaster Recovery** | What is the SLA, RPO and RTO of the source Hive deployment? | This will drive decision on the landing target on Azure and whether to have a hot-standby OR active-active regional deployment on Azure.
+|  | BC and DR strategy for HIve workloads. | Describe BR and DR strategy in detail. Impact of HIve being unavailable.
 
 ### Sizing
 
@@ -145,13 +179,37 @@ Perform the following steps to export hive metadata:
     
       ```
 
-      ![hive-coresite-information](../images/hive-coresite-information.png)
-
-      c.   Note the TARGET_HDFS_PATH.
+        c.   Note the TARGET_HDFS_PATH.
 
   2. Update the TARGET_HDFS_PATH and TARGET_OBJECTSTORE_PATH in hive_migrate.properties script to the location where HIVE tables data will be typically available post migration. Please note that you need not escape the forward slashes in the path.
 
-      ![hive-script-update-for-targetpath](../images/hive-script-update-for-targetpath.png)
+      ```xml
+      #!/bin/bash
+        #
+        # This file will be sourced by the generate_target_ddl_from_source.sh
+        # to customize/overide properties
+        # SRC_HDFS_PATH and SRC_OBJECTSTORE_PATH will be derived automatically from the cluster.
+        # You will be customizing
+        #     RUNDIR , TARGET_HDFS_PATH, TARGET_OBJECTSTORE_PATH
+        # 
+        #     --------------------------------------------------------    ---- 
+        # Location to hold intermediate and final scripts to be generated.
+        # You must have write privileges on this directory
+        export RUNDIR=/tmp/hivemigrate
+    
+    
+        #         ------------------------------------------------------------ 
+        # Modify expected target BDS hdfs path in your hive DDL script
+        #
+        export TARGET_HDFS_PATH=hdfs://ram-ambarisrv-xu.    southeastasia.cloudapp.azure.com:8020/tmp/hivemigrate/export
+    
+    
+        # ------------------------------------------------------------ 
+        # Modify expected target BDS Object Store path in your hive DDL script
+        #
+        export TARGET_OBJECTSTORE_PATH=hdfs://ram-ambarisrv-xu.southeastasia.cloudapp.azure.com:8020/tmp/hivemigrate/export
+    
+      ```
 
   3. Connect to the target cluster via ssh as root user. See Connect to a Cluster Node Through Secure Shell (SSH) in Using Source Cluster
   4. Create a script named generate_target_ddl_from_source.sh in the root home directory with the attached code. This script generates the DDL statements that you can run on the target cluster to create the hive metadata.
@@ -192,6 +250,12 @@ The first step is to migrate the Hive Metastore from Hadoop to Azure Databricks 
 
 There are two methods you can use to generate the DDL for hive tables:
 
+```sql
+show tables;
+
+SHOW CREATE TABLE person;
+```
+
 - Use SHOW CREATE TABLE command
 
 The “show create table” hive command can be used to generate the DDL for the single hive table (syntax: SHOW CREATE TABLE HIVE_TABLE_NAME; )
@@ -230,8 +294,17 @@ Example:
 
 Connecting to Azure databricks via token and list down the folders in DBFS
 
+```powershell-interactive
+databricks configure --token
+```
+
 ![hive-connect-databricks-via-token](../images/hive-connect-databricks-via-token.png)
 Copy the file from local to DBFS
+
+```shell
+databricks fs cp /tmp/hivetables /tmp/ -r
+databricks fs ls /tmp/
+```
 
 ![hive-filecopy-from-local-to-dbfs](../images/hive-filecopy-from-local-to-dbfs.png)
 
@@ -562,9 +635,7 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 [How to use Apache Hive replication in Azure HDInsight clusters | Microsoft Docs](https://docs.microsoft.com/azure/hdinsight/interactive-query/apache-hive-replication)
 
-
-
-![hive-decisssion-flow-matrix](../images/hive-decisssion-flow-matrix.png)
+![hive-decisssion-flow-matrix](../images/hive-decission-matrix.png)
   
 ## Migrate Hive SQL Workloads
   
@@ -578,6 +649,4 @@ We can use Hive replication approach to migrate Hive to new cluster. Refer below
 
 Please contact harman@knowledgelens.com & deepanjali@knowledgelens.com for further assistance.
 
-
-[Previous](considerations.md) 
-
+[Previous](considerations.md)
