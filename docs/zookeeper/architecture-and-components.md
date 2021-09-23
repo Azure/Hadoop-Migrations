@@ -8,6 +8,11 @@ Distributed applications such as Apache Kafka, Apache HBase etc. rely on ZK for 
 
 The find out more about the motivation behind ZooKeeper and its applications, please check [Apache ZooKeeper](https://zookeeper.apache.org/doc/current/zookeeperOver.html). It covers ZooKeeper in detail and the motivation behind it.  
 
+![zookeeper](https://user-images.githubusercontent.com/7907123/134483156-c6c8ae3a-25f5-446a-b1f0-9e748420f37a.png)
+
+Example architecture with Kafka
+
+![Kafka with Zookeeper](https://user-images.githubusercontent.com/7907123/134483257-0b69061a-7a94-4e3c-9e44-5fc5c446acd8.png)
 
 ## Next step
 
