@@ -1,6 +1,6 @@
 # Considerations
 
-- f Hive IaaS migration is your first workload on Azure, we strongly recommend investing time and effort in building a strong foundation for workloads hosted on Azure by leveraging Cloud Adoption Framework enterprise-scale landing zone (ESLZ) guidance. Enterprise-scale is an architectural approach and a reference implementation that enables effective construction and operationalization of landing zones on Azure, at scale. This approach aligns with the Azure roadmap and the Cloud Adoption Framework for Azure.
+- If Hive IaaS migration is your first workload on Azure, we strongly recommend investing time and effort in building a strong foundation for workloads hosted on Azure by leveraging Cloud Adoption Framework enterprise-scale landing zone (ESLZ) guidance. Enterprise-scale is an architectural approach and a reference implementation that enables effective construction and operationalization of landing zones on Azure, at scale. This approach aligns with the Azure roadmap and the Cloud Adoption Framework for Azure.
 
 - We strongly recommend all workloads deployed on Azure must be designed and deployed in alignment with Well-Architected Framework. The Azure Well-Architected Framework is a set of guiding tenets that can be used to improve the quality of a workload. The framework consists of five pillars of architecture excellence: Cost Optimization, Operational Excellence, Performance Efficiency, Reliability, and Security.
 
