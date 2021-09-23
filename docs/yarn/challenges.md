@@ -6,3 +6,15 @@
 2. Recreating users and groups priorities
 3. Setting up the jobs
 
+## Next step
+
+[Considerations](considerations.md)
+
+## Further Reading 
+
+[Architecture and Components](architecture-and-components.md)
+
+[Challenges](challenges.md)
+
+[Migration Approach](migration-approach.md)
+
