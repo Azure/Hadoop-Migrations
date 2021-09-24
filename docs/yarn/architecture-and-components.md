@@ -33,13 +33,13 @@ One example of resources group where we assign users in order to get a porcentag
 **Yarn Application workflow**
 
 1. Client submits an application
-2. The Resource Manager allocates a container to start the Application Manager
-3. The Application Manager registers itself with the Resource Manager
-4. The Application Manager negotiates containers from the Resource Manager
-5. The Application Manager notifies the Node Manager to launch containers
+2. The Resource Manager allocates a container to start the Application Master
+3. The Application Master registers itself with the Resource Manager
+4. The Application Master negotiates containers from the Resource Manager
+5. The Application Master notifies the Node Manager to launch containers
 6. Application code is executed in the container
-7. Client contacts Resource Manager/Application Manager to monitor application’s status
-8. Once the processing is complete, the Application Manager un-registers with the Resource Manager
+7. Client contacts Resource Manager/Application Master to monitor application’s status
+8. Once the processing is complete, the Application Master un-registers with the Resource Manager
 
 ![Yarn](https://user-images.githubusercontent.com/7907123/132715866-1ebaf075-9117-4ce2-b374-11dbf507b456.png)
 
