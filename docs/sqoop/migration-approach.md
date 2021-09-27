@@ -134,8 +134,16 @@ Here, as an example, based on Sqoop1 1.4.7 and Sqoop2 1.99.7, the mapping with t
 
 
 ### Connect to Databases on premise
-If you still need to copy data between a data store in your on-premises network and Azure after migrating Sqoop to Data Factory, consider using [Self-hosted IR](https://docs.microsoft.com/azure/data-factory/concepts-integration-runtime#self-hosted-integration-runtime). If you are trying to securely perform data integration in a private network environment where there is no direct communication path from the public cloud environment, install Self-hosted IR in the on-premises environment in the internal firewall or in the virtual private network, and Self-hosted IR Makes an HTTPS-based outbound connection to Azure to establish a secure connection for data movement. Self-hosted IR is currently only supported on Windows OS. You can also achieve scalability and high availability by installing and associating Self-hosted IRs on multiple machines. Self-hosted IR is also responsible for dispatching data transformation activities to resources that are not on-premises or in Azure's Virtual Network.
-For information on how to set up Self-hosted IR and communication requirements, see [Create and configure a self-hosted integration runtime](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime). 
+If you still need to copy data between a data store in your on-premises network and Azure after migrating Sqoop to Data Factory, consider using [Self-hosted IR](https://docs.microsoft.com/azure/data-factory/concepts-integration-runtime#self-hosted-integration-runtime) or [Data Factory Managed VNet using Private Endpoint](https://docs.microsoft.com/azure/data-factory/tutorial-managed-virtual-network-on-premise-sql-server).
+
+#### Self-hosted IR
+If you are trying to securely perform data integration in a private network environment where there is no direct communication path from the public cloud environment, install Self-hosted IR in the on-premises environment in the internal firewall or in the virtual private network, and Self-hosted IR makes an HTTPS-based outbound connection to Azure to establish a secure connection for data movement. Self-hosted IR is currently only supported on Windows OS. You can also achieve scalability and high availability by installing and associating Self-hosted IRs on multiple machines. Self-hosted IR is also responsible for dispatching data transformation activities to resources that are not on-premises or in Azure's Virtual Network.
+For information on how to set up Self-hosted IR and communication requirements, see [Create and configure a self-hosted integration runtime](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime).
+#### Managed VNet using Private Endpoint
+If you have a private connection between on-premises and Azure (such as ExpressRoute or VPN), you can use Data Factory's Managed VNet and Private Endpoint to make a private connection to your on-premises databases. You can use VNets for forwarding to forward traffic to your on-premises, as shown in the diagram below, to securely access your on-premises resources without going through the Internet. See the next section for Managed VNets and Private Links.
+![How to access on-premises SQL Server from Data Factory Managed VNet using Private Endpoint](https://docs.microsoft.com/azure/data-factory/media/tutorial-managed-virtual-network/sql-server-access-model.png)
+
+See [Create and configure a self-hosted integration runtime](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime)
 
 ### Network options
 Data Factory has two network options: Managed Virtual Network and Private Link. Both enable the process of data integration to be carried out securely by building a private network. Both of these options can be used at the same time, either one or none. Select an option according to your security policy.
@@ -145,14 +153,14 @@ You can deploy the Azure Integration Runtime, which is the Data Factory Runtime,
 
 ![Managed VNET and Privete Endpoints](../images/managed-vnet-architecture-diagram.png)
 
-See “Azure Data Factory Managed Virtual Network”(https://docs.microsoft.com/azure/data-factory/managed-virtual-network-private-endpoint).
+See [Azure Data Factory Managed Virtual Network](https://docs.microsoft.com/azure/data-factory/managed-virtual-network-private-endpoint).
 
 #### Private Link
 You can use [Private Link](https://docs.microsoft.com/azure/private-link/) in Data Factory to create a Data Factory private endpoint in your customer's virtual network and enable a private connection to your Data Factory instance.
 
 ![Managed VNET and Privete Endpoints](../images/private-link-architecture.png)
 
-See “Azure Private Link for Azure Data Factory”(https://docs.microsoft.com/azure/data-factory/data-factory-private-link).
+See [Azure Private Link for Azure Data Factory](https://docs.microsoft.com/azure/data-factory/data-factory-private-link).
 
 
 ### Performance of data copy
@@ -182,7 +190,16 @@ As an example, see [Data Factory Properties](https://docs.microsoft.com/azure/da
 
 ### Data Transformation
 A unique feature of Data Factory is the variety of data transformation activities. Data Factory native data transformation activities include Data Flow and Data Wrangling. Both define data transformations in a visual UI and run fast in the Spark engine. As an external engine, you can take advantage of the activities of various Hadoop components of HDInsight, Databricks, stored procedures, and other custom activities. Consider using these activities when migrating Sqoop and want to include data transformations in the process.
-See [Transform data in Azure Data Factory](https://docs.microsoft.com/azure/data-factory/transform-data) for more information. 
+See [Transform data in Azure Data Factory](https://docs.microsoft.com/azure/data-factory/transform-data) for more information.
+
+#### Transform data using HDInsight activities
+The HDInsight activities in an Azure Data Factory pipeline executes Hive/Pig/MapReduce/Streaming/Spark queries on your own or on-demand HDInsight cluster. If you're using data transformation logic of the Hadoop ecosystem with Sqoop, it's easy to move to transformations with HDInsight activities. Please refer to the following documents for details.
+
+- [Transform data using Hadoop Hive activity in Azure Data Factory or Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-hadoop-hive)
+- [Transform data using Hadoop MapReduce activity in Azure Data Factory or Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-hadoop-map-reduce)
+- [Transform data using Hadoop Pig activity in Azure Data Factory or Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-hadoop-pig)
+- [Transform data using Spark activity in Azure Data Factory and Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-spark)
+- [Transform data using Hadoop Streaming activity in Azure Data Factory or Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-hadoop-streaming)
 
 ### File format
 Sqoop supports Text, SequenceFile and Avro as file formats when importing data into HDFS. Data Factory does not support HDFS as Sink, but it does use Azure Data Lake Storage gen2 or Azure Blob Storage as file storage. For more information on HDFS migration, please refer to [HDFS Migration Guide](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hdfs/migration-approach.md). The supported formats for Data Factory to write to file storage are Text, Binary, Avro, JSON, ORC, Parquet. Data Factory does not support the SequenceFile format, so if necessary, use an activity such as Spark to convert it to SequenceFile with `saveAsSequenceFile`. 
