@@ -563,8 +563,8 @@ Please note that these do not show all Storm and Functions connectivity. See the
 Storm Spout and Functions Input
 |Storm Spout|Functions Input|Description|
 |--|--|--|
-|Kafka|N/A|Can connect with Kafka client in your code.|
-|HDFS|N/A|FFunctions does not have a built-in HDFS Input. Configure the Blob Storage to contain the required data. Alternatively, use custom code to consume HDFS data.|
+|Kafka|N/A|Can connect with Kafka client in your code. [Kafka extension](https://techcommunity.microsoft.com/t5/apps-on-azure/announcing-preview-of-the-azure-functions-kafka-extension/ba-p/1342348) for reading and writing Kafka topics is also available. This extension is supported when hosting [Premium plan](https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#premium-plan).|
+|HDFS|N/A|Functions does not have a built-in HDFS Input. Configure the Blob Storage to contain the required data. Alternatively, use custom code to consume HDFS data.|
 |Azure Event Hub|Azure Event Hub||
 |N/A|Azure IoT Hub||
 |N/A|Azure Blob Storage||
@@ -577,7 +577,7 @@ Storm Spout and Functions Input
 Storm Bolt and Functions Output
 |Storm Bolt|Functions Output|Description|
 |--|--|--|
-|Kafka|Kafka||
+|Kafka|Kafka|Can connect with Kafka client in your code. [Kafka extension](https://techcommunity.microsoft.com/t5/apps-on-azure/announcing-preview-of-the-azure-functions-kafka-extension/ba-p/1342348) for reading and writing Kafka topics is also available. This extension is supported when hosting [Premium plan](https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#premium-plan).|
 |HDFS|N/A|Functions cannot output data directly to HDFS. Design to output to Blob Storage. Or output to HDFS with custom code.|
 |HBase|N/A|Functions doesn't have a built-in connector for HBase, can be output to HBase with custom code.|
 |Hive|N/A|Functions doesn't have a built-in connector for Hive, can be output to Hive table with custom code. |
