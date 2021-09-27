@@ -193,7 +193,7 @@ A unique feature of Data Factory is the variety of data transformation activitie
 See [Transform data in Azure Data Factory](https://docs.microsoft.com/azure/data-factory/transform-data) for more information.
 
 #### Transform data using HDInsight activities
-The HDInsight activities in an Azure Data Factory pipeline executes Hive/Pig/MapReduce/Streaming/Spark queries on your own or on-demand HDInsight cluster. If you're using data transformation logic of the Hadoop ecosystem with Sqoop, it's easy to move to transformations with HDInsight activities. あなたはPrivate Linkを使用してPlease refer to the following documents for details.
+The HDInsight activities in an Azure Data Factory pipeline executes Hive/Pig/MapReduce/Streaming/Spark queries on your own or [on-demand HDInsight cluster](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-create-linux-clusters-adf). If you're using data transformation logic of the Hadoop ecosystem with Sqoop, it's easy to move to transformations with HDInsight activities. Please refer to the following documents for details.
 
 - [Transform data using Hadoop Hive activity in Azure Data Factory or Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-hadoop-hive)
 - [Transform data using Hadoop MapReduce activity in Azure Data Factory or Synapse Analytics](https://docs.microsoft.com/azure/data-factory/transform-data-using-hadoop-map-reduce)
