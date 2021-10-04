@@ -82,23 +82,17 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 hive --version
 ```
 
-![hive-version-information](../images/hive-version-information.png)
-
 ### Finding hive related packages
 
 ```shell
 rpm -qa|grep hive
 ```
 
-![hive-packages-information](../images/hive-packages-information.png)
-
 ### Finding Total DB size
 
 ```shell
 hdfs dfs -du -h /apps/hive/warehouse
 ```
-
-![hive-totaldb-size](../images/hive-totaldb-size.png)
 
 ### Finding Hive metastore DB type
 
@@ -110,23 +104,17 @@ hdfs dfs -du -h /apps/hive/warehouse
 select count(DB_ID) from hive.DBS
 ```
 
-![hive-db-information](../images/hive-db-information.png)
-
 ### Finding number of tables
 
 ```sql
 select count(*) from hive.TBLS;
 ```
 
-![hive-tables-information](../images/hive-tables-information.png)
-
 ### Executing script to find out the table/DB information
 
 ```bash
 sh generate_hive_metadata.sh
 ```
-
-![hive-script-for-metadata-information](../images/hive-script-for-metadata-information.png)
 
 The following set of assessment questions are designed to gain an insight into existing deployment of Hive and establish a set of requirements that must be considered for any type of Hive migration scenario to Azure.
 
@@ -259,8 +247,6 @@ SHOW CREATE TABLE person;
 
 The “show create table” hive command can be used to generate the DDL for the single hive table (syntax: SHOW CREATE TABLE HIVE_TABLE_NAME; )
 
-![hive-show-create-table](../images/hive-show-create-table.png)
-
 - Use shell script + beeline to dump all tables DDL in the given Hive database
 
 You can leverage on the same command “SHOW CREATE TABLE” to export all hive table DDL. The following handy script demonstrate the scripting approach to export DDL for multiple tables:
@@ -297,15 +283,10 @@ Connecting to Azure databricks via token and list down the folders in DBFS
 databricks configure --token
 ```
 
-![hive-connect-databricks-via-token](../images/hive-connect-databricks-via-token.png)
-Copy the file from local to DBFS
-
 ```shell
 databricks fs cp /tmp/hivetables /tmp/ -r
 databricks fs ls /tmp/
 ```
-
-![hive-filecopy-from-local-to-dbfs](../images/hive-filecopy-from-local-to-dbfs.png)
 
 Finally, the Hive jobs can be migrated over to Azure Databricks. Given that Apache Spark SQL in Azure Databricks is designed to be [compatible](https://docs.microsoft.com/azure/databricks/spark/latest/spark-sql/compatibility/hive) with the Apache Hive, including metastore connectivity, SerDes, and UDFs, even the “copy/paste” approach to Hive job migration is feasible. The [Workspace CLI](https://docs.microsoft.com/azure/databricks/dev-tools/cli/workspace-cli) can be used to perform bulk imports of scripts onto Azure Databricks.
 
