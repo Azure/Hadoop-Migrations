@@ -279,7 +279,7 @@ Example:
 
 Connecting to Azure databricks via token and list down the folders in DBFS
 
-```powershell-interactive
+```shell
 databricks configure --token
 ```
 
