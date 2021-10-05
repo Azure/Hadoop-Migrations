@@ -2,8 +2,6 @@
 
 There are components involved in the authorization process:
 
-![image](https://user-images.githubusercontent.com/7907123/121877268-bd0c5080-cd0a-11eb-884a-976b2c1c74ee.png)
-
 **Sentry Server**: The Sentry RPC server manages the authorization metadata. It supports interface to securely retrieve and manipulate the metadata;
 
 **Data Engine:** This is a data processing application such as Hive or Impala that needs to authorize access to data or metadata resources. The data engine loads the Sentry plugin and all client requests for accessing resources are intercepted and routed to the Sentry plugin for validation;
@@ -34,7 +32,8 @@ finance-department group in AD. This will give Carol access to data from the Sal
 
 **Sentry Integration with the Hadoop Ecosystem**
 
-<img width="360" alt="Sentry_Architecture" src="https://user-images.githubusercontent.com/7907123/132703663-d038910c-95e7-410e-80f3-a0e8da12e4c0.PNG">
+![Hadoop Stack - Sentry (1)](https://user-images.githubusercontent.com/7907123/135984745-4948d600-547a-4dd1-a587-8b4602c77461.png)
+
 
 Information from:https://cwiki.apache.org/confluence/display/SENTRY/Sentry+Tutorial#SentryTutorial-ArchitectureOverview
 
