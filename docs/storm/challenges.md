@@ -1,4 +1,4 @@
-# Limitations of Storm   
+# Challenges of Storm   
 
 1. Need to write java code
 2. Need to start from basic principles
