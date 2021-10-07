@@ -6,6 +6,15 @@ Apache ZooKeeper (ZK) is a centralized service for maintaining configuration inf
 
 Distributed applications such as Apache Kafka, Apache HBase etc. rely on ZK for addressing challenges associated with distributed applications such as race conditions; leader election etc.
 
+List of zookeeper functionalities:
+
+Leader election − Electing the leader for coordination porposes
+Cluster management − adding / removing node and nodes status.
+Naming service − Naming identification of cluster nodes like DNS for nodes
+Configuration management − Latest configuration updates
+Locking  − Locking the data while modifying it. 
+Highly reliable data registry − Availability of data when few nodes are down.
+
 The find out more about the motivation behind ZooKeeper and its applications, please check [Apache ZooKeeper](https://zookeeper.apache.org/doc/current/zookeeperOver.html). It covers ZooKeeper in detail and the motivation behind it.  
 
 ![zookeeper](https://user-images.githubusercontent.com/7907123/134483156-c6c8ae3a-25f5-446a-b1f0-9e748420f37a.png)
