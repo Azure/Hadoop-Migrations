@@ -1,6 +1,6 @@
 # Challenges of Storm   
 
-1. Need to write java code
-2. Need to start from basic principles
-3. Adoption for change is slow
+1. Write java code
+2. Basic principles
+3. Slow changes
 4. Not support for govern artefacts
