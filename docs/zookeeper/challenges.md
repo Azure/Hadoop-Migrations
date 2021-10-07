@@ -2,10 +2,10 @@
 
 
 
-1. Is necesary to Ensemble of odd number of nodes.
+1. Is necessary to Ensemble of odd number of nodes.
 2. Race condition − Two or more machines trying to perform a particular task, which actually needs to be done only by a single machine at any given time.
 3. Inconsistency − Partial failure of data.
-4. For the Quorum we need atleast 3 nodes as 2 node are not enough- to handle single failure
+4. For the Quorum we need at least 3 nodes as 2 node are not enough- to handle single failure
 5. Deadlocking − Two or more operations waiting for each other to complete indefinitely.
 6. In this case more is not better Suggested Production cluster size is 3 or 5 
 
