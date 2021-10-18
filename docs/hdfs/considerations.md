@@ -28,3 +28,5 @@ For other issues related to ABFS refer link - https://issues.apache.org/jira/bro
 - For requirements where it is needed to connect to ADLS from existing older clusters ( prior to v3.1) backported driver details can be found at the link - https://github.com/Azure/abfs-backport
 
 - In an Azure Virtual Networks environment, the **DistCp** tool doesn't support **Azure ExpressRoute** private peering with an Azure Storage virtual network endpoint.Refer the link for recommendations - https://docs.microsoft.com/azure/data-factory/data-migration-guidance-hdfs-azure-storage
+
+[Previous](challenges.md)   [Next](migration-approach.md)
