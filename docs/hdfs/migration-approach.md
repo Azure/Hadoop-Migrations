@@ -143,3 +143,4 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
 
     For more details related to Live Data migrator refer [Migrate your Hadoop data lakes with WANDisco LiveData Platform for Azure | Azure Blog and Updates | Microsoft Azure](https://azure.microsoft.com/blog/migrate-your-hadoop-data-lakes-with-wandisco-livedata-platform-for-azure/)
 
+[Previous](considerations.md)
