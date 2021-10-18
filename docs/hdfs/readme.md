@@ -68,7 +68,5 @@ Refer to the below sections to read more about the Migration approach for HDFS
 
 [Challenges](challenges.md)
 
-[Considerations](considerations.md)
 
-[Migration approach](migration-approach.md)
 
