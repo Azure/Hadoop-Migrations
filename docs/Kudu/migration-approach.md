@@ -1,0 +1,21 @@
+# Migration Approach
+
+Azure has several landing targets for Apache Kudu. Depending on requirements and product features, customers can choose between Azure IaaS, HDInsight, Synapse or Azure Databricks.  
+
+Landing Targets for Apache Kudu on Azure
+
+![Landing Targets for Apache Kudu on Azure](../images/flowchart-kudu-azure-landing-targets.png)
+
+- [Lift and shift migration to Azure IaaS]()
+- [Migration to HDInsight Interactive Hive Cluster]()
+- [Migration to Delta Lake with Synapse/Databricks]()
+- [Migration to Synapse + Synapse Link for Cosmos DB]()
+
+## Further Reading
+
+[Architecture and Components](readme.md)
+
+[Challenges](challenges.md)
+
+[Considerations](considerations.md)
+
