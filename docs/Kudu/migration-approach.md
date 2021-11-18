@@ -6,10 +6,18 @@ Landing Targets for Apache Kudu on Azure
 
 ![Landing Targets for Apache Kudu on Azure](../images/flowchart-kudu-azure-landing-targets.png)
 
-- [Lift and shift migration to Azure IaaS]()
+- [Lift and shift migration to Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
 - [Migration to HDInsight Interactive Hive Cluster]()
-- [Migration to Delta Lake with Synapse/Databricks]()
+- [Migration to Synapse/Databricks with Delta Lake]()
 - [Migration to Synapse + Synapse Link for Cosmos DB]()
+
+## Lift and shift migration to Azure IaaS
+
+## Migration to HDInsight Interactive Hive Cluster
+
+## Migration to Synapse/Databricks with Delta Lake
+
+## Migration to Synapse + Synapse Link for Cosmos DB
 
 ## Further Reading
 
@@ -18,4 +26,3 @@ Landing Targets for Apache Kudu on Azure
 [Challenges](challenges.md)
 
 [Considerations](considerations.md)
-
