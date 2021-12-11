@@ -9,7 +9,7 @@ Landing Targets for Apache Kudu on Azure
 - [Lift and shift migration to Azure IaaS](#lift-and-shift-migration-to-azure-iaas)
 - [Migration to Azure HDInsight](#migration-to-hdinsight-interactive-hive-cluster)
 - [Migration to Azure Synapse/Databricks with Delta Lake](#migration-to-synapsedatabricks-with-delta-lake)
-- [Migration to Azure Cosmos DB and Azure Synapse + Synapse Link for Azure Cosmos DB](#migration-to-azure-cosmos-db-and-azure-synapse-synapse-link-for-azure-cosmos-db)
+- [Migration to Azure Cosmos DB and Azure Synapse + Synapse Link for Azure Cosmos DB](#migration-to-azure-cosmos-db-and-azure-synapse--synapse-link-for-azure-cosmos-db)
 
 ## Lift and shift migration to Azure IaaS
 If you're migrating your workload to Azure IaaS with Lift and shift, you can keep Kudu up and running. To run Cloudera workloads on Azure, refer to Cloudera's [Reference Architecture guide](https://docs.cloudera.com/documentation/other/reference-architecture/topics/ra_azure_deployment.html) and design your target system.
