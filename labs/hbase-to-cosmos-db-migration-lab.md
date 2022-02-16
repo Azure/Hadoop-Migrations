@@ -213,7 +213,7 @@ Once the Spark shell is up, run the Scala code as follows:
 
 Import libraries needed to load data from HBase.
 
-```java
+```Scala
 // Import libraries
 import org.apache.spark.sql.{SQLContext, _}
 import org.apache.spark.sql.execution.datasources.hbase._
@@ -223,7 +223,7 @@ import spark.sqlContext.implicits._
 
 Defines the Spark catalog schema for HBase tables. Where the namespace is `default` and the table name is `Contacts`. The row key is specified as the key. Columns, column families, and columns are mapped to Spark catalog.
 
-```java
+```scala
 // define a catalog for the Contacts table you created in HBase
 def catalog = s"""{
     |"table":{"namespace":"default", "name":"Contacts"},
@@ -240,7 +240,7 @@ def catalog = s"""{
 
 Next, define a method to get the data from the HBase `Contacts` table as a DataFrame.
 
-```java
+```Scala
 def withCatalog(cat: String): DataFrame = {
     spark.sqlContext
     .read
@@ -252,13 +252,13 @@ def withCatalog(cat: String): DataFrame = {
 
 Create a DataFrame using the defined method.
 
-```java
+```Scala
 val df = withCatalog(catalog)
 ```
 
 Then import the libraries needed to use the Cosmos DB Spark connector.
 
-```java
+```Scala
 import com.microsoft.azure.cosmosdb.spark.schema._
 import com.microsoft.azure.cosmosdb.spark._
 import com.microsoft.azure.cosmosdb.spark.config.Config
@@ -266,13 +266,13 @@ import com.microsoft.azure.cosmosdb.spark.config.Config
 
 Make settings to write data to Cosmos DB.
 
-```java
+```Scala
 val writeConfig = Config(Map("Endpoint" -> "https://<Cosmos Account Name>.documents.azure.com:443/", "Masterkey" -> "<Master Key>", "Database" -> "<Database Name>", "Collection" -> "Contacts", "Upsert" -> "true"))
 ```
 
 Write DataFrame data to Azure Cosmos DB.
 
-```java
+```Scala
 import org.apache.spark.sql.SaveMode
 df.write.mode(SaveMode.Overwrite).cosmosDB(writeConfig)
 ```
