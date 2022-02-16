@@ -136,7 +136,7 @@ exit
 ```
 
 ### Upload sample data
-Download Sample Data from [here]() and upload it to your HDInsight's Blob storage.
+Download Sample Data from [here](data/Contacts.txt) and upload it to your HDInsight's Blob storage.
 
 ### Import data into HBase
 
