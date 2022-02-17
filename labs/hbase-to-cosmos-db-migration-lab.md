@@ -14,7 +14,7 @@ Create a resource group for ths lab.
 #!/bin/bash
 
 export ResourceGroupName="<HDI Resource Group Name>"
-export loation=”japaneast”
+export location="<Location Name>"
 
 # Create Reource Groups
 az group create --name $resourceGroupName --location $location
