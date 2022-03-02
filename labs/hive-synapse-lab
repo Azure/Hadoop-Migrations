@@ -1,3 +1,8 @@
 
-** Creating ADF Workspace 
+
+If you want to use ADF you can follow this guide:
+
+https://docs.microsoft.com/en-us/azure/data-factory/connector-hive?tabs=data-factory
+
+if you want to do it manually you can following the next steps:
 
