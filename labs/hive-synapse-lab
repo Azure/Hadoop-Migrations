@@ -12,6 +12,7 @@ if you want to do it manually you can following the next steps:
 4.Use the User root and change the password
 5.Access Hive and check the DB to export
 6.Use the following command to expeort into a CSV the DB
+ hive -f "select * from db.table" >> expoerthivedb.csv
 
 
 
