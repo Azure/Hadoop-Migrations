@@ -1,4 +1,4 @@
-
+# Hive to Synapse
 
 If you want to use ADF you can follow this guide:
 
