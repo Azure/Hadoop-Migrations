@@ -1,8 +1,12 @@
 # Hive to Synapse
 
+## Using Azure Data Factory
+
 If you want to use ADF you can follow this guide:
 
 https://docs.microsoft.com/en-us/azure/data-factory/connector-hive?tabs=data-factory
+
+## Using Hive Command Line
 
 if you want to do it manually you can following the next steps:
 
