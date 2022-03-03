@@ -6,7 +6,10 @@ https://docs.microsoft.com/en-us/azure/data-factory/connector-hive?tabs=data-fac
 
 if you want to do it manually you can following the next steps:
 
-1.Create user from the HDP sandbox on the azure deployment configuration:
+1.Create user from the HDP sandbox on the azure deployment configuration or reset the password:
+
+![create sandbox and user](https://user-images.githubusercontent.com/7907123/156600810-15bda27f-b015-46cf-82e8-914a03594b42.png)
+
 
 ![User creation](https://user-images.githubusercontent.com/7907123/156598598-7a5e7f39-9807-4ce1-b910-0da3f3093b20.png)
 
