@@ -6,7 +6,9 @@ https://docs.microsoft.com/en-us/azure/data-factory/connector-hive?tabs=data-fac
 
 if you want to do it manually you can following the next steps:
 
-1.Create user from the Azure VM UI of the sandbox image:
+1.Create user from the HDP sandbox on the azure deployment configuration:
+
+![user creation]()
 2.Accessing via Putty or other ssh terminal configuring a tunnel to get access to the VM
 3.Getting access from the website using the IP of the tunnel and the port 127.0.0.1:4200
 4.Use the User root and change the password
