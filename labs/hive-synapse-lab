@@ -6,3 +6,8 @@ https://docs.microsoft.com/en-us/azure/data-factory/connector-hive?tabs=data-fac
 
 if you want to do it manually you can following the next steps:
 
+1. Create user from the Azure VM UI of the sandbox image:
+
+
+
+
