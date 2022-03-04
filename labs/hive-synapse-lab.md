@@ -35,8 +35,9 @@ if you want to do it manually you can following the next steps:
 ![Hive](https://user-images.githubusercontent.com/7907123/156599505-baa24405-62c7-49fa-883e-6b4d2083c9ed.png)
 
 6.Use the following command to expeort into a CSV the DB
+```
  hive -f "select * from db.table" >> expoerthivedb.csv
-
+```
 7.Import the DB's into Synpse using the import button:
 
 ![synapse](https://user-images.githubusercontent.com/7907123/156605005-9f8ed058-0db3-4f83-98ff-a25cf4d6d043.png)
