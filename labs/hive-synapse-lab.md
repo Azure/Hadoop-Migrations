@@ -44,10 +44,15 @@ if you want to do it manually you can following the next steps:
 ![synapse](https://user-images.githubusercontent.com/7907123/156605005-9f8ed058-0db3-4f83-98ff-a25cf4d6d043.png)
 
 
+## Sharing the Hive Metastore wiht Synapse Spark
 
+You will find the information on the follwoing link:
+https://docs.microsoft.com/en-us/azure/hdinsight/share-hive-metastore-with-synapse
 
+## Using the Azure Migration Tool
 
-
+You will find the relevant information on the following link:
+https://github.com/Azure-Samples/Synapse/tree/main/SparkCatalogMigration/DatabricksToSynapseMigration
 
 
 
