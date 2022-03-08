@@ -25,7 +25,6 @@ if you want to do it manually you can following the next steps:
 
 
 
-
 4.Use the User root and change the password
 
 ![sandbox website](https://user-images.githubusercontent.com/7907123/156598978-2bc83363-598e-4346-8113-a41ac62717d4.png)
