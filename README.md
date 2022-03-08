@@ -14,8 +14,8 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |----------|-----------|-----------|
 |[Apache HDFS](docs/hdfs/) |Distributed File System |[Planning the data migration](/docs/images/hdfs_1Datamigrationplanning.png) ,  [Pre-checks prior to data migration](docs/images/hdfs_2prechecks.png)
 |[Apache HBase](docs/hbase/)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
+|[Apache Spark](docs/spark/)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/flowchart-spark-azure-landing-targets.png)|
 |[Apache Hive](docs/hive/)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/hive-decission-matrix.png), [Selecting target DB for hive metadata](docs/images/hive-metadata-db-discissionflow.png)|
-|[Apache Spark](docs/spark/)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/clip_image142.png)|
 |[Apache Ranger](docs/ranger/)    |Frame work to monitor and manage Data secuirty |
 |[Apache Sentry](docs/sentry/)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
 |[Apache MapReduce](docs/mapreduce/) |Distributed computation framework |
