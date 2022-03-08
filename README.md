@@ -23,7 +23,7 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache YARN](docs/yarn/) | Resource manager for Hadoop ecosystem |
 |[Apache Storm](docs/storm/)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
 |[Apache Sqoop](docs/sqoop/)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
-|[Apache Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system||
+|[Apache Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system|[Choosing landing targets for Apache Kafka on Azure](https://user-images.githubusercontent.com/70247096/126110828-a2450b95-217b-40d7-8400-95ed667140d7.png)|
 |[Apache Atlas](docs/atlas/)|Open source framework for data governance and Metadata Management||
 
 
