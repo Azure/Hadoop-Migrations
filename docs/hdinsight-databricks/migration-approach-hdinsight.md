@@ -4,18 +4,18 @@
 
 ## Considerations
 
-** HDInsight Spark:
+**HDInsight Spark:**
 Azure HDInsight as "A cloud-based service from Microsoft for big data analytics". It is a cloud-based service from Microsoft for big data analytics that helps organizations process large amounts of streaming or historical data.
 
-** Main features from the HDInsight platform:
+**Main features from the HDInsight platform:**
 * Fully managed
 * Variety of services for multiple porpuses
 * Open-source analytics servicefro entreprise companies
 
-** Synapse Spark:
+**Synapse Spark:**
 Azure Synapse Analytics takes the best of Azure SQL Data Warehouse and modernizes it by providing more functionalities for the SQL developers such as adding querying with serverless SQL pool, adding machine learning support, embedding Apache Spark natively, providing collaborative notebooks, and offering data integration within a single service. In addition to the languages supported by Apache Spark, Synapse Spark also support C#.
 
-** Synapse Spark Primary Use-Cases
+**Synapse Spark Primary Use-Cases**
 
 1. Consolidated type of nodes for starters to pick e.g., Small, Medium, Large node types compared to different node types.
 
@@ -31,7 +31,7 @@ Azure Synapse Analytics takes the best of Azure SQL Data Warehouse and modernize
 
 6. Existing spark user to take advantage of Microsoft proprietary optimizations e.g., Hyperspace: An indexing subsystem for Apache Spark.
 
-** Main features from Azure Synapse:
+**Main features from Azure Synapse:**
 * Complete T-SQL based analytics
 * Hybrid data integration
 * Apache Spark integration
