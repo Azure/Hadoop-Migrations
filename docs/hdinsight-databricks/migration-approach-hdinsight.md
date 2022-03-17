@@ -20,6 +20,9 @@ Main features from Azure Synapse:
 
 
 ## Considerations
+HDInsight and Synapse Spark are using the same version of Apache Spark 3.1, that is a good starting point when we try to performa a migration from different platform.
+as we are using the same Spark version code and jars will be able to deploy in Synapse easily.
+
 
 ## Planning
 
