@@ -15,6 +15,21 @@ Main features from the HDInsight platform:
 Synapse Spark:
 Azure Synapse Analytics takes the best of Azure SQL Data Warehouse and modernizes it by providing more functionalities for the SQL developers such as adding querying with serverless SQL pool, adding machine learning support, embedding Apache Spark natively, providing collaborative notebooks, and offering data integration within a single service. In addition to the languages supported by Apache Spark, Synapse Spark also support C#.
 
+Synapse Spark Primary Use-Cases
+
+1. Consolidated type of nodes for starters to pick e.g., Small, Medium, Large node types compared to different node types.
+
+2. Ephemeral Jobs: Synapse spark is built for short term processing and hence all the cluster have a TTL (Time to Live) and are automatically terminated to save costs.
+
+3. Support for both reading and writing into Synapse tables.
+
+4. Built in support for .NET for spark application enables existing user skill set to take advantage of Apache Spark distributed data processing.
+
+![spark-synapse-options](../images/spark-synapse-options.png)
+
+5. Unified security and monitoring features including Managed VNets throughout all workloads with one Azure Synapse workspace
+
+6. Existing spark user to take advantage of Microsoft proprietary optimizations e.g., Hyperspace: An indexing subsystem for Apache Spark.
 Main features from Azure Synapse:
 * Complete T-SQL based analytics
 * Hybrid data integration
@@ -34,10 +49,7 @@ On the other hand Synapse is consumption-based, and is easier to configurate.Syn
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
-
-
 ## Planning
-
 
 ## Migration Approach
 
@@ -50,22 +62,6 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
 
 Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
-
-### Synapse Spark Primary Use-Cases
-
-1. Consolidated type of nodes for starters to pick e.g., Small, Medium, Large node types compared to different node types.
-
-2. Ephemeral Jobs: Synapse spark is built for short term processing and hence all the cluster have a TTL (Time to Live) and are automatically terminated to save costs.
-
-3. Support for both reading and writing into Synapse tables.
-
-4. Built in support for .NET for spark application enables existing user skill set to take advantage of Apache Spark distributed data processing.
-
-![spark-synapse-options](../images/spark-synapse-options.png)
-
-5. Unified security and monitoring features including Managed VNets throughout all workloads with one Azure Synapse workspace
-
-6. Existing spark user to take advantage of Microsoft proprietary optimizations e.g., Hyperspace: An indexing subsystem for Apache Spark.
 
 ### Migration Scenarios
 
