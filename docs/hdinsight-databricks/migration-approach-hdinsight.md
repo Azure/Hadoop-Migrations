@@ -58,12 +58,6 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 
 ![img](../images/flowchart-spark-azure-landing-targets.png)
 
-### Shared Metadata
-
-Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
-
-Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
-
 ### Migration Scenarios
 
 1. Moving from On-premises Hadoop -> Use Synapse migration as the primary migration strategy and Synapse Spark for ad-hoc queries and processing.
@@ -182,7 +176,10 @@ Reference link for pipeline and data flow: [QuickStart: to load data into dedica
 
 Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
 ## Metadata migration
+**Shared Metadata**
+Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
 
+Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
 ## Code migration
 
 ## Performance benchmarking approach
