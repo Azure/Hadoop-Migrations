@@ -249,8 +249,6 @@ Reference link for pipeline and data flow: [QuickStart: to load data into dedica
 Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
 ## Metadata migration
 
-## Data migration
-
 ## Code migration
 
 ## Performance benchmarking approach
