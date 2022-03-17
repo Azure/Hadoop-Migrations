@@ -137,9 +137,7 @@ Spark is a processing framework and does not store any data, once the processing
 | Use case            | Sink                 | Comment        |Reference Links|
 | ------------------- | -------------------- | --------------  |--------------|
 | Data Warehouse      | Synapse table        |                 |[Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
-| API and fast access | Cosmos DB            |                 |[Configuration references · Azure/azure-cosmosdb-spark Wiki](https://docs.microsoft.com/azure/cosmos-db/synapse-link)               |
-| Historical Analysis | ADLS Gen2 (Datalake) |                 |[Introduction to Microsoft Spark utilities - Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-csharp)                |
-| Integration         | EventHub             | Kafka protocol        |[Azure/azure-event-hubs-spark](https://github.com/Azure/azure-event-hubs-spark)|
+
 
 ### Data Migration:
 
