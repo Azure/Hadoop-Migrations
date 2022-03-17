@@ -26,25 +26,15 @@ as we are using the same Spark version code and jars will be able to deploy in S
 
 [Azure HDInsight Runtime for Apache Spark 3.1](https://techcommunity.microsoft.com/t5/analytics-on-azure-blog/spark-3-1-is-now-generally-available-on-hdinsight/ba-p/3253679)
 
-
 HDInsight is a service that is always up and we have to understand deeply the service to be able to configure and tunned , that make the service complex compare with others.Most of HDInsights features are Apache based. There are several cluster types to choose from depending upon your need.
 
 On the other hand Synapse is consumption-based, and is easier to configurate.Synapse incorporates many other Azure services and is the main plaform for Analytics and Data Orchestration.
 
-# Performance Considerations
+### Performance Considerations
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
-# Data Storage
 
-Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
-
-| Use case            | Sink                 | Comment        |
-| ------------------- | -------------------- | -------------- |
-| Data Warehouse      | Synapse table        |                |
-| API and fast access | Cosmos DB            |                |
-| Historical Analysis | ADLS Gen2 (Datalake) |                |
-| Integration         | EventHub             | Kafka protocol |
 
 ## Planning
 
