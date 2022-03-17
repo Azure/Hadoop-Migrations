@@ -23,6 +23,11 @@ Main features from Azure Synapse:
 HDInsight and Synapse Spark are using the same version of Apache Spark 3.1, that is a good starting point when we try to performa a migration from different platform.
 as we are using the same Spark version code and jars will be able to deploy in Synapse easily.
 
+HDInsight is a service that is always up and we have to understand deeply the service to be able to configure and tunned , that make the service complex compare with others.Most of HDInsights features are Apache based. There are several cluster types to choose from depending upon your need.
+
+On the other hand Synapse is consumption-based, and is easier to configurate.Synapse incorporates many other Azure services and is the main plaform for Analytics and Data Orchestration.
+
+There is a new feature which allows some Synapse-HDInsight integrations.https://docs.microsoft.com/en-us/azure/hdinsight/share-hive-metastore-with-synapse
 
 ## Planning
 
