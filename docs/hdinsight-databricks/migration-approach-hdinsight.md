@@ -3,7 +3,7 @@
 ## Assessment
 
 HDInsight Spark:
-Azure HDInsight as "A cloud-based service from Microsoft for big data analytics". It is a cloud-based service from Microsoft for big data analytics that helps organizations process large amounts of streaming or historical data. On the other hand, ![image](https://user-images.githubusercontent.com/7907123/158826239-a2ed2a1e-f7fc-434f-bb8c-6b9ba4bee5c2.png)
+Azure HDInsight as "A cloud-based service from Microsoft for big data analytics". It is a cloud-based service from Microsoft for big data analytics that helps organizations process large amounts of streaming or historical data.
 
 Main features from the HDInsight platform:
 * Fully managed
