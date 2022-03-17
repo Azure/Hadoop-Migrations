@@ -27,7 +27,7 @@ HDInsight is a service that is always up and we have to understand deeply the se
 
 On the other hand Synapse is consumption-based, and is easier to configurate.Synapse incorporates many other Azure services and is the main plaform for Analytics and Data Orchestration.
 
-There is a new feature which allows some Synapse-HDInsight integrations.https://docs.microsoft.com/en-us/azure/hdinsight/share-hive-metastore-with-synapse
+There is a new feature which allows some Synapse-HDInsight integrations. [Share-Hive-Metastore] (https://docs.microsoft.com/en-us/azure/hdinsight/share-hive-metastore-with-synapse)
 
 ## Planning
 
