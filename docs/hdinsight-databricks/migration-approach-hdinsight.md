@@ -45,8 +45,6 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 
 ![img](../images/flowchart-spark-azure-landing-targets.png)
 
-## Modernization – Synapse
-
 ### Shared Metadata
 
 Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
