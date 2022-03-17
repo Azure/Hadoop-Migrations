@@ -31,11 +31,11 @@ HDInsight is a service that is always up and we have to understand deeply the se
 
 On the other hand Synapse is consumption-based, and is easier to configurate.Synapse incorporates many other Azure services and is the main plaform for Analytics and Data Orchestration.
 
-## Performance Considerations
+# Performance Considerations
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
-## Data Storage
+# Data Storage
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
