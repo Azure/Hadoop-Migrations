@@ -12,3 +12,12 @@ This document provides an end-to-end guide for migrating Azure HDInsight Spark c
 
 ### Azure Synapse Analytics
 [Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/overview-what-is) is a data analytics platform that integrates data warehouses and big data systems. In the past, building a data analysis platform required connecting components such as databases, ETL, and machine learning. Azure Synapse tightly integrates the necessary solutions such as SQL Server technology used in enterprise data warehouses, Spark technology used for big data, Pipelines for ETL and ELT, and machine learning with Azure ML. This guide mainly introduces Spark Pool as a migration target.
+
+
+### Next Step
+
+Refer to the below sections to read more about Migration approach for Spark
+
+[Migrate HDInsight Spark to Synapse Spark](migration-approach-hdinsight.md)
+
+[Migrate Databricks to Synapse Spark](migration-approach-databricks.md)
