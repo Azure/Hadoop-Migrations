@@ -114,10 +114,6 @@ Reference Link: [Apache Spark core concepts - Azure Synapse Analytics | Microsof
 
 >[!NOTE] Each Synapse workspace has a default quota limit at the Workspace level and also at the Spark pool level. These requirements need to be captured during the assessment phase (Infrastructure)
 
-### Performance Considerations
-
-Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
-
 ### Data Storage:
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
