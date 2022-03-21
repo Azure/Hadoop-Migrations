@@ -59,17 +59,8 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 
 ### Migration Scenarios
 
-1. Moving from On-premises Hadoop -> Use Synapse migration as the primary migration strategy and Synapse Spark for ad-hoc queries and processing.
+1. Moving from HDInsight -> Use Synapse migration as the primary migration strategy and Synapse Spark for ad-hoc queries and processing.
 
-2. Moving from On-premises Data Warehouse (Teradata, Netezza etc.) to Synapse Spark -> Follow Synapse migration path
-
-| Layer          | Questions                                                    |
-| -------------- | ------------------------------------------------------------ |
-| Infrastructure | Type of Worker nodes required e.g., memory profile or number of cores |
-|                | Job performance and SLA e.g., long running |
-| Application    | Spark version currently in use                               |
-|                | Python, Java, Scala, R version in use |
-| Security and administration | How to enforce data security policy e.g., column level masking |
 
 ### Creating an Apache Spark Pool
 
@@ -143,22 +134,6 @@ spark.sql ("CREATE DATABASE IF NOT EXISTS sparknyc")
 val df = spark. read. sqlanalytics("sqlpool001.dbo.TaxiTrip")
 
 df. write. mode("overwrite").saveAsTable("sparknyc.taxitrip")
-```
-
-3. Now you can use the regular dataframe operation to perform transformations.
-
-### Ingesting Spark table data into an SQL pool table
-
-1. Create Notebook (default language is pyspark)
-
-2. to create a synapse table, execute as below.
-
-```sql
-%%spark
-
-val df = spark.sql ("SELECT * FROM sparknyc. passengerstats")
-
-df. write. sqlanalytics("sqlpool001.dbo.PassengerStats",Constants.INTERNAL)
 ```
 
 3. Now you can use the regular dataframe operation to perform transformations.
