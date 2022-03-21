@@ -138,10 +138,6 @@ df. write. mode("overwrite").saveAsTable("sparknyc.taxitrip")
 
 3. Now you can use the regular dataframe operation to perform transformations.
 
-### Integrating with Pipelines
-
-Reference link for pipeline and data flow: [QuickStart: to load data into dedicated SQL pool using the copy activity - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/quickstart-copy-activity-load-sql-pool)
-
 ### Monitoring
 
 Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
