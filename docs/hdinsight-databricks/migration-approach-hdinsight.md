@@ -120,7 +120,7 @@ Synapse Spark supports reading multiple different file formats (ORC, Parquet etc
 
 Internal migration from Synapse SQL Pool to Synapse Spark Pool is documented in detail at [Import and Export data between serverless Apache Spark pools and SQL pools - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)
 
-### Ingesting SQL pool data into a Spark database
+### Ingesting HDInsight data into a Spark database
 
 1. Create Notebook (default language is pyspark)
 
