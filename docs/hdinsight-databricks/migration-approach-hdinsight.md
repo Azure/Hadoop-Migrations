@@ -330,7 +330,9 @@ in order to migrate all the notebooks/code that we have in other environments we
 
 ![image](https://user-images.githubusercontent.com/7907123/159435877-74220752-0794-41bf-9b2e-136d3a853739.png)
 
+then depending of the Spark version that we have we should perform the commented change from this link:
 
+[Spark 2.4 to 3.0](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-24-to-30)
 ## Performance benchmarking approach
 
 ## Security
