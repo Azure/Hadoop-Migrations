@@ -58,7 +58,7 @@ Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Micros
 
 Azure has several landing targets for Apache Spark. Depending on requirements and product features, customers can choose between Azure Synapse, Azure Databricks and Azure HDInsight.
 
-![img](../images/flowchart-spark-azure-landing-targets.png)
+![image](https://user-images.githubusercontent.com/7907123/159463096-d64a494e-b54e-465d-9806-e9ca552f1c8a.png)
 
 ### Migration Scenarios
 
