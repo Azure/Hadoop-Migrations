@@ -320,6 +320,9 @@ Azure Synapse Analytics allows the different workspace computational engines to 
 
 Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
 ## Code migration
+in order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
+![image](https://user-images.githubusercontent.com/7907123/159435877-74220752-0794-41bf-9b2e-136d3a853739.png)
+
 
 ## Performance benchmarking approach
 
