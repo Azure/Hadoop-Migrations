@@ -51,7 +51,7 @@ Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Micros
 
 ## Planning
 
-![image](https://user-images.githubusercontent.com/7907123/159452468-60286065-80fc-4853-9d78-fb4cbd52909a.png)
+![image](https://user-images.githubusercontent.com/7907123/159471883-67fb7739-013d-4f17-9606-256fce59d447.png)
 
 
 ## Migration Approach
