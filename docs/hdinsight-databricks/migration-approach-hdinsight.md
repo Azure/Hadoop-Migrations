@@ -109,9 +109,9 @@ Reference Link: [Apache Spark core concepts - Azure Synapse Analytics | Microsof
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
-| Use case            | Sink                 | Comment        |Reference Links|
+| HDInsight         | Synapse               | Comment        |Reference Links|
 | ------------------- | -------------------- | --------------  |--------------|
-| Data Warehouse      | Synapse table        |                 |[Import and Export data between serverless Apache Spark pools and SQL pool](https://docs.microsoft.com/azure/synapse-analytics/spark/synapse-spark-sql-pool-import-export)               |
+| HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS ](https://github.com/Azure/databox-adls-loader)               |
 
 
 ### Data Migration:
