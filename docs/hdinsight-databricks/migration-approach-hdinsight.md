@@ -1,5 +1,4 @@
 # Migration Approach
-![image](https://user-images.githubusercontent.com/7907123/159463171-67ff209d-211f-4dbe-bbfa-4cfc7308fa0a.png)
 
 ## Assessment
 
