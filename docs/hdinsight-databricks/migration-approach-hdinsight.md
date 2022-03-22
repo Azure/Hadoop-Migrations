@@ -59,7 +59,7 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 
 ### Migration Scenarios
 
-1. Moving from HDInsight -> Use Synapse migration as the primary migration strategy and Synapse Spark for ad-hoc queries and processing.
+1. Moving from HDInsight Spark to Synapse Spark.
 
 
 ### Creating an Apache Spark Pool
