@@ -311,24 +311,6 @@ files with their permissions (depending on the number of files in HDFS, this com
     ```
 You can see more details in the following repository:https://github.com/Azure/databox-adls-loader
 
-### Ingesting HDInsight data into a Spark database
-
-1. Create Notebook (default language is pyspark)
-
-2. If we need to read table create in Synapse (sqlpool001.dbo.TaxiTrip)
-
-```sql
-%%spark
-
-spark.sql ("CREATE DATABASE IF NOT EXISTS sparknyc")
-
-val df = spark. read. sqlanalytics("sqlpool001.dbo.TaxiTrip")
-
-df. write. mode("overwrite").saveAsTable("sparknyc.taxitrip")
-```
-
-3. Now you can use the regular dataframe operation to perform transformations.
-
 ### Monitoring
 
 Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
