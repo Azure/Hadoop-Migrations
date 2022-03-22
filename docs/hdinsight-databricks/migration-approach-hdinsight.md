@@ -111,7 +111,7 @@ Spark is a processing framework and does not store any data, once the processing
 
 | HDInsight         | Synapse               | Comment        |Reference Links|
 | ------------------- | -------------------- | --------------  |--------------|
-| HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS ](https://github.com/Azure/databox-adls-loader)               |
+| HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)               |
 
 
 ### Data Migration:
@@ -309,14 +309,15 @@ files with their permissions (depending on the number of files in HDFS, this com
     ```bash
     ./copy-acls.py -s ./filelist.json -i ./id_map.json  -A adlsgen2hnswestus2 -C databox1 --dest-spn-id {spn_client_id} --dest-spn-secret {spn_secret}
     ```
-You can see more details in the following repository:https://github.com/Azure/databox-adls-loader
+You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
 ### Monitoring
 
 Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
 ## Metadata migration
 **Shared Metadata**
-Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between its Apache Spark pools and serverless SQL pool. More information is available from the below link 
+Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between Apache Spark pools and other External Metasotres. More information is available from the below link 
+[External metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-external-metastore)
 
 Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
 ## Code migration
