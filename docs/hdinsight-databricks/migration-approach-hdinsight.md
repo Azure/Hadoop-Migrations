@@ -130,11 +130,11 @@ Spark is a processing framework and does not store any data, once the processing
 
 | HDInsight         | Synapse               | Tool        |Reference Links|
 | ------------------- | -------------------- | --------------  |--------------|
-| HDFS      | ADLS       |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
-| HDFS      | ADLS       |      Distcp           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)|
-| HDFS      | ADLS       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF| Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
-| HDFS      | ADLS       |      Data Movement Library           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)|
-| HDFS      | ADLS       |      DataBox           |[Import and Export data between HDInsight HDFS to Synapse ADLS](https://github.com/Azure/databox-adls-loader)|
+| HDFS      | ADLS       |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
+| HDFS      | ADLS       |      Distcp           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)|
+| HDFS      | ADLS       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
+| HDFS      | ADLS       |      Data Movement Library           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Library Movement](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)|
+| HDFS      | ADLS       |      DataBox           |[Import and Export data between HDInsight HDFS to Synapse ADLS - DataBox](https://github.com/Azure/databox-adls-loader)|
 
 ##### Case 1 - AZcopy data from HDFS to ADLS
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
