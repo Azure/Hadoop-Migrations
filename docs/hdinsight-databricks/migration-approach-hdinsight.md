@@ -59,12 +59,12 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 
 ![image](https://user-images.githubusercontent.com/7907123/159687313-b5436dda-3ce5-4702-8f0f-dc5e2a334bc0.png)
 
-### Migration Scenarios
+# Migration Scenarios
 
 1. Moving from HDInsight Spark to Synapse Spark.
 
 
-### Creating an Apache Spark Pool
+## Creating an Apache Spark Pool
 
 An Apache Spark pool in your Synapse Workspace provides Spark environment to load data, model process and get faster insights.
 
@@ -117,7 +117,7 @@ Azure Synapse Analytics allows the different workspace computational engines to 
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
 
-#### Data Storage:
+### Data Storage:
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
@@ -126,13 +126,13 @@ Spark is a processing framework and does not store any data, once the processing
 | HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS](https://github.com/Azure/databox-adls-loader)|
 
 
-#### Migrate HDFS Store to Azure Data Lake Storage Gen2
+### Migrate HDFS Store to Azure Data Lake Storage Gen2
 
 The key challenge for customers with existing on-premises Hadoop clusters that wish to migrate to Azure (or exist in a hybrid environment) is the movement of the existing dataset. The dataset may be very large, which likely rules out online transfer. Transfer volume can be solved by using Azure Data Box as a physical appliance to 'ship' the data to Azure.
 
 This set of scripts provides specific support for moving big data analytics datasets from an on-premises HDFS cluster to ADLS Gen2 using a variety of Hadoop and custom tooling.
 
-###### Prerequisites
+#### Prerequisites
 
 The mechanism to copy data from an on-premise HDFS cluster to ADLS Gen2 relies on the following:
 
