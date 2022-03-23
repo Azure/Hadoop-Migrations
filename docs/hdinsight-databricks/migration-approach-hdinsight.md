@@ -10,7 +10,7 @@ Azure HDInsight as "A cloud-based service from Microsoft for big data analytics"
 **Main features from the HDInsight platform:**
 * Fully managed
 * Variety of services for multiple porpuses
-* Open-source analytics servicefro entreprise companies
+* Open-source analytics service for entreprise companies
 
 
 HDInsight is a service that is always up and we have to understand deeply the service to be able to configure and tunned , that make the service complex compare with others.Most of HDInsights features are Apache based. There are several cluster types to choose from depending upon your need.
