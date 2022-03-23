@@ -113,9 +113,9 @@ Spark is a processing framework and does not store any data, once the processing
 
 | HDInsight         | Synapse               | Comment        |Reference Links|
 | ------------------- | -------------------- | --------------  |--------------|
-| HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)|
+| HDFS      | ADLS       |                 | [Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)       |
 
-[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)
+
 ### Data Migration:
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
