@@ -113,7 +113,7 @@ Azure Synapse Analytics allows the different workspace computational engines to 
 
 [External metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-external-metastore)
 
-### Data Migration:
+## Data Migration:
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
 
