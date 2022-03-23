@@ -115,7 +115,7 @@ Spark is a processing framework and does not store any data, once the processing
 | ------------------- | -------------------- | --------------  |--------------|
 | HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)|
 
-
+[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 ### Data Migration:
 
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
@@ -313,9 +313,6 @@ files with their permissions (depending on the number of files in HDFS, this com
     ```
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
-### Monitoring
-
-Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
 ## Metadata migration
 **Shared Metadata**
 Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between Apache Spark pools and other External Metasotres. More information is available from the below link: 
@@ -336,6 +333,11 @@ Then depending of the Spark version you should perform the commented changes tha
 [Spark 3.0 to 3.1](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-30-to-31)
 
 [Spark 3.1 to 3.2](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-31-to-32)
+
+## Monitoring
+
+Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
+
 ## Performance benchmarking approach
 
 ## Security
