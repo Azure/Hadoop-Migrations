@@ -326,11 +326,11 @@ Azure Synapse Analytics allows the different workspace computational engines to 
 Also we are able to share an external metastore:
 Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
 ## Code migration
-in order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
+In order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
 
 ![image](https://user-images.githubusercontent.com/7907123/159435877-74220752-0794-41bf-9b2e-136d3a853739.png)
 
-then depending of the Spark version that we have we should perform the commented change from this link:
+Then depending of the Spark version you should perform the commented changes that this link shows:
 
 [Spark 2.4 to 3.0](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-24-to-30)
 ## Performance benchmarking approach
