@@ -10,21 +10,21 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 
 
  
-|Component | Description| Decision Flow/Flowchats|
-|----------|-----------|-----------|
-|[Apache HDFS](docs/hdfs/) |Distributed File System |[Planning the data migration](/docs/images/hdfs_1Datamigrationplanning.png) ,  [Pre-checks prior to data migration](docs/images/hdfs_2prechecks.png)
-|[Apache HBase](docs/hbase/)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)
-|[Apache Spark](docs/spark/)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/flowchart-spark-azure-landing-targets.png)|
-|[Apache Hive](docs/hive/)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/hive-decission-matrix.png), [Selecting target DB for hive metadata](docs/images/hive-metadata-db-discissionflow.png)|
-|[Apache Ranger](docs/ranger/)    |Frame work to monitor and manage Data secuirty |
-|[Apache Sentry](docs/sentry/)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|
-|[Apache MapReduce](docs/mapreduce/) |Distributed computation framework |
-|[Apache Zookeeper](docs/zookeeper/) |Distributed coordination service |
-|[Apache YARN](docs/yarn/) | Resource manager for Hadoop ecosystem |
-|[Apache Storm](docs/storm/)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|
-|[Apache Sqoop](docs/sqoop/)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|
-|[Apache Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system|[Choosing landing targets for Apache Kafka on Azure](https://user-images.githubusercontent.com/70247096/126110828-a2450b95-217b-40d7-8400-95ed667140d7.png)|
-|[Apache Atlas](docs/atlas/)|Open source framework for data governance and Metadata Management||
+|Component | Description| Decision Flow/Flowchats|Target Solutions|
+|----------|-----------|-----------|-----------|
+|[Apache HDFS](docs/hdfs/) |Distributed File System |[Planning the data migration](/docs/images/hdfs_1Datamigrationplanning.png) ,  [Pre-checks prior to data migration](docs/images/hdfs_2prechecks.png)|Azure Data Lake Storage gen2|
+|[Apache HBase](docs/hbase/)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)|HBase on VM, HDInsight, Cosmos DB|
+|[Apache Spark](docs/spark/)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/flowchart-spark-azure-landing-targets.png)|HDInsight, Synapse, Databricks|
+|[Apache Hive](docs/hive/)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/hive-decission-matrix.png), [Selecting target DB for hive metadata](docs/images/hive-metadata-db-discissionflow.png)|Hive on VM, HDInsight, Synapse|
+|[Apache Ranger](docs/ranger/)    |Frame work to monitor and manage Data secuirty |HDInsight Enterprise Security Package, Azure AD, Ranger on VM|
+|[Apache Sentry](docs/sentry/)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|Sentry/Ranger on VM, HDInsight Engerprise Security Package, Azure AD|
+|[Apache MapReduce](docs/mapreduce/) |Distributed computation framework |MapReduce, Spark|
+|[Apache Zookeeper](docs/zookeeper/) |Distributed coordination service |ZooKeeper on VM, Built-in solution in PaaS|
+|[Apache YARN](docs/yarn/) | Resource manager for Hadoop ecosystem |YARN on VM, Built-in solution in PaaS|
+|[Apache Storm](docs/storm/)     |Distributed real-time computing system|[Choosing landing targets for Apache Storm on Azure](docs/images/flowchart-storm-azure-landing-targets.png)|Storm/Flink/etc on VM. Stream Analytics, Spark Streaming on HDInsight/Databricks, Functions|
+|[Apache Sqoop](docs/sqoop/)|Command line interface tool for transferring data between Apache Hadoop clusters and relational databases|[Choosing landing targets for Apache Sqoop on Azure](docs/images/flowchart-sqoop-azure-landing-targets.png)|Sqoop on VM, Sqoop on HDInsight, Data Factory|
+|[Apache Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system|[Choosing landing targets for Apache Kafka on Azure](https://user-images.githubusercontent.com/70247096/126110828-a2450b95-217b-40d7-8400-95ed667140d7.png)|Kafka on VM, Event Hub for Kafka, HDInsight|
+|[Apache Atlas](docs/atlas/)|Open source framework for data governance and Metadata Management||Purview|
 
 
 
