@@ -333,6 +333,10 @@ In order to migrate all the notebooks/code that we have in other environments we
 Then depending of the Spark version you should perform the commented changes that this link shows:
 
 [Spark 2.4 to 3.0](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-24-to-30)
+
+[Spark 3.0 to 3.1](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-30-to-31)
+
+[Spark 3.1 to 3.2](https://spark.apache.org/docs/latest/sql-migration-guide.html#upgrading-from-spark-sql-31-to-32)
 ## Performance benchmarking approach
 
 ## Security
