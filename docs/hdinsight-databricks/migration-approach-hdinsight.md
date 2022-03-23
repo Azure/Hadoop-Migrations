@@ -107,7 +107,17 @@ Reference Link: [Apache Spark core concepts - Azure Synapse Analytics | Microsof
 
 >[!NOTE] Each Synapse workspace has a default quota limit at the Workspace level and also at the Spark pool level. These requirements need to be captured during the assessment phase (Infrastructure)
 
-### Data Storage:
+## Set up Linked service with external HDInsight Hive Meta Store (HMS)
+**Shared Metadata**
+Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between Apache Spark pools and other External Metasotres. More information is available from the below link: 
+
+[External metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-external-metastore)
+
+### Data Migration:
+
+Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
+
+#### Data Storage:
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
@@ -115,10 +125,6 @@ Spark is a processing framework and does not store any data, once the processing
 | ------------------- | -------------------- | --------------  |--------------|
 | HDFS      | ADLS       |                 |[Import and Export data between HDInsight HDFS to Synapse ADLS](https://github.com/Azure/databox-adls-loader)|
 
-
-### Data Migration:
-
-Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
 
 #### Migrate HDFS Store to Azure Data Lake Storage Gen2
 
@@ -313,14 +319,11 @@ files with their permissions (depending on the number of files in HDFS, this com
     ```
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS | Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
-## Metadata migration
+## Metadata migration from External to Manage Metastore
 **Shared Metadata**
-Azure Synapse Analytics allows the different workspace computational engines to share databases and Parquet-backed tables between Apache Spark pools and other External Metasotres. More information is available from the below link: 
-
-[External metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-external-metastore)
-
-Also we are able to share an external metastore:
+Once we have conected to the External HDInsight Metastore moved the external to a Manage tables:
 Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
+
 ## Code migration
 In order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
 
