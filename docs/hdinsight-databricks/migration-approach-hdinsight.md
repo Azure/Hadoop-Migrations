@@ -194,7 +194,7 @@ Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](h
 ## Code migration
 In order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
 
-![image](https://user-images.githubusercontent.com/7907123/159435877-74220752-0794-41bf-9b2e-136d3a853739.png)
+![image](https://user-images.githubusercontent.com/7907123/159870008-247c21d3-bb7e-45c2-8d66-2256456bb23c.png)
 
 Then depending of the Spark version you should perform the commented changes that this link shows:
 
