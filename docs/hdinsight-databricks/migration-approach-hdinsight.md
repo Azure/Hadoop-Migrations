@@ -170,7 +170,7 @@ You can see more details in the following repository:[Import and Export data bet
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Box| Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
 
-![image](https://user-images.githubusercontent.com/7907123/159869181-7e00f52d-a94f-421c-8662-a34160a25553.png)
+![image](https://user-images.githubusercontent.com/7907123/159869331-32d15ece-0142-4721-8613-df2c9b26b07d.png)
 
 
 ### Summary table
