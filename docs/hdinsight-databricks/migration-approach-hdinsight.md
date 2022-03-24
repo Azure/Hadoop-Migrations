@@ -169,9 +169,12 @@ You can see more details in the following repository:[Import and Export data bet
 ##### DataBox data from HDFS to ADLS
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Box| Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
-![image](https://user-images.githubusercontent.com/7907123/159730444-fa7a2900-6e00-46be-999e-7eb216e763ee.png)
+
+![image](https://user-images.githubusercontent.com/7907123/159869181-7e00f52d-a94f-421c-8662-a34160a25553.png)
+
 
 ### Summary table
+
 
 | HDInsight         | Synapse               | Scenario               | Tool        |Reference Links|
 | ------------------- | -------------------- | -------------------- | --------------  |--------------|
