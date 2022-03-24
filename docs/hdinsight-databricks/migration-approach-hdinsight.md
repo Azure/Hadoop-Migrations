@@ -156,7 +156,7 @@ More information on the following link : [Data Transfer Solution | Microsoft Doc
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
 | HDInsight         | Synapse               | Scenario               | Tool        |Reference Links|
-| ------------------- | -------------------- | --------------  |--------------|
+| ------------------- | -------------------- | -------------------- | --------------  |--------------|
 | HDFS      | ADLS       | Small-High Bandwith              |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
 | HDFS      | ADLS       | Small-High Bandwith             |      Distcp           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)|
 | HDFS      | ADLS       | Small-Low Bandwith       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
