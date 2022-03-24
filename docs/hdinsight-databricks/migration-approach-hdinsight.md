@@ -51,13 +51,13 @@ Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Micros
 
 ## Planning
 
-![image](https://user-images.githubusercontent.com/7907123/159871293-96b1d1ff-515c-4437-87f1-bd2eaf4618f0.png)
+
 
 ## Migration Approach
 
 Azure has several landing targets for Apache Spark. Depending on requirements and product features, customers can choose between Azure Synapse, Azure Databricks and Azure HDInsight.
 
-![image](https://user-images.githubusercontent.com/7907123/159871180-4fab1d55-ba7b-4cf3-8e10-a9353e7406f0.png)
+![image](https://user-images.githubusercontent.com/7907123/159871439-96c68799-e6a1-4495-8abf-c7d679f2e57a.png)
 
 # Migration Scenarios
 
