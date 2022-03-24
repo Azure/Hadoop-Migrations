@@ -153,15 +153,16 @@ More information on the following link : [Data Transfer Solution | Microsoft Doc
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
+![image](https://user-images.githubusercontent.com/7907123/159730444-fa7a2900-6e00-46be-999e-7eb216e763ee.png)
+
 | HDInsight         | Synapse               | Scenario               | Tool        |Reference Links|
 | ------------------- | -------------------- | -------------------- | --------------  |--------------|
-| HDFS      | ADLS       | Small-High Bandwith              |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
+| HDFS      | ADLS       | Small-Low Bandwith              |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
 | HDFS      | ADLS       | Small-High Bandwith             |      Distcp           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)|
 | HDFS      | ADLS       | Small-High Bandwith       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
 | HDFS      | ADLS       | Big-High Bandwith       |      Data Movement Library           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Library Movement](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)|
 | HDFS      | ADLS       | Big-Low Bandwith       |      DataBox           |[Import and Export data between HDInsight HDFS to Synapse ADLS - DataBox](https://github.com/Azure/databox-adls-loader)|
 
-![image](https://user-images.githubusercontent.com/7907123/159730444-fa7a2900-6e00-46be-999e-7eb216e763ee.png)
 
 ##### AZcopy data from HDFS to ADLS
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
