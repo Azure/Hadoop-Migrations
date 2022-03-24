@@ -153,16 +153,6 @@ More information on the following link : [Data Transfer Solution | Microsoft Doc
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
-![image](https://user-images.githubusercontent.com/7907123/159730444-fa7a2900-6e00-46be-999e-7eb216e763ee.png)
-
-| HDInsight         | Synapse               | Scenario               | Tool        |Reference Links|
-| ------------------- | -------------------- | -------------------- | --------------  |--------------|
-| HDFS      | ADLS       | Small-Low Bandwith              |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
-| HDFS      | ADLS       | Small-High Bandwith             |      Distcp           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)|
-| HDFS      | ADLS       | Small-High Bandwith       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
-| HDFS      | ADLS       | Big-High Bandwith       |      Data Movement Library           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Library Movement](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)|
-| HDFS      | ADLS       | Big-Low Bandwith       |      DataBox           |[Import and Export data between HDInsight HDFS to Synapse ADLS - DataBox](https://github.com/Azure/databox-adls-loader)|
-
 
 ##### AZcopy data from HDFS to ADLS
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
@@ -179,10 +169,23 @@ You can see more details in the following repository:[Import and Export data bet
 ##### DataBox data from HDFS to ADLS
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Box| Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
+![image](https://user-images.githubusercontent.com/7907123/159730444-fa7a2900-6e00-46be-999e-7eb216e763ee.png)
+
+### Summary table
+
+| HDInsight         | Synapse               | Scenario               | Tool        |Reference Links|
+| ------------------- | -------------------- | -------------------- | --------------  |--------------|
+| HDFS      | ADLS       | Small-Low Bandwith              |      AZcopy           |[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)|
+| HDFS      | ADLS       | Small-High Bandwith             |      Distcp           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)|
+| HDFS      | ADLS       | Small-High Bandwith       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
+| HDFS      | ADLS       | Big-High Bandwith       |      Data Movement Library           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Library Movement](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)|
+| HDFS      | ADLS       | Big-Low Bandwith       |      DataBox           |[Import and Export data between HDInsight HDFS to Synapse ADLS - DataBox](https://github.com/Azure/databox-adls-loader)|
+
 ## Metadata migration from External to Manage Metastore
 **Shared Metadata**
 Once we have conected to the External HDInsight Metastore moved the external to a Manage tables:
 Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
+
 
 ## Code migration
 In order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
