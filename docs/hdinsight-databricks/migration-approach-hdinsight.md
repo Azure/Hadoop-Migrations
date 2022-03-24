@@ -192,7 +192,7 @@ Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](h
 
 
 ## Code migration
-In order to migrate all the notebooks/code that we have in other environments we will need to use the import button, when we create a new notbook as we can see in the following picture:
+In order to migrate all the notebooks/code that we have in other environments customers will need to use the import button, when creates a new notbook as we can see in the following picture:
 
 ![image](https://user-images.githubusercontent.com/7907123/159870008-247c21d3-bb7e-45c2-8d66-2256456bb23c.png)
 
