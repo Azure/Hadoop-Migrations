@@ -129,7 +129,7 @@ This set of scripts provides specific support for moving big data analytics data
 ### Selecting a data transfer solution
 Answer the following questions to help select a data transfer solution:
 
-Is your available network bandwidth limited or non-existent, and you want to transfer large datasets?
+**Is your available network bandwidth limited or non-existent, and you want to transfer large datasets?**
 
 If yes, see: [Scenario 1: Transfer large datasets with no or low network bandwidth.](https://docs.microsoft.com/en-us/azure/storage/common/storage-solution-large-dataset-low-network)
 
