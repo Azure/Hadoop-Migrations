@@ -57,7 +57,7 @@ Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Micros
 
 Azure has several landing targets for Apache Spark. Depending on requirements and product features, customers can choose between Azure Synapse, Azure Databricks and Azure HDInsight.
 
-![image](https://user-images.githubusercontent.com/7907123/159865833-e014b786-5e9e-4123-9b4d-55b794fd543a.png)
+![image](https://user-images.githubusercontent.com/7907123/159871180-4fab1d55-ba7b-4cf3-8e10-a9353e7406f0.png)
 
 # Migration Scenarios
 
@@ -113,10 +113,13 @@ Azure Synapse Analytics allows the different workspace computational engines to 
 
 [External metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-external-metastore)
 
+## Metadata migration from External to Manage Metastore
+**Shared Metadata**
+Once we have conected to the External HDInsight Metastore moved the external to a Manage tables:
+Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
+
 ## Data Migration:
-
 Synapse Spark supports reading multiple different file formats (ORC, Parquet etc.) so use the same migration strategy as on-premises HDFS migration.
-
 
 ### Migrate HDFS Store to Azure Data Lake Storage Gen2
 
@@ -184,12 +187,6 @@ You can see more details in the following repository:[Import and Export data bet
 | HDFS      | ADLS       | Big Datasets-High Bandwith       |      ADF           |[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)|
 | HDFS      | ADLS       | Big Datasets-High Bandwith       |      Data Movement Library           |[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Library Movement](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)|
 | HDFS      | ADLS       | Big Datasets-Low Bandwith       |      DataBox           |[Import and Export data between HDInsight HDFS to Synapse ADLS - DataBox](https://github.com/Azure/databox-adls-loader)|
-
-## Metadata migration from External to Manage Metastore
-**Shared Metadata**
-Once we have conected to the External HDInsight Metastore moved the external to a Manage tables:
-Reference: [Shared metadata tables - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/metadata/table)
-
 
 ## Code migration
 In order to migrate all the notebooks/code that we have in other environments customers will need to use the import button, when creates a new notbook as we can see in the following picture:
