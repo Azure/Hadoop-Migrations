@@ -149,6 +149,8 @@ If yes, use the scripted/programmatic options outlined in [Scenario 4: Periodic 
 
 If yes, use the options in [Scenario 4: Periodic data transfers.](https://docs.microsoft.com/en-us/azure/storage/common/storage-solution-periodic-data-transfer)
 
+More information on the following link : [Data Transfer Solution | Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-choose-data-transfer-solution?toc=/azure/storage/blobs/toc.json) 
+
 ### Data Migration Summary:
 
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
