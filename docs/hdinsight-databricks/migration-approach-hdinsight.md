@@ -154,19 +154,19 @@ More information on the following link : [Data Transfer Solution | Microsoft Doc
 Spark is a processing framework and does not store any data, once the processing is complete an appropriate sink needs to be chosen.
 
 
-**AZcopy data from HDFS to ADLS
+**AZcopy data from HDFS to ADLS**
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - AZcopy| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
 
-**Distcp data from HDFS to ADLS
+**Distcp data from HDFS to ADLS**
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - Distcp| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-use-distcp)
 
-**ADF from HDFS to ADLS
+**ADF from HDFS to ADLS**
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF| Microsoft Docs](https://docs.microsoft.com/en-us/azure/data-factory/connector-hdfs?tabs=data-factory)
 
-**Data Movement Library data from HDFS to ADLS
+**Data Movement Library data from HDFS to ADLS**
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - ADF| Microsoft Docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-data-movement-library)
 
-**DataBox data from HDFS to ADLS
+**DataBox data from HDFS to ADLS**
 You can see more details in the following repository:[Import and Export data between HDInsight HDFS to Synapse ADLS - Data Box| Microsoft Docs](https://github.com/Azure/databox-adls-loader)
 
 
