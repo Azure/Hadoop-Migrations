@@ -276,13 +276,13 @@ High level decision flow diagram while performing live migration:
 
 1. Create a linked service to “Impala” cluster as shown below:
 
-Click on “manage” on synapse pool and click on “linked services”. Click on “New”
+Click  on “linked services”. Click on “New”
 
-![impala-to-synapse-linkedservice-creation](../images/himpala-synapse_copyactivity_linkedservice.png)
+![impala-to-synapse-linkedservice-creation](../images/impala-synapse_copyactivity_linkedservice.png)
 
 Search for “Impala” and click continue:
 
-![hive-synapse-connectionstring](../images/hive-synapse-connectionstring.png)
+![impala-synapse-connectionstring](../images/impala-synapse-copyactivity1.png)
 
 Provide the relevant details as shown below:
 
@@ -296,53 +296,36 @@ Test the connection and create the linked service.
 
 Click on the integrate button on synapse studio. Click on the “+” button to add new pipeline. Search for the “Copy” activity and add the copy activity to the pipeline:
 
-![hive-impala-create-copy-activity1](../images/hive-synapse-create-copy-activity1.png)
+![impala-synapse-create-copy-activity1](../images/impala-synapse-copyactivity2.png)
 
 Click on the copy activity. Rename the activity from “Copy data1” to “ImpalatoSynapse” as shown below
 
-![hive-synapse-create-copy-activity2](../images/hive-synapse-create-copy-activity2.png)
+![impala-synapse-create-copy-activity2](../images/impala-synapse-copyactivity3.png)
 
 Click on “New Dataset”
 
-![hive-synapse-create-copy-activity3](../images/hive-synapse-create-copy-activity3.png)
+![impala-synapse-create-copy-activity3](../images/impala-synapse-copyactivity4.png)
 
-Search for “Hive” and the add the dataset. Click on the “open” button to open the dataset
+Search for “Impala” and the add the dataset. Click on the “open” button to open the dataset.Map the dataset to linked service created earlier as shown below. Pick the Impala table to be transferred.
 
-![hive-synapse-create-copy-activity4](../images/hive-synapse-create-copy-activity4.png)
+![impala-synapse-create-copy-activity4](../images/impala-synapse-copyactivity5.png)
 
-Map the dataset to linked service created earlier as shown below. Pick the Impala table to be transferred.
-
-![hive-synapse-create-copy-activity5](../images/hive-synapse-create-copy-activity5.png)
+![impala-synapse-create-copy-activity5](../images/impala-synapse-copyactivity6.png)
 
 Switch the tab and return to the copy activity. Click on the “sink” tab and click on “+ New” button to create a dataset for “Synapse” destination table. Search for synapse in dataset creation and pick “azure synapse dedicated pool”
 
-![hive-synapse-create-copy-activity6](../images/hive-synapse-create-copy-activity6.png)
+![impala-synapse-create-copy-activity6](../images/impala-synapse-copyactivity7.png)
 
 Provide a name which can identify the table being transferred. Pick the dedicated pool to which data is to be imported to. Click on the edit button and provide the destination table name, manually. Set “Import Schema” to “None”
 
-![hive-synapse-create-copy-activity7](../images/hive-synapse-create-copy-activity7.png)
+![impala-synapse-create-copy-activity7](../images/impala-synapse-copyactivity8.png)
 
-On the sink settings, select “Copy method” as “Bulk Insert” and Table option as “Auto Create Table” as shown below
-
-![hive-synapse-create-copy-activity8](../images/hive-synapse-create-copy-activity8.png)
-
-Hit the “Mapping” tab, Click on “import schemas” and perform “mapping” if required.
-
-![hive-synapse-create-copy-activity9](../images/hive-synapse-create-copy-activity9.png)
-
-Change the pipeline name as “HivetoSynapse” and hit the publish button.
-
-![hive-synapse-create-copy-activity10](../images/hive-synapse-create-copy-activity10.png)
-
-1. Execute the Pipeline and verify the results
-
-Execute the pipeline by clicking on the “Add Trigger” -> “Trigger Now” button
 
 Upon successful completion of the run, verify if the new table has been created and the data has been successfully transferred by clicking on the data section of synapse studio and querying the table as shown below.
 
-![hive-synapse-create-copy-activity11](../images/hive-synapse-create-copy-activity11.png)
 
-![hive-synapse-create-copy-activity12](../images/hive-synapse-create-copy-activity12.png)
+
+![impala-synapse-create-copy-activity8](../images/impala-synapse-copyactivity9.png)
 
 #### Scenario 2: Live migration with Hadoop cluster directly Via self hosted IR
 
@@ -356,9 +339,9 @@ Upon successful completion of the run, verify if the new table has been created 
 
 - Install Self hosted Integration runtime in a on-premise server which can access azure. Refer [Create a self-hosted integration runtime - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime#setting-up-a-self-hosted-integration-runtime)
 
-- Install odbc driver in self hosted IR - [Cloudera ODBC Driver for Apache Hive Installation and Configuration Guide](https://docs.cloudera.com/documentation/other/connectors/hive-odbc/2-6-9/Cloudera-ODBC-Driver-for-Apache-Hive-Install-Guide.pdf)
+- Install odbc driver in self hosted IR - [Cloudera ODBC Driver for Apache Impala Installation and Configuration Guide](https://docs.cloudera.com/documentation/other/connectors/impala-odbc/latest/Cloudera-ODBC-Driver-for-Impala-Install-Guide.pdf)
 
-- Setup kerberos authentication in self hosted integration runtime as explained [here](https://www.simba.com/products/Hive/doc/ODBC_InstallGuide/win/content/odbc/hi/kerberos.htm)
+- Setup kerberos authentication in self hosted integration runtime as explained [here](http://simba.wpengine.com/products/Impala/doc/ODBC_InstallGuide/win/content/odbc/hi/kerberos.htm)
 
 - After the setup, create the linked service using use Azure Data Factory odbc connector to connect to the hive cluster
 
@@ -370,26 +353,20 @@ Upon successful completion of the run, verify if the new table has been created 
 
 - Hive connector only supports Hive tables in Apache Hive of version 3.1.0
 
-#### Hive object mapping to Azure Synapse
+#### Impala object mapping to Azure Synapse
 
 | Hive object                     | Synapse object                                               | High level migration method                                  |
 | ------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Hive internal tables            | Table in Azure Synapse dedicated pool                        | Azure Data Factory                                           |
-| Hive external tables            | Synapse external tables using polybase. Data  resides as files in ADL Gen 2 | ·      Azure Data Factory / azcopy to move  HDFS files to ADL Gen 2  ·      DDL Scripts to create external tables |
-| Hive partitions                 | Synapse tables with distribution option                      | ·      DDL Scripts                                           |
-| Hive table / object permissions | Synapse access controls at the database layer                | ·      DDL Scripts                                           |
+| Impala internal tables            | Table in Azure Synapse dedicated pool                        | Azure Data Factory                                           |
+| Impala external tables            | Synapse external tables using polybase. Data  resides as files in ADL Gen 2 | ·      Azure Data Factory / azcopy to move  HDFS files to ADL Gen 2  ·      DDL Scripts to create external tables |
+| Impala partitions                 | Synapse tables with distribution option                      | ·      DDL Scripts                                           |
+| Impala table / object permissions | Synapse access controls at the database layer                | ·      DDL Scripts                                           |
 
 ## Offline migration
 
 If the on-premise Hive cluster cannot be connected to Azure, then one may perform an offline / disconnected migration. Following are the high level steps. < Details to be added>
 
-- Script out all the DDL scripts for the external and internal tables in Hive. Sample script to extract DDL statements provided below.
-
-```bash
-  #!/bin/bash  rm -f tableNames.txt  rm -f HiveTableDDL.txt  hive -e "use $1; show  tables;" > tableNames.txt   wait  cat tableNames.txt |while read LINE     do     hive -e "use $1;show create table $LINE;"  >>HiveTableDDL.txt     echo -e "\n" >>  HiveTableDDL.txt     done  rm -f tableNames.txt  echo "Table DDL  generated"
-```
-
-Reference: [sql - How to get/generate the create statement for an existing hive table? - Stack Overflow](https://stackoverflow.com/questions/18134131/how-to-get-generate-the-create-statement-for-an-existing-hive-table)
+- Script out all the DDL scripts for the external and internal tables in Hive Metadata. Use above provided Sample script to extract DDL statements.
 
 - Export the internal tables as csv files to local HDFS storage
 
@@ -399,19 +376,27 @@ Reference: [sql - How to get/generate the create statement for an existing hive 
 
 - Perform any processing of data via notebooks or SQL Scripts and ingest the prepared data into Synapse SQL dedicated pools or Synapse spark database
 
-- Import the hive internal table to azure synapse dedicated SQL Pool or spark database via T-SQL scripts.
+- Import the impala internal table to azure synapse dedicated SQL Pool or spark database via T-SQL scripts.
 
-### Migrate - HDInsight Hive
+### Migrate - Impala to HDInsight Hive
 
-- SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
-- SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
+Steps in migrating the Impala to HDInsight Hive
 
+- Compare the differences between Hive and Impala
+  - SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
+  - SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
+- Migrate metadata (HDInsight supports only Azure SQL Db for Metadata)
+  - Migrating PostgresSQL to Azure SQLDB [Migrating PostgresSQL to Azure SQLDB](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online)
+  - Migrating MySQL to Azure SQLDB [Migrating MySQL to Azure SQLDB](https://docs.microsoft.com/azure/dms/tutorial-mysql-azure-mysql-offline-portal)
+- Create and export DDLs for Tables in Impala with above mentioned Scripts
+- Execute DDLs in already deployed HDInsight Hive
+  
 
 ### Lift and Shift - IAAS
 
-Other options to migrate Hive Tables
+Other options to migrate Impala Tables
 
-An hive has following type of workloads:
+An Impala has following type of workloads:
 
 - Managed Tables
 
