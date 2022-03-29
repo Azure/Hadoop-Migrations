@@ -207,7 +207,13 @@ Then depending of the Spark version you should perform the commented changes tha
 Reference link for monitoring Spark application: [Monitor Apache Spark applications using Synapse Studio - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/monitoring/apache-spark-applications)
 
 ## Performance benchmarking approach
+
 [Apache Spark in Azure Synapse - Performance Update](https://techcommunity.microsoft.com/t5/azure-synapse-analytics-blog/apache-spark-in-azure-synapse-performance-update/ba-p/2243534)
+
+### Performance Optimization
+
+[Optimize Apache Spark jobs in Azure Synapse Analytics](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-performance)
+
 ## Security
 
 ## BC-DR
