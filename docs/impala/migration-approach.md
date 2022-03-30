@@ -3,7 +3,7 @@
 - [Metadata](#metadata)
 - [Sizing](#sizing)
 - [Export Hive Metadata](#export-hive-metadata)
-- [Decision flow for selecting target DB for hive metadata:](#decision-flow-for-selecting-target-db-for-hive-metadata)
+- [Decision flow for impala](#Decision-flow-for-impala)
 - [Modernization – Databricks](#modernization-databricks)
 - [Modernization – Synapse](#modernization-synapse)
 - [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
@@ -231,7 +231,7 @@ Perform the following steps to export Hive/Impala metadata:
 > [!TIP]
 Other options to migrate Hive metastore are based upon underlying Databases and its utilities like export import, replication, log shipping etc.
 
-### Decision flow for selecting target  for impala
+## Decision flow for impala
 
 ![impala-discissionflow](../images/Impala-decision-flow.png)
 
@@ -327,6 +327,7 @@ Upon successful completion of the run, verify if the new table has been created 
 
 ![impala-synapse-create-copy-activity8](../images/impala-synapse-copyactivity9.png)
 
+Please refer the MS Docs for futher details  here [Copy data from Impala using Azure Data Factory or Synapse Analytics ](https://docs.microsoft.com/azure/data-factory/connector-impala?tabs=data-factory)
 #### Scenario 2: Live migration with Hadoop cluster directly Via self hosted IR
 
 - Install Self hosted Integration runtime in a on-premise server which can access azure. Refer [Create a self-hosted integration runtime - Azure Data Factory | Microsoft Docs](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime#setting-up-a-self-hosted-integration-runtime)
@@ -350,8 +351,6 @@ Upon successful completion of the run, verify if the new table has been created 
 #### Considerations
 
 - Complex types such as arrays, maps, structs, and unions are not supported for read via Azure Data Factory.
-
-- Hive connector only supports Hive tables in Apache Hive of version 3.1.0
 
 #### Impala object mapping to Azure Synapse
 
