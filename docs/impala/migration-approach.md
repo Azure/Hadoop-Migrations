@@ -162,9 +162,8 @@ If the on-premise Hive cluster cannot be connected to Azure, then one may perfor
 Steps in migrating the Impala to HDInsight Hive
 
 - Compare the differences between Hive and Impala
-  - SQL Differences between Hive and Impala 1 [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
-  - SQL Differences between Hive and Impala 2 [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
-- Migrate metadata (HDInsight supports only Azure SQL Db for Metadata)
+  - SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
+  - Migrate metadata (HDInsight supports only Azure SQL Db for Metadata)
   - Migrating PostgresSQL to Azure SQLDB [Migrating PostgresSQL to Azure SQLDB](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online)
   - Migrating MySQL to Azure SQLDB [Migrating MySQL to Azure SQLDB](https://docs.microsoft.com/azure/dms/tutorial-mysql-azure-mysql-offline-portal)
 - Create and export DDLs for Tables in Impala with above mentioned Scripts
