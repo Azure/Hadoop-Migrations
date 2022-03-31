@@ -1,9 +1,7 @@
 # Migration Approach
 
 - [Metadata](#metadata)
-- [Sizing](#sizing)
-- [Export Hive Metadata](#export-hive-metadata)
-- [Decision flow for impala](#Decision-flow-for-impala)
+
 - [Modernization – Databricks](#modernization-databricks)
 - [Modernization – Synapse](#modernization-synapse)
 - [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
@@ -13,223 +11,7 @@
 
 ## Metadata
 
-### Finding CPU information
-
-Execute the command cat /proc/cpuinfo shell to get complete information( number of CPUs, Memory, Frequency etc..) on server
-
-```shell
-[ramreddyy@apacoracle ~]$ cat /proc/cpuinfo
-processor       : 0
-vendor_id       : GenuineIntel
-cpu family      : 6
-model           : 85
-model name      : Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz
-stepping        : 7
-microcode       : 0xffffffff
-cpu MHz         : 2593.879
-cache size      : 36608 KB
-physical id     : 0
-siblings        : 16
-core id         : 0
-cpu cores       : 8
-apicid          : 0
-initial apicid  : 0
-fpu             : yes
-fpu_exception   : yes
-cpuid level     : 21
-wp              : yes
-flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology eagerfpu pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single pti tpr_shadow vnmi ept vpid fsgsbase bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f rdseed adx smap clflushopt avx512cd xsaveopt xsavec
-bugs            : cpu_meltdown spectre_v1 spectre_v2
-bogomips        : 5187.75
-clflush size    : 64
-cache_alignment : 64
-address sizes   : 46 bits physical, 48 bits virtual
-power management:
-```
-
-### Finding network interfaces
-
-Execute command ifconfig –a to get network interfaces
-
-```shell
-[ramreddyy@apacoracle ~]$ ifconfig -a
-eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.10.0.4  netmask 255.255.255.0  broadcast 10.10.0.255
-        inet6 fe80::20d:3aff:fec8:c553  prefixlen 64  scopeid 0x20<link>
-        ether 00:0d:3a:c8:c5:53  txqueuelen 1000  (Ethernet)
-        RX packets 34689  bytes 44675389 (42.6 MiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 12234  bytes 2713561 (2.5 MiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10<host>
-        loop  txqueuelen 0  (Local Loopback)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-[ramreddyy@apacoracle ~]$
-```
-
-### Finding Impala version
-
-  Execute command at command line impala --version.
-
-```$ impala-shell -i localhost --quiet
-Starting Impala Shell without Kerberos authentication
-Welcome to the Impala shell. Press TAB twice to see a list of available commands.
-...
-(Shell
-      build version: Impala Shell v3.4.x (hash) built on
-      date)
-[localhost:21000] > select version();
-+-------------------------------------------
-| version()
-+-------------------------------------------
-| impalad version ...
-| Built on ...
-+------------------------------------------
-```
-
-### Finding impala related packages
-
-```shell
-rpm -qa|grep impala
-```
-
-### Finding Total DB size
-
-```shell
-hdfs dfs -du -h /apps/hive/warehouse
-```
-
-### Finding number of databases
-
-```sql
-select count(DB_ID) from hive.DBS
-```
-
-### Finding number of tables
-
-```sql
-select count(*) from hive.TBLS;
-```
-
-### Executing script to find out the table/DB information
-
-```bash
-sh generate_hive_metadata.sh
-```
-
-The following set of assessment questions are designed to gain an insight into existing deployment of Hive and establish a set of requirements that must be considered for any type of Hive migration scenario to Azure.
-
-| Layer  | Questions | Background  |
-|------- |---|---|
-|  **Infrastructure**  | Number of servers for each type of role -   Hive Services; Metadata DB; Processing layer | Understand scale and design of incumbent solution.|
-|&nbsp; | Number of cores per server | ```lscpu``` *OR* ```cat /proc/cpuinfo``` commands can be used to list cores per server.|
-|&nbsp; | Available memory per server | This is the total memory available per server. On Linux, commands such as ```free -mg``` *OR* ```cat /proc/meminfo``` can be used to report on memory available on each server.|
-|&nbsp; | Is the existing environment virtualized or deployed on bare-metal servers? | The information will be used as one of the inputs when it comes to sizing and understanding performance characterstics of on-premises Impala environment.|
-|&nbsp; | Network | Understand the network bandwidth each VM can support; and if any special NIC configuration is used to support high bandwidth between Impala servers.   Use the following commands to extract details of VM network configuration ```ifconfig -a``` *OR* ```ethtool <name of the interface>```|
-|&nbsp; | Storage | What is the total size of data post-replication? Usually, default configuration of HDFS replicates data 3x.|
-|**Operating System** | Version and distro type | The following command will print out details of Linux distro and version in use  ```uname -a```|
-|&nbsp; | Kernel parameters | Understand if customer has applied any specific kernel-level parameters to improve the performance of Impala deployment. Hence, we do not recommend changing default parameters straightaway unless it has been recommended by your OS and/or application vendor. In most cases, customers tweak these parameters to address specific workload performance requirements. Whilst it's fairly straight-forward to change config, however customers usually arrive at this decision after carrying out extensive testing.   <br> **Linux memory and block device parameters** <br> ```cat /sys/kernel/mm/transparent_hugepage/enabled``` <br>```cat /sys/kernel/mm/transparent_hugepage/defrag```<br>```cat /sys/block/sda/queue/scheduler```<br>```cat /sys/class/block/sda/queue/rotational```<br>```cat /sys/class/block/sda/queue/read_ahead_kb```<br>```cat /proc/sys/vm/zone_reclaim_mode```<br> **Linux network stack parameters** <br> ```sudo sysctl -a \ grep -i "net.core.rmem_max\|net.core.wmem_max\|net.core.rmem_default\| net.core.wmem_default\|net.core.optmem_max\|net.ipv4.tcp_rmem\|net.ipv4.tcp_wmem"```|
-|**Security & administration** | Accessing Impala | How do users access the data in Impala? Is it via APIs or directly via Impala shell?<br> How applications consume data?<br> How is data written to Impala and proximity of these systems? Are they within the same data centre or located outside of DC where Impala is deployed?|
-|&nbsp; | User provisioning | How are users authenticated and authorized? <br>•Ranger?<br>•Knox?<br>•Kerberos?|
-|&nbsp; | Encryption | Is there a requirement to have data encrypted in transport and/or at-rest? What encryption solutions are currently in-use?|
-|&nbsp; | Tokenization | Is there a requirement to tokenize data? If yes, how is data tokenized? Popular applications used for tokenization include (but not limited to) Protegrity; Vormetric etc.|
-|&nbsp; | Compliance | Are there any special regulatory requirements applicable to Impala workloads? For example – PCI-DSS; HIPAA etc.|
-|&nbsp; | Keys, certificates, and secrets management policies. | If applicable, please describe and what tools/applications are used for this function.|
-|**High-Availability and Disaster Recovery** | What is the SLA, RPO and RTO of the source Impala deployment? | This will drive decision on the landing target on Azure and whether to have a hot-standby OR active-active regional deployment on Azure.|
-|  | BC and DR strategy for HIve workloads. | Describe BR and DR strategy in detail. Impact of Impala being unavailable.|
-
-### Sizing
-
-Please refer the VM information for the link to choose right instance [VM sizes - Azure Virtual Machines](https://docs.microsoft.com/azure/virtual-machines/sizes)
-
-[VM sizes - Azure Virtual Machines | Microsoft Docs](https://docs.microsoft.com/azure/virtual-machines/sizes)
-
-### Export Hive Metadata
-
-This section describes how to export the Hive/Impala metadata from On-Premises cluster.
-
-Perform the following steps to export Hive/Impala metadata:
-
-  1. Get the target Cluster HDFS Path to update hive_migrate.properties.
-
-      a.   To retrieve the TARGET_HDFS_PATH, login to target Target cluster using SSH/CLI.
-
-      b.   Extract value of key : <fs.DefaultFS> from target cluster core-site.xml file
-
-      ```console
-        [root@ram-hadoopsrv-xu1 linuxadmin]# cat /etc/hadoop/conf/core-site.xml | grep -A1 "fs.defaultFS"
-    
-        <name>fs.defaultFS</name>
-    
-        <value>hdfs://ram-hadoopsrv-xu0.southeastasia.cloudapp.azure.com:8020</value>
-    
-        [root@ram-hadoopsrv-xu1 linuxadmin]#
-    
-      ```
-
-        c.   Note the TARGET_HDFS_PATH.
-
-  2. Update the TARGET_HDFS_PATH and TARGET_OBJECTSTORE_PATH in hive_migrate.properties script to the location where HIVE tables data will be typically available post migration. Please note that you need not escape the forward slashes in the path.
-
-      ```xml
-      #!/bin/bash
-        #
-        # This file will be sourced by the generate_target_ddl_from_source.sh
-        # to customize/overide properties
-        # SRC_HDFS_PATH and SRC_OBJECTSTORE_PATH will be derived automatically from the cluster.
-        # You will be customizing
-        #     RUNDIR , TARGET_HDFS_PATH, TARGET_OBJECTSTORE_PATH
-        # 
-        #     --------------------------------------------------------    ---- 
-        # Location to hold intermediate and final scripts to be generated.
-        # You must have write privileges on this directory
-        export RUNDIR=/tmp/hivemigrate
-    
-    
-        #         ------------------------------------------------------------ 
-        # Modify expected target BDS hdfs path in your hive DDL script
-        #
-        export TARGET_HDFS_PATH=hdfs://ram-ambarisrv-xu.    southeastasia.cloudapp.azure.com:8020/tmp/hivemigrate/export
-    
-    
-        # ------------------------------------------------------------ 
-        # Modify expected target BDS Object Store path in your hive DDL script
-        #
-        export TARGET_OBJECTSTORE_PATH=hdfs://ram-ambarisrv-xu.southeastasia.cloudapp.azure.com:8020/tmp/hivemigrate/export
-    
-      ```
-
-  3. Connect to the target cluster via ssh as root user. See Connect to a Cluster Node Through Secure Shell (SSH) in Using Source Cluster configure the metstore DB with following steps:
-  
-        ```Shell
-        a) Install a MySQL or PostgreSQL database. Start the database if it is not started after installation.
-        b) Download the MySQL connector or the PostgreSQL connector and place it in the /usr/share/java/ directory.
-        c) Use the appropriate command line tool for your database to create the metastore database.
-        d) Use the appropriate command line tool for your database to grant privileges for the metastore database to the hive user.
-        e) Modify hive-site.xml to include information matching your particular database: its URL, username, and password. Copy the hive-site.xml file to the Impala Configuration Directory later in the Impala installation process.
-        ```
-
-  4. Create a script named generate_target_ddl_from_source.sh in the root home directory with the attached code. This script generates the DDL statements that you can run on the target cluster to create the hive metadata.
-
-  5. As a root user, run the generate_target_ddl_from_source.sh script.
-
-      ```sql
-           1 . CREATE_TARGET_DB.hql
-        
-           2 . CREATE_TARGET_TABLE.hql
-        
-           3 . ADD_TARGET_PARTITION.hql
-        ```
-
-> [!TIP]
-Other options to migrate Hive metastore are based upon underlying Databases and its utilities like export import, replication, log shipping etc.
+For exploring metadata information, assesment, exporting metadata, importing metadata and deploying metada to target cluster please refer metadata migration steps of Hive. Please click [here](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hive/migration-approach.md#metadata)
 
 ## Decision flow for impala
 
@@ -323,8 +105,6 @@ Provide a name which can identify the table being transferred. Pick the dedicate
 
 Upon successful completion of the run, verify if the new table has been created and the data has been successfully transferred by clicking on the data section of synapse studio and querying the table as shown below.
 
-
-
 ![impala-synapse-create-copy-activity8](../images/impala-synapse-copyactivity9.png)
 
 Please refer the MS Docs for futher details  here [Copy data from Impala using Azure Data Factory or Synapse Analytics ](https://docs.microsoft.com/azure/data-factory/connector-impala?tabs=data-factory)
@@ -382,15 +162,15 @@ If the on-premise Hive cluster cannot be connected to Azure, then one may perfor
 Steps in migrating the Impala to HDInsight Hive
 
 - Compare the differences between Hive and Impala
-  - SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
-  - SQL Differences between Hive and Impala [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
+  - SQL Differences between Hive and Impala 1 [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
+  - SQL Differences between Hive and Impala 2 [Differences between Hive and Impala](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/impala_langref_unsupported.html)
 - Migrate metadata (HDInsight supports only Azure SQL Db for Metadata)
   - Migrating PostgresSQL to Azure SQLDB [Migrating PostgresSQL to Azure SQLDB](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online)
   - Migrating MySQL to Azure SQLDB [Migrating MySQL to Azure SQLDB](https://docs.microsoft.com/azure/dms/tutorial-mysql-azure-mysql-offline-portal)
 - Create and export DDLs for Tables in Impala with above mentioned Scripts
 - Execute DDLs in already deployed HDInsight Hive
+- when we migrate from Impala to hive we have options to execute we have diffeent options and interfaces. Please refer the link for [Interactive Query In Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/interactive-query/apache-interactive-query-get-started#execute-apache-hive-queries-from-interactive-query)
   
-
 ### Lift and Shift - IAAS
 
 Other options to migrate Impala Tables
@@ -547,3 +327,4 @@ Import table data from transient folder on target cluster.
 import table t1 from '/temp/t1';
 ```
 
+[Previous](challenges.md)
