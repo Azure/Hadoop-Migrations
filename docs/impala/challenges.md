@@ -14,5 +14,4 @@
   * DevOps
   * Automation
 
-
-[Previous](readme.md)   [Next](considerations.md)
+[Previous](readme.md)   [Next](migration-approach.md)
