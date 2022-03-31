@@ -23,13 +23,9 @@ StateStore checks on the health of all Impala daemons in a cluster, and continuo
 The Impala Catalog Service
 
 The Catalog Service relays the metadata changes from Impala SQL statements to all the Impala daemons in a cluster. It is physically represented by a daemon process named Catalogd.
-The catalog service avoids the need to issue REFRESH and INVALIDATE METADATA statements when the metadata changes are performed by statements issued through Impala. 
-
-
+The catalog service avoids the need to issue REFRESH and INVALIDATE METADATA statements when the metadata changes are performed by statements issued through Impala.
 ### Further Reading
 
 [Challenges](challenges.md)
-
-[Considerations](considerations.md)
 
 [Migration Approach](migration-approach.md)
