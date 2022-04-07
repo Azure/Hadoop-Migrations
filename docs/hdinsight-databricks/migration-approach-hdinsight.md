@@ -211,7 +211,7 @@ Then depending of the Spark version you should perform the commented changes tha
 ![image](https://user-images.githubusercontent.com/7907123/162150413-5b3babbd-7426-40d1-b042-40f3312dffd8.png)
 
 
-# Synapse Spark Libraries
+# Synapse Spark 3.1 Libraries
 
 [Spark libraries - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-3-runtime)
 
