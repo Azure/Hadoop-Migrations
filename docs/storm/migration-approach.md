@@ -36,7 +36,7 @@ storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topo
 ```
 #### Monitor the Topology
 
-See [Quickstart: Create and monitor an Apache Storm topology in Azure HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/storm/apache-storm-quickstart) for topology monitoring.
+See [Quickstart: Create and monitor an Apache Storm topology in Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/storm/apache-storm-quickstart) for topology monitoring.
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
 
