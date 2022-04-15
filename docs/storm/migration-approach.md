@@ -81,7 +81,7 @@ Spark provides primitives for in-memory cluster computing. A Spark job can load 
 
 ### Migration From Storm to Spark
 
-To migrate your application from Storm to one of the Spark streaming APIs, please refer to [Migrate Azure HDInsight 3.6 Apache Storm to HDInsight 4.0 Apache Spark](https://docs.microsoft.com/en-us/azure/hdinsight/storm/migrate-storm-to-spark#general-migration-flow). This document describes how to migrate Apache Storm workloads on HDInsight 3.6 to HDInsight 4.0 Spark cluster. However, you can use the same way to migrate from general Apache Storm to HDInsight Spark Cluster.
+To migrate your application from Storm to one of the Spark streaming APIs, please refer to [Migrate Azure HDInsight 3.6 Apache Storm to HDInsight 4.0 Apache Spark](https://docs.microsoft.com/azure/hdinsight/storm/migrate-storm-to-spark#general-migration-flow). This document describes how to migrate Apache Storm workloads on HDInsight 3.6 to HDInsight 4.0 Spark cluster. However, you can use the same way to migrate from general Apache Storm to HDInsight Spark Cluster.
 
 More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/)
 
