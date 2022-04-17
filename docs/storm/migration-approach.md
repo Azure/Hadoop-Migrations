@@ -36,42 +36,7 @@ storm jar /usr/hdp/current/storm-client/contrib/storm-starter/storm-starter-topo
 ```
 #### Monitor the Topology
 
-Use the following steps to monitor the topology using the Storm UI:
-
-1. To display the Storm UI, open a web browser to https://CLUSTERNAME.domain.net/stormui. Replace CLUSTERNAME with the name of your cluster.
-
-2. Under Topology Summary, select one of the jobs , in this case the wordcount entry in the Name column. Information about the topology is displayed.
-
-![image](https://user-images.githubusercontent.com/7907123/123391245-18a4cc80-d59c-11eb-95fe-26229acb3f07.png)
-
-The new page provides the following information:
-
-![image](https://user-images.githubusercontent.com/7907123/123632381-25cdef80-d818-11eb-88ba-bde2029f7fb6.png)
-
-3. From this page, select an entry from the Spouts or Bolts section. Information about the selected component is displayed.
-
-![image](https://user-images.githubusercontent.com/7907123/123632498-4a29cc00-d818-11eb-8cd9-7c58ef1093a2.png)
-
-The new page displays the following information:
-
-![image](https://user-images.githubusercontent.com/7907123/123632570-63327d00-d818-11eb-8f1d-7bbb44815186.png)
-
-4. When viewing the details of a spout or bolt, select an entry from the Port column in the Executors section to view details for a specific instance of the component.
-
-``` Output
-2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: split default ["with"]
-2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: split default ["nature"]
-2015-01-27 14:18:02 b.s.d.executor [INFO] Processing received message source: split:21, stream: default, id: {}, [snow]
-2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: count default [snow, 747293]
-2015-01-27 14:18:02 b.s.d.executor [INFO] Processing received message source: split:21, stream: default, id: {}, [white]
-2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: count default [white, 747293]
-2015-01-27 14:18:02 b.s.d.executor [INFO] Processing received message source: split:21, stream: default, id: {}, [seven]
-2015-01-27 14:18:02 b.s.d.task [INFO] Emitting: count default [seven, 1493957]
-```
-In this example, the word seven has occurred 1493957 times. This count is how many times the word has been encountered since this topology was started.
-
-#### Stop the Topology
-Return to the Topology summary page for the word-count topology, and then select the Kill button from the Topology actions section. When prompted, enter 10 for the seconds to wait before stopping the topology. After the timeout period, the topology no longer appears when you visit the Storm UI section of the dashboard.
+See [Quickstart: Create and monitor an Apache Storm topology in Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/storm/apache-storm-quickstart) for topology monitoring.
 
 ## Migration to Spark Streaming on Azure HDInsight or Azure Databricks
 
