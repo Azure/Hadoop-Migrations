@@ -46,29 +46,7 @@ Spark provides primitives for in-memory cluster computing. A Spark job can load 
 
 ### Migration From Storm to Spark
 
-To migrate your application from Storm to one of the Spark streaming APIs, do the following:
-
-1. Deploy a new cluster. Deploy a new Spark cluster in the same virtual network and deploy your Spark Streaming or Spark Structured Streaming application on it and test it thoroughly.
-
-![image](https://user-images.githubusercontent.com/7907123/123607172-e72b3b80-d7fd-11eb-8584-3e6e5d9543f3.png)
-
-
-2. Stop consuming on the old Storm cluster. In the existing Storm, stop consuming data from the streaming data source and wait it for the data to finish writing to the target sink.
-
-![image](https://user-images.githubusercontent.com/7907123/123607371-1f327e80-d7fe-11eb-95ed-3abdb09de812.png)
-
-
-3. Start consuming on the new Spark cluster. Start streaming data from a newly deployed Spark cluster. At this time, the process is taken over by consuming from the latest Kafka offset.
-
-![image](https://user-images.githubusercontent.com/7907123/123608900-7b49d280-d7ff-11eb-95c1-eee2afe28b26.png)
-
-
-4. Remove the old cluster as needed. Once the switch is complete and working properly, Storm cluster as needed.
-
-![image](https://user-images.githubusercontent.com/7907123/123608931-83097700-d7ff-11eb-8ac0-db5412be84a9.png)
-
-
-See reference documentation: [Migration Storm to Spark](https://docs.microsoft.com/azure/hdinsight/storm/migrate-storm-to-spark)
+To migrate your application from Storm to one of the Spark streaming APIs, please refer to [Migrate Azure HDInsight 3.6 Apache Storm to HDInsight 4.0 Apache Spark](https://docs.microsoft.com/azure/hdinsight/storm/migrate-storm-to-spark#general-migration-flow). This document describes how to migrate Apache Storm workloads on HDInsight 3.6 to HDInsight 4.0 Spark cluster. However, you can use the same way to migrate from general Apache Storm to HDInsight Spark Cluster.
 
 More information on the following link [Migration Big Data Workloads HDInsights](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/)
 
