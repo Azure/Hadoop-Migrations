@@ -68,7 +68,7 @@ Use Azure Kubernetes Service with Kafka on HDInsight | Microsoft Docs
 https://docs.microsoft.com/en-us/azure/hdinsight/kafka/apache-kafka-azure-container-services
 
 Kafka Data Migration
-The MirrorMaker tool can leverage on the Apache Kafka's mirroring feature topics from one cluster to another. It can help to perform the Kafka data migration after the new Kafka cluster is provisioned. 
+[The MirrorMaker tool](https://docs.microsoft.com/azure/hdinsight/kafka/apache-kafka-mirroring) can leverage on the Apache Kafka's mirroring feature topics from one cluster to another. It can help to perform the Kafka data migration after the new Kafka cluster is provisioned. 
 Migration Option: Move producers first and follow by consumers.
 By firstly migrating the business producers to the new Kafka instance, the original Kafka will not have new message produced. After all messages of the original Kafka instance are consumed, the topic consumers can be migrated to the new Kafka instance, and then consume the topics from the new Kafka instance.
 1.	Change the Kafka connection address of the producer client to pointing to the new Kafka instance. 
@@ -90,7 +90,4 @@ More Info: Introducing Kafka Streams: Stream Processing Made Simple - Confluent
 
 Confluent Partnership:
 Confluent( Kafka founding company) has a strategic alliance with Microsoft.
-Link: Confluent and Microsoft Announce Strategic Alliance and Introducing seamless integration between Microsoft Azure and Confluent Cloud | Azure Blog and Updates | Microsoft Azure
-
-
-
+Link: [Confluent and Microsoft Announce Strategic Alliance](https://www.confluent.io/ja-jp/press-release/confluent-strategic-alliance-with-microsoft/) and [Introducing seamless integration between Microsoft Azure and Confluent Cloud](https://azure.microsoft.com/de-de/blog/introducing-seamless-integration-between-microsoft-azure-and-confluent-cloud/)
