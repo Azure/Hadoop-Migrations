@@ -9,7 +9,7 @@ In terms of workload profile, it is designed to serve as a datastore for data-in
 
 It is a distributed system and from CAP theorem perspective, HBase is designed for Consistency and Partitioning.  
 
-We will discuss components and principles that will play a role in planning and building of a HBase cluster on Azure especially while migrating to Azure HDI HBase or HBase on Azure virtual machines. These concepts will also play role when it comes to re-platforming HBase to Cosmos DB migration.  
+We will discuss components and principles that will play a role in planning and building of a HBase cluster on Azure especially while migrating to Azure HDInsight HBase or HBase on Azure virtual machines. These concepts will also play role when it comes to re-platforming HBase to Cosmos DB migration.  
 
 HBase is a distributed system, and it follows a leader-follower model. A typical HBase deployment consists of nodes with following roles.  
 
