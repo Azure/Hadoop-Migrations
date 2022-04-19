@@ -32,12 +32,12 @@ Translating these requirements to Azure compute and storage, following VMs are a
 
 There is no equivalent service for ZooKeeper on Azure; however, the capabilities ZK provides and function it plays in supporting distributed applications are natively built-in to Azure PaaS. For example, if one migrates Apache Kafka to Azure Event Hubs, there is no need to plan for ZooKeeper migration because it's capabilities and functions are built-in to Event Hubs. This is true for PaaS migrations for following PaaS migrations:  
 
-- Apache Kafka to Azure Event Hubs or Azure HDI Kafka
+- Apache Kafka to Azure Event Hubs or Azure HDInsight Kafka
 
-- Apache HBase to Azure Cosmos DB  or Azure HDI HBase
+- Apache HBase to Azure Cosmos DB  or Azure HDInsight HBase
 
 - Apache Storm to Azure Stream Analytics
 
 - Apache Solr to Azure Search  
 
-- Apache Hive to Azure Synapse or Azure HDI Hive
+- Apache Hive to Azure Synapse or Azure HDIsight Hive
