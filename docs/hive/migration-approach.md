@@ -453,7 +453,7 @@ Reference: [sql - How to get/generate the create statement for an existing hive 
 
 ### Lift and Shift - HDInsight
 
-Refer the documentation provided by the HDI product team
+Refer [the documentation](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/) provided by the HDInsight product team
 
 ### Lift and Shift - IAAS
 
