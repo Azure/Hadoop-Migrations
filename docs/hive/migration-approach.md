@@ -218,6 +218,12 @@ Other options to migrate Hive metastore are based upon underlying Databases and 
 
 ![hive-metadata-db-discissionflow](../images/hive-metadata-db-discissionflow.png)
 
+## Decision Flow Matrix for Hive on Azure
+
+Please refer the decission flow matrix for correct target service on Azure
+
+![hive-decission-matrix.png](../images/hive-decission-matrix.png)
+  
 ## Modernization Databricks
 
 Azure Databricks is structured to enable secure cross-functional team collaboration while keeping a significant amount of backend services managed by Azure Databricks so you can stay focused on your data science, data analytics, and data engineering tasks.
@@ -610,13 +616,12 @@ Import table data from transient folder on target cluster.
 ```sql
 import table t1 from '/temp/t1';
 ```
-## Decision Map/Flowchart
+
 We can use Hive replication approach to migrate Hive to new cluster. Refer below link which depicts the replication to HDInsight
 
 [How to use Apache Hive replication in Azure HDInsight clusters | Microsoft Docs](https://docs.microsoft.com/azure/hdinsight/interactive-query/apache-hive-replication)
 
-![hive-decisssion-flow-matrix](../images/hive-decission-matrix.png)
-  
+
 ## Migrate Hive SQL Workloads
   
 ### Migrate Hive SQL Queries to HDIsight Spark SQL
