@@ -4,11 +4,11 @@
 - [Sizing](#sizing)
 - [Export Hive Metadata](#export-hive-metadata)
 - [Decision flow for selecting target DB for hive metadata:](#decision-flow-for-selecting-target-db-for-hive-metadata)
+- [Decision Map/Flowchart](#decision-mapflowchart)
 - [Modernization – Databricks](#modernization-databricks)
 - [Modernization – Synapse](#modernization-synapse)
 - [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
 - [Lift and Shift - IAAS](#lift-and-shift---iaas)
-- [Decision Map/Flowchart](#decision-mapflowchart)
 - [Migrate Hive SQL Workloads](#migrate-hive-sql-workloads)
 
 ## Metadata
