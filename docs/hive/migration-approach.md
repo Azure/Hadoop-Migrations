@@ -3,8 +3,8 @@
 - [Metadata](#metadata)
 - [Sizing](#sizing)
 - [Export Hive Metadata](#export-hive-metadata)
-- [Decision flow for selecting target DB for hive metadata:](#decision-flow-for-selecting-target-db-for-hive-metadata)
-- [Decision Map/Flowchart](#decision-mapflowchart)
+- [Decision flow for selecting target DB for hive metadata](#decision-flow-for-selecting-target-db-for-hive-metadata)
+- [Decision Flow Matrix for Hive on Azure](#decision-flow-matrix-for-hive-on-azure)
 - [Modernization – Databricks](#modernization-databricks)
 - [Modernization – Synapse](#modernization-synapse)
 - [Lift and Shift – HDInsight](#lift-and-shift---hdinsight)
@@ -218,7 +218,7 @@ Other options to migrate Hive metastore are based upon underlying Databases and 
 
 ![hive-metadata-db-discissionflow](../images/hive-metadata-db-discissionflow.png)
 
-## Decision Flow Matrix for Hive on Azure
+### Decision Flow Matrix for Hive on Azure
 
 Please refer the decission flow matrix for correct target service on Azure
 
