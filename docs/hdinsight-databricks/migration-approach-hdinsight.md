@@ -68,6 +68,12 @@ The networking options available for HDInsight and Synapse Spark Pool are differ
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
+### Job Scheduling Considerations
+
+There are also differences in job management between HDInsight and Synapse Spark Pool. It is important to understand the difference between them.
+
+Both HDInsight and Synapse Spark Pool use [YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) as their job scheduler. YARN can be [controlled by the user on HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-troubleshoot-yarn). For instance, setting various parameters, getting logs using yarn command, managing queues, setting using REST API and collecting metrics, etc,. [Synapse Spark Pool](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-overview#spark-pool-architecture) also uses YARN as a cluster manager. Therefore, the mechanism for job execution and resource management is the same. However, Synapse Spark Pool does not open an interface for users to directly manage YARN and does not need to be managed by users like HDInsight. Also, Synapse Spark Pool is not designed for multi-user use on a single cluster. See [Q&A] (https://docs.microsoft.com/en-us/azure/synapse-analytics/overview-faq#can-i-run-a-multi-user-spark-cluster-in-azure-synapse-analytics-) for more detail and solutions.
+
 ## Planning
 
 ![image](https://user-images.githubusercontent.com/7907123/159872794-28231510-0642-4ab6-9325-24718fa35ada.png)
