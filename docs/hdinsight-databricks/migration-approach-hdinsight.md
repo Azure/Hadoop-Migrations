@@ -45,6 +45,25 @@ as we are using the same Spark version code and jars will be able to deploy in S
 Synapse is consumption-based, and is easier to configurate.Synapse incorporates many other Azure services and is the main plaform for Analytics and Data Orchestration.
 [Azure Synapse Runtime for Apache Spark 3.1](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-3-runtime)
 
+### Networking Considerations
+The networking options available for HDInsight and Synapse Spark Pool are different, so it's important to understand the differences when planning your migration.
+
+**The main networking options available in HDInsight**
+
+|Option|Notes|
+|---|---|
+|[Virtual Network](https://docs.microsoft.com/azure/hdinsight/hdinsight-virtual-network-architecture)|HDInsight clusters can be deployed within virtual networks. Users can control the virtual network, such as by applying NSG rules, deploying NVA, etc.|
+|[Private Link](https://docs.microsoft.com/azure/hdinsight/hdinsight-private-link)|HDInsight's Private Link is used to make private connections to HDInsight clusters over the Microsoft backbone network. Communication with cluster-dependent resources (storage, metastore, KeyValut, etc.) can also be configured by adding a Private Link connection with the cluster.|
+
+**The main networking options available in Synapse Spark Pool**
+
+|Option|Notes|
+|---|---|
+|[Managed Virtual Network](https://docs.microsoft.com/azure/synapse-analytics/security/synapse-workspace-managed-vnet)|Synapse workspaces can be associated with virtual networks. This virtual network is managed by Azure Synapse, so users can't control it like a normal virtual network, for example by applying their own NSG rules.|
+|[Private Endpoint](https://docs.microsoft.com/azure/synapse-analytics/security/how-to-connect-to-workspace-with-private-links)|An endpoint for connecting to the Synapse workspace. The following three types of target sub resources can be selected. Sql --For executing SQL queries in the Dedicated SQL Pool, SqlOnDemand --For executing SQL queries in Serverless SQL Pool, Dev --For accessing everything in the workspace|
+|[Managed Private Endpoint](https://docs.microsoft.com/en-us/azure/synapse-analytics/security/synapse-workspace-managed-private-endpoints)|Deployed within a managed virtual network. Endpoint for Synapse to connect privately to Azure resources.|
+|[Private Link Hub](https://docs.microsoft.com/azure/synapse-analytics/security/synapse-private-link-hubs)|For connecting to Azure Synapse Studio from a virtual network using a private link.|
+
 ### Performance Considerations
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
