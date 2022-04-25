@@ -68,6 +68,24 @@ The networking options available for HDInsight and Synapse Spark Pool are differ
 
 Refer to [Optimize Spark jobs for performance - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-performance) for considerations.
 
+### Scaling
+HDInsight and Synapse Spark Pool also differ in scaling. It is also important to understand and put those differences in the migration.
+
+**Manual-scaling**
+
+- HDInsight can manually scale worker nodes.
+- Synapse Spark cannot be scaled manually. Only auto-scaling is supported.
+
+**Auto-scaling**
+ 
+There are differences in the scaling conditions available for HDInsight and Synapse Spark Pool autoscaling.
+
+|Conditions for auto-scaling|HDInsight|Synapse|
+|---|---|---|
+|Schedule-based|Recommended for use when jobs are expected to run for a fixed schedule with a predictable duration, or when they are expected to be infrequently used at certain times of the day. See [this documentation](https://docs.microsoft.com/azure/hdinsight/hdinsight-autoscale-clusters#create-a-cluster-with-schedule-based-autoscaling) for more information.|Not supported|
+|Load-based|Total Pending CPU、Total Pending Memory、Total Free CPU、Total Free Memory、Used Memory per Node、Number of Application Masters per Node are used as metrics。See [this documentation](https://docs.microsoft.com/ja-jp/azure/hdinsight/hdinsight-autoscale-clusters#choosing-load-based-or-schedule-based-scaling) for more information.|Total Pending CPU、Total Pending Memory、Total Free CPU、Total Free Memory、Used Memory per Node are used as metrics. See [this documentation](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-autoscale) for more information.|
+
+
 ### Job Scheduling Considerations
 
 There are also differences in job management between HDInsight and Synapse Spark Pool. It is important to understand the difference between them.
