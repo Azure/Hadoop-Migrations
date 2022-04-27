@@ -300,6 +300,16 @@ References
 
 ## BC-DR
 
+## Code Sample
+
+This section provides several code examples for user to create Apache Spark / Spark Stream / Azure Integration samples, users could use the sample to submit to serverless `Spark Pool` in Synapse.
+
+[Spark Scala](../codesample/SparkLogQuery.scala)
+
+[Spark SQL](../codesample/SparkSQLExample.scala)
+
+[Spark Streaming - Eventhub Kafka Ingestion to ADLS Gen2](../codesample/SparkStreamingEventhubToADLSSample.scala)
+
 ## Further Reading
 
 [Spark Architecture and Components](readme.md)
