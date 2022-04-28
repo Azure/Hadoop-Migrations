@@ -300,6 +300,17 @@ References
 
 ## BC-DR
 
+## Benchmark
+
+[Spark SQL Perf](https://github.com/databricks/spark-sql-perf) is a performance testing framework fpr Spark SQL. The framework is based on TPCDS/TPCH, an industry standard benchmark for transactional decision-making system. In this section, we will leverage `spark-sql-perf` framework, which is developed by `Databricks`, to help to perform benchmarking in Synapse Spark Pool.
+
+
+Generally, `spark-sql-perf` provides `dsdgen` tools to generate random `tpcds` records for benchmarking, however, in Synapse, we are not able to leverage `dsdgen` since it is a tool needs to be compiled in linux os. Hence, we would use a hadoop environment to compile the tool and generate the data. For more information, please refer to [Set Up Benchmark](https://github.com/databricks/spark-sql-perf) section in github.
+
+In this section, we will use `HDInsight` cluster to generate `tpcds` data. For the detailed instructions, please refer to [How to generate TPC-DS data](how-to-generate-tpc-ds-data.md).
+
+After we have generated the data we need, we will start running benchmark with scala program. For more information, you may refer to [How to run TPC-DS performance benchmark in Synapse Spark Pool]().
+
 ## Code Sample
 
 This section provides several code examples for user to create Apache Spark / Spark Stream / Azure Integration samples, users could use the sample to submit to serverless `Spark Pool` in Synapse.
