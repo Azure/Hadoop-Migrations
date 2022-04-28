@@ -309,7 +309,7 @@ Generally, `spark-sql-perf` provides `dsdgen` tools to generate random `tpcds` r
 
 In this section, we will use `HDInsight` cluster to generate `tpcds` data. For the detailed instructions, please refer to [How to generate TPC-DS data](how-to-generate-tpc-ds-data.md).
 
-After we have generated the data we need, we will start running benchmark with scala program. For more information, you may refer to [How to run TPC-DS performance benchmark in Synapse Spark Pool]().
+After we have generated the data we need, we will start running benchmark with scala program. For more information, you may refer to [How to run TPC-DS performance benchmark in Synapse Spark Pool](how-to-run-tpc-ds-performance-benchmark-in-synapse-spark.md).
 
 ## Code Sample
 
