@@ -47,7 +47,7 @@ See [Query Delta Lake files using serverless SQL pool in Azure Synapse Analytics
 You can convert the file format in Azure Databricks as well. See [Migrate workloads to Delta Lake](https://docs.microsoft.com/en-us/azure/databricks/delta/porting) for a sample code.
 
 ## Migration to Azure Cosmos DB and Azure Synapse + Synapse Link for Azure Cosmos DB
-f you are using HBase and Kudu to achieve HTAP workloads, you can consider migrating them to Cosmos DB and implementing HTAP with Azure Synapse Link for Azure Cosmos DB.
+If you are using HBase and Kudu to achieve HTAP workloads, you can consider migrating them to Cosmos DB and implementing HTAP with Azure Synapse Link for Azure Cosmos DB.
 
 ### Introduction of Synapse Link for Cosmos DB
 Azure Synapse Link for Azure Cosmos DB is a feature that allows you to perform transactions and analytics in a hybrid manner. Azure Synapse Link creates a seamless integration between Cosmos DB and Synapse Analytics that allows you to perform analytics on your Cosmos DB's operational data. See [What is Azure Synapse Link for Azure Cosmos DB?](https://docs.microsoft.com/azure/cosmos-db/synapse-link) for more details.
