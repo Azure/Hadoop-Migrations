@@ -19,7 +19,7 @@ For more information visit <https://www.immuta.com/capabilities/data-access-gove
 
 ## Project RaPTor - Ranger Policy Translator Tool
 
-The intended purpose of this solution is to periodically synchronise resource-based Apache RangerTM policies with Azure Datalake Storage (ADLS) ACLs. This can be used either as a one-off migration from Ranger resource-based policies to ADLS ACLs or as a continuous sychronisation mechanism. 
+The intended purpose of the [Ranger Policy Translation Tool](https://github.com/hurtn/ranger-migration#readme) is to periodically synchronise resource-based Apache RangerTM policies with Azure Datalake Storage (ADLS) ACLs. This can be used either as a one-off migration from Ranger resource-based policies to ADLS ACLs or as a continuous sychronisation mechanism. 
 For those using HDInsight Enterprise Security Package (ESP), the security principals (users and groups) in Ranger will usually linked to Azure Active Directory (AAD) identities, but for those using non AAD based identities you will need to ensure there is a corresponding user principal name (UPN) in AAD which can be associated with the storage ACL.
 
 [Previous](considerations.md)   [Next](migration-approach.md)
