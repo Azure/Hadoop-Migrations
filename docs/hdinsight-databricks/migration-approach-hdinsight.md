@@ -12,7 +12,7 @@ Also gather the following information in advance from your existing HDInsight Sp
 ### Cluster info
 Use the following information to understand which version and size of cluster you are using and to estimate the size of the destination Synapse Spark Pool.
 
-- HDInsight Location: Ex: east us
+- HDInsight Location: Ex: eastus
 - Number of clusters: Ex: 5
 - Cluster Nodes:
     - Head Node
