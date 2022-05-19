@@ -1,7 +1,7 @@
 
 [Apache Kafka](https://kafka.apache.org/) is a highly scalable fault tolerant distributed messaging system that is built based on a publish-subscribe architecture. Kafka is used as an ingestion layer in real time streaming scenarios (like IoT, real time log monitoring systems etc), but is also gaining momentum as the immutable append only data store in Kappa architectures
 
-![image](https://user-images.githubusercontent.com/70247096/126110828-a2450b95-217b-40d7-8400-95ed667140d7.png)
+![image](../images/flowchart-kafka-azure-landing-targets.png)
 
 Kafka on Azure IaaS:
 https://github.com/Azure/azure-quickstart-templates/tree/master/application-workloads/kafka/kafka-ubuntu-multidisks
