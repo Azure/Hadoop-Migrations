@@ -1,6 +1,55 @@
 # Migration Approach
 
 ## Assessment
+### Basic information
+For basic information about cluster configuration, please refer to the following documentation:
+
+- [Metadata assessment](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hive/migration-approach.md#metadata)
+- [Planning and Sizing for Azure Compute & Storage](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hbase/migration-approach.md#lift-and-shift-migration-to-azure-iaas)
+
+Also gather the following information in advance from your existing HDInsight Spark cluster. These can help you identify what to migrate and how to migrate.
+
+### Cluster info
+Use the following information to understand which version and size of cluster you are using and to estimate the size of the destination Synapse Spark Pool.
+
+- HDInsight Location: Ex: east us
+- Number of clusters: Ex: 5
+- Cluster Nodes:
+    - Head Node
+    - Worker Node
+    - Autoscalable?
+- Third party tool?
+- HDInsight Spark version
+- Language version such as Python, Scala, Java, R
+
+### Storage & Data volume
+Check the necessity of storage migration and understand the scale of migration.
+
+- Primary storage type: Ex: Data Lake Storage Gen2
+- Secondary storage type: Ex: n/a
+- Size of Hot Data (Frequently Accessed): Ex: 1TB
+- Size of Cold Data: Ex: 2TB
+- Monthy Data growth: 10GB
+- Storage Format: Ex: ORC, Parquet, Avro, etc 
+- Data Compression format: Ex: Snappy, Bzip2, LZO, etc
+
+### Users & Jobs
+Check the number of users and tool compatibility.
+
+- Total number of Spark jobs per day: Ex: 50
+- Running time of day: Ex: 4 hours
+- Number of interactive users: Ex: 30
+- Describe how Spark jobs are submitted interactively: Ex: spark-submit command and Zeppelin Notebook
+- Spark Streaming?: Ex: Yes, Spark Structured Streaming
+
+### Network/security configuration
+HDInsight and Synapse Spark Pool differ greatly in the available network and security configuration options, so check the current configuration that needs to be migrated.
+
+- Virtual Network configuration, NSG configuration
+- Is Private Link enabled?
+- Is Public Access enabled?
+- Is ESP enabled?
+    - Collects security policy information used by Ranger. Consider whether an equivalent policy can be used with Synapse.
 
 ## Considerations
 
@@ -13,27 +62,16 @@ Azure HDInsight as "A cloud-based service from Microsoft for big data analytics"
 * Open-source analytics service for entreprise companies
 
 
-HDInsight is a service that is always up and we have to understand deeply the service to be able to configure and tunned , that make the service complex compare with others.Most of HDInsights features are Apache based. There are several cluster types to choose from depending upon your need.
+HDInsight is a service that is always up and we have to understand deeply the service to be able to configure and tunned, that make the service complex compare with others. Most of HDInsight features are Apache based. There are several cluster types to choose from depending upon your need.
 [Azure HDInsight Runtime for Apache Spark 3.1](https://techcommunity.microsoft.com/t5/analytics-on-azure-blog/spark-3-1-is-now-generally-available-on-hdinsight/ba-p/3253679)
 
 **Synapse Spark:**
+
 Azure Synapse Analytics takes the best of Azure SQL Data Warehouse and modernizes it by providing more functionalities for the SQL developers such as adding querying with serverless SQL pool, adding machine learning support, embedding Apache Spark natively, providing collaborative notebooks, and offering data integration within a single service. In addition to the languages supported by Apache Spark, Synapse Spark also support C#.
 
 **Synapse Spark Primary Use-Cases**
 
-1. Consolidated type of nodes for starters to pick e.g., Small, Medium, Large node types compared to different node types.
-
-2. Ephemeral Jobs: Synapse spark is built for short term processing and hence all the cluster have a TTL (Time to Live) and are automatically terminated to save costs.
-
-3. Support for both reading and writing into Synapse tables.
-
-4. Built in support for .NET for spark application enables existing user skill set to take advantage of Apache Spark distributed data processing.
-
-![spark-synapse-options](../images/spark-synapse-options.png)
-
-5. Unified security and monitoring features including Managed VNets throughout all workloads with one Azure Synapse workspace
-
-6. Existing spark user to take advantage of Microsoft proprietary optimizations e.g., Hyperspace: An indexing subsystem for Apache Spark.
+Please refer to [Synapse Spark Primary Use-Cases](../spark/migration-approach.md#synapse-spark-primary-use-cases) for the primary use cases of Synapse Spark.
 
 **Main features from Azure Synapse:**
 * Complete T-SQL based analytics
@@ -92,14 +130,11 @@ There are also differences in job management between HDInsight and Synapse Spark
 
 Both HDInsight and Synapse Spark Pool use [YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) as their job scheduler. YARN can be [controlled by the user on HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-troubleshoot-yarn). For instance, setting various parameters, getting logs using yarn command, managing queues, setting using REST API and collecting metrics, etc,. [Synapse Spark Pool](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-overview#spark-pool-architecture) also uses YARN as a cluster manager. Therefore, the mechanism for job execution and resource management is the same. However, Synapse Spark Pool does not open an interface for users to directly manage YARN and does not need to be managed by users like HDInsight. Also, Synapse Spark Pool is not designed for multi-user use on a single cluster. See [Q&A] (https://docs.microsoft.com/en-us/azure/synapse-analytics/overview-faq#can-i-run-a-multi-user-spark-cluster-in-azure-synapse-analytics-) for more detail and solutions.
 
-## Planning
-
-![image](https://user-images.githubusercontent.com/7907123/159872794-28231510-0642-4ab6-9325-24718fa35ada.png)
-
 
 ## Migration Approach
 
-Azure has several landing targets for Apache Spark. Depending on requirements and product features, customers can choose between Azure Synapse, Azure Databricks and Azure HDInsight.
+The following steps can be used as a migration approach.
+
 
 ![image](https://user-images.githubusercontent.com/7907123/159871439-96c68799-e6a1-4495-8abf-c7d679f2e57a.png)
 
@@ -111,45 +146,7 @@ Azure has several landing targets for Apache Spark. Depending on requirements an
 ## Creating an Apache Spark Pool
 
 An Apache Spark pool in your Synapse Workspace provides Spark environment to load data, model process and get faster insights.
-
-Reference Link: [QuickStart: Create a serverless Apache Spark pool using the Azure portal - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/quickstart-create-apache-spark-pool-portal)
-
-### Spark Instances
-
-Spark instances are created when you connect to a Spark pool, create a session, and run a job. As multiple users may have access to a single Spark pool, a new Spark instance is created for each user that connects.
-
-Examples on how the spark pools behave are shown below, Spark pools need to be created based on the usage type.
-
-**Example 1**
-
-* You create a Spark pool called SP1; it has a fixed cluster size of 20 nodes.
-
-* You submit a notebook job, J1 that uses 10 nodes, a Spark instance, SI1 is created to process the job.
-
-* You now submit another job, J2, that uses 10 nodes because there is still capacity in the pool and the instance, the J2, is processed by SI1.
-
-* If J2 had asked for 11 nodes, there would not have been capacity in SP1 or SI1. In this case, if J2 comes from a notebook, then the job will be rejected; if J2 comes from a batch job, then it will be queued.
-
-**Example 2**
-
-* You create a Spark pool call SP2; it has an auto scale enabled 10 – 20 nodes.
-
-* You submit a notebook job, J1 that uses 10 nodes, a Spark instance, SI1, is created to process the job.
-
-* You now submit another job, J2, that uses 10 nodes, because there is still capacity in the pool the instance auto grows to 20 nodes and processes J2.
-
-**Example 3**
-
-* You create a Spark pool called SP1; it has a fixed cluster size of 20 nodes.
-
-* You submit a notebook job, J1 that uses 10 nodes, a Spark instance, SI1 is created to process the job.
-
-* Another user, U2, submits a Job, J3, that uses 10 nodes, a new Spark instance, SI2, is created to process the job.
-* You now submit another job, J2, that uses 10 nodes because there's still capacity in the pool and the instance, J2, is processed by SI1.
-
-Reference Link: [Apache Spark core concepts - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-concepts#spark-instances)
-
->[!NOTE] Each Synapse workspace has a default quota limit at the Workspace level and also at the Spark pool level. These requirements need to be captured during the assessment phase (Infrastructure)
+Spark instances are created when you connect to a Spark pool, create a session, and run a job. As multiple users may have access to a single Spark pool, a new Spark instance is created for each user that connects. Please refer to [Creating an Apache Spark Pool](../spark/migration-approach.md#creating-an-apache-spark-pool).
 
 ## Set up Linked service with external HDInsight Hive Meta Store (HMS)
 **Shared Metadata**
@@ -219,7 +216,7 @@ You can see more details in the following repository:[Import and Export data bet
 ### Size vs Bandwith Diagram
 
 ![image](https://user-images.githubusercontent.com/7907123/159869475-73ef93fc-3a07-467f-994a-0f352a635f4b.png)
-
+Image source : https://docs.microsoft.com/azure/storage/common/storage-choose-data-transfer-solution
 
 ### Summary table
 
