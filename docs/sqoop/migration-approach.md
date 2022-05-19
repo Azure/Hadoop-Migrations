@@ -141,7 +141,9 @@ If you are trying to securely perform data integration in a private network envi
 For information on how to set up Self-hosted IR and communication requirements, see [Create and configure a self-hosted integration runtime](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime).
 #### Managed VNet using Private Endpoint
 If you have a private connection between on-premises and Azure (such as ExpressRoute or VPN), you can use Data Factory's Managed VNet and Private Endpoint to make a private connection to your on-premises databases. You can use VNets for forwarding to forward traffic to your on-premises, as shown in the diagram below, to securely access your on-premises resources without going through the Internet. See the next section for [Managed VNets](#managed-virtual-network).
-![How to access on-premises SQL Server from Data Factory Managed VNet using Private Endpoint](https://docs.microsoft.com/azure/data-factory/media/tutorial-managed-virtual-network/sql-server-access-model.png)
+
+![How to access on-premises SQL Server from Data Factory Managed VNet using Private Endpoint](../images/managedvnet-privateendpoint.png)
+Image source : https://docs.microsoft.com/en-us/azure/data-factory/tutorial-managed-virtual-network-on-premise-sql-server
 
 See [Create and configure a self-hosted integration runtime](https://docs.microsoft.com/azure/data-factory/create-self-hosted-integration-runtime)
 
