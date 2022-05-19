@@ -46,7 +46,7 @@ sudo apt-get install sbt
     ```
    scalaVersion := "2.12.10"
 
-   sparkVersion := "3.1.0"
+   sparkVersion := "3.1.2"
    ```
    
     Then we could start building the `spark-sql-perf` framework by follow command
