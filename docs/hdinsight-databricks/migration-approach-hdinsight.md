@@ -7,10 +7,49 @@ For basic information about cluster configuration, please refer to the following
 - [Metadata assessment](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hive/migration-approach.md#metadata)
 - [Planning and Sizing for Azure Compute & Storage](https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hbase/migration-approach.md#lift-and-shift-migration-to-azure-iaas)
 
+Also gather the following information in advance from your existing HDInsight Spark cluster. These can help you identify what to migrate and how to migrate.
 
-- Spark version
-- Python, Scala, Java, R? version
-- Current network/security configuration
+### Cluster info
+Use the following information to understand which version and size of cluster you are using and to estimate the size of the destination Synapse Spark Pool.
+
+- HDInsight Location: Ex: east us
+- Number of clusters: Ex: 5
+- Cluster Nodes:
+    - Head Node
+    - Worker Node
+    - Autoscalable?
+- Third party tool?
+- HDInsight Spark version
+- Language version such as Python, Scala, Java, R
+
+### Storage & Data volume
+Check the necessity of storage migration and understand the scale of migration.
+
+- Primary storage type: Ex: Data Lake Storage Gen2
+- Secondary storage type: Ex: n/a
+- Size of Hot Data (Frequently Accessed): Ex: 1TB
+- Size of Cold Data: Ex: 2TB
+- Monthy Data growth: 10GB
+- Storage Format: Ex: ORC, Parquet, Avro, etc 
+- Data Compression format: Ex: Snappy, Bzip2, LZO, etc
+
+### Users & Jobs
+Check the number of users and tool compatibility.
+
+- Total number of Spark jobs per day: Ex: 50
+- Running time of day: Ex: 4 hours
+- Number of interactive users: Ex: 30
+- Describe how Spark jobs are submitted interactively: Ex: spark-submit command and Zeppelin Notebook
+- Spark Streaming?: Ex: Yes, Spark Structured Streaming
+
+### Network/security configuration
+HDInsight and Synapse Spark Pool differ greatly in the available network and security configuration options, so check the current configuration that needs to be migrated.
+
+- Virtual Network configuration, NSG configuration
+- Is Private Link enabled?
+- Is Public Access enabled?
+- Is ESP enabled?
+    - Collects security policy information used by Ranger. Consider whether an equivalent policy can be used with Synapse.
 
 ## Considerations
 
