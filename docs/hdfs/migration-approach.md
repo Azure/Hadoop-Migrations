@@ -56,7 +56,7 @@ Based on the identified strategy for data migration identify the data sets to be
 
    4 .   Database dump
 
-   5 .   CDC
+   5 .   Change Data Capture
 
    6 .   Streaming Ingestion
 
@@ -64,7 +64,7 @@ Based on the identified strategy for data migration identify the data sets to be
 
     To plan the number of storage accounts needed , understand the total load on the current hdfs by using the metric TotalLoad that gives the concurrent file access across all the data nodes. Based on the total load on premise and the expected growth on Azure , limit needs to be checked on the storage account in the region. If it is possible to increase the limit , a single storage account may suffice. However for a data lake , it is advised to keep a separate storage account per zone considering the future data volume growth. Other reasons to keep a separate storage account include – access control , resiliency requirements, data replication requirements , exposing the data for public usage.  It is important to understand if an hierarchical namespace is needed to be enabled on the storage account- as once it has been enabled cannot revert back to a flat namespace . Workloads like backups , images etc do not gain any benefit from enabling a hierarchical namespace.
 
-![img](../images/Plan_storage_accounts.png)
+![img](../images/Plan_storage_accounts_new.png)
 
 
 Refer the link [Securing Storage Accounts ](https://docs.microsoft.com/azure/storage/common/storage-network-security?tabs=azure-portal#trusted-microsoft-services) to secure all traffic between your VNet and the storage account over a private link.
@@ -79,13 +79,13 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
 
     Hadoop platforms have the replication factor specified in the hdfs-site.xml or per file . The replication on ADLS Gen2 can be planned based on the nature of the data ie. If an application requires the data to be reconstructed in case of a loss then ZRS can be an option . In ADLS Gen 2 ZRS – data is copied synchronously across 3 AZs in the primary region. For applications that require high availability and is not constrained by the region of storage – the data can additionally be copied in a secondary region – ie. geo redundancy .
 
-![img](../images/Availability_requirements.png)
+![img](../images/Availability_requirements_new.png)
 
 4. **Check for     corrupted/missing blocks**
 
     Check for corrupted/missing blocks by checking the block scanner report – if any corrupted blocks are found then wait for the data to be restored prior to transferring the file associated with the corrupted blocks.
 
-![img](../images/Check_missingblocks.png)
+![img](../images/Check_missingblocks_new.png)
 
 5. **Check if NFS is     enabled**
 
@@ -97,7 +97,7 @@ Refer the link [Default limits for Storage Accounts](https://docs.microsoft.com/
 
 6. **Check Hadoop     File Formats**
 
-![img](../images/check_fileformats.png)
+![img](../images/check_fileformats_new.png)
 
  7. **Choose an Azure     solution for data transfer**
 
