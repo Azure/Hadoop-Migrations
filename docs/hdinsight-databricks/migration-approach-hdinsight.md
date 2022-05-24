@@ -50,6 +50,8 @@ Ambari, Azure Monitor, Spark UI, YARN UI, Spark History Server, Prometheus on AK
 #### Synapse Spark
 Azure Monitor, Spark UI, Spark History Server, Prometheus on AKS
 
+More information : [Manage and Monitor - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-history-server)
+
 ### Network/security configuration
 HDInsight and Synapse Spark Pool differ greatly in the available network and security configuration options, so check the current configuration that needs to be migrated.
 
