@@ -44,10 +44,10 @@ Check the number of users and tool compatibility.
 
 ### Cluster Management
 
-# HDI Management UI's 
+#### HDI Management UI's 
 Ambari, Azure Monitor, Spark UI, YARN UI, Spark History Server, Prometheus on AKS, REST APIs (YARN, Spark, etc)
 
-# Synapse Spark
+#### Synapse Spark
 Azure Monitor, Spark UI, Spark History Server, Prometheus on AKS
 
 ### Network/security configuration
