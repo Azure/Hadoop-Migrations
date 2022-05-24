@@ -42,6 +42,14 @@ Check the number of users and tool compatibility.
 - Describe how Spark jobs are submitted interactively: Ex: spark-submit command and Zeppelin Notebook
 - Spark Streaming?: Ex: Yes, Spark Structured Streaming
 
+### Cluster Management
+
+# HDI Management UI's 
+Ambari, Azure Monitor, Spark UI, YARN UI, Spark History Server, Prometheus on AKS, REST APIs (YARN, Spark, etc)
+
+# Synapse Spark
+Azure Monitor, Spark UI, Spark History Server, Prometheus on AKS
+
 ### Network/security configuration
 HDInsight and Synapse Spark Pool differ greatly in the available network and security configuration options, so check the current configuration that needs to be migrated.
 
