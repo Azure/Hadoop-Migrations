@@ -45,11 +45,13 @@ Check the number of users and tool compatibility.
 ### Cluster Management
 
 #### HDI Management UI's 
+The following services are created to control and monitor the perfromance and jobs that are running inside an HDInisght CLuster:
 Ambari, Azure Monitor, Spark UI, YARN UI, Spark History Server, Prometheus on AKS, REST APIs (YARN, Spark, etc)
 
 More information : [Manage cluster performance - Azure HDInsights | Microsoft Docs](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-key-scenarios-to-monitor)
 
 #### Synapse Spark
+The following services are created to control and monitor the perfromance and jobs that are running inside an Synapse Spark CLuster:
 Azure Monitor, Spark UI, Spark History Server, Prometheus on AKS
 
 More information : [Manage and Monitor - Azure Synapse Analytics | Microsoft Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-history-server)
