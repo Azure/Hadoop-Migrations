@@ -2,8 +2,6 @@
 
 **Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Sunil Sattiraju, Danny Liu, Nagaraj Seeplapudur Venkatesan, Jose Mendez.**
 
-*IMPORTANT - This documentation is currently public preview and update schedule TBD.*
-
 ## Brief introduction to Apache Hadoop
 
 Hadoop  provides a distributed file system and a framework for the analysis and transformation of very large data sets using the MapReduce paradigm. An important characteristic of Hadoop is the partitioning of data and computation across many (thousands) of hosts, and executing application computations in parallel close to their data. A Hadoop cluster scales computation capacity, storage capacity and IO bandwidth by simply adding commodity hardware.  The key components of an Hadoop system include-
