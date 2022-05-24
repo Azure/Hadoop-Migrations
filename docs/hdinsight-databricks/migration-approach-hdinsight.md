@@ -47,7 +47,7 @@ Check the number of users and tool compatibility.
 #### HDI Management UI's 
 Ambari, Azure Monitor, Spark UI, YARN UI, Spark History Server, Prometheus on AKS, REST APIs (YARN, Spark, etc)
 
-More information : [Manage and Monitor - Azure HDInsights | Microsoft Docs](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-key-scenarios-to-monitor)
+More information : [Manage cluster performance - Azure HDInsights | Microsoft Docs](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-key-scenarios-to-monitor)
 
 #### Synapse Spark
 Azure Monitor, Spark UI, Spark History Server, Prometheus on AKS
