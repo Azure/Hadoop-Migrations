@@ -1,6 +1,6 @@
 # EHMA - Enabling Hadoop Migration on Azure
 
-**Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Sunil Sattiraju, Danny Liu, Nagaraj Seeplapudur Venkatesan, Jose Mendez.**
+**Contributors: Namrata Maheshwary, Ram Yerrabotu, Daman Kaur, Hideo Takagi, Amanjeet Singh, Raja N, Ram Baskaran, Pawan Hosatti, Ben Sadeghi, Sunil Sattiraju, Danny Liu, Nagaraj Seeplapudur Venkatesan, Jose Mendez, Eugene Chung.**
 
 ## Brief introduction to Apache Hadoop
 
