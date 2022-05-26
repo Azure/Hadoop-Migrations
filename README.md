@@ -6,9 +6,23 @@
 
 Hadoop  provides a distributed file system and a framework for the analysis and transformation of very large data sets using the MapReduce paradigm. An important characteristic of Hadoop is the partitioning of data and computation across many (thousands) of hosts, and executing application computations in parallel close to their data. A Hadoop cluster scales computation capacity, storage capacity and IO bandwidth by simply adding commodity hardware.  The key components of an Hadoop system include-
 
+## EHMA- Enabling Hadoop Migrations on Azure
 
- 
-|Component | Description| Decision Flow/Flowchats|Target Solutions|
+Enabling quicker, easier and efficient Hadoop migrations hence making Azure as the preferred cloud while migrating Hadoop workloads.This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing platform/infrastructure -- On-Premises and Other Cloud like AWS to Azure.
+
+### End State Reference Architecture
+
+One of the challenges while migrating workloads from on-premises Hadoop to Azure is having the right deployment done which is aligning with the desired end state architecture and the application. With this bicep project we are aiming to reduce a significant effort which goes behind deploying the PaaS services on Azure and having a production ready architecture up and running.
+
+We will be looking at the end state architecture for big data workloads on Azure PaaS listing all the components deployed as a part of bicep template deployment. With Bicep we also have an additional advantage of deploying only the modules we prefer for a customised architecture. In the later sections we will cover the pre-requisites for the template and different methods of deploying the resources on Azure such as Oneclick, Azure CLI, Github Actions and DevOps Pipeline.
+
+See [Reference Architecture Deployment](bicep) for more information.
+
+### Target States
+
+![image](docs/images/Target_state.png)
+
+|Component | Description| Decision Flow/Flowchats|Targeted Azure Services|
 |----------|-----------|-----------|-----------|
 |[Apache HDFS](docs/hdfs/) |Distributed File System |[Planning the data migration](/docs/images/hdfs_1Datamigrationplanning.png) ,  [Pre-checks prior to data migration](docs/images/hdfs_2prechecks.png)|Azure Data Lake Storage gen2|
 |[Apache HBase](docs/hbase/)      |Column-oriented table service |[Choosing landing target for Apache HBase](/docs/images/flowchart-hbase-azure-landing-targets.png) ,  [Choosing storage for Apache HBase on Azure](docs/images/flowchart-hbase-azure-storage-options.png)|HBase on VM, HDInsight, Cosmos DB|
@@ -24,37 +38,18 @@ Hadoop  provides a distributed file system and a framework for the analysis and 
 |[Apache Kafka](docs/kafka/)|Highly scalable fault tolerant distributed messaging system|[Choosing landing targets for Apache Kafka on Azure](docs/images/flowchart-kafka-azure-landing-targets.png)|Kafka on VM, Event Hub for Kafka, HDInsight|
 |[Apache Atlas](docs/atlas/)|Open source framework for data governance and Metadata Management||Purview|
 
-
-
-This guide recognizes that Hadoop provides an extensive ecosystem of services and frameworks. This guide is not intended to be a definitive document that describes components of the Hadoop ecosystem in detail, or how they are implemented on Azure. Rather, this guide focuses on specific guidance and considerations you can follow to help move your existing platform/infrastructure -- On-Premises and Other Cloud like AWS to Azure.
- 
-
-### End State Reference Architecture
-
-One of the challenges while migrating workloads from on-premises Hadoop to Azure is having the right deployment done which is aligning with the desired end state architecture and the application. With this bicep project we are aiming to reduce a significant effort which goes behind deploying the PaaS services on Azure and having a production ready architecture up and running.
-
-We will be looking at the end state architecture for big data workloads on Azure PaaS listing all the components deployed as a part of bicep template deployment. With Bicep we also have an additional advantage of deploying only the modules we prefer for a customised architecture. In the later sections we will cover the pre-requisites for the template and different methods of deploying the resources on Azure such as Oneclick, Azure CLI, Github Actions and DevOps Pipeline.
-
-See [Reference Architecture Deployment](bicep) for more information.
-
-#### Target States
-
-![image](docs/images/Target_state.png)
-
-
--  **Modernize(Azure Synapse Analytics & Azure Databricks)**
+### Modernize(Azure Synapse Analytics & Azure Databricks)
 
 ![image](docs/images/end_State_architecture_Modernize.png)
 
-
-- **Lift and Shift(HDInsight)**
+### Lift and Shift(HDInsight)
 
 ![image](docs/images/Hdinight%20end%20state.png)
 
-For more information Refer the [Guide to migrating Big 
+For more information Refer the [Guide to migrating Big
 Data workloads to Azure HDInsight](https://azure.microsoft.com/resources/migrating-big-data-workloads-hdinsight/)
 
-- **Lift and Shift(IaaS)**  
+### Lift and Shift(IaaS)
 
 The following pattern presents a point of view on how to deploy OSS on Azure IaaS with a tight integration back to a customer's on-premises systems such as Active Directory; Domain Controller; DNS etc. The deployment follows Enterprise Scale Landing Zone guidance from Microsoft where management capabilities such as monitoring; security; governance; networking etc. are hosted within a management subscription. The workloads (all IaaS-based) are hosted in a separate subscription. Enterprise Scale Landing Zones (ESLZ) guidance is covered in details [here](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/enterprise-scale/architecture#landing-zone-in-enterprise-scale).  
 
@@ -101,21 +96,18 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 
 12. **[Azure DevOps Services](https://docs.microsoft.com/azure/devops/user-guide/alm-devops-features?view=azure-devops)** is a SaaS offering from Microsoft and provides an integrated set of services and tools to manage your software projects, from planning and development through testing and deployment.
 
-
 ### Glossary of Terms and Acronyms
 
 - [Glossary of Terms and Acronyms](docs/appendix/glossary.md)
 
+### Trademarks
 
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow [Microsoft's_Trademark_&_Brand_Guidelines](https://www.microsoft.com//legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
 
-# Contributing
+### Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <https://cla.opensource.microsoft.com>.
 
@@ -123,5 +115,6 @@ When you submit a pull request, a CLA bot will automatically determine whether y
 
 This repo is adhering to Microsoft documentation standards. Please make sure that you use Visual Studio Code for alterations and have the [Azure Docs Extension](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-authoring-pack) installed. Please refer to [Docs Authoring Pack for VS Code](https://docs.microsoft.com/contribute/how-to-write-docs-auth-pack) on how to use this extension and the [Microsoft Writing Style Guide](https://docs.microsoft.com/style-guide/welcome/).
 
-## Final Note
+### Final Note
+
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the Code of [Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com]((mailto:opencode@microsoft.com)) with any additional questions or comments.
