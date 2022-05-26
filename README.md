@@ -14,11 +14,9 @@ Enabling quicker, easier and efficient Hadoop migrations hence making Azure as t
 
 One of the challenges while migrating workloads from on-premises Hadoop to Azure is having the right deployment done which is aligning with the desired end state architecture and the application. With this bicep project we are aiming to reduce a significant effort which goes behind deploying the PaaS services on Azure and having a production ready architecture up and running.
 
-We will be looking at the end state architecture for big data workloads on Azure PaaS listing all the components deployed as a part of bicep template deployment. With Bicep we also have an additional advantage of deploying only the modules we prefer for a customised architecture. In the later sections we will cover the pre-requisites for the template and different methods of deploying the resources on Azure such as Oneclick, Azure CLI, Github Actions and DevOps Pipeline.
+We will be looking at the end state architecture for big data workloads on Azure PaaS listing all the components deployed as a part of bicep template deployment. With Bicep we also have an additional advantage of deploying only the modules we prefer for a customised architecture. In the later sections we will cover the pre-requisites for the template and different methods of deploying the resources on Azure such as One-click, Azure CLI, Github Actions and DevOps Pipeline.
 
-See [Reference Architecture Deployment](bicep) for more information.
-
-### Target States
+See [Reference Architecture Deployment](bicep) for more information.### Target States
 
 ![image](docs/images/Target_state.png)
 
