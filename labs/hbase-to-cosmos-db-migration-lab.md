@@ -198,7 +198,7 @@ mvn clean package -DskipTests
 Copy hbase-site.xml to Spark configuration directory so that Spark can load the HBase settings.
 
 ```bash
-cp /etc/hbase/conf/hbase-site.xml /etc/spark2/conf/
+sudo cp /etc/hbase/conf/hbase-site.xml /etc/spark2/conf/
 ```
 
 ## 5. Data migration from HBase to Cosmos DB SQL API using Spark
