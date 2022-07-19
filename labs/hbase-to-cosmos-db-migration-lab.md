@@ -206,7 +206,7 @@ Start Spark Shell with created jar file and the Cosmos DB Spark Connector.
 
 
 ```bash
-spark-shell --jars <Path to Spark HBase Connector Jar>,/usr/hdp/current/hbase-client/lib/shaded-c*,<Path to Cosmos DB Spark Connector Jar>
+spark-shell --jars <Path to Spark HBase Connector Jar>,/usr/hdp/current/hbase-client/lib/shaded-clients/*,<Path to Cosmos DB Spark Connector Jar>
 ```
 
 Once the Spark shell is up, run the Scala code as follows:
