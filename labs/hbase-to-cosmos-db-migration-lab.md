@@ -185,6 +185,7 @@ Clone the repository and switch to branch 2.4 for Spark 2.4.
 
 ```bash
 git clone https://github.com/hortonworks-spark/shc
+cd shc
 git checkout branch-2.4
 ```
 
