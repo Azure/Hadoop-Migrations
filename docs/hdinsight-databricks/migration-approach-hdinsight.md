@@ -63,14 +63,14 @@ In Hadoop ecosystem the storage is a unified distributed layer spread across sev
 
 The storage layer of HDInsight cluster is utilizing Azure Storage underneath as it seamlessly integrates with the cluster to utilize storage option. HDInsight can use a blob container in Azure Storage as the default file system for the cluster. Through an HDFS interface, the full set of components in HDInsight can operate directly on structured or unstructured data stored as blobs. The data can be stored in Azure storage you chose for your Hadoop cluster which can be interfaced to your compute cluster exposed as HDFS layer. The data in HDFS layer is located inside compute cluster and available for applications who have access to compute cluster. The data in HDFS layer can be referenced using HDFS API. There is storage by default in azure storage account which can be referenced either using HDFS API or Blob Storage API for your application. There are various options of storing the data for your HDInsight cluster. There are also benefits associated with those storage options available. 
 
-Storage options for HDInsight cluster: https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-compare-storage-options
+Storage options for HDInsight cluster: [Compare storage options for use with Azure HDInsight clusters | Microsoft Docs ] (https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-hadoop-compare-storage-options)
 
 Benefits of Azure Storage: [Azure Storage overview in HDInsight | Microsoft Docs ](https://docs.microsoft.com/en-us/azure/hdinsight/overview-azure-storage)
 
 #### Synapse Storage
 The storage in Synapse spark pool is using a storage account specifically Azure Data Lake Storage gen 2 with Hierarchal namespace enabled feature which is provisioned by default when Azure Synapse Analytics service is created in Azure. The default redundancy of the data is set to LRS which stores 3 copies of your data locally in the same region. If you want your data to be HA, then you can choose and change the redundancy to GRS and RA-GRS according to your need. When you execute a spark job where data is stored in Azure Data Lake the files will be accessed from this storage account. For this you will either create a linked service in your workspace or reference the file locations in your spark job configuration. 
 
-Migration approach for moving data from HDFS to ADLS gen 2 :  https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hdfs/migration-approach.md 
+Migration approach for moving data from HDFS to ADLS gen 2 : [Migration from HDFS to Azure storage account] (https://github.com/Azure/Hadoop-Migrations/blob/main/docs/hdfs/migration-approach.md)
 
 ### Network/security configuration
 HDInsight and Synapse Spark Pool differ greatly in the available network and security configuration options, so check the current configuration that needs to be migrated.
@@ -179,13 +179,13 @@ The spark cluster follows a master slave architecture and known as an MPP engine
 Hence the spark cluster can have one master node or more master node (you can choose multiple master nodes for your spark cluster when you want to have a HA cluster) and the master node is installed on master node of a Hadoop cluster. Similarly, worker nodes define the number of nodes the job can run parallelly on, the worker nodes are mainly installed on data nodes or node manager nodes in Hadoop cluster. 
 
 An Apache Spark pool in your Synapse Workspace provides Spark environment to load data, model process and get faster insights.
-Spark instances are created when you connect to a Spark pool, create a session, and run a job. As multiple users may have access to a single Spark pool, a new Spark instance is created for each user that connects. Please refer to [Creating an Apache Spark Pool](../spark/migration-approach.md#creating-an-apache-spark-pool).
+Spark instances are created when you connect to a Spark pool, create a session, and run a job. As multiple users may have access to a single Spark pool, a new Spark instance is created for each user that connects.
 
 By default, there is no spark pool created in your Synapse workspace, you can create on by going to the manage tab in your Synapse workspace and create it from there. In there you get two node size families one is Memory optimized and other is Hardware accelerated and with respective those you get node size with memory optimized you get namely small, medium, large, Xlarge and XXlarge and with hardware accelerated you get GPU-Large and GPU-Xlarge. Depending upon your existing Hadoop spark cluster you can select one of those and create your spark pool. 
 
-How to create spark pool in Azure Synapse analytics: https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-apache-spark-pool-portal
+How to create spark pool in Azure Synapse analytics: [Create Spark pool] (https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-apache-spark-pool-portal)
 
-Node family in spark pool: https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-pool-configurations
+Node family in spark pool: [Spark pool nodes configurations] (https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-pool-configurations)
 
 Once the spark pool is created you can still alter the cluster configuration afterwards, but the spark pool might need a restart. The spark pool comes with auto scaling and auto pause feature which means Apache Spark pools can automatically scale up and down compute resources based on the amount of activity. When the auto scale feature is enabled, you can set the minimum and maximum number of nodes to scale.  
 
@@ -289,7 +289,7 @@ Then depending of the Spark version you should perform the commented changes tha
 
 The libraries or drivers that were used will also need to be uploaded to the newly created spark cluster in Synapse workspace. 
 
-How to upload libraries in spark pool: https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-azure-portal-add-libraries
+How to upload libraries in spark pool: [Upload libraries to your Spark pool] (https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-azure-portal-add-libraries)
 
 ![image](https://user-images.githubusercontent.com/7907123/162150363-8e821bd8-76b6-4b54-9cd2-c3f69b7cb57d.png)
 
@@ -352,9 +352,9 @@ This capability of GIT integration is unfortunately not supported with HDInsight
 
 However, it is supported natively when using Synapse Analytics workspace. You can integrate your existing GIT hub repository or Azure Devops repository with your synapse workspace. By doing so you can easily automate your deployment process of synapse workspace to multiple environments. 
 
-Steps to integrate your GIT with Azure synapse analytics: https://docs.microsoft.com/en-us/azure/synapse-analytics/cicd/source-control
+Steps to integrate your GIT with Azure synapse analytics: [Source control in Synapse Studio - Azure Synapse Analytics | Microsoft Docs ] (https://docs.microsoft.com/en-us/azure/synapse-analytics/cicd/source-control)
 
-Steps to setup CI/CD for Azure synapse analytics: https://docs.microsoft.com/en-us/azure/synapse-analytics/cicd/continuous-integration-delivery
+Steps to setup CI/CD for Azure synapse analytics: [Continuous integration & delivery in Azure Synapse Analytics - Azure Synapse Analytics | Microsoft Docs ](https://docs.microsoft.com/en-us/azure/synapse-analytics/cicd/continuous-integration-delivery)
 
 ## Benchmark
 
