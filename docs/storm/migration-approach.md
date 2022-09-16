@@ -51,8 +51,8 @@ Apache Storm can provide different levels of guaranteed message processing. For 
 
 | |Storm|Spark Streaming|Spark Structured Streaming|
 |---|---|---|---|
-|Event processing guarantee|At least once<br\>Exactly Once (Trident)|[Exactly Once](https://spark.apache.org/docs/latest/streaming-programming-guide.html)|[Exactly Once](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)|
-|Processing Model|Real-Time<br\>Micro Batch (Trident)|Micro Batch|Micro Batch|
+|Event processing guarantee|At least once<br>Exactly Once (Trident)|[Exactly Once](https://spark.apache.org/docs/latest/streaming-programming-guide.html)|[Exactly Once](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)|
+|Processing Model|Real-Time<br>Micro Batch (Trident)|Micro Batch|Micro Batch|
 |Event time support|[Yes](https://storm.apache.org/releases/2.0.0/Windowing.html)|No|[Yes](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)|
 |Languages|Java, etc|Scala, Java, Python|Python, R, Scala, Java, SQL|
 
