@@ -3,28 +3,28 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "value": "koreacentral"
+            "value": 
         },
         "clusterType": {
-            "value": "hadoop"
+            "value": 
         },
         "clusterName": {
-            "value": "hdmp001hdi001"
+            "value": 
         },
         "clusterLoginUserName": {
-            "value": "hdmpuser"
+            "value": 
         },
         "clusterLoginPassword": {
-            "value": "hsafda#Sn$8"
+            "value": 
         },
         "sshUserName": {
-            "value": "azureuser"
+            "value": 
         },
         "sshPassword": {
-            "value": "hsafda#Sn$8"
+            "value": 
         },
         "clusterStorageAccountName": {
-            "value": "hdmp001sa001"
+            "value": 
         },
         "clusterWorkerNodeCount": {
             "value": 4
@@ -36,7 +36,7 @@
             "value": 3
         },
         "userAssignedIdentityName": {
-            "value": "hdmp001uain001"
+            "value": 
         },
         "vmSizeHeadNode": {
             "value": "Standard_E8_v3"
@@ -48,13 +48,13 @@
             "value": "Standard_A5"
         },
         "vnetHDIName": {
-            "value": "vnetBlue"
+            "value": 
         },
         "hdiSubnetName": {
-            "value": "subnet-hdi"
+            "value": 
         },
         "hdiSubnetCidr": {
-            "value": "192.168.13.192/26"
+            "value": 
         }
     }
 }
