@@ -2,7 +2,7 @@
   "$schema": "https://aka.ms/hadoop-migration-bicep-templates-metadata-schema#",
   "type": "QuickStart",
   "itemDisplayName": "Create an User Assigned Identity instance",
-  "description": "This template creates an User Assigned Identity instance for AAD",
+  "description": "This template creates an User Assigned Identity instance for Entra ID",
   "summary": "Create an User Assigned Identity instance",
   "githubUsername": "nudbeach",
   "docOwner": "euchung",

@@ -19,8 +19,8 @@ Landing Targets for Apache Sentry on Azure
 ![Sentry](https://user-images.githubusercontent.com/7907123/132818412-f2f22608-7dc9-4a9b-b26f-c18571634ba9.png)
 
 
-**Migration to Azure Active Directory (RBAC)**
-Sentry is the authorization method for the Hadoop cluster and is base on ACL's and Role Base Access Control (RBAC) and as the Azure method for authorization is Azure Active Directory which is base on RBAC the migration approach is direct.
+**Migration to Azure Entra ID (RBAC)**
+Sentry is the authorization method for the Hadoop cluster and is base on ACL's and Role Base Access Control (RBAC) and as the Azure method for authorization is Azure Entra ID which is base on RBAC the migration approach is direct.
 
 First what we can do is to get all the sentry policies following this procedure:
 https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=61309948
@@ -39,9 +39,9 @@ https://docs.cloudera.com/cdp-private-cloud/latest/upgrade-cdh/topics/cdpdc-sent
 
 **Migration to Databricks**
 
-The authentication method of Azure Databricks is Azure Active Directory (AAD) which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions. 
+The authentication method of Azure Databricks is Azure Entra ID which actually is using a RBAC as authorization system, where we define the access granularity for the world of tables and folders defining the Row-level and column permissions. 
 
-This access control is base on the AAD and the databricks ACL's, as Sentry use ACL's as Databricks this will be an advantage to migrate the service. 
+This access control is base on the Entra ID and the databricks ACL's, as Sentry use ACL's as Databricks this will be an advantage to migrate the service. 
 
 Some companies are migrating Ranger Policies to databricks cluster using an intermediate solution:
 
@@ -50,7 +50,7 @@ https://www.immuta.com/articles/migrating-from-apache-ranger-to-immuta-on-databr
 
 **Migration to CosmosDB**
 
-Cosmos DB use Active directory integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Active Directory.
+Cosmos DB use Entra ID integration (Azure RBAC)	You can also provide or restrict access to the Cosmos account, database, container, and offers (throughput) using Access control (IAM) in the Azure portal. IAM provides role-based access control and integrates with Entra ID.
 
 
 **Migration to  HDInsight from Ranger**
@@ -87,7 +87,7 @@ More detail on the following documentation:[Import-Export Ranger Policies](https
 | HDInsights                         |      + |     +* |     + |
 | Databricks                             |     + |     - |      + |
 | CosmosDB |     + |     - |      - |
-| Active directory integration (Azure RBAC) |     + |     - |      - |
+| Entra ID integration (Azure RBAC) |     + |     - |      - |
 
 (*) Doing a Previous migration to Ranger
 

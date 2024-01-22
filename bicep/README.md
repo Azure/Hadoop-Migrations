@@ -237,7 +237,7 @@ Deploying with Github Action includes 4 main steps
 
 ### 1. Role assignments to Service Principal
 
-We are going to create a Service Principal for client authentication backed by Azure AD which's dedicated to GitHub Action and Azure DevOps Pipeline
+We are going to create a Service Principal for client authentication backed by Entra ID which's dedicated to GitHub Action and Azure DevOps Pipeline
 
 ```commands
 az ad sp create-for-rbac --name <Your App Name -2> --role contributor \

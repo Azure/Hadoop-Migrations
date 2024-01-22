@@ -28,8 +28,8 @@ See [Reference Architecture Deployment](bicep) for more information.
 |[Apache HBase](https://learn.microsoft.com/en-us/azure/architecture/guide/hadoop/apache-hbase-migration)      |Column-oriented table service |[Choosing landing target for Apache HBase](https://learn.microsoft.com/en-us/azure/architecture/guide/hadoop/apache-hbase-migration#migration-approaches) ,  [Choosing storage for Apache HBase on Azure](https://learn.microsoft.com/en-us/azure/architecture/guide/hadoop/apache-hbase-migration#consider-storage-options)|HBase on VM, HDInsight, Cosmos DB|
 |[Apache Spark](docs/spark/)     |Data processing Framework |[Choosing landing target for Apache Spark on Azure](docs/images/flowchart-spark-azure-landing-targets.png)|HDInsight, Synapse, Databricks|
 |[Apache Hive](docs/hive/)      |Datawarehouse infrastructure |[Choosing landing target for Hive](docs/images/hive-decission-matrix.png), [Selecting target DB for hive metadata](docs/images/hive-metadata-db-discissionflow.png)|Hive on VM, HDInsight, Synapse|
-|[Apache Ranger](docs/ranger/)    |Frame work to monitor and manage Data secuirty |HDInsight Enterprise Security Package, Azure AD, Ranger on VM|
-|[Apache Sentry](docs/sentry/)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|Sentry/Ranger on VM, HDInsight Engerprise Security Package, Azure AD|
+|[Apache Ranger](docs/ranger/)    |Frame work to monitor and manage Data secuirty |HDInsight Enterprise Security Package, Entra ID, Ranger on VM|
+|[Apache Sentry](docs/sentry/)|Frame work to monitor and manage Data secuirty|[Choosing landing Targets for Apache Sentry on Azure](https://user-images.githubusercontent.com/7907123/122378499-4bc8d980-cf66-11eb-95f5-b7373d15116b.png)|Sentry/Ranger on VM, HDInsight Engerprise Security Package, Entra ID|
 |[Apache MapReduce](docs/mapreduce/) |Distributed computation framework |MapReduce, Spark|
 |[Apache Zookeeper](docs/zookeeper/) |Distributed coordination service |ZooKeeper on VM, Built-in solution in PaaS|
 |[Apache YARN](docs/yarn/) | Resource manager for Hadoop ecosystem |YARN on VM, Built-in solution in PaaS|
@@ -55,7 +55,7 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 
 ![image](docs/images/azure%20iaas%20target%20state%20v2.jpg)  
 
-1. On-premises AD will synchronize with Azure AD (AAD) using AD Connect hosted on-premises.  
+1. On-premises AD will synchronize with Entra ID using AD Connect hosted on-premises.  
 
 2. ExpressRoute provides secure and private network connectivity between on-premises and Azure.  
 
@@ -80,9 +80,9 @@ The following pattern presents a point of view on how to deploy OSS on Azure Iaa
 
    - **[Azure DevOps Self-Hosted Agent](https://docs.microsoft.com/azure/devops/pipelines/agents/v2-linux?view=azure-devops)** hosted on Azure VM Scale-Sets (VMSS) gives you flexibility over the size and the image of machines on which agents run. You specify a virtual machine scale set, a number of agents to keep on standby, a maximum number of virtual machines in the scale set, and Azure Pipelines manages the scaling of your agents for you.  
 
-5. **[Azure Active Directory (AAD)](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis)** tenant is synchronized with on-premises AD via [AD Connect](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-sync-whatis) (1).  
+5. **[Azure Entra ID](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis)** tenant is synchronized with on-premises AD via [AD Connect](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-sync-whatis) (1).  
 
-6. **[Azure AD Domain Services (AAD DS)](https://docs.microsoft.com/azure/active-directory-domain-services/synchronization)** provides LDAP and Kerberos capabilities on Azure. When you first deploy Azure AD DS, an automatic one-way synchronization is configured and started to replicate the objects from Azure AD. This one-way synchronization continues to run in the background to keep the Azure AD DS managed domain up-to-date with any changes from Azure AD. No synchronization occurs from Azure AD DS back to Azure AD.  
+6. **[Azure Entra Domain Services](https://docs.microsoft.com/azure/active-directory-domain-services/synchronization)** provides LDAP and Kerberos capabilities on Azure. When you first deploy Domain Services, an automatic one-way synchronization is configured and started to replicate the objects from Entra ID. This one-way synchronization continues to run in the background to keep the Domain Services managed domain up-to-date with any changes from Entra ID. No synchronization occurs from Domain Services back to Entra ID.  
 
 7. Services such as **[Azure DNS](https://docs.microsoft.com/azure/dns/private-dns-overview)**,**[Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-introduction)** and **[Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/basic-concepts)** sit inside the management subscription and provide service/IP address resolution; unified infrastructure security management system and certificate/key management capabilities resptively.
 

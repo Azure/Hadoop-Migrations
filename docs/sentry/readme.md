@@ -12,7 +12,7 @@ Sentry is one of the core components of Hadoop and installed/deployed as part of
 
 In the context of Sentry migration to Azure IaaS , Sentry is deployed as part of Hadoop installation on Azure. This is true for the cloudera Hadoop versions. There are some scenarios where Sentry is migrated to Azure independent of Hadoop cluster it manages. because is not part of all the hadoop cluster, what is more common and not deprecated is Apache Ranger
 
-From Azure PaaS migration perspective, Sentry have an equivalent service on Azure that is Azure Active Directory. 
+From Azure PaaS migration perspective, Sentry have an equivalent service on Azure that is Azure Entra ID. 
 
 ## Next step
 

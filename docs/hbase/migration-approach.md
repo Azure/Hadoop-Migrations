@@ -153,15 +153,15 @@ To enable servers to authenticate to each other seamlessly, various authenticati
 
 If the domain controller (DC) is located on-premises or outside of an Azure region or in a 3P cloud, latency impact must be considered/factored-in for operations requiring interaction with the domain controller. One option could be to host a second [domain controller on Azure](https://docs.microsoft.com/azure/architecture/reference-architectures/identity/adds-extend-domain). The Azure-based DC is then used for all authentication and authorisation scenarios for workloads running on Azure. We recommend you do not assign operations [masters roles to the domain controllers](https://docs.microsoft.com/windows-server/identity/ad-ds/plan/planning-operations-master-role-placement) deployed in Azure. In such a scenario, primary DC (or PDC) is hosted on-premises.  
 
-##### **Kerberized Linux environment using Azure Active Directory Domain Services (AAD-DS)**  
+##### **Kerberized Linux environment using Azure Entra ID Domain Services**  
 
-[Azure Active Directory Domain Services (AD DS)](https://docs.microsoft.com/azure/active-directory-domain-services/overview) provides managed domain services such as domain join, group policy, lightweight directory access protocol (LDAP), and Kerberos/NTLM authentication. One can use AAD-DS without the need to deploy, manage, and patch domain controllers (DCs) in the cloud.  
+[Azure Entra ID Domain Services](https://docs.microsoft.com/azure/active-directory-domain-services/overview) provides managed domain services such as domain join, group policy, lightweight directory access protocol (LDAP), and Kerberos/NTLM authentication. One can use Entra ID Domain Services without the need to deploy, manage, and patch domain controllers (DCs) in the cloud.  
 
 *Considerations*  
 
-- Regional availability of AAD-DS
-- Networking requirements for AAD-DS
-- HA-DR and uptime SLA for AAD-DS
+- Regional availability of Entra ID Domain Services
+- Networking requirements for Entra ID Domain Services
+- HA-DR and uptime SLA for Entra ID Domain Services
 
 ##### **Standalone MIT KDC**  
 

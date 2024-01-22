@@ -4,9 +4,9 @@
 
 However, for many businesses, on the contrary security is the key reason why they want to stick with on-premise. With locally hosted data, some people believe that they have better data security compared to cloud-based storage.
 
-But this is nothing more than a myth. Services such as AAD (Azure Active Directory) provide Azure with another advantage over on-premise storage solutions.
+But this is nothing more than a myth. Services such as Entra ID provide Azure with another advantage over on-premise storage solutions.
 
-Azure Active Directory is a multi-tenant, cloud-based directory and identity management service. It allows IT admins to give employees single sign-on (SSO) access to multiple cloud SaaS applications like SharePoint, Office 365 and more.
+Entra ID is a multi-tenant, cloud-based directory and identity management service. It allows IT admins to give employees single sign-on (SSO) access to multiple cloud SaaS applications like SharePoint, Office 365 and more.
 
 In addition, it offers an extensive suite of identity management services which include:
 

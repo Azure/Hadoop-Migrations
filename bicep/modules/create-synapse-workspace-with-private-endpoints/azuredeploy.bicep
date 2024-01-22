@@ -54,10 +54,10 @@ param sqlAdministratorLoginPassword string
 @description('This parameter will determine the node size if SparkDeployment is true')
 param sparkNodeSize string = 'Medium'
 
-//@description('Specifies the name of the Azure Active Directory group of the SQL admin group.')
+//@description('Specifies the name of the Azure Entra ID group of the SQL admin group.')
 //param synapseSqlAdminGroupName string
 
-//@description('Specifies the Azure Active Directory objectID of the SQL admin group.')
+//@description('Specifies the Azure Entra ID objectID of the SQL admin group.')
 //param synapseSqlAdminGroupObjectID string
 
 @description('Specifies the name of the subnet which the private endpoint uses.')
